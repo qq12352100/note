@@ -1,0 +1,11 @@
+strust2基于配置文件：
+app_en_US.properties
+	login.username = username
+app_zh_CN.properties （这个文件必须是utf-8格式，用txt打开是/uz80/09ks）
+	login.username = 用户名
+
+struts2.xml 中配置
+<constant name="struts.custom.i18n.resources" value="app"></constant>
+
+jsp页面中取值
+<s:property value"getText('login.username')"/>

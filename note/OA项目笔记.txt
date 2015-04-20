@@ -1,0 +1,93 @@
+//声明式异常处理 
+<!-- 配置全局的Exception -->
+<global-exception-mappings>
+	<exception-mapping exception="java.lang.Exception" result="error_userState" />
+</global-exception-mappings>
+
+//时间类型格式
+<s:date name="%{postTime}" format="yyyy-MM-dd HH:mm:ss"/>
+
+//Set集合转换为Long[]数组
+Long[] privilege = new Long[role.getPrivilege.size()];
+int indx = 0;
+for(Privilege privilege : role.getPrivilege()) {
+	privilegeIds[index++] = privilege.getById();
+}
+//jquery全选
+<input type="checkbox" onclick="$('[name=privilege]').attr('checked',this.checked)" id="cbAll">
+<label for="cbAll">全选<label>
+//单选checkbox回显
+<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"
+	<s:property value="%{id in privilegeIds ? 'checked' : ''}"
+>
+<label for="cd_${id}">${name}</label>
+
+${pageContext.request.contextPath}  //jsp页面中拿到Web-Root路径
+
+String z = new String(zone.getBytes("ISO-8859-1"), "UTF-8");
+
+onclick="return window.confirm('您确定要初始化密码为1234吗？')"
+
+userAdd.jsp中---------
+岗位add
+<s:select name="roleIds" multiple="true" size="10" list="#roleList" listKey="id" listValue="name"></s:select> 按住Ctrl键可以多选或取消选择
+
+部门add
+<s:select name="departmentId" list="#departmentList" listKey="id" listValue="name" headerKey="" headerValue="请选择部门"></s:select>
+
+userAction中---------
+岗位add
+private Long[] roleIds;  //生成get、set方法，接受前台传来的数据
+List<Role> roleList = roleService.getByIds(roleIds);
+model.setRoles(new HashSet<Role>(roleList));
+userService.save(model);
+
+部门add
+private Long departmentId;  //生成get、set方法，接受前台传来的数据
+Department department = departmentService.getById(departmentId);
+model.setDepartment(department);
+userService.save(model);
+
+修改和添加页面save.jsp---------
+<s:form action="userAction_%{id == null ? 'add' : 'edit'}">
+	<s:hidden name="id"></s:hidden>
+
+<s:radio name="gender" list="%{{'男', '女'}}"></s:radio>
+
+IF判断------------
+<s:if test="#parent != null">
+	<s:a action="departmentAction_list?parentId=%{#parent.parent.id}">返回上一级</s:a>
+</s:if>
+------------------------------------------------------------------------
+ActionContext.getContext().put("key",value);		//放到值栈map中
+ActionContext.getContext().getValueStack().push(role);  // 放到栈顶，先找栈再找map
+-------------------------------------------------------------------------
+模板：
+	多对一：
+		<many-to-one name="" class="" column=""></many-to-one>
+	一对多：
+		<set name="">
+			<key column=""></key>
+			<one-to-many class=""/>
+		</set>
+	多对多：
+		<set name="" table="">
+			<key column=""></key>
+			<many-to-many class="" column=""></many-to-many>
+		</set>
+----------------------------------------------------------------------------		
+		请求数	地址栏
+转发	  1		不变
+重定向	  2		变
+----------------------------------------------------------------------------
+  作用		方法名		返回值		页面
+
+列表		list()		list		list.jsp
+删除		delete()	toList
+添加页面	addUI()		addUI		addUI.jsp
+添加		add()		toList
+修改页面	editUI()	editUI		editUI.jsp
+修改		edit()		toList
+
+toList的结果配置：
+<result name="toList" type="redirectAction">roleAction_list</result>

@@ -1,0 +1,79 @@
+当前用户的Git配置文件放在用户主目录(c:/docments and settings/andministrator)下的一个隐藏文件.gitconfig中
+//git lg  设计log样式
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset 
+-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+git config --global alias.last 'log -1'		//git last显示最后一次提交信息
+git config --global alias.st status			//告诉Git，以后st就表示status
+git add .gitignore  //.gitignore内容为(*.zip文件 /WebRoot/WEB-INF/classes/文件夹)
+===========================================================================================
+git tag v1.0   										//切换到需要打标签的分支上,打一个新标签
+git tag -a v0.1 -m "version 0.1 released" 3628164	//-a指定标签名，-m指定说明文字
+git tag -d v0.1										//删除标签
+git push origin v1.0								//推送某个标签到远程
+git push origin --tags								//一次性推送全部尚未推送到远程的本地标签
+git push origin :refs/tags/v0.9						//要删除远程标签，先从本地删除，远程删除命令也是push
+============================================================================================
+git checkout -b dev 	//创建分支dev（-b参数表示创建并切换 =$ git branch dev + $ git checkout dev）
+git branch				//查看当前分支
+git merge dev			//合并指定分支到当前分支
+git branch -d dev		//删除dev分支
+
+git pull origin master	//从远程获取最新版本并merge到本地,相当于git fetch 和 git merge
+git fetch origin master //从远程获取最新版本到本地，不会自动merge
+
+git stash					//当前工作现场“储藏”起来，等以后恢复现场后继续工作
+git stash list				//查看存储了几个工作现场
+git stash apply stash@{0}	//恢复特定的工作现场
+git stash apply				//恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+git stash pop				//恢复的同时把stash内容也删了：
+==============================================================================================
+mkdir test01 					//创建目录
+cd test01						//进入目录
+pwd								//显示所在路径
+git init						//初始化仓库
+git add readme.txt				//添加文件（文件要在test01目录下面）
+git commit -m "first file"		//提交文件（形成一个快照，以便以后恢复，后面添加提交信息）
+git status						//查看仓库状态
+git diff readme.txt 			//查看文件与上次哪里不同
+git log --pretty=oneline 		//查看日志
+git reset --hard HEAD^			//退回上个版本，用HEAD表示当前版本，上上一个版本就是HEAD^^
+git reset --hard 3628164 		//退回指定版本（版本号不用写全，前几位就可以）
+git reflog						//记录你的每一次命令
+git checkout -- readme.txt		//让这个文件回到最近一次git commit或git add时的状态
+git reset HEAD readme.txt		//把暂存区的修改撤销掉,重新放回工作区.把暂存区的修改回退到工作区
+
+rm test.txt						//从本机删除文件
+git rm test.txt --cached  		//从版本库中删除文件，但不删除文件  
+git rm image -r					//删除指定目录所有文件
+
+git remote add origin git@github.com:michaelliao/learngit.git 		//关联远程仓库
+git remote -v 														//查看远程仓库
+
+git push -u origin master											//推送到远程库上
+
+git clone git@github.com:michaelliao/gitskills.git					//克隆远程仓库
+cd gitskills	//进入目录
+ls				//查看文件
+
+三步曲=============================================================================
+git add .					//添加文件（目录下面所有文件）
+git commit -m "first file"	//提交文件（形成一个快照，以便以后恢复，后面添加提交信息）
+git push -u origin master	//推送到远程库上
+===================================================================================
+
+ssh-keygen		//生成公钥
+
+git config --global user.name "HanShuliang" 			//设置用户名
+git config --global user.email "13241153187@163.com" 	//设置邮箱
+
+git init //初始化项目，生成.git隐藏文件
+
+提示出错信息：fatal: remote origin already exists.
+    解决办法如下：
+    1、先输入$ git remote rm origin
+
+ 如果输入$ ssh -T git@github.com
+	出现错误提示：Permission denied (publickey).因为新生成的key不能加入ssh就会导致连接不上github。
+    解决办法如下：
+    1、先输入$ ssh-agent，再输入$ ssh-add ~/.ssh/id_key，这样就可以了。
