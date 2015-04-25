@@ -1,79 +1,79 @@
-µ±Ç°ÓÃ»§µÄGitÅäÖÃÎÄ¼ş·ÅÔÚÓÃ»§Ö÷Ä¿Â¼(c:/docments and settings/andministrator)ÏÂµÄÒ»¸öÒş²ØÎÄ¼ş.gitconfigÖĞ
-//git lg  Éè¼ÆlogÑùÊ½
+å½“å‰ç”¨æˆ·çš„Gité…ç½®æ–‡ä»¶æ”¾åœ¨ç”¨æˆ·ä¸»ç›®å½•(c:/docments and settings/andministrator)ä¸‹çš„ä¸€ä¸ªéšè—æ–‡ä»¶.gitconfigä¸­
+//git lg  è®¾è®¡logæ ·å¼
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset 
 -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-git config --global alias.last 'log -1'		//git lastÏÔÊ¾×îºóÒ»´ÎÌá½»ĞÅÏ¢
-git config --global alias.st status			//¸æËßGit£¬ÒÔºóst¾Í±íÊ¾status
-git add .gitignore  //.gitignoreÄÚÈİÎª(*.zipÎÄ¼ş /WebRoot/WEB-INF/classes/ÎÄ¼ş¼Ğ)
+git config --global alias.last 'log -1'		//git lastæ˜¾ç¤ºæœ€åä¸€æ¬¡æäº¤ä¿¡æ¯
+git config --global alias.st status			//å‘Šè¯‰Gitï¼Œä»¥åstå°±è¡¨ç¤ºstatus
+git add .gitignore  						//.gitignoreå†…å®¹ä¸º(*.zipæ–‡ä»¶ /WebRoot/WEB-INF/classes/æ–‡ä»¶å¤¹)
 ===========================================================================================
-git tag v1.0   										//ÇĞ»»µ½ĞèÒª´ò±êÇ©µÄ·ÖÖ§ÉÏ,´òÒ»¸öĞÂ±êÇ©
-git tag -a v0.1 -m "version 0.1 released" 3628164	//-aÖ¸¶¨±êÇ©Ãû£¬-mÖ¸¶¨ËµÃ÷ÎÄ×Ö
-git tag -d v0.1										//É¾³ı±êÇ©
-git push origin v1.0								//ÍÆËÍÄ³¸ö±êÇ©µ½Ô¶³Ì
-git push origin --tags								//Ò»´ÎĞÔÍÆËÍÈ«²¿ÉĞÎ´ÍÆËÍµ½Ô¶³ÌµÄ±¾µØ±êÇ©
-git push origin :refs/tags/v0.9						//ÒªÉ¾³ıÔ¶³Ì±êÇ©£¬ÏÈ´Ó±¾µØÉ¾³ı£¬Ô¶³ÌÉ¾³ıÃüÁîÒ²ÊÇpush
+git tag v1.0   										//åˆ‡æ¢åˆ°éœ€è¦æ‰“æ ‡ç­¾çš„åˆ†æ”¯ä¸Š,æ‰“ä¸€ä¸ªæ–°æ ‡ç­¾
+git tag -a v0.1 -m "version 0.1 released" 3628164	//-aæŒ‡å®šæ ‡ç­¾åï¼Œ-mæŒ‡å®šè¯´æ˜æ–‡å­—
+git tag -d v0.1										//åˆ é™¤æ ‡ç­¾
+git push origin v1.0								//æ¨é€æŸä¸ªæ ‡ç­¾åˆ°è¿œç¨‹
+git push origin --tags								//ä¸€æ¬¡æ€§æ¨é€å…¨éƒ¨å°šæœªæ¨é€åˆ°è¿œç¨‹çš„æœ¬åœ°æ ‡ç­¾
+git push origin :refs/tags/v0.9						//è¦åˆ é™¤è¿œç¨‹æ ‡ç­¾ï¼Œå…ˆä»æœ¬åœ°åˆ é™¤ï¼Œè¿œç¨‹åˆ é™¤å‘½ä»¤ä¹Ÿæ˜¯push
 ============================================================================================
-git checkout -b dev 	//´´½¨·ÖÖ§dev£¨-b²ÎÊı±íÊ¾´´½¨²¢ÇĞ»» =$ git branch dev + $ git checkout dev£©
-git branch				//²é¿´µ±Ç°·ÖÖ§
-git merge dev			//ºÏ²¢Ö¸¶¨·ÖÖ§µ½µ±Ç°·ÖÖ§
-git branch -d dev		//É¾³ıdev·ÖÖ§
+git checkout -b dev 	//åˆ›å»ºåˆ†æ”¯devï¼ˆ-bå‚æ•°è¡¨ç¤ºåˆ›å»ºå¹¶åˆ‡æ¢ =$ git branch dev + $ git checkout devï¼‰
+git branch				//æŸ¥çœ‹å½“å‰åˆ†æ”¯
+git merge dev			//åˆå¹¶æŒ‡å®šåˆ†æ”¯åˆ°å½“å‰åˆ†æ”¯
+git branch -d dev		//åˆ é™¤devåˆ†æ”¯
 
-git pull origin master	//´ÓÔ¶³Ì»ñÈ¡×îĞÂ°æ±¾²¢mergeµ½±¾µØ,Ïàµ±ÓÚgit fetch ºÍ git merge
-git fetch origin master //´ÓÔ¶³Ì»ñÈ¡×îĞÂ°æ±¾µ½±¾µØ£¬²»»á×Ô¶¯merge
+git pull origin master	//ä»è¿œç¨‹è·å–æœ€æ–°ç‰ˆæœ¬å¹¶mergeåˆ°æœ¬åœ°,ç›¸å½“äºgit fetch å’Œ git merge
+git fetch origin master //ä»è¿œç¨‹è·å–æœ€æ–°ç‰ˆæœ¬åˆ°æœ¬åœ°ï¼Œä¸ä¼šè‡ªåŠ¨merge
 
-git stash					//µ±Ç°¹¤×÷ÏÖ³¡¡°´¢²Ø¡±ÆğÀ´£¬µÈÒÔºó»Ö¸´ÏÖ³¡ºó¼ÌĞø¹¤×÷
-git stash list				//²é¿´´æ´¢ÁË¼¸¸ö¹¤×÷ÏÖ³¡
-git stash apply stash@{0}	//»Ö¸´ÌØ¶¨µÄ¹¤×÷ÏÖ³¡
-git stash apply				//»Ö¸´£¬µ«ÊÇ»Ö¸´ºó£¬stashÄÚÈİ²¢²»É¾³ı£¬ÄãĞèÒªÓÃgit stash dropÀ´É¾³ı£»
-git stash pop				//»Ö¸´µÄÍ¬Ê±°ÑstashÄÚÈİÒ²É¾ÁË£º
+git stash					//å½“å‰å·¥ä½œç°åœºâ€œå‚¨è—â€èµ·æ¥ï¼Œç­‰ä»¥åæ¢å¤ç°åœºåç»§ç»­å·¥ä½œ
+git stash list				//æŸ¥çœ‹å­˜å‚¨äº†å‡ ä¸ªå·¥ä½œç°åœº
+git stash apply stash@{0}	//æ¢å¤ç‰¹å®šçš„å·¥ä½œç°åœº
+git stash apply				//æ¢å¤ï¼Œä½†æ˜¯æ¢å¤åï¼Œstashå†…å®¹å¹¶ä¸åˆ é™¤ï¼Œä½ éœ€è¦ç”¨git stash dropæ¥åˆ é™¤ï¼›
+git stash pop				//æ¢å¤çš„åŒæ—¶æŠŠstashå†…å®¹ä¹Ÿåˆ äº†ï¼š
 ==============================================================================================
-mkdir test01 					//´´½¨Ä¿Â¼
-cd test01						//½øÈëÄ¿Â¼
-pwd								//ÏÔÊ¾ËùÔÚÂ·¾¶
-git init						//³õÊ¼»¯²Ö¿â
-git add readme.txt				//Ìí¼ÓÎÄ¼ş£¨ÎÄ¼şÒªÔÚtest01Ä¿Â¼ÏÂÃæ£©
-git commit -m "first file"		//Ìá½»ÎÄ¼ş£¨ĞÎ³ÉÒ»¸ö¿ìÕÕ£¬ÒÔ±ãÒÔºó»Ö¸´£¬ºóÃæÌí¼ÓÌá½»ĞÅÏ¢£©
-git status						//²é¿´²Ö¿â×´Ì¬
-git diff readme.txt 			//²é¿´ÎÄ¼şÓëÉÏ´ÎÄÄÀï²»Í¬
-git log --pretty=oneline 		//²é¿´ÈÕÖ¾
-git reset --hard HEAD^			//ÍË»ØÉÏ¸ö°æ±¾£¬ÓÃHEAD±íÊ¾µ±Ç°°æ±¾£¬ÉÏÉÏÒ»¸ö°æ±¾¾ÍÊÇHEAD^^
-git reset --hard 3628164 		//ÍË»ØÖ¸¶¨°æ±¾£¨°æ±¾ºÅ²»ÓÃĞ´È«£¬Ç°¼¸Î»¾Í¿ÉÒÔ£©
-git reflog						//¼ÇÂ¼ÄãµÄÃ¿Ò»´ÎÃüÁî
-git checkout -- readme.txt		//ÈÃÕâ¸öÎÄ¼ş»Øµ½×î½üÒ»´Îgit commit»ògit addÊ±µÄ×´Ì¬
-git reset HEAD readme.txt		//°ÑÔİ´æÇøµÄĞŞ¸Ä³·Ïúµô,ÖØĞÂ·Å»Ø¹¤×÷Çø.°ÑÔİ´æÇøµÄĞŞ¸Ä»ØÍËµ½¹¤×÷Çø
+mkdir test01 					//åˆ›å»ºç›®å½•
+cd test01						//è¿›å…¥ç›®å½•
+pwd								//æ˜¾ç¤ºæ‰€åœ¨è·¯å¾„
+git init						//åˆå§‹åŒ–ä»“åº“
+git add readme.txt				//æ·»åŠ æ–‡ä»¶ï¼ˆæ–‡ä»¶è¦åœ¨test01ç›®å½•ä¸‹é¢ï¼‰
+git commit -m "first file"		//æäº¤æ–‡ä»¶ï¼ˆå½¢æˆä¸€ä¸ªå¿«ç…§ï¼Œä»¥ä¾¿ä»¥åæ¢å¤ï¼Œåé¢æ·»åŠ æäº¤ä¿¡æ¯ï¼‰
+git status						//æŸ¥çœ‹ä»“åº“çŠ¶æ€
+git diff readme.txt 			//æŸ¥çœ‹æ–‡ä»¶ä¸ä¸Šæ¬¡å“ªé‡Œä¸åŒ
+git log --pretty=oneline 		//æŸ¥çœ‹æ—¥å¿—
+git reset --hard HEAD^			//é€€å›ä¸Šä¸ªç‰ˆæœ¬ï¼Œç”¨HEADè¡¨ç¤ºå½“å‰ç‰ˆæœ¬ï¼Œä¸Šä¸Šä¸€ä¸ªç‰ˆæœ¬å°±æ˜¯HEAD^^
+git reset --hard 3628164 		//é€€å›æŒ‡å®šç‰ˆæœ¬ï¼ˆç‰ˆæœ¬å·ä¸ç”¨å†™å…¨ï¼Œå‰å‡ ä½å°±å¯ä»¥ï¼‰
+git reflog						//è®°å½•ä½ çš„æ¯ä¸€æ¬¡å‘½ä»¤
+git checkout -- readme.txt		//è®©è¿™ä¸ªæ–‡ä»¶å›åˆ°æœ€è¿‘ä¸€æ¬¡git commitæˆ–git addæ—¶çš„çŠ¶æ€
+git reset HEAD readme.txt		//æŠŠæš‚å­˜åŒºçš„ä¿®æ”¹æ’¤é”€æ‰,é‡æ–°æ”¾å›å·¥ä½œåŒº.æŠŠæš‚å­˜åŒºçš„ä¿®æ”¹å›é€€åˆ°å·¥ä½œåŒº
 
-rm test.txt						//´Ó±¾»úÉ¾³ıÎÄ¼ş
-git rm test.txt --cached  		//´Ó°æ±¾¿âÖĞÉ¾³ıÎÄ¼ş£¬µ«²»É¾³ıÎÄ¼ş  
-git rm image -r					//É¾³ıÖ¸¶¨Ä¿Â¼ËùÓĞÎÄ¼ş
+rm test.txt						//ä»æœ¬æœºåˆ é™¤æ–‡ä»¶
+git rm test.txt --cached  		//ä»ç‰ˆæœ¬åº“ä¸­åˆ é™¤æ–‡ä»¶ï¼Œä½†ä¸åˆ é™¤æ–‡ä»¶  
+git rm image -r					//åˆ é™¤æŒ‡å®šç›®å½•æ‰€æœ‰æ–‡ä»¶
 
-git remote add origin git@github.com:michaelliao/learngit.git 		//¹ØÁªÔ¶³Ì²Ö¿â
-git remote -v 														//²é¿´Ô¶³Ì²Ö¿â
+git remote add origin git@github.com:michaelliao/learngit.git 		//å…³è”è¿œç¨‹ä»“åº“
+git remote -v 														//æŸ¥çœ‹è¿œç¨‹ä»“åº“
 
-git push -u origin master											//ÍÆËÍµ½Ô¶³Ì¿âÉÏ
+git push -u origin master											//æ¨é€åˆ°è¿œç¨‹åº“ä¸Š
 
-git clone git@github.com:michaelliao/gitskills.git					//¿ËÂ¡Ô¶³Ì²Ö¿â
-cd gitskills	//½øÈëÄ¿Â¼
-ls				//²é¿´ÎÄ¼ş
+git clone git@github.com:michaelliao/gitskills.git					//å…‹éš†è¿œç¨‹ä»“åº“
+cd gitskills	//è¿›å…¥ç›®å½•
+ls				//æŸ¥çœ‹æ–‡ä»¶
 
-Èı²½Çú=============================================================================
-git add .					//Ìí¼ÓÎÄ¼ş£¨Ä¿Â¼ÏÂÃæËùÓĞÎÄ¼ş£©
-git commit -m "first file"	//Ìá½»ÎÄ¼ş£¨ĞÎ³ÉÒ»¸ö¿ìÕÕ£¬ÒÔ±ãÒÔºó»Ö¸´£¬ºóÃæÌí¼ÓÌá½»ĞÅÏ¢£©
-git push -u origin master	//ÍÆËÍµ½Ô¶³Ì¿âÉÏ
+ä¸‰æ­¥æ›²=============================================================================
+git add .					//æ·»åŠ æ–‡ä»¶ï¼ˆç›®å½•ä¸‹é¢æ‰€æœ‰æ–‡ä»¶ï¼‰
+git commit -m "first file"	//æäº¤æ–‡ä»¶ï¼ˆå½¢æˆä¸€ä¸ªå¿«ç…§ï¼Œä»¥ä¾¿ä»¥åæ¢å¤ï¼Œåé¢æ·»åŠ æäº¤ä¿¡æ¯ï¼‰
+git push -u origin master	//æ¨é€åˆ°è¿œç¨‹åº“ä¸Š
 ===================================================================================
 
-ssh-keygen		//Éú³É¹«Ô¿
+ssh-keygen		//ç”Ÿæˆå…¬é’¥
 
-git config --global user.name "HanShuliang" 			//ÉèÖÃÓÃ»§Ãû
-git config --global user.email "13241153187@163.com" 	//ÉèÖÃÓÊÏä
+git config --global user.name "HanShuliang" 			//è®¾ç½®ç”¨æˆ·å
+git config --global user.email "13241153187@163.com" 	//è®¾ç½®é‚®ç®±
 
-git init //³õÊ¼»¯ÏîÄ¿£¬Éú³É.gitÒş²ØÎÄ¼ş
+git init //åˆå§‹åŒ–é¡¹ç›®ï¼Œç”Ÿæˆ.gitéšè—æ–‡ä»¶
 
-ÌáÊ¾³ö´íĞÅÏ¢£ºfatal: remote origin already exists.
-    ½â¾ö°ì·¨ÈçÏÂ£º
-    1¡¢ÏÈÊäÈë$ git remote rm origin
+æç¤ºå‡ºé”™ä¿¡æ¯ï¼šfatal: remote origin already exists.
+    è§£å†³åŠæ³•å¦‚ä¸‹ï¼š
+    1ã€å…ˆè¾“å…¥$ git remote rm origin
 
- Èç¹ûÊäÈë$ ssh -T git@github.com
-	³öÏÖ´íÎóÌáÊ¾£ºPermission denied (publickey).ÒòÎªĞÂÉú³ÉµÄkey²»ÄÜ¼ÓÈëssh¾Í»áµ¼ÖÂÁ¬½Ó²»ÉÏgithub¡£
-    ½â¾ö°ì·¨ÈçÏÂ£º
-    1¡¢ÏÈÊäÈë$ ssh-agent£¬ÔÙÊäÈë$ ssh-add ~/.ssh/id_key£¬ÕâÑù¾Í¿ÉÒÔÁË¡£
+ å¦‚æœè¾“å…¥$ ssh -T git@github.com
+	å‡ºç°é”™è¯¯æç¤ºï¼šPermission denied (publickey).å› ä¸ºæ–°ç”Ÿæˆçš„keyä¸èƒ½åŠ å…¥sshå°±ä¼šå¯¼è‡´è¿æ¥ä¸ä¸Šgithubã€‚
+    è§£å†³åŠæ³•å¦‚ä¸‹ï¼š
+    1ã€å…ˆè¾“å…¥$ ssh-agentï¼Œå†è¾“å…¥$ ssh-add ~/.ssh/id_keyï¼Œè¿™æ ·å°±å¯ä»¥äº†ã€‚
