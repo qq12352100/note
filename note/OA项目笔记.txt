@@ -60,8 +60,7 @@ for(Privilege privilege : role.getPrivilege()) {
 <label for="cbAll">全选<label>
 //单选checkbox回显
 <input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"
-	<s:property value="%{id in privilegeIds ? 'checked' : ''}"
->
+	<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
 <label for="cd_${id}">${name}</label>
 
 ${pageContext.request.contextPath}  //jsp页面中拿到Web-Root路径
@@ -103,7 +102,7 @@ IF判断------------
 	<s:a action="departmentAction_list?parentId=%{#parent.parent.id}">返回上一级</s:a>
 </s:if>
 ------------------------------------------------------------------------
-ActionContext.getContext().put("key",value);		//放到值栈map中
+ActionContext.getContext().put("key",value);			//放到值栈map中
 ActionContext.getContext().getValueStack().push(role);  // 放到栈顶，先找栈再找map
 -------------------------------------------------------------------------
 模板：

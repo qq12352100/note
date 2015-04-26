@@ -1,0 +1,19 @@
+任务调度 /etc/crontable
+
+crontab -e 编辑任务
+crontab -r 终止所有任务
+
+* * * * * date > /home/date1.txt //每分钟把当前日期写到date1.txt中
+分  每小时第几分钟执行  0-59
+时  每日第几个小时执行  0-23
+月  每月第几天执行      1-31
+年  每年第几月执行      1-12
+周  每周第几天执行      0-6
+
+【shell编程】
+写个文件mytask.sh
+  * * * * * date > /home/date1.txt
+  cp /home/date1.txt /root
+任务中写 * * * * * mytask.sh
+
+注意：不能执行，授权chmod 744 mytask.sh
