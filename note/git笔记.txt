@@ -19,9 +19,6 @@ git branch				//查看当前分支
 git merge dev			//合并指定分支到当前分支
 git branch -d dev		//删除dev分支
 
-git pull origin master	//从远程获取最新版本并merge到本地,相当于git fetch 和 git merge
-git fetch origin master //从远程获取最新版本到本地，不会自动merge
-
 git stash					//当前工作现场“储藏”起来，等以后恢复现场后继续工作
 git stash list				//查看存储了几个工作现场
 git stash apply stash@{0}	//恢复特定的工作现场
@@ -61,6 +58,8 @@ git add .					//添加文件（目录下面所有文件）
 git commit -m "first file"	//提交文件（形成一个快照，以便以后恢复，后面添加提交信息）
 git push -u origin master	//推送到远程库上
 ===================================================================================
+git pull origin master	//从远程获取最新版本并merge到本地,相当于git fetch 和 git merge
+git fetch origin master //从远程获取最新版本到本地，不会自动merge
 
 ssh-keygen		//生成公钥
 
