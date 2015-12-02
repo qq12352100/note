@@ -23,7 +23,7 @@ $git clone git@github.com:qq12352100/MyUtil.git
 5.1 配置
   git config --global user.name "Your Name"
   git config --global user.email your_email@gmail.com
- 
+
 5.2 创建Repository
 mkdir clrs
 cd clrs
@@ -35,7 +35,6 @@ git remote add origin git@github.com:your_name/clrs.git
 git push origin master
 
 移除远程仓库：git remote rm origin
-
 
 5.3 提交已经存在的Repository
 cd existing_git_repo

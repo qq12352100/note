@@ -1,33 +1,38 @@
+=======================================================
+cat log.txt|grep -A10 -B10 name 【查看log.txt中name前后10行】
+ps -ef|grep java				【查看运行中的java程序】
+
+
+
 -------------------------------------------------------
 -------------------------常用命令----------------------
 -------------------------------------------------------
 
-vi /etc/sysconfig/network-scripts/ifcfg-eth0 【设置IP】
-/etc/rc.d/init.d/network restart 【重启网络配置】
-ls -l > a.txt 			 【列表内容输出到a.txt中|覆盖|>>|追加】
-rm -f /var/log/httpd/access.log【将会强制删除/var/log/httpd/access.log这个文件】
-rm -rf /var/log/httpd/access   【将会删除/var/log/httpd/access目录以及其下所有文件、文件夹】
+vi /etc/sysconfig/network-scripts/ifcfg-eth0	【设置IP】
+/etc/rc.d/init.d/network restart				【重启网络配置】
+ls -l > a.txt									【列表内容输出到a.txt中|覆盖|>>|追加】
+rm -f /var/log/httpd/access.log					【将会强制删除/var/log/httpd/access.log这个文件】
+rm -rf /var/log/httpd/access					【将会删除/var/log/httpd/access目录以及其下所有文件、文件夹】
 
-shutdown now 【关机】
-reboot       【开机】
-env 	     【查看环境变量】
-history      【查看历史命令记录】
-netstat -anp 【查看监听端口和进程号】
-ps -aux|more 【查看进程-->top动态查看】
-kill -9 1777 【强制杀死1777号进程】
+shutdown now 	【关机】
+reboot       	【开机】
+env          	【查看环境变量】
+history      	【查看历史命令记录】
+ps -aux|more 	【查看进程-->top动态查看】
+kill -9 1777 	【强制杀死1777号进程】
 
 mount -参数 设备名称 挂载点  【挂载命令】挂载光驱直接mount /mnt/cdrom
 umount 设备名称              【卸载命令】
+		
+df 目录全路径		【查看某个目录是在哪个分区】
+df -l        		【查看磁盘使用情况】
+fdisk -l     		【查看系统分区的具体情况】
 
-df 目录全路径 【查看某个目录是在哪个分区】
-df -l         【查看磁盘使用情况】
-fdisk -l      【查看系统分区的具体情况】
-
-ls      【列出文件和目录】
-ls -a   【显示隐藏文件】
-ls -l   【显示长列表格式】
-ls -ahl 【查看文件的所有组】
-mv f1 f2【修改文件名】
+ls      			【列出文件和目录】
+ls -a   			【显示隐藏文件】
+ls -l   			【显示长列表格式】
+ls -ahl 			【查看文件的所有组】
+mv f1 f2			【修改文件名】
 find / -name a.txt  【查找根目录下的a.txt文件】 
 chown 用户名 文件名 【修改文件所有者】
 chgrp 组名 文件名   【修改文件所在组】
@@ -54,7 +59,7 @@ useradd -g 组名 用户名   【创建用户并指定组】
 usermod -g 组名 用户名   【改变用户所在组】
 usermod -d 目录名 用户名 【改变用户登录的初始目录】
 ---组命令-----
-groupadd 组名 	     【添加组】
+groupadd 组名        【添加组】
 [cat|vi] /ect/group  【查看所有组】
 [cat|vi] /ect/passwd 【查看所有的用户信息】
 
@@ -77,8 +82,8 @@ swp 交换分区 一般是你的物理内存的两倍 不要大于256
 ---------------------jdk/tomcat安装--------------------
 -------------------------------------------------------
 1、挂载到mount /mnt/cdrom
-2、把文件拷贝到/home 【cp 文件 /home】
-3、切换到home下 【cd /home】
+2、把文件拷贝到/home    【cp 文件 /home】
+3、切换到home下		【cd /home】
 4、安装 ./???.bin
 5、查看环境配置文件 /etc/profile
 6、在unset i下面配置环境变量
@@ -89,8 +94,7 @@ export JAVA_HOME PATH CLASSPATH
 -------------------------------------------------------
 ------------------eclipse/myeclipse安装----------------
 -------------------------------------------------------
-1、把文件拷贝到/home 【cp 文件 /home】
-2、切换到home下 【cd /home】
+1、把文件拷贝到/home	【cp 文件 /home】
+2、切换到home下		【cd /home】
 3、安装 tar -zxvf ???.tar.gz
-4、启动eclipse【startx进入图形界面】
-
+4、启动eclipse		【startx进入图形界面】
