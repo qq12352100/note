@@ -1,3 +1,44 @@
+1、检查是否已经存在KEY
+ 
+$ cd ~/.ssh
+$ ls
+config  id_rsa  id_rsa.pub  known_hosts
+$ mkdir key_backup
+$ cp id_rsa* key_backup
+$ rm id_rsa*
+注：windows7在C:\Users\ZDZ\.ssh目录下可以找到
+
+2、生成SSH KEY
+ $ ssh-keygen -t rsa -C "qq12352100@163.com"
+
+3、将Public Key 添加到GitHub
+Account-->SSH keys 里面的 Add a new key ,  将你的public key（id_rsa.pub）的内容拷贝到SSH key文本框
+
+4、测试
+$ ssh git@github.com
+==========================================================================================
+下载你的项目
+$git clone git@github.com:qq12352100/MyUtil.git
+
+5.1 配置
+  git config --global user.name "Your Name"
+  git config --global user.email your_email@gmail.com
+ 
+5.2 创建Repository
+mkdir clrs
+cd clrs
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:your_name/clrs.git
+git push origin master
+ 
+5.3 提交已经存在的Repository
+cd existing_git_repo
+git remote add origin git@github.com:your_name/clrs.git
+git push origin master
+==========================================================================================
 当前用户的Git配置文件放在用户主目录(c:/docments and settings/andministrator)下的一个隐藏文件.gitconfig中
 //git lg  设计log样式
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset 
