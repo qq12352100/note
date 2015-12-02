@@ -1,0 +1,32 @@
+eclipse快捷键
+
+Ctrl + Shift + T	找java文件
+Ctrl + Shift + R	找所有文件
+Ctrl + L		快速定位到某行
+Ctrl + K		快速查找当前单词下一个的位置
+
+Alt + Shift + S		快速生成geter和seter(按R)、生成无参构造函数、生成有参构造函数
+Alt + Shift + W		快速在左边定位show In。。。
+
+Alt + Shift + A		进入块选择
+
+alt + enter		打开工程属性
+
+alt + shift + j		快速注释/**  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

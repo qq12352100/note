@@ -1,0 +1,59 @@
+安装
+tar zxvf redis-2.4.16.tar.gz
+make 
+redis-server：Redis服务器的daemon启动程序
+redis-cli：Redis命令行操作工具。或者通过telnet进行纯文本协议操作
+redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能
+redis-cli shutdown  :关闭操作
+密码：requirepass test123  (配置文件中)
+验证：redis 127.0.0.1:6379> auth test123
+
+
+调优=======================================================
+# WARNING overcommit_memory is set to 0! 
+vim /etc/sysctl.conf  
+末尾追加vm.overcommit_memory = 1
+然后执行sysctl vm.overcommit_memory=1，使之生效：
+---------------------------------------------------
+# WARNING: The TCP backlog setting of 511 cannot be enforced
+echo 511 > /proc/sys/net/core/somaxconn
+---------------------------------------------------
+为了调整内存分配策略，需要配置/proc/sys/vm/overcommit_memory
+0， 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。
+1， 表示内核允许分配所有的物理内存，而不管当前的内存状态如何。
+2， 表示内核允许分配超过所有物理内存和交换空间总和的内存
+默认为0，如果内存情况比较紧张的话，设为1：
+echo 1 > /proc/sys/vm/overcommit_memory  
+----------------------------------------------------
+redis.conf参数：
+daemonize：	是否以后台daemon方式运行
+bind：		指定Redis可接收请求的IP地址,不设置将处理所有请求,建议生产环境中设置
+pidfile：	pid文件位置
+port：		监听的端口号
+timeout：	请求超时时间，单位为秒,超时后会关闭连接
+loglevel：	log信息级别
+logfile：	log文件位置，默认打印在命令行终端的窗口上
+databases：	开启数据库的数量，可以使用 SELECT <dbid>命令来切换数据库。默认使用的数据库是 0
+save * *：	保存快照的频率，第一个*表示多长时间（秒级），第二个*表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。60秒之内有10000个keys发生变化时
+rdbcompression：在进行镜像备份时，是否使用压缩
+dbfilename：	数据快照文件名（只是文件名，不包括目录）
+dir：		数据快照的保存目录（这个是目录）
+appendonly：	是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率。
+appendfsync：	appendonlylog如何同步到磁盘（三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步）
+slaveof <masterip> <masterport> ：主从配置，在redis-slave上配置master的ip port，即可。
+maxclients 128：限制同时连接的客户数量。当连接数超过这个值时,redis 将不再接收其他连接请求,客户端尝试连接时将收到 error 信息
+
+daemonize yes	 #守护进程模式，是指在UNIX或其他多任务操作系统中在后台执行的电脑程序，并不会接受电脑用户的直接操控。
+save 60 1000	 #当时间间隔超过60秒，或存储超过1000条记录时，进行持久化。
+maxmemory 256mb  #分配256MB内存，一定要设定maxmemmory，且配置大小要小于物理内存，留有足够的内存供系统使用。某期间数据暴涨，导致内存吃紧，SWAP加剧，直接宕机。
+
+
+
+
+
+
+
+
+
+
+
