@@ -33,7 +33,10 @@ git add README
 git commit -m 'first commit'
 git remote add origin git@github.com:your_name/clrs.git
 git push origin master
- 
+
+移除远程仓库：git remote rm origin
+
+
 5.3 提交已经存在的Repository
 cd existing_git_repo
 git remote add origin git@github.com:your_name/clrs.git
