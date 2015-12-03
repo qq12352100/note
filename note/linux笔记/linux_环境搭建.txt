@@ -25,23 +25,23 @@ source /etc/profile
 1、下载MySQL-5.6.16-1.el6.x86_64.rpm-bundle.tar
 2、解压 tar -xvf MySQL-5.6.15-1.el6.i686.rpm-bundle.tar
 MySQL-shared-compat-5.6.15-1.el6.i686.rpm		 # RHEL兼容包
-MySQL-server-5.6.15-1.el6.i686.rpm			 # MySQL服务端程序
-MySQL-client-5.6.15-1.el6.i686.rpm			 # MySQL客户端程序
-MySQL-devel-5.6.15-1.el6.i686.rpm			 # MySQL的库和头文件
-MySQL-shared-5.6.15-1.el6.i686.rpm			 # MySQL的共享库
+MySQL-server-5.6.15-1.el6.i686.rpm				 # MySQL服务端程序
+MySQL-client-5.6.15-1.el6.i686.rpm				 # MySQL客户端程序
+MySQL-devel-5.6.15-1.el6.i686.rpm				 # MySQL的库和头文件
+MySQL-shared-5.6.15-1.el6.i686.rpm				 # MySQL的共享库
 在RHEL系统中，必须先安装“MySQL-shared-compat-5.6.15-1.el6.i686.rpm”这个兼容包，然后才能安装server和client，否则安装时会出错。
 3、安装
-rpm -qa | grep mysql				--查看系统之前是否已安装MySQL
+rpm -qa | grep mysql							--查看系统之前是否已安装MySQL
 rpm -e --nodeps mysql-libs-5.1.47-4.el6.i686	--移除mysql
-find / -name mysql*				--查找残留文件
-rm -rf /var/lib/mysql*				--移除残留文件
+find / -name mysql*								--查找残留文件
+rm -rf /var/lib/mysql*							--移除残留文件
 卸载后 /var/lib/mysql 中的  /etc/my.cnf 会重命名为 my.cnf.rpmsave，/var/log/mysqld.log 会重命名为 /var/log/mysqld.log.rpmsave，如果确定没用后就手工删除。
 安装开始：
 rpm -ivh MySQL-shared-compat-5.6.15-1.el6.i686.rpm
 rpm -ivh MySQL-server-5.6.15-1.el6.i686.rpm
 rpm -ivh MySQL-client-5.6.15-1.el6.i686.rpm
-rpm -q MySQL-server				--安装完成，查看有没有安装成功
-netstat -nat					--检测 MySQL 3306 端口是否安打开
+rpm -q MySQL-server					--安装完成，查看有没有安装成功
+netstat -nat						--检测 MySQL 3306 端口是否安打开
 service mysql start/stop			--启动/关闭MySql 服务
 
 a、数据库目录    /var/lib/mysql/ 
@@ -51,10 +51,10 @@ d、启动脚本	 /etc/rc.d/init.d/（启动脚本文件mysql的目录）
 
 在这个版本的安装过程中会在 /root/.mysql_secret 生成随机密码，首次登陆、找到随机密码，用此密码来登录
 
-set password=password('123456');	--设置新密码
+set password=password('123456');														--设置新密码
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION；	--赋予任何主机上以root身份访问数据的权限(有密码)
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION；				--赋予任何主机上以root身份访问数据的权限(没密码)
-flush privileges;			--刷新系统权限,重启服务也可以
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION；							--赋予任何主机上以root身份访问数据的权限(没密码)
+flush privileges;																		--刷新系统权限,重启服务也可以
 
 --查看连接权限
 use mysql;
@@ -148,7 +148,6 @@ rpm -e --nodeps mysql		--删除包
 mysql
 localhost密码root
 远程连接密码123456
-
 
 
 

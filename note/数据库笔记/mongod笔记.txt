@@ -1,3 +1,23 @@
+===================================linux安装==========================================================
+1、下载，解压mongodb文件。
+wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
+tar -zxvf mongodb-linux-x86_64-3.0.6.tgz
+mv mongodb-linux-x86_64-3.0.6.tgz mongodb3.0.6
+
+2、创建mongodb存放的数据文件、日子文件(mongodb_db、mongodb_logs)
+mkdir mongodbdata
+cd mongodbdata
+mkdir mongodb_db
+mkdir mongodb_logs
+
+3、进入刚才解压的mongodb3.0.6/bin 目录指定输出路径
+./mongod --dbpath=/usr/local/mongodbdata/mongodb_db --logpath=/usr/local/mongodbdata/mongodb_logs/mongodb.log --logappend&
+
+4、检查端口是否启动
+netstat -lanp  | grep 27017
+
+5、进入到bin目录，执行 ./mongo
+===================================window安装==========================================================
 E:\mongodb-win32-i386-3.0.6\bin
 
 E:\mongodb-win32-i386-3.0.6\db
@@ -79,11 +99,11 @@ mongod --dbpath E:\mongodb-win32-i386-3.0.6\db --logpath=E:\mongodb-win32-i386-3
 ------------------------------------------------------------------
 ==>>查找
 ($gt为大于、$gte为大于等于、$lt为小于、$lte为小于等于、$ne为不等于、$exists不存在、$in指定范围、$nin指定不在某范围)
-> db.books.find( { money: { $in: [ 20,30,90] } } );		 //查找money等于20，30，90的数据  
+> db.books.find( { money: { $in: [ 20,30,90] } } );			 //查找money等于20，30，90的数据  
 > db.books.find( { auther: { $in: [ /^李/,/^钱/ ] } } );	 //查找以李，钱开头的数据  
 > db.books.find( { $or: [ { money: 20 }, { money: 80 } ] } );    //查找money等于20，80的数据 
-> db.books.distinct( 'auther' );				 //distinct 去处重复
-> db.person.count({"age":{$gt:20}})				 //计算年龄超过20的
+> db.books.distinct( 'auther' );							 //distinct 去处重复
+> db.person.count({"age":{$gt:20}})							 //计算年龄超过20的
 > db.person.find()
 { "_id" : ObjectId("55fa29d6a85077fba6f27540"), "name" : "bkk", "age" : 20 }
 { "_id" : ObjectId("55fa29daa85077fba6f27541"), "name" : "bkk", "age" : 21 }
@@ -145,8 +165,8 @@ Binary data : 此数据类型用于存储二进制数据。
 Code : 此数据类型用于存储到文档中的JavaScript代码。
 Regular expression : 此数据类型用于存储正则表达式。
 ==============================================================================
-> db.createUser({"user":"sa","pwd":"sa","roles":["readWrite"]})		//添加用户
-> db.dropUser("admin")							//删除用户
+> db.createUser({"user":"bkk","pwd":"root","roles":["readWrite"]})	//添加用户
+> db.dropUser("admin")												//删除用户
 
 
 

@@ -8,19 +8,21 @@ communication  Build  path JRE System Library Problem
 去除警告方法：工程名称上右键菜单：Properties--->Java Build Path--->Libraries，
 选中"JRE System Library[JavaSE-1.6]"，
 选择右侧按钮“Edit"，打开新界面中选择"Workspace default JRR (JDK1.7......)"即可。
-========================================================================================================== ${}标签不起作用
-<%@ page contentType="text/html; charset=gb2312" language="java" isELIgnored="false" %>
-<%@ page isELIgnored＝"true|false"%>如果设定为真，那么JSP中的表达式被当成字符串处理。　
-比如下面这个表达式：<p>${2000 % 20}</p>
-在isELIgnored＝"true"时输出为${2000 % 20}，
-而isELIgnored＝"false"时输出为100。Web容器默认isELIgnored＝"false"。
 ========================================================================================================== eclipse新建maven webapp后无法添加src/main/java和src/main/test
 1.eclipse->window>preferences->java->compiler->选择本地要用的Java版本
 2.eclipse->window>preferences->java->installJars->修改为本地jdk
 3.项目右键->buildPath configure Build Path->点击选项卡Libraries->选中JRE System Library->
 点击edit->选中Alternate JRE->选择jdk
 4.点击finish，点击ok，自动出现src/main/java和src/test/java
-==========================================================================================================
+========================================================================================================== eclipse控制台中的中文输出乱码问题
+1、首先在Run-Run Configration-Tomcat-Arguments,在VM arguments中添加-Dfile.encoding=UTF-8
+2、Common tab页，在Console encoding中选择UTF-8
+========================================================================================================== ${}标签不起作用
+<%@ page contentType="text/html; charset=gb2312" language="java" isELIgnored="false" %>
+<%@ page isELIgnored＝"true|false"%>如果设定为真，那么JSP中的表达式被当成字符串处理。　
+比如下面这个表达式：<p>${2000 % 20}</p>
+在isELIgnored＝"true"时输出为${2000 % 20}，
+而isELIgnored＝"false"时输出为100。Web容器默认isELIgnored＝"false"。
 ==========================================================================================================
 ==========================================================================================================
 ==========================================================================================================
