@@ -6,7 +6,7 @@ Ctrl + Shift + F	格式化文件Format Document。
 Ctrl + Shift + O	作用是缺少的Import
 Ctrl + Shift + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中是 <!--~-->。 
 
-
+ctrl + E			快速转换编辑器
 Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
 
