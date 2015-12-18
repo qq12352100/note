@@ -5,13 +5,16 @@ mysqldump -u root -p bkk>bak.sql
 truncate user_a;		#ID从0开始
 delete user_a;			#ID从上次的开始
 
+删除
+DELETE FROM _user WHERE username IS NULL AND city <> 'NULL';
 
-DELETE FROM _user WHERE username IS NULL;
-
+插入
 INSERT INTO _user(username) VALUES (RAND()*10);
 
+更新
 UPDATE _user SET int_=5 WHERE int_ IS NULL ;
 
+清空
 TRUNCATE TABLE _user;
 -----------------------------------------------------------------------------------------------------------------
 在创建表时，就插入另一张表里面的某些数据
@@ -20,7 +23,7 @@ create table user_b AS select * from user_a where id < 10;
 复制表A里面10条记录插入表B里面
 insert into user_b(name,password) select name,password from user_a where id < 10;
 
-查询年龄段个数
+查询年龄20岁以下分布段个数
 SELECT age "年龄" ,COUNT(id) "数量" FROM user_a GROUP BY age HAVING age <20;
 
 查询年龄段分布
@@ -28,6 +31,11 @@ SELECT COUNT(id) "10-20岁人数量" FROM user_my WHERE age >10 AND age <20;
 
 保留后两位小数
 SELECT ROUND(foolt,2) FROM user_a;
+
+执行sql脚本文件
+1、mysql –uroot –p123456 -Dtest<d:\test\ss.sql
+2、进入mysql的控制台后，使用source命令执行
+source d:\test\ss.sql 或者 \. d:\test\ss.sql
 
 -----------------------------------------------------------------------------------------------------------------
 SELECT a.a1 "活跃人数" , b.b1 "男性活跃" ,c.c1 "女性活跃" FROM (

@@ -6,17 +6,20 @@ redis-cli：Redis命令行操作工具。或者通过telnet进行纯文本协议
 redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能
 redis-cli shutdown  :关闭操作
 密码：requirepass test123  (配置文件中)
+# requirepass foobared去掉注释，foobared改为自己的密码
 验证：redis 127.0.0.1:6379> auth test123
 
 
 调优=======================================================
 # WARNING overcommit_memory is set to 0! 
-vim /etc/sysctl.conf  
-末尾追加vm.overcommit_memory = 1
-然后执行sysctl vm.overcommit_memory=1，使之生效：
+echo "vm.overcommit_memory=1" >> /etc/sysctl.conf
+sysctl -p
 ---------------------------------------------------
 # WARNING: The TCP backlog setting of 511 cannot be enforced
 echo 511 > /proc/sys/net/core/somaxconn
+---------------------------------------------------
+# WARNING you have Transparent Huge Pages (THP) support enabled in your kernel.
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
 ---------------------------------------------------
 为了调整内存分配策略，需要配置/proc/sys/vm/overcommit_memory
 0， 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。

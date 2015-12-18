@@ -1,28 +1,29 @@
 eclipse快捷键
 
-Ctrl + Shift + T	找java文件
-Ctrl + Shift + R	找所有文件
-Ctrl + Shift + F	格式化文件Format Document。
-Ctrl + Shift + O	作用是缺少的Import
-Ctrl + Shift + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中是 <!--~-->。 
+CTRL + SHIFT + T	找java文件
+CTRL + SHIFT + R	找所有文件
+CTRL + SHIFT + F	格式化文件Format Document。
+CTRL + SHIFT + O	作用是缺少的Import
+CTRL + SHIFT + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中是 <!--~-->。 
+CTRL + SHIFT + X   	转为大写    
+CTRL + SHIFT + Y    转为小写
 
-ctrl + E			快速转换编辑器
+Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数
+Alt + Shift + W		快速在左边定位show In。。。
+Alt + Shift + A		进入块选择
+Alt + shift + J		快速注释/**  */
+
+Ctrl + E			快速转换编辑器
 Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
 
-
-Alt + Shift + S		快速生成geter和seter(按R)、生成无参构造函数、生成有参构造函数
-Alt + Shift + W		快速在左边定位show In。。。
-
-Alt + Shift + A		进入块选择
-
 Alt + enter			打开工程属性
 
-Alt + shift + j		快速注释/**  */
+------------------------------------------------------------------------
+notepad快捷键
 
-
-
-
+转换小写：Ctrl+u
+转换大写：Ctrl+Shift+u
 
 
 
