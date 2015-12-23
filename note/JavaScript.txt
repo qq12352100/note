@@ -1,3 +1,8 @@
+http://cdn.code.baidu.com/  百度静态资源库
+
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
+
 ==========================================================================================================选择器
 $("#a").next()		当前元素的下一个
 

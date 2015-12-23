@@ -8,7 +8,7 @@ CTRL + SHIFT + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中
 CTRL + SHIFT + X   	转为大写    
 CTRL + SHIFT + Y    转为小写
 
-Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数
+Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数(按O)
 Alt + Shift + W		快速在左边定位show In。。。
 Alt + Shift + A		进入块选择
 Alt + shift + J		快速注释/**  */
@@ -18,14 +18,17 @@ Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
 
 Alt + enter			打开工程属性
-------------------------------------------------------------------------
-Eclipse中为SVN设置快捷键
+------------------------------------------------------------------------------------------------------Eclipse中为SVN设置快捷键
 1、Window-->Preferences-->General-->Keys
 2、点击“Category”列，进行字母表排序，方便我们找到SVN相关Command。
 3、Binding中同时按住你想设定的快捷键。Alt + E
 4、把When选择为“In Windows”。
-
-------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------Eclipse设置一行的代码长度
+java：window->preferences->java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
+XML：window->preferences->XML->XML Files->Editor-> line width 修改成140		搜索xml
+html：window->preferences->Web->HTML Files->Editor-> line width 修改成140	搜索html
+------------------------------------------------------------------------------------------------------
+===================================================================================
 notepad快捷键
 
 转换小写：Ctrl+u
