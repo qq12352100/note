@@ -83,7 +83,7 @@ swp 交换分区 一般是你的物理内存的两倍 不要大于256
 -------------------------------------------------------
 1、挂载到mount /mnt/cdrom
 2、把文件拷贝到/home    【cp 文件 /home】
-3、切换到home下		【cd /home】
+3、切换到home下			【cd /home】
 4、安装 ./???.bin
 5、查看环境配置文件 /etc/profile
 6、在unset i下面配置环境变量
@@ -95,6 +95,6 @@ export JAVA_HOME PATH CLASSPATH
 ------------------eclipse/myeclipse安装----------------
 -------------------------------------------------------
 1、把文件拷贝到/home	【cp 文件 /home】
-2、切换到home下		【cd /home】
+2、切换到home下			【cd /home】
 3、安装 tar -zxvf ???.tar.gz
-4、启动eclipse		【startx进入图形界面】
+4、启动eclipse			【startx进入图形界面】

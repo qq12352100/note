@@ -1,36 +1,23 @@
-========================================================================================================== URL取参数
-http://localhost:8086/topic/index?topicId=361
-window.location
-属性          描述
-pathname   /topic/index  		 设置或获取对象指定的文件名或路径。
-host       http:localhost:8086   	 设置或获取 location 或 URL 的 hostname 和 port 号码。
-search     ?topicId=361   		 设置或获取 href 属性中跟在问号后面的部分。
-
-hash          设置或获取 href 属性中在井号“#”后面的分段。
-hostname      设置或获取 location 或 URL 的主机名称部分。
-href          设置或获取整个 URL 为字符串。
-port          设置或获取与 URL 关联的端口号码。
-protocol      设置或获取 URL 的协议部分。
 ==========================================================================================================选择器
 $("#a").next()		当前元素的下一个
 
-$(".intro")		所有 class="intro" 的元素
+$(".intro")			所有 class="intro" 的元素
 $(".intro.demo")	所有 class="intro" 且 class="demo" 的元素
 
-$("p")			所有 <p> 元素
+$("p")				所有 <p> 元素
 $("p:first")		第一个 <p> 元素
-$("p:last")		最后一个 <p> 元素
+$("p:last")			最后一个 <p> 元素
 
 $("tr:even")		所有偶数 <tr> 元素
-$("tr:odd")		所有奇数 <tr> 元素
+$("tr:odd")			所有奇数 <tr> 元素
 
-$("[href]")		所有带有 href 属性的元素
+$("[href]")			所有带有 href 属性的元素
 $("[href='#']")		所有 href 属性的值等于 "#" 的元素
 $("[href!='#']")	所有 href 属性的值不等于 "#" 的元素
 $("[href$='.jpg']")	所有 href 属性的值包含以 ".jpg" 结尾的元素
 
-$(":input")		所有 <input> 元素
-$(":text")		所有 type="text" 的 <input> 元素//password、radio、checkbox、submit、reset、button、image、file
+$(":input")			所有 <input> 元素
+$(":text")			所有 type="text" 的 <input> 元素//password、radio、checkbox、submit、reset、button、image、file
 $(":enabled")		所有激活的 input 元素
 $(":disabled")		所有禁用的 input 元素
 $(":selected")		所有被选取的 input 元素
@@ -70,8 +57,43 @@ if(obj.a3.length>0){
 	 $("#a3_"+val.trim()).prop("checked","checked");
 	});
 }
-==========================================================================================================
-==========================================================================================================
+========================================================================================================== URL取参数
+http://localhost:8086/topic/index?topicId=361
+window.location
+属性          描述
+pathname   /topic/index  		 设置或获取对象指定的文件名或路径。
+host       http:localhost:8086   	 设置或获取 location 或 URL 的 hostname 和 port 号码。
+search     ?topicId=361   		 设置或获取 href 属性中跟在问号后面的部分。
+
+hash          设置或获取 href 属性中在井号“#”后面的分段。
+hostname      设置或获取 location 或 URL 的主机名称部分。
+href          设置或获取整个 URL 为字符串。
+port          设置或获取与 URL 关联的端口号码。
+protocol      设置或获取 URL 的协议部分。
+==========================================================================================================窗口嵌套时刷新上级窗口
+if(window.parent != window){
+	window.parent.location.reload(true);
+}
+==========================================================================================================精确到秒按小时数倒记时代码
+<SCRIPT LANGUAGE="JavaScript">   
+var maxtime = 60*60 //一个小时，按秒计算，自己调整!   
+function CountDown(){   
+if(maxtime>=0){   
+minutes = Math.floor(maxtime/60);   
+seconds = Math.floor(maxtime%60);   
+msg = "距离结束还有"+minutes+"分"+seconds+"秒";   
+document.all["timer"].innerHTML=msg;   
+if(maxtime == 5*60) alert('注意，还有5分钟!');   
+--maxtime;   
+}   
+else{   
+clearInterval(timer);   
+alert("时间到，结束!");   
+}   
+}   
+timer = setInterval("CountDown()",1000);   
+</SCRIPT>   
+<div id="timer" style="color:red"></div> 
 ==========================================================================================================
 
 
