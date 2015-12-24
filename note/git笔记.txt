@@ -18,11 +18,11 @@ Account-->SSH keys 里面的 Add a new key ,  将你的public key（id_rsa.pub�
 $ ssh git@github.com
 ==========================================================================================
 下载你的项目
-$git clone git@github.com:qq12352100/MyUtil.git
+$git clone git@github.com:qq12352100/note.git
 
 5.1 配置
-  git config --global user.name "Your Name"
-  git config --global user.email your_email@gmail.com
+git config --global user.name "bkk" 					//设置用户名
+git config --global user.email "qq12352100@163.com" 	//设置邮箱
 
 5.2 创建Repository
 mkdir clrs
@@ -31,14 +31,16 @@ git init
 touch README
 git add README
 git commit -m 'first commit'
-git remote add origin git@github.com:your_name/clrs.git
+git remote add origin git@github.com:qq12352100/note.git
 git push origin master
 
-移除远程仓库：git remote rm origin
+git remote add origin git@github.com:qq12352100/note.git	//添加远程仓库
+git remote -v 												//查看远程仓库
+git remote rm origin										//移除远程仓库
 
 5.3 提交已经存在的Repository
 cd existing_git_repo
-git remote add origin git@github.com:your_name/clrs.git
+git remote add origin git@github.com:qq12352100/note.git
 git push origin master
 ==========================================================================================
 当前用户的Git配置文件放在用户主目录(c:/docments and settings/andministrator)下的一个隐藏文件.gitconfig中
@@ -87,12 +89,12 @@ rm test.txt						//从本机删除文件
 git rm test.txt --cached  		//从版本库中删除文件，但不删除文件  
 git rm image -r					//删除指定目录所有文件
 
-git remote add origin git@github.com:michaelliao/learngit.git 		//关联远程仓库
+git remote add origin git@github.com:qq12352100/note.git	 		//关联远程仓库
 git remote -v 														//查看远程仓库
 
 git push -u origin master											//推送到远程库上
 
-git clone git@github.com:michaelliao/gitskills.git					//克隆远程仓库
+git clone git@github.com:qq12352100/note.git						//克隆远程仓库
 cd gitskills	//进入目录
 ls				//查看文件
 
@@ -106,8 +108,6 @@ git fetch origin master 	//从远程获取最新版本到本地，不会自动me
 
 ssh-keygen					//生成公钥
 
-git config --global user.name "HanShuliang" 			//设置用户名
-git config --global user.email "13241153187@163.com" 	//设置邮箱
 
 git init //初始化项目，生成.git隐藏文件
 
