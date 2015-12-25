@@ -27,7 +27,8 @@ Alt + enter			打开工程属性
 java：window->preferences->java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
 XML：window->preferences->XML->XML Files->Editor-> line width 修改成140		搜索xml
 html：window->preferences->Web->HTML Files->Editor-> line width 修改成140	搜索html
-------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------Eclipse中设置author名字
+选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types 默认是当前系统的用户名
 ===================================================================================
 notepad快捷键
 
