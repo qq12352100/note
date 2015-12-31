@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="8005" shutdown="SHUTDOWN">
+	<Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+	<Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+	<Listener className="org.apache.catalina.core.JasperListener" />
+	<Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+	<Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+	<Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+	<GlobalNamingResources>
+		<Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+			pathname="conf/tomcat-users.xml" />
+	</GlobalNamingResources>
+
+	<Service name="Catalina">
+		<!-- 连接器
+			 port:						端口号
+			 protocol:					通信协议,tomcat默认采用的BIO模型，在几百并发下性能会有很严重的下降。tomcat自带还有NIO的模型，另外也可以调用APR的库来实现操作系统级别控制。
+			 redirectPort:				重定向端口号
+			 minProcessors：				最小空闲连接线程数，用于提高系统处理性能,默认值为 10
+			 maxProcessors：				最大连接线程数，即：并发处理的最大请求数,默认值为 75
+			 acceptCount：				允许的最大连接数，应大于等于 maxProcessors,默认值为 100
+			 enableLookups：				是否反查域名，取值为： true 或 false ,为了提高处理能力,应设置为 false
+			 URIEncoding:			    URL统一编码
+			 address="127.0.0.1"		设置Tomcat监听指定的IP地址。0.0.0.0监听了所有的IP协议的所有IP地址的80端口。
+			 connectionTimeout：			网络连接超时，单位：毫秒。设置为 0 表示永不超时,这样设置有隐患的,如果为 -1, 表示不限制建立客户连接的时间。通常可设置为 30000 毫秒。
+			 Tomcat缓存优化:
+			 	compression 		 	打开压缩功能   
+				compressionMinSize   	启用压缩的输出内容大小，这里面默认为2KB
+				compressableMimeType 	压缩类型
+			 其中和最大连接数相关的参数为maxProcessors 和 acceptCount 。如果要加大并发连接数，应同时加大这两个参数。
+				
+				executor="tomcatThreadPool" port="80" protocol="org.apache.coyote.http11.Http11NioProtocol" address="0.0.0.0" maxHttpHeaderSize="10240" 
+                connectionTimeout="20000" enableLookups="false" disableUploadTimeout="true" redirectPort="8443" URIEncoding="utf-8" acceptCount="1000"
+                maxThreads="500" minSpareThreads="20" compression="on" compressionMinSize="50" noCompressionUserAgents="gozilla,traviata" 
+                compressableMimeType="application/json,text/javascript"
+		 -->
+
+		<Connector port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol" enableLookups="false" URIEncoding="utf-8" connectionTimeout="20000" 
+		    compression="on" compressionMinSize="2048" compressableMimeType="application/json,text/html,text/xml,text/javascript,text/css,text/plain" 
+		    redirectPort="8443" />
+		
+		<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
+
+		<!-- defaultHost指定默认主机。在一个<Engine>元素中可以配置多个虚拟主机，每个虚拟主机都通过name属性来识别，但是在<Engine>元素中必须指定一个在其中存在的主机配置，通过defaultHost来默认指定。 -->
+		<Engine name="Catalina" defaultHost="localhost">
+		    
+			<Realm className="org.apache.catalina.realm.LockOutRealm">
+				<Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase" />
+			</Realm>
+			
+			<!-- 对虚拟主机进行配置，可以在一个<Engine>元素中配置多个<Host>元素，也就是指定多个虚拟主机。 -->
+			<Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
+
+				<!-- className属性 指定主机实现类。这里使用默认的标准主机，可以省略。 -->
+				<!-- name属性 虚拟主机名称，也就是一个逻辑域名标识符，例如localhost，如果连接器<Connector>配置元素指定了HTTP协议和8085端口，
+					则可以通过浏览器使用前缀http://localhost:8085来进行通信；如果你将本地IP地址127.0.0.1绑定到任意一个域名，例如www.shirdrn.org上，
+					可以通过浏览器使用前缀http://www.shirdrn.org:8080来与容器进行本地交互。 -->
+				
+				<!-- appBase属性表示应用程序的根目录，也就是通过虚拟主机可以访问的资源所在的基路径，例如，上面appBase="webapps"，
+					因为使用Tomcat部署应用程序，默认部署到webapps目录下面，这种情况是，你只能将应用程序部署后存放到webapps目录下，
+					其实通过<Host>元素的子元素<Context>元素的docBase来指定实际应用程序的位置，也就是在物理文件系统中的位置（不一定就是在webapps目录下）。 -->
+				
+				<!-- 在<Host>元素中可以配置一个或者多个<Context>元素。如果配置多个的话，
+					必须使得每个<Context>元素对应一个唯一的path。每个<Context>元素表示一个Web应用程序，
+					可以在该元素中来对指定的Web应用程序详细配置。 -->
+				<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs/ip_log" prefix="localhost_access_log." 
+				    suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+			</Host>
+		</Engine>
+	</Service>
+</Server>
