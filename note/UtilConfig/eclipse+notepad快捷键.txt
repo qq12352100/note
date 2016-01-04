@@ -18,16 +18,24 @@ Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
 
 Alt + enter			打开工程属性
-------------------------------------------------------------------------------------------------------Eclipse中为SVN设置快捷键
+---------------------------------------------------------------------------------------------------------------Eclipse中为SVN设置快捷键
 1、Window-->Preferences-->General-->Keys
 2、点击“Category”列，进行字母表排序，方便我们找到SVN相关Command。
 3、Binding中同时按住你想设定的快捷键。(更新)Alt + Z (提交)Alt + A
 4、把When选择为“In Windows”。
-------------------------------------------------------------------------------------------------------Eclipse设置一行的代码长度
-java：window->preferences->java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
-XML：window->preferences->XML->XML Files->Editor-> line width 修改成140		搜索xml
-html：window->preferences->Web->HTML Files->Editor-> line width 修改成140	搜索html
-------------------------------------------------------------------------------------------------------Eclipse中设置author名字
+---------------------------------------------------------------------------------------------------------------Eclipse删除SVN用户名密码
+1. 查看你的Eclipse中使用的是什么SVN Interface
+windows > preference > Team > SVN #SVN Interface
+2. 如果是用的JavaHL, 找到以下目录并删除auth目录.
+    XP    C:\Documents and Settings\[YourUserName]\Application Data\Subversion\
+    WIN7  C:\Users\[YourUserName]\AppData\Roaming\Subversion\
+3. 如果你用的SVNKit, 找到以下目录并删除.keyring文件.
+	[eclipse]\configuration\org.eclipse.core.runtime
+---------------------------------------------------------------------------------------------------------------Eclipse设置一行的代码长度
+java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
+XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
+html：Web->HTML Files->Editor-> line width 修改成140	搜索html
+---------------------------------------------------------------------------------------------------------------Eclipse中设置author名字
 选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types 默认是当前系统的用户名
 ===================================================================================
 notepad快捷键
