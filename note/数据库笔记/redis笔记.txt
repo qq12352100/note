@@ -5,9 +5,13 @@ redis-server：Redis服务器的daemon启动程序
 redis-cli：Redis命令行操作工具。或者通过telnet进行纯文本协议操作
 redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能
 redis-cli shutdown  :关闭操作
+
 密码：requirepass test123  (配置文件中)
 # requirepass foobared去掉注释，foobared改为自己的密码
 验证：redis 127.0.0.1:6379> auth test123
+
+redis-server  redis.conf	//指定配置文件启动redis服务
+redis-cli -a test123		//指定密码登录客户端
 
 
 调优=======================================================
@@ -28,29 +32,32 @@ echo never > /sys/kernel/mm/transparent_hugepage/enabled
 默认为0，如果内存情况比较紧张的话，设为1：
 echo 1 > /proc/sys/vm/overcommit_memory  
 ----------------------------------------------------
-redis.conf参数：
-daemonize：	是否以后台daemon方式运行
-bind：		指定Redis可接收请求的IP地址,不设置将处理所有请求,建议生产环境中设置
-pidfile：	pid文件位置
-port：		监听的端口号
-timeout：	请求超时时间，单位为秒,超时后会关闭连接
-loglevel：	log信息级别
-logfile：	log文件位置，默认打印在命令行终端的窗口上
-databases：	开启数据库的数量，可以使用 SELECT <dbid>命令来切换数据库。默认使用的数据库是 0
-save * *：	保存快照的频率，第一个*表示多长时间（秒级），第二个*表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。60秒之内有10000个keys发生变化时
-rdbcompression：在进行镜像备份时，是否使用压缩
-dbfilename：	数据快照文件名（只是文件名，不包括目录）
-dir：		数据快照的保存目录（这个是目录）
-appendonly：	是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率。
-appendfsync：	appendonlylog如何同步到磁盘（三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步）
-slaveof <masterip> <masterport> ：主从配置，在redis-slave上配置master的ip port，即可。
-maxclients 128：限制同时连接的客户数量。当连接数超过这个值时,redis 将不再接收其他连接请求,客户端尝试连接时将收到 error 信息
+===========redis.conf参数=======================================================================
+daemonize：			是否以后台daemon方式运行
+bind：				指定Redis可接收请求的IP地址,不设置将处理所有请求,建议生产环境中设置
+pidfile：			pid文件位置
+port：				监听的端口号
+timeout：			请求超时时间，单位为秒,超时后会关闭连接
+loglevel：			log信息级别
+logfile：			log文件位置，默认打印在命令行终端的窗口上
+databases：			开启数据库的数量，可以使用 SELECT <dbid>命令来切换数据库。默认使用的数据库是 0
+save * *：			保存快照的频率，第一个*表示多长时间（秒级），第二个*表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。60秒之内有10000个keys发生变化时
+rdbcompression：	在进行镜像备份时，是否使用压缩
+dbfilename：		数据快照文件名（只是文件名，不包括目录）
+dir：				数据快照的保存目录（这个是目录）
+appendonly：		是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率。
+appendfsync：		appendonlylog如何同步到磁盘（三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步）
+maxclients 128：	限制同时连接的客户数量。当连接数超过这个值时,redis 将不再接收其他连接请求,客户端尝试连接时将收到 error 信息
 
 daemonize yes	 #守护进程模式，是指在UNIX或其他多任务操作系统中在后台执行的电脑程序，并不会接受电脑用户的直接操控。
 save 60 1000	 #当时间间隔超过60秒，或存储超过1000条记录时，进行持久化。
 maxmemory 256mb  #分配256MB内存，一定要设定maxmemmory，且配置大小要小于物理内存，留有足够的内存供系统使用。某期间数据暴涨，导致内存吃紧，SWAP加剧，直接宕机。
 
-操作=======================================================
+================主从配置=======================================================================
+slaveof <masterip> <masterport>		#在redis-slave上配置master的ip port，即可。
+masterauth test123					#验证
+
+==================操作=========================================================================
 ---------------------------------------string---------------------------------------
 set name bkk@163.com
 get name
@@ -133,6 +140,51 @@ zcount myzset 2 4 				//2-4序号之间元素个数
 zcard myzset 					//所有元素个数
 zremrangebyrank myzset 1 1 		//删除索引区间元素
 zremrangebyscore myzset 1 2 	//删除序号区间元素
+
+=============键值命令===============================================================================
+keys *							//返回所有键
+exists 	name					//判断key是否存在（1存在0不存在）
+del name						//删除key（1成功0不成功）
+expire name 10					//设置过期时间（10秒）（1成功0失败）
+ttl name						//获取有效时长（-1过期）
+select 0						//选择第0个数据库（0-15共16个数据库）(默认进入0数据库)
+move name 1  					//移动key-value到1数据库
+persist name					//移除key的过期时间（永远不过期）
+randomkey						//随机返回一个key
+rename name name_new			//重命名
+type name						//返回key的类型
+
+=============服务器命令==============================================================================
+ping							//测试连接是否存活（返回PONG代表活着）
+echo “bkk”						//输出“bkk”
+qiut							//退出客户端
+dbsize							//返回当前数据库key的数量
+info							//信息
+config get *					//返回相关配置的值
+flushdb							//清空当前数据库
+flushall						//清空所有数据库中所有key
+
+=============事务管理================================================================================
+multi		//开启事务
+set age 10
+set age 20
+exec		//提交事务 discard(事务回滚)
+get age  	//age最终为20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
