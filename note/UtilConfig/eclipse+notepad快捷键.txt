@@ -37,7 +37,11 @@ XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
 html：Web->HTML Files->Editor-> line width 修改成140	搜索html
 ---------------------------------------------------------------------------------------------------------------Eclipse中设置author名字
 选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types 默认是当前系统的用户名
-===================================================================================
+===============================================================================================================Properties Editor插件
+Name: Properties Editor
+Location: http://propedit.sourceforge.jp/eclipse/updates/
+Editors-->File Association		*.properties
+===============================================================================================================
 notepad快捷键
 
 转换小写：Ctrl+u

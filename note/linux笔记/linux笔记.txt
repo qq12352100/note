@@ -1,8 +1,19 @@
-=======================================================
+===========================================================================================
 cat log.txt|grep -A10 -B10 name 【查看log.txt中name前后10行】
 ps -ef|grep java				【查看运行中的java程序】
 netstat -tunpl | grep 端口      【查看端口占用】
 
+===========================================================================================关闭防火墙
+1) 重启后生效 
+开启： chkconfig iptables on 
+关闭： chkconfig iptables off 
+2) 即时生效，重启后失效 
+查看状态： service iptables status 
+开启： service iptables start 
+关闭： service iptables stop 
+3）修改/etc/sysconfig/iptables 文件，添加以下内容： 
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 
 -------------------------------------------------------
 -------------------------常用命令----------------------
@@ -14,8 +25,8 @@ ls -l > a.txt									【列表内容输出到a.txt中|覆盖|>>|追加】
 rm -f /var/log/httpd/access.log					【将会强制删除/var/log/httpd/access.log这个文件】
 rm -rf /var/log/httpd/access					【将会删除/var/log/httpd/access目录以及其下所有文件、文件夹】
 
-shutdown now 	【关机】
-reboot       	【开机】
+shutdown now 	【关机】init 0
+reboot       	【重启】
 env          	【查看环境变量】
 history      	【查看历史命令记录】
 ps -aux|more 	【查看进程-->top动态查看】
