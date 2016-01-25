@@ -35,13 +35,14 @@ windows > preference > Team > SVN #SVN Interface
 java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
 XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
 html：Web->HTML Files->Editor-> line width 修改成140	搜索html
----------------------------------------------------------------------------------------------------------------Eclipse中设置author名字
+---------------------------------------------------------------------------------------------------------------Eclipse中设置注释格式
 选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types 默认是当前系统的用户名
 /**
  * @author bkk 
  * @version ${date}${time}
  */
 ===============================================================================================================Properties Editor插件
+Help-->Install New software-->add
 Name: Properties Editor
 Location: http://propedit.sourceforge.jp/eclipse/updates/
 Editors-->File Association		*.properties

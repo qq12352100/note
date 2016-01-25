@@ -2,7 +2,52 @@ http://cdn.code.baidu.com/  百度静态资源库
 
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
-
+==========================================================================================================json处理
+------------------------------------jquery转json字符串转换json对象
+var obj = jQuery.parseJSON(data);
+console.dirxml(obj);
+------------------------------------定义json对象
+var json ={};
+json['a3']="已填写";
+==========================================================================================================字符处理
+------------------------------------String转int
+var str1='00100';
+alert(Number(str1));  	//得到100
+alert(parseInt(str1));  //得到64
+------------------------------------截取字符串
+str.substring(0,2);		//abcd-->ab
+str.substring(2);		//abcd-->cd
+------------------------------------分割字符串
+var arr=str.split(',');
+alert(arr[1]);
+------------------------------------判断包含字符串
+if(largeString.indexOf(shortString) != -1){
+}
+==========================================================================================================滑动到底部
+$(window).scroll(function(){ 
+   totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+   if($(document).height() <= totalheight){//如果高度小了
+		alert(0);
+   } 
+});
+==========================================================================================================循环
+if(obj.a3.length>0){
+	var temp = obj.a3.split(',');
+	jQuery.each(temp, function(i,val) {
+	 $("#a3_"+val.trim()).prop("checked","checked");
+	});
+}
+------------------------------------循环调用函数
+$(function(){
+	var form_list=new Array(test1,test2);
+	form_list[0].apply();
+});
+var test1=function(){
+	alert(0);
+}
+var test2=function(){
+	alert(1);
+}
 ==========================================================================================================选择器
 $("#a").next()		当前元素的下一个
 
@@ -27,41 +72,16 @@ $(":enabled")		所有激活的 input 元素
 $(":disabled")		所有禁用的 input 元素
 $(":selected")		所有被选取的 input 元素
 $(":checked")		所有被选中的 input 元素
-==========================================================================================================字符处理
-------------------------------------截取字符串
-str.substring(0,2);
-str.substring(2);
-------------------------------------分割字符串
-var arr=str.split(',');
-alert(arr[1]);
-------------------------------------jquery转json对象
-var obj = jQuery.parseJSON(data);
-console.dirxml(obj);
-------------------------------------循环调用函数
-$(function(){
-	var form_list=new Array(test1,test2);
-	form_list[0].apply();
-});
-var test1=function(){
-	alert(0);
-}
-var test2=function(){
-	alert(1);
-}
-==========================================================================================================滑动到底部
-$(window).scroll(function(){ 
-   totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
-   if($(document).height() <= totalheight){//如果高度小了
-		alert(0);
-   } 
-});
-==========================================================================================================循环
-if(obj.a3.length>0){
-	var temp = obj.a3.split(',');
-	jQuery.each(temp, function(i,val) {
-	 $("#a3_"+val.trim()).prop("checked","checked");
-	});
-}
+
+jQuery.parent(expr) 	//找父亲节点，可以传入expr进行过滤，比如$("span").parent()或者$("span").parent(".class")
+jQuery.parents(expr) 	//类似于jQuery.parents(expr),但是是查找所有祖先元素，不限于父元素
+jQuery.children(expr)	//返回所有子节点，这个方法只会返回直接的孩子节点，不会返回所有的子孙节点
+jQuery.contents() 		//返回下面的所有内容，包括节点和文本。这个方法和children()的区别就在于，包括空白文本，也会被作为一个jQuery对象返回，children()则只会返回节点
+jQuery.prev() 			//返回上一个兄弟节点，不是所有的兄弟节点
+jQuery.prevAll() 		//返回所有之前的兄弟节点
+jQuery.next() 			//返回下一个兄弟节点，不是所有的兄弟节点
+jQuery.nextAll() 		//返回所有之后的兄弟节点
+jQuery.siblings() 		//返回兄弟姐妹节点，不分前后
 ========================================================================================================== URL取参数
 http://localhost:8086/topic/index?topicId=361
 window.location
