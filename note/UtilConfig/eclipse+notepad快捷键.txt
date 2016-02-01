@@ -5,6 +5,7 @@ CTRL + SHIFT + R	找所有文件
 CTRL + SHIFT + F	格式化文件Format Document。
 CTRL + SHIFT + O	作用是缺少的Import
 CTRL + SHIFT + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中是 <!--~-->。 
+CTRL + Shift + C	快速行注释
 CTRL + SHIFT + X   	转为大写    
 CTRL + SHIFT + Y    转为小写
 
@@ -12,12 +13,18 @@ Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成
 Alt + Shift + W		快速在左边定位show In。。。
 Alt + Shift + A		进入块选择
 Alt + shift + J		快速注释/**  */
+Alt + shift + Z		为选中代码添加try/cath,if
+Alt + Shift + R		重命名 
+Alt + Shift + M		将选中行抽取成一个方法
+Alt + Shift + C 	修改函数结构(比较实用,有N个函数调用了这个方法,修改一次搞定) 
 
 Ctrl + E			快速转换编辑器
 Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
+Ctrl + H			整个项目中查找关键词
 
-Alt + enter			打开工程属性
+Alt + enter				打开工程属性
+syst 然后 alt  +   /    打印当前方法
 ---------------------------------------------------------------------------------------------------------------Eclipse中为SVN设置快捷键
 1、Window-->Preferences-->General-->Keys
 2、点击“Category”列，进行字母表排序，方便我们找到SVN相关Command。
@@ -36,11 +43,14 @@ java：java->code style->formatter->edit->line wrapping->maximum line width 修�
 XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
 html：Web->HTML Files->Editor-> line width 修改成140	搜索html
 ---------------------------------------------------------------------------------------------------------------Eclipse中设置注释格式
-选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types 默认是当前系统的用户名
+选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types（Methods） 默认是当前系统的用户名
 /**
  * @author bkk 
  * @version ${date}${time}
  */
+---------------------------------------------------------------------------------------------------------------Eclipse中比较文件
+右键菜单上就有compare with-->each other,比较两个文件之间的不同。
+右键菜单上就有compare with-->local history,可以比较任意两次保存之后，文件有什么不同。
 ===============================================================================================================Properties Editor插件
 Help-->Install New software-->add
 Name: Properties Editor
