@@ -2,7 +2,6 @@
 1、下载，解压mongodb文件。
 wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
 tar -zxvf mongodb-linux-x86_64-3.0.6.tgz
-mv mongodb-linux-x86_64-3.0.6.tgz mongodb3.0.6
 
 2、创建mongodb存放的数据文件、日子文件(mongodb_db、mongodb_logs)
 mkdir mongodbdata
@@ -17,6 +16,8 @@ mkdir mongodb_logs
 netstat -lanp  | grep 27017
 
 5、进入到bin目录，执行 ./mongo
+
+killall mongod 关闭
 ===================================window安装==========================================================
 E:\mongodb-win32-i386-3.0.6\bin
 
