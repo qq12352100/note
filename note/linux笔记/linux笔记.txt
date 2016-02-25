@@ -5,17 +5,21 @@ netstat -tunpl | grep 端口      【查看端口占用】
 uname -a						【查看32位64位】
 more /proc/cpuinfo				【查看cpu是多少位的】
 
-===========================================================================================关闭防火墙
+===========================================================================================【关闭防火墙】
+查看状态： service iptables status 
 1) 重启后生效 
 开启： chkconfig iptables on 
 关闭： chkconfig iptables off 
 2) 即时生效，重启后失效 
-查看状态： service iptables status 
 开启： service iptables start 
 关闭： service iptables stop 
 3）修改/etc/sysconfig/iptables 文件，添加以下内容： 
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+===========================================================================================【使用iptables限制ping命令】
+iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
+解除设置方法（即删除本规则）:
+iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 
 -------------------------------------------------------
 -------------------------常用命令----------------------
@@ -53,6 +57,8 @@ chgrp 组名 文件名   【修改文件所在组】
 pwd   【显示当前工作目录】
 cd    【改变目录】
 mkdir 【建立目录】
+vi a.txt 	【建立文件】
+touch a.txt
 rmdir 【删除空目录】
 more  【显示文件内容，带分页，空格下一页，】
 less  【显示文件内容带分页】
@@ -91,23 +97,3 @@ swp 交换分区 一般是你的物理内存的两倍 不要大于256
 进入grub引导界面时，输入e
 选中第二行，输入e
 输入 空格+1 【单用户级别】
--------------------------------------------------------
----------------------jdk/tomcat安装--------------------
--------------------------------------------------------
-1、挂载到mount /mnt/cdrom
-2、把文件拷贝到/home    【cp 文件 /home】
-3、切换到home下			【cd /home】
-4、安装 ./???.bin
-5、查看环境配置文件 /etc/profile
-6、在unset i下面配置环境变量
-JAVA_HOME=/home/jdk1.6
-PATH=$PATH:$JAVA_HOME/bin
-CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export JAVA_HOME PATH CLASSPATH
--------------------------------------------------------
-------------------eclipse/myeclipse安装----------------
--------------------------------------------------------
-1、把文件拷贝到/home	【cp 文件 /home】
-2、切换到home下			【cd /home】
-3、安装 tar -zxvf ???.tar.gz
-4、启动eclipse			【startx进入图形界面】

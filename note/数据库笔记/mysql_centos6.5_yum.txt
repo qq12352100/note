@@ -1,0 +1,24 @@
+第1步、yum安装mysql
+yum -y install mysql-server
+
+第2步、设置开机启动
+chkconfig mysqld on
+
+第3步、启动MySql服务
+service mysqld start
+
+第4步、设置MySQL的root用户设置密码
+mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+...... 省略了一些行
+mysql> select user,host,password from mysql.user;		//查询用户的密码，都为空，用下面的命令设置root的密码为root
+mysql> set password for root@localhost=password('root');
+mysql> exit
+
+第5步、用新密码登陆
+mysql -u root -p
+
+第6步、开放远程登录权限
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

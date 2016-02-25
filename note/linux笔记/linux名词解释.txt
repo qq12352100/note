@@ -1,3 +1,0 @@
-samba-------windows与linux共享文件
-ssh---------windows下操作linux
-rpm---------软件管理包
