@@ -75,6 +75,7 @@ netstat -ln |grep 3690
 killall svnserve 				//停止
 svnserve -d -r /opt/svn/repo 	//启动
 #如果已经有svn在运行，可以换一个端口运行
-svnserve -d -r /opt/svn/ --listen-port 3391
+svnserve -d -r /opt/svn/ --listen-port 3399
 
+svn://115.28.41.25:3399
 
