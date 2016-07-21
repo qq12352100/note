@@ -25,12 +25,20 @@ Ctrl + H			整个项目中查找关键词
 
 Alt + enter				打开工程属性
 syst 然后 alt  +   /    打印当前方法
----------------------------------------------------------------------------------------------------------------Eclipse中为SVN设置快捷键
+---------------------------------------------------------------------------------------------------------------将velocity当做html进行高亮显示
+window > preference > Content type > Text > Html  > Add  搜索Content
+在输入框中输入 *.vm  点击OK ，选中新加入得*.vm   
+在下面的 Defualt encoding 中输入 "utf-8“ 单击 update
+---------------------------------------------------------------------------------------------------------------设置一行的代码长度
+java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
+XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
+html：Web->HTML Files->Editor-> line width 修改成140	搜索html
+---------------------------------------------------------------------------------------------------------------为SVN设置快捷键
 1、Window-->Preferences-->General-->Keys
 2、点击“Category”列，进行字母表排序，方便我们找到SVN相关Command。
 3、Binding中同时按住你想设定的快捷键。(更新)Alt + Z (提交)Alt + A
 4、把When选择为“In Windows”。
----------------------------------------------------------------------------------------------------------------Eclipse删除SVN用户名密码
+---------------------------------------------------------------------------------------------------------------删除SVN用户名密码
 1. 查看你的Eclipse中使用的是什么SVN Interface
 windows > preference > Team > SVN #SVN Interface
 2. 如果是用的JavaHL, 找到以下目录并删除auth目录.
@@ -38,17 +46,14 @@ windows > preference > Team > SVN #SVN Interface
     WIN7  C:\Users\[YourUserName]\AppData\Roaming\Subversion\
 3. 如果你用的SVNKit, 找到以下目录并删除.keyring文件.
 	[eclipse]\configuration\org.eclipse.core.runtime
----------------------------------------------------------------------------------------------------------------Eclipse设置一行的代码长度
-java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
-XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
-html：Web->HTML Files->Editor-> line width 修改成140	搜索html
----------------------------------------------------------------------------------------------------------------Eclipse中设置注释格式
+
+---------------------------------------------------------------------------------------------------------------设置注释格式
 选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types（Methods） 默认是当前系统的用户名
 /**
  * @author bkk 
  * @version ${date}${time}
  */
----------------------------------------------------------------------------------------------------------------Eclipse中比较文件
+---------------------------------------------------------------------------------------------------------------比较文件
 右键菜单上就有compare with-->each other,比较两个文件之间的不同。
 右键菜单上就有compare with-->local history,可以比较任意两次保存之后，文件有什么不同。
 ===============================================================================================================Properties Editor插件
