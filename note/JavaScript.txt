@@ -100,6 +100,15 @@ protocol      设置或获取 URL 的协议部分。
 if(window.parent != window){
 	window.parent.location.reload(true);
 }
+==========================================================================================================函数传参掉方法
+checkCss(this);
+function checkCss(temp){
+	var clazz = $(temp).attr("class");
+	if(clazz=="buketian"){
+		alert(请先填写基本信息);
+		return false;
+	}
+}
 ==========================================================================================================精确到秒按小时数倒记时代码
 <SCRIPT LANGUAGE="JavaScript">   
 var maxtime = 60*60 //一个小时，按秒计算，自己调整!   
