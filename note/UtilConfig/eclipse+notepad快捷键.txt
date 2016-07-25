@@ -6,8 +6,9 @@ CTRL + SHIFT + F	格式化文件Format Document。
 CTRL + SHIFT + O	作用是缺少的Import
 CTRL + SHIFT + / 	在代码窗口中是这种/*~*/注释，在JSP文件窗口中是 <!--~-->。 
 CTRL + Shift + C	快速行注释
-CTRL + SHIFT + X   	转为大写    
+CTRL + SHIFT + X   	转为大写
 CTRL + SHIFT + Y    转为小写
+CTRL + SHIFT + ->   快速选中右边一块
 
 Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数(按O)
 Alt + Shift + W		快速在左边定位show In。。。

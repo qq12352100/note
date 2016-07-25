@@ -58,6 +58,7 @@ $(".intro.demo")	所有 class="intro" 且 class="demo" 的元素
 $("p")				所有 <p> 元素
 $("p:first")		第一个 <p> 元素
 $("p:last")			最后一个 <p> 元素
+:eq(index)， 例如 $("ul li:eq(2)") 表示列表中的第三个元素（index 从 0 开始）
 
 $("tr:even")		所有偶数 <tr> 元素
 $("tr:odd")			所有奇数 <tr> 元素
