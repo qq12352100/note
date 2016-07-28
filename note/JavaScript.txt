@@ -24,6 +24,8 @@ alert(arr[1]);
 -------------------------------------------判断包含字符串
 if(largeString.indexOf(shortString) != -1){
 }
+==========================================================================================================日期处理
+var datee = new Date(Number(1469513008600)).getFullYear();
 ==========================================================================================================滑动到底部
 $(window).scroll(function(){ 
    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
@@ -130,7 +132,23 @@ alert("时间到，结束!");
 timer = setInterval("CountDown()",1000);   
 </SCRIPT>   
 <div id="timer" style="color:red"></div> 
+==========================================================================================================合计算数 
+$("#creditInfoEditE").find("table").find("input:gt(0):lt(7)").keydown(function() {
+	var sum = 0;
+	$("#creditInfoEditE").find("table").find("input:gt(0):lt(7)").each(function(){
+		if($(this).val()){
+			sum += parseInt($(this).val());
+		}
+	});
+	$("#total").val(sum);
+});
 ==========================================================================================================
+
+
+
+
+
+
 
 
 
