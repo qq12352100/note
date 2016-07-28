@@ -34,7 +34,7 @@ $(window).scroll(function(){
    } 
 });
 ==========================================================================================================循环
-if(obj.a3.length>0){
+if(obj.a3.length>0){ 
 	var temp = obj.a3.split(',');
 	jQuery.each(temp, function(i,val) {
 	 $("#a3_"+val.trim()).prop("checked","checked");
