@@ -10,6 +10,11 @@ JSON.stringify(jsonobj); 	//转为json字符串
 -------------------------------------------定义json对象
 var json ={};
 json['a3']="已填写";
+-------------------------------------------取json的key与value
+for(var key in jsonObj){
+	alert(key);//key
+	alert(jsonObj[key]);//value
+}
 ==========================================================================================================字符处理
 -------------------------------------------String转int
 var str1='00100';
@@ -62,6 +67,9 @@ $("p:first")		第一个 <p> 元素
 $("p:last")			最后一个 <p> 元素
 :eq(index)， 例如 $("ul li:eq(2)") 表示列表中的第三个元素（index 从 0 开始）
 
+$("#baseInfoMember_d").find("table").find("tr:gt(2)").remove();  索引大于第三个tr（第三个以后的tr）
+
+
 $("tr:even")		所有偶数 <tr> 元素
 $("tr:odd")			所有奇数 <tr> 元素
 
@@ -108,7 +116,6 @@ checkCss(this);
 function checkCss(temp){
 	var clazz = $(temp).attr("class");
 	if(clazz=="buketian"){
-		alert(请先填写基本信息);
 		return false;
 	}
 }
