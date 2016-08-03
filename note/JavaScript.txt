@@ -149,9 +149,12 @@ $("#creditInfoEditE").find("table").find("input:gt(0):lt(7)").keydown(function()
 	});
 	$("#total").val(sum);
 });
-==========================================================================================================
+==========================================================================================================HTML
+<table id="" style="border-collapse: collapse;" >	//td加边框不起作用
+input[disabled]{outline: none;border:none;background:none;}		//input去掉边框
 
-
+border:1px solid #000000;		//一个像素的实线边框
+	1px dashed #000000			//一个像素的虚线边框
 
 
 
