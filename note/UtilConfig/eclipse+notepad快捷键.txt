@@ -9,11 +9,12 @@ CTRL + Shift + C	快速行注释
 CTRL + SHIFT + X   	转为大写
 CTRL + SHIFT + Y    转为小写
 CTRL + SHIFT + ->   快速选中右边一块
+CTRL + SHIFT + G	查找类、方法和属性的引用
 
 Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数(按O)
 Alt + Shift + W		快速在左边定位show In。。。
 Alt + Shift + A		进入块选择
-Alt + shift + J		快速注释/**  */
+Alt + shift + J		快速注释方法头上/**  */
 Alt + shift + Z		为选中代码添加try/cath,if
 Alt + Shift + R		重命名 
 Alt + Shift + M		将选中行抽取成一个方法
@@ -23,9 +24,12 @@ Ctrl + E			快速转换编辑器
 Ctrl + L			快速定位到某行
 Ctrl + K			快速查找当前单词下一个的位置
 Ctrl + H			整个项目中查找关键词
+Ctrl + O			显示当前类的属性与方法
 
 Alt + enter				打开工程属性
 syst 然后 alt  +   /    打印当前方法
+syso 然后 alt  +   /    打印
+main 然后 alt  +   /	生成main方法
 ---------------------------------------------------------------------------------------------------------------将velocity当做html进行高亮显示
 window > preference > Content type > Text > Html  > Add  搜索Content
 在输入框中输入 *.vm  点击OK ，选中新加入得*.vm   
