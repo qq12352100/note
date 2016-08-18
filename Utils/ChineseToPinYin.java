@@ -1,86 +1,78 @@
-package com.bkk.base;
+package Test.TestPic;
 
-import java.io.IOException;
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+/**
+ * 将汉字转换为全拼+返回中文的首字母+将字符串转移为ASCII码
+ * 
+ * @author bkk
+ * @version 2016年8月18日上午11:43:14
+ */
 public class ChineseToPinYin {
-	/**
-	 * 把中文转成Unicode码
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public String chinaToUnicode(String str) {
-		String result = "";
-		for (int i = 0; i < str.length(); i++) {
-			int chr1 = (char) str.charAt(i);
-			if (chr1 >= 19968 && chr1 <= 171941) {// 汉字范围 \u4e00-\u9fa5 (中文)
-				result += "\\u" + Integer.toHexString(chr1);
+	// 将汉字转换为全拼
+	public static String getPingYin(String src) {
+
+		char[] t1 = null;
+		t1 = src.toCharArray();
+		String[] t2 = new String[t1.length];
+		HanyuPinyinOutputFormat t3 = new HanyuPinyinOutputFormat();
+
+		t3.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+		t3.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+		t3.setVCharType(HanyuPinyinVCharType.WITH_V);
+		String t4 = "";
+		int t0 = t1.length;
+		try {
+			for (int i = 0; i < t0; i++) {
+				// 判断是否为汉字字符
+				if (java.lang.Character.toString(t1[i]).matches("[\\u4E00-\\u9FA5]+")) {
+					t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
+					t4 += t2[0];
+				} else
+					t4 += java.lang.Character.toString(t1[i]);
+			}
+			// System.out.println(t4);
+			return t4;
+		} catch (BadHanyuPinyinOutputFormatCombination e1) {
+			e1.printStackTrace();
+		}
+		return t4;
+	}
+
+	// 返回中文的首字母
+	public static String getPinYinHeadChar(String str) {
+
+		String convert = "";
+		for (int j = 0; j < str.length(); j++) {
+			char word = str.charAt(j);
+			String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
+			if (pinyinArray != null) {
+				convert += pinyinArray[0].charAt(0);
 			} else {
-				result += str.charAt(i);
+				convert += word;
 			}
 		}
-		return result;
+		return convert;
 	}
 
-	/**
-	 * 判断是否为中文字符
-	 * 
-	 * @param c
-	 * @return
-	 */
-	public boolean isChinese(char c) {
-		Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-		if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
-				|| ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
-				|| ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
-			return true;
+	// 将字符串转移为ASCII码
+	public static String getCnASCII(String cnStr) {
+		StringBuffer strBuf = new StringBuffer();
+		byte[] bGBK = cnStr.getBytes();
+		for (int i = 0; i < bGBK.length; i++) {
+			strBuf.append(Integer.toHexString(bGBK[i] & 0xff));
 		}
-		return false;
+		return strBuf.toString();
 	}
 
-	// ---------------------------------------------------ASCII码转换为字符串
-	public static char ascii2Char(int ASCII) {
-		return (char) ASCII;
+	public static void main(String[] args) {
+		System.out.println(getPingYin("綦江qq县"));
+		System.out.println(getPinYinHeadChar("綦江县"));
+		System.out.println(getCnASCII("綦江县"));
 	}
-
-	public static int char2ASCII(char c) {
-		return (int) c;
-	}
-
-	public static String ascii2String(int[] ASCIIs) {// ASCII码转换为字符串
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < ASCIIs.length; i++) {
-			sb.append((char) ascii2Char(ASCIIs[i]));
-		}
-		return sb.toString();
-	}
-
-	public static int[] string2ASCII(String s) {// 字符串转换为ASCII码
-		if (s == null || "".equals(s)) {
-			return null;
-		}
-
-		char[] chars = s.toCharArray();
-		int[] asciiArray = new int[chars.length];
-
-		for (int i = 0; i < chars.length; i++) {
-			asciiArray[i] = char2ASCII(chars[i]);
-		}
-		return asciiArray;
-	}
-
-	public static void showIntArray(int[] intArray, String delimiter) {
-		for (int i = 0; i < intArray.length; i++) {
-			System.out.print(intArray[i] + delimiter);
-		}
-	}
-
-	public static void main(String[] args) throws IOException {
-		String s = "好好学习！！!!——2016年1月4日";
-		showIntArray(string2ASCII(s), " ");
-		System.out.println();
-		System.out.println(ascii2String(string2ASCII(s)));
-
-	}
-
 }
