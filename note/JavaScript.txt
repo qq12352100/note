@@ -29,6 +29,13 @@ alert(arr[1]);
 -------------------------------------------判断包含字符串
 if(largeString.indexOf(shortString) != -1){
 }
+-------------------------------------------取一类值转为字符串用，分割
+var checkName= [];
+jQuery("input[name='a']").each(function(key,value){
+	checkName[key] = $(this).val();
+});
+checkName.join(",").substring(1);
+-------------------------------------------
 ==========================================================================================================日期处理
 var datee = new Date(Number(1469513008600)).getFullYear();
 var start = new Date("2016-08-27 00:00:00");  
@@ -79,7 +86,7 @@ $("p:first")		第一个 <p> 元素
 $("p:last")			最后一个 <p> 元素
 :eq(index)， 例如 $("ul li:eq(2)") 表示列表中的第三个元素（index 从 0 开始）
 
-$("#baseInfoMember_d").find("table").find("tr:gt(2)").remove();  索引大于第三个tr（第三个以后的tr）
+$("#baseInfoMember_d").find("table").find("tr:gt(2)").remove();  索引0大于第三个tr（第三个以后的tr）（index 从 0 开始）
 
 
 $("tr:even")		所有偶数 <tr> 元素
