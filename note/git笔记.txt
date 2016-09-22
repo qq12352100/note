@@ -12,6 +12,24 @@ git log 查看commit的历史
 git show <commit-hash-id>查看某次commit的修改内容
 git log -p <filename>查看某个文件的修改历史
 git log -p -2查看最近2次的更新内容
+==========================================================================================github添加多个key
+一、创建两个key
+$ ssh-keygen
+Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa): 	//路径+文件名
+Enter passphrase (empty for no passphrase):									//密码（输入不会有提示）
+Enter same passphrase again:												//再输入一次密码
+
+二、查看系统ssh-key代理,执行如下命令
+$ ssh-add -l
+Could not open a connection to your authentication agent.
+如果发现上面的提示,说明系统代理里没有任何key,执行如下操作
+exec ssh-agent bash
+如果系统已经有ssh-key 代理 ,执行下面的命令可以删除
+$ ssh-add -D
+添加密钥到ssh-agent
+$ ssh-add ~/.ssh/keys/key_note
+$ ssh-add ~/.ssh/keys/test
+
 ==========================================================================================github添加一个key
 1、检查是否已经存在KEY
 $ cd ~/.ssh
@@ -34,8 +52,12 @@ $ ssh git@github.com
 $git clone git@github.com:qq12352100/note.git
 
 5.1 配置
+git config -l											//查看全局配置
 git config --global user.name "bkk" 					//设置用户名
 git config --global user.email "qq12352100@163.com" 	//设置邮箱
+//暂时禁用
+git config --global --unset user.name
+git config --global --unset user.email
 
 5.2 创建Repository
 mkdir clrs
