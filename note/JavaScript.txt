@@ -168,6 +168,10 @@ $("#creditInfoEditE").find("table").find("input:gt(0):lt(7)").keydown(function()
 	});
 	$("#total").val(sum);
 });
+==========================================================================================================禁止一次弹窗
+window.alert = function(str){
+return ;
+}
 ==========================================================================================================HTML
 <table id="" style="border-collapse: collapse;" >	//td加边框不起作用
 input[disabled]{outline: none;border:none;background:none;}		//input去掉边框
