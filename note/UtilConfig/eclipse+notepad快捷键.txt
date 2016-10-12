@@ -1,5 +1,12 @@
 eclipse快捷键
 
+F12					定位到编辑器
+CTRL + F7			切换块视图Console、Package Explorer、Servers、
+CTRL + F8			切换大视图java EE、Debug、synchronizing
+CTRL + F10			显示系统菜单
+CTRL + 3			快速进入
+
+CTRL + SHIFT + E	打开所有编辑器列表（Ctrl + E）
 CTRL + SHIFT + T	找java文件
 CTRL + SHIFT + R	找所有文件
 CTRL + SHIFT + F	格式化文件Format Document。
