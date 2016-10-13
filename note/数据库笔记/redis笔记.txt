@@ -19,7 +19,7 @@ redis-cli -a test123		//指定密码登录客户端
 echo "vm.overcommit_memory=1" >> /etc/sysctl.conf
 sysctl -p
 ---------------------------------------------------
-# WARNING: The TCP backlog setting of 511 cannot be enforced
+# WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
 echo 511 > /proc/sys/net/core/somaxconn
 ---------------------------------------------------
 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel.
