@@ -10,7 +10,7 @@ yum clean all			清除缓存目录下的软件包及旧的headers
 -----------------------------------------------------------------------------------------------------------------
 查询yum install安装软件的路径:
 一般是/usr/local一般一个软件是要复制多个文件到不同的地方，包括可执行文件，文档，配置文件。
-通过yum安装的软件包，可以通过rpm-ql软件包名来查询这个软件包具体都复制到了哪些文件到哪些地方。
+通过yum安装的软件包，可以通过rpm -ql软件包名来查询这个软件包具体都复制到了哪些文件到哪些地方。
 =================================================================================================================【安装JDK】  
 yum list java*  
 yum install java-1.7.0-openjdk* -y  (自动选择yes)
@@ -39,8 +39,13 @@ mysql -u root -p
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+=================================================================================================================【安装tomcat】
+yum -y install tomcat6 tomcat6-webapps tomcat6-admin-webapps tomcat6-docs-webapp tomcat6-javadoc
+service tomcat6 start
+service tomcat6 stop
+service tomcat6 restart
+通过以下命令可以查看tomcat安装目录：rpm -ql tomcat6 | cat -n
 =================================================================================================================
-
 
 
 

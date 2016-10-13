@@ -1,45 +1,35 @@
-linux下安装nginx:Centos6.5 64
-----------------------------------------------------------------------------------------
-第一步：从http://nginx.org/download/上下载相应的版本(或者wget http://nginx.org/download/nginx-1.5.9.tar.gz直接在Linux上用命令下载)
-第二步：解压 tar -zxvf nginx-1.5.9.tar.gz 
-第三步：设置一下配置信息 ./configure --prefix=/usr/local/nginx
+linux下安装nginx:Centos6.5
+========================================================================================
+准备：依赖包安装顺序依次为:openssl、zlib、pcre, 然后安装Nginx包
+#yum install openssl zlib pcre
+安装nginx：
+#tar -zxvf nginx-1.5.9.tar.gz 
+#cd nginx-1.5.9
+#./configure && make && make install
+
+
 错误：
+./configure: error: the HTTP rewrite module requires the PCRE library.
+#yum -y install pcre-devel
+./configure: error: the HTTP gzip module requires the zlib library.
+#yum install -y zlib-devel
 ./configure: error: the HTTP cache module requires md5 functions
-from OpenSSL library.   You can either disable the module by using
---without-http-cache option, or install the OpenSSL library into the system,
-or build the OpenSSL library statically from the source with nginx by using
---with-http_ssl_module --with-openssl=<path> options.
-
-yum list http*		--查找缺少的软件包
-yum install http	--安装
-yum list installed	--列出所有已安装的软件包
-
-第四步：
-进入目录：
-	make 编译 （make的过程是把各种语言写的源码文件，变成可执行文件和各种库文件）
-	make install 安装 （make install是把这些编译出来的可执行文件和库文件复制到合适的地方）
+#yum -y install openssl openssl-devel
 
 启动操作：
-	/usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t 查看配置信息是否正确)
-
+	/usr/local/nginx/sbin/nginx (/usr/local/nginx/sbin/nginx -t 查看配置信息是否正确)
 停止操作：
-	停止操作是通过向nginx进程发送信号（什么是信号请参阅linux文 章）来进行的
-	步骤1：查询nginx主进程号
-	ps -ef | grep nginx
-	在进程列表里 面找master进程，它的编号就是主进程号了。
-	步骤2：发送信号
+	#ps -ef | grep nginx
 	从容停止Nginx：
-	kill -QUIT 主进程号
+	#kill -QUIT 主进程号
 	快速停止Nginx：
-	kill -TERM 主进程号
+	#kill -TERM 主进程号
 	强制停止Nginx：
-	pkill -9 nginx
-	另外， 若在nginx.conf配置了pid文件存放路径则该文件存放的就是Nginx主进程号，如果没指定则放在nginx的logs目录下。有了pid文 件，我们就不用先查询Nginx的主进程号，而直接向Nginx发送信号了，命令如下：
-	kill -信号类型 '/usr/nginx/logs/nginx.pid'
+	#pkill -9 nginx 
 重启：
 	nginx -s reload 
 
-----------------------------------------------------------------------------------------
+========================================================================================【负载均衡配置】
 负载一个tomcat：
 	打开nginx.conf修改：
 	server_name localhost:8080;  
@@ -66,8 +56,7 @@ location：表示匹配的路径，这时配置了/表示所有请求都被匹�
 root：里面配置了root这时表示当匹配这个请求的路径时，将会在这个文件夹内寻找相应的文件，这里对我们之后的静态文件伺服很有用。
 index：当没有指定主页时，默认会选择这个指定的文件，它可以有多个，并按顺序来加载，如果第一个不存在，则找第二个，依此类推。
 
-----------------------------------------------------------------------------------------
-静态文件伺服：
+========================================================================================【静态文件处理】
 一般都会把所有静态文件，html,htm,js,css等都放在同一个文件夹下，这样就不会有tomcat这样的情况了，因为tomcat下的是属于不同的项目，这个我们就没办法了。
 我们先要去掉之前配的location /，避免全部请求被拦截了。
 location ~ \.jsp$ {  
@@ -76,8 +65,21 @@ location ~ \.jsp$ {
           
 location ~ \.(html|js|css|png|gif)$ {  
     root D:/software/developerTools/server/apache-tomcat-7.0.8/webapps/ROOT;  
-}  
-
+}
+========================================================================================【session共享+负载权重】
+upstream myServer {   
+	server 127.0.0.1:9090 down; 
+    server 127.0.0.1:8080 weight=2; 
+    server 127.0.0.1:6060; 
+    server 127.0.0.1:7070 backup;
+	ip_hash; 						#session共享ip定向访问，要求nginx必须为最前端服务器
+	upstream_hash;					#这个模块多数情况下是用作url_hash的,他会将ip加入x_forwarded_for这个http_header里，用upstream_hash可以用这个头做因子，将请求定向到指定的后端
+}
+down 表示单前的server暂时不参与负载 
+weight  默认为1.weight越大，负载的权重就越大。 
+max_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误 
+fail_timeout:max_fails 次失败后，暂停的时间。 
+backup： 其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。
 
 
 
