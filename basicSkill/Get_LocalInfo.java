@@ -22,6 +22,9 @@ public class Test01 {
 		System.out.println("域名和IP：" + InetAddress.getByName("www.baidu.com"));
 		System.out.println("得到IP：" + InetAddress.getByName("61.135.169.125"));
 		// jumpHostsXml();
+		//隐藏文件windos
+		String sets = "attrib +H \"" + file.getAbsolutePath() + "\"";
+		Runtime.getRuntime().exec(sets);// 将日志文件隐藏
 	}
 
 	/**
