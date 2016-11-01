@@ -48,6 +48,15 @@ jQuery("input[name='a']").each(function(key,value){
 });
 checkName.join(",").substring(1);
 -------------------------------------------
+==========================================================================================================函数处理
+--------------------------------------------------------------------------获取被点击元素
+function yearClink(fun){
+	fun.name;//获取函数名字
+	fun();
+	fun.call();//调用函数
+	event.target;
+	event.currentTarget;
+}
 ==========================================================================================================日期处理
 var datee = new Date(Number(1469513008600)).getFullYear();
 var start = new Date("2016-08-27 00:00:00");  
@@ -108,6 +117,12 @@ $("[href]")			所有带有 href 属性的元素
 $("[href='#']")		所有 href 属性的值等于 "#" 的元素
 $("[href!='#']")	所有 href 属性的值不等于 "#" 的元素
 $("[href$='.jpg']")	所有 href 属性的值包含以 ".jpg" 结尾的元素
+[att=value] 		匹配包含给定属性的元素 (大小写区分)
+[att*=value] 		模糊匹配
+[att!=value] 		不能是这个值
+[att$=value] 		结尾是这个值
+[att^=value] 		开头是这个值
+[att1][att2][att3]... 匹配多个属性条件中的一个
 
 $(":input")			所有 <input> 元素
 $(":text")			所有 type="text" 的 <input> 元素//password、radio、checkbox、submit、reset、button、image、file
@@ -190,6 +205,8 @@ input[disabled]{outline: none;border:none;background:none;}		//input去掉边框
 
 border:1px solid #000000;		//一个像素的实线边框
 	1px dashed #000000			//一个像素的虚线边框
+	
+	cursor:pointer;				//鼠标样式
 
 
 
