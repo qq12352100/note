@@ -2,6 +2,7 @@
 /etc/init.d/sshd start			【启动22端口ssh服务】service sshd start
 passwd root						【修改root密码】
 alias cls='clear'				【别名来使用清屏命令】
+:/xxxx							【vi模式下查找关键字xxxx】
 ===========================================================================================
 cat log.txt|grep -A10 -B10 name  【查看log.txt中name前后10行】
 cat error.log | grep -C 5 'nick' 【显示file文件里匹配foo字串那行以及上下5行】
@@ -98,6 +99,9 @@ groupadd 组名        【添加组】
 [cat|vi] /ect/group  【查看所有组】
 [cat|vi] /ect/passwd 【查看所有的用户信息】
 
+cut -d : -f 1 /etc/passwd									#查看系统中有哪些用户：
+cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1		#查看可以登录系统的用户：
+
 监视特定用户==》top回车u回车然后输出用户名即可
 终止特定进程==》top回车k回车然后输入要杀死的ID
 指定系统状态更新时间==》top -d 10 十秒更新一次
@@ -141,6 +145,19 @@ GATEWAY="192.168.1.1"
 # hostname test1
 重启生效:
 修改/etc/sysconfig/network
+===========================================================================================【CentOS 6 无法修改resolv.conf的问题】
+/etc/init.d/NetworkManager stop 	#关闭NetworkManager服务
+vim /etc/resolv.conf				#修改或新增dns地址
+/etc/init.d/network restart			#重启网卡
+chkconfig NetworkManager off 		#避免重启服务器后配置被清空
+===========================================================================================【桌面配置】
+startx					#从命令行直接启动图形桌面环境
+echo $LANG 				#查看当前使用的系统语言
+locale					#查看安装的语言包
+locale -a 				#查看支持的字符集:
+LANG="zh_CN.utf8"		#切换为中文
+vi /etc/sysconfig/i18n  			#设置系统默认的语言配置
+yum groupinstall chinese-support 	#安装中文语言包
 ===========================================================================================【解压命令】
 .tar 
 解包：tar xvf FileName.tar

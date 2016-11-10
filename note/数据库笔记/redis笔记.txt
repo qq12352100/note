@@ -1,10 +1,10 @@
 安装
 tar zxvf redis-2.4.16.tar.gz
 make 
-redis-server：Redis服务器的daemon启动程序
-redis-cli：Redis命令行操作工具。或者通过telnet进行纯文本协议操作
-redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能
-redis-cli shutdown  :关闭操作
+src/redis-server		#Redis服务器的daemon启动程序
+src/redis-cli			#Redis命令行操作工具。或者通过telnet进行纯文本协议操作
+src/redis-benchmark		#Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能
+src/redis-cli shutdown 	#关闭操作
 
 密码：requirepass test123  (配置文件中)
 # requirepass foobared去掉注释，foobared改为自己的密码
@@ -15,7 +15,8 @@ redis-cli -a test123		//指定密码登录客户端
 -------------------------------------------------------------【远程连接】
 修改配置 bind 0.0.0.0
 #redis-cli -h 192.168.1.50 -p 6379
--------------------------------------------------------------
+-------------------------------------------------------------【中文乱码】
+src/redis-cli --raw
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
