@@ -1,7 +1,7 @@
 eclipse快捷键
 
 F12					定位到编辑器
-CTRL + F7			切换块视图Console、Package Explorer、Servers、
+CTRL + F7			切换块视图Console、Package Explorer、Servers、##全屏编辑器CTRL + F7按两下（Servers放第一个）Ctrl + Alt + D(S停止) 重启当前debug模式
 CTRL + F8			切换大视图java EE、Debug、synchronizing
 CTRL + F10			显示系统菜单
 CTRL + 3			快速进入
