@@ -1,0 +1,97 @@
+echo $# 【输出参数个数】
+./restart.sh sss2 sss  sss
+3
+echo $1	【输出第一个参数】
+echo $2	【输出第二个参数】
+./restart.sh sss sss2 ss1
+sss
+sss2
+#############################################################################
+【变量的申明】name=xxx;取变量值的时候$name
+【条件判断】
+if[ condition]; then
+　　operator;
+elif[ condition]; then
+　　operator;
+else
+　　operator;
+fi
+【循环】
+　　while[ condition]
+#condition如果是用[]取代test，则有两个[]
+　　do
+　　　　operator;
+　　done;
+-----------------------------------------------------------
+　　for((i=1;i<100;i++))
+　　do
+ 　　　　operator;
+　　done;
+-----------------------------------------------------------
+　　for var in $(seq n)
+#or for var in `cat /etc/hosts`
+　　do
+ 　　　　operator;
+　　done;
+使用"[]"做判断【条件】注意点：
+　　1）、每个组件之间都要用空格隔开，如果用@代替空格，则表达式的判断为@[@str1@==@str2@]@；
+　　2）、用'=='进行判断时，两边的必须是字符串，所以必须用""括起来，如"$name" == "want"，用$name == "want"出错，两边类型不同；
+　　3）、test判断：
+　　　　文件侦测: 
+				test -e filename
+　　　　　　　　test -f filename
+　　　　　　　　test -d direct
+　　　　文件权限判断：
+　　　　　　　　test -r filename
+　　　　　　　　test -w filename
+　　　　　　　　test -x filename
+　　　　文档时间：
+　　　　　　　　test file1 -nt file2;判断file1是否比file2新
+　　　　　　　　test file1 -ot file2;
+　　　　　　　　test file1 -et file2;判断两个文件是否为同一个档案，可用在hard link的判断上
+　　　　两整数的判断：
+　　　　　　　　test n1 -eq n2;等于
+　　　　　　　　test n1 -ne n2;不等于
+　　　　　　　　test n1 -gt n2;大于
+　　　　　　　　test n1 -lt n2;小于
+　　　　　　　　test n1 -ge n2;大于等于
+　　　　　　　　test n1 -le n2;小于等于
+　　　　字符串的判断：
+　　　　　　test -z string;字符串是否为空为0，如果string为空，则为true;
+　　　　　　test -n string;字符串是否非0
+　　　　　　test st1 = st2;
+　　　　　　test st1 != st2;
+　　　　多重判断：
+　　　　　　-a:and，例子test -r file -a -x file;
+　　　　　　-o:or
+　　　　　　!:test ! -x file：判断file文件是否没有可执行权限
+　　　4）、[]判断可以替代test进行判断，除了2）中的字符串相等要用==；
+　　　5）、let "count=$count + 1";必须有""，否则出错
+#############################################################################
+
+#!/bin/sh
+#判断进程是否存在
+ps -fe|grep java |grep -v grep
+if [ $? -ne 0 ]
+then
+echo "stop....."
+else
+echo "runing....."
+fi
+#########################################################################
+
+#!/bin/sh
+#根据进程名杀死进程
+if [ $# -lt 1 ]
+then
+  echo "缺少参数：procedure_name"
+  exit 1
+fi
+ 
+PROCESS=`ps -ef|grep $1|grep -v grep|grep -v PPID|awk '{ print $2}'`
+for i in $PROCESS
+do
+  echo "Kill the $1 process [ $i ]"
+  kill -9 $i
+done
+########################################################################
