@@ -157,6 +157,14 @@ protocol      设置或获取 URL 的协议部分。
 if(window.parent != window){
 	window.parent.location.reload(true);
 }
+history.go(0) 
+location.reload() 
+location=location 
+location.assign(location) 
+document.execCommand('Refresh') 
+window.navigate(location) 
+location.replace(location) 
+document.URL=location.href
 ==========================================================================================================函数传参掉方法
 checkCss(this);
 function checkCss(temp){
