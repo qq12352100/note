@@ -140,6 +140,8 @@ jQuery.prevAll() 		//返回所有之前的兄弟节点
 jQuery.next() 			//返回下一个兄弟节点，不是所有的兄弟节点
 jQuery.nextAll() 		//返回所有之后的兄弟节点
 jQuery.siblings() 		//返回兄弟姐妹节点，不分前后
+---------------------------------------------------------------------------------
+$("#searchArea").is(':checked')		//判断有没有被选中
 ========================================================================================================== URL取参数
 http://localhost:8086/topic/index?topicId=361
 window.location
@@ -207,6 +209,16 @@ $("#creditInfoEditE").find("table").find("input:gt(0):lt(7)").keydown(function()
 window.alert = function(str){
 return ;
 }
+==========================================================================================================监听键盘按键|模拟按键
+jQuery.fn.simulateKeyPress = function(character) {  
+	// 内部调用jQuery.event.trigger参数有 (Event, data, elem). 最后一个参数是非常重要的的！  
+	jQuery(this).trigger({ type: 'keypress', which: character.charCodeAt(0) });  
+}; 
+$('body').keypress( function(e) {  
+	console.log(String.fromCharCode( e.which ));  
+});  
+// 模拟按键了 x  
+$( 'body' ).simulateKeyPress('x');  
 ==========================================================================================================HTML
 <table id="" style="border-collapse: collapse;" >	//td加边框不起作用
 input[disabled]{outline: none;border:none;background:none;}		//input去掉边框
