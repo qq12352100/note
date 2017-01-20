@@ -33,7 +33,9 @@ Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:comp
 把java Build Path里面的Libraries中的JRE System Libraries(JRE7)改为jdk7, maven编译需要jdk, 而不是jre
 ==========================================================================================================eclipse的xml进行拼写检查
 在eclipse下的Window--Preference输入spell，然后把第一个复选框“Enable spell checking“给去掉就可以了
-==========================================================================================================
+==========================================================================================================eclipse设置不格式化注释
+Windows -> Preferces -> Java -> Code Style -> Formatter -> Edit -> Comments
+取消勾选“Enable Javadoc comment formatting”.
 ==========================================================================================================
 
 
