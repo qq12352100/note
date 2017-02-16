@@ -1,0 +1,23 @@
+MVC的工作原理：
+第一站到达的是Spring的DispatcherServlet，它是一个前端控制器，工作是将用户的请求委托给其他的组件（这里是交给Spring MVC的控制器）去处理。
+这里DispatcherServlet要决定将请求传给哪一个控制器（Controller）去处理，那么这时就需要处理器映射（Handler Mapping）了。
+处理器映射会看请求的URL信息，然后决定将请求交给哪一个控制器去处理。
+选择了一个合适的控制器后，DispatcherServlet就会将请求交给这个控制器去处理。在这个控制器上，用户的请求将会将用户提交的一些信息交由控制器处理并等待。
+控制器的最后一件事就是将模型数据打包，并且指定产生输出的视图的特定名称，然后它将模型、视图名称以及request请求一起发送给DispatcherServlet。
+所以控制器并没有与视图进行耦合，因为传递给DispatcherServlet的视图名称并不是某一个指定的特殊的文件名称（如后缀名一定是JSP或其他什么名称），它只要是一个可以产生输出和展示结果的逻辑名称就可以了。
+DispatcherServlet会向一个视图解析器（ViewResolver）进行请求，视图解析器可以将逻辑视图名称映射到一个特定的视图显示文件上面。
+现在DispatcherServlet知道哪一个视图文件可以显示结果了。该视图将会利用模板数据产生输出，这些输出通过response对象返回给客户端进行显示。
+
+DispatcherServlet with name 'SpringMVC' processing GET request for [/springMVC-mybatis/]
+Looking up handler method for path /
+Returning handler method  返回处理方法
+Returning cached instance of singleton bean 'userController' 返回缓存实例
+...处理业务逻辑
+Invoking afterPropertiesSet() on bean with name 'index'
+Rendering view in DispatcherServlet with name 'SpringMVC' 渲染视图
+Added model object 'userList' of type [java.util.ArrayList] to request in view with name 'index'
+Forwarding to resource [/WEB-INF/pages/index.jsp] in InternalResourceView 'index'
+Successfully completed request
+
+
+
