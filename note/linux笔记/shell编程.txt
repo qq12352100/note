@@ -133,3 +133,33 @@ do
   kill -9 $i
 done
 ########################################################################
+#!/bin/sh
+# eg: tomcat.sh start xxx
+#
+proc_dir="/usr/local/xxx/tomcat-zc-web/bin"
+proc_name=$2
+if [ x$proc_name != x ]
+then
+	proc_dir=${proc_dir//xxx/$proc_name}
+fi
+#echo $proc_dir
+function stop () {
+  kill -9 `ps -ef |grep $proc_dir |grep -v grep|awk '{print $2}'`
+}
+ 
+function start () {
+  cd $proc_dir
+  ./startup.sh
+  tail -300f /usr/local/$proc_name/log/catalina.out
+}
+ 
+case $1 in 
+  start)
+	start;;
+  stop)
+	stop;;
+  restart)
+	stop
+	start;;
+esac
+########################################################################
