@@ -1,3 +1,4 @@
+
 ===========================================================================================
 /etc/init.d/sshd start			【启动22端口ssh服务】service sshd start
 passwd root						【修改root密码】
@@ -12,7 +13,8 @@ ps -ef|grep java				【查看运行中的java程序】
 netstat -tunpl | grep 端口      【查看端口占用】netstat -apn
 uname -a						【查看32位64位】
 more /proc/cpuinfo				【查看cpu是多少位的】
-
+find / -name 'key' -type d		【查找目录】
+find / -name key -print			【查找文件】
 ===========================================================================================【关闭防火墙】
 查看状态： service iptables status 
 1) 重启后生效 

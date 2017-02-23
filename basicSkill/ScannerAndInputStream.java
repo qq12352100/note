@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.Scanner;
 
-public class Test01 {
+public class ScannerAndInputStream {
 	public static void main(String[] args) throws Exception {
 		// standardInput();
 		// samples();
