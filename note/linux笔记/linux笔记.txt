@@ -3,7 +3,7 @@
 /etc/init.d/sshd start			【启动22端口ssh服务】service sshd start
 passwd root						【修改root密码】
 alias cls='clear'				【别名来使用清屏命令】
-:/xxxx							【vi模式下查找关键字xxxx】
+/xxxx							【vi模式下查找关键字xxxx,按n查找下一个】
 ===========================================================================================
 cat log.txt|grep -A10 -B10 name  【查看log.txt中name前后10行】
 cat error.log | grep -C 5 'nick' 【显示file文件里匹配foo字串那行以及上下5行】
