@@ -18,6 +18,7 @@ CTRL + SHIFT + Y    转为小写
 CTRL + SHIFT + ->   快速选中右边一块
 CTRL + SHIFT + G	查找类、方法和属性的引用
 
+Alt + F5			Update Maven Project
 Alt + Shift + S		快速生成geter和seter(按R)、重写toString(按S)、生成无参构造函数(按C)、生成有参构造函数(按O)
 Alt + Shift + W		快速在左边定位show In。。。
 Alt + Shift + A		进入块选择
