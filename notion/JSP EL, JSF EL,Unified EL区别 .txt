@@ -1,0 +1,25 @@
+Difference between JSP EL, JSF EL and Unified EL 
+
+Jun 2002: JSTL 1.0 was introduced with EL for first time. It were those ${} things which works in JSTL tags only. It is designed to call Javabean get methods.
+
+Nov 2003: JSP 2.0 was introduced and EL was moved from JSTL 1.0 to JSP 2.0 in javax.servlet.jsp.el package and it became standard EL as part of J2EE 1.4 standard.
+JSTL 1.1 was shipped without EL. Now ${} works outside JSTL tags in JSP template text as well.
+
+Mar 2004: JSF 1.0 was introduced with deferred EL in javax.faces.el package. It were those #{} things which works inside JSF tags only.
+The difference with standard JSP EL ${} is that it doesn't only do get, but can also do set. This was mandatory for managed bean auto-creation and setting the values of input components.
+The standard EL ${} works in JSF output tags as well, but they won't auto-create beans if they don't exist in scope yet and they won't set input values.
+
+May 2005: While still preparing for new JSP 2.1 which should be released May 2006, deferred EL  #{} was extracted from JSF and combined with standard EL ${} in the javax.el package.
+At that point, it became unified EL which was introduced with JSF 1.2 and became later part of JSP 2.1 and Java EE 5 standard. The #{} can now also be used in JSP tags to get values, 
+but not to set values. The ${} can now in JSP also auto-create managed beans, but not set values.
+
+Nov 2006: Facelets was introduced as successor of JSP. It allowed for use of #{} in template text outside JSF tags, as substitute for <h:outputText> without any attributes. 
+It also treats ${} as #{}, so they both behave the same in Facelets.
+
+Dec 2009: EL was extracted from JSP specification and became a standalone specification which will be maintained independently from JSP, the first version being EL 2.2 (JSR-245), 
+analogous with JSP 2.2. Main new feature is calling parameterized methods instead of only calling Javabean getters/setters inside #{} syntax, e.g. #{bean.method(argument)}. 
+Furthermore, Facelets became part of Java EE 6 standard.
+
+Jun 2013: EL 3.0 was introduced which comes with a standalone EL processor, allowing usage in a plain Java SE application. 
+Other main new features are the new string concatenation operator +=, new operations for collection objects, 
+including streams and Lambda expressions -> (even on Java 6/7!) and importing constants into EL scope.
