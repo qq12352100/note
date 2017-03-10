@@ -98,8 +98,8 @@ workspace\.metadata\.plugins\org.eclipse.wst.server.core
 --使用Ecplise git commit时出现"There are no stages files"
 进入Window——Preferences——Team——Git——Committing，
 取消 [] use staging view to commit instead of commit dialog
---push
-点team---remote--push或者team--push to upstream
+--push 单个文件或者文件夹
+点team---add to Index--Commit and Push
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
