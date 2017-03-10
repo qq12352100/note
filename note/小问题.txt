@@ -1,24 +1,3 @@
-========================================================================================================== eclipse,jdk版本问题
-eclipse默认用自带的JDK，最高版本是1.6，如果想用自己安装的JDK1.7，设置方法：
-菜单window--->Preferences--->Java--->Installed JREs，把默认JDK1.6的改为自己新安装的JDK1.7。
-这时在java project中会警告：
-Description Resource Path Location Type Build path specifies execution environment JavaSE-1.6. 
-There are no JREs installed in the workspace that are strictly compatible with this environment.
-communication  Build  path JRE System Library Problem
-去除警告方法：工程名称上右键菜单：Properties--->Java Build Path--->Libraries，
-选中"JRE System Library[JavaSE-1.6]"，
-选择右侧按钮“Edit"，打开新界面中选择"Workspace default JRR (JDK1.7......)"即可。
-========================================================================================================== eclipse新建maven webapp后无法添加src/main/java和src/main/test
-1.eclipse->window>preferences->java->compiler->选择本地要用的Java版本
-2.eclipse->window>preferences->java->installJars->修改为本地jdk
-3.项目右键->buildPath configure Build Path->点击选项卡Libraries->选中JRE System Library->
-点击edit->选中Alternate JRE->选择jdk
-4.点击finish，点击ok，自动出现src/main/java和src/test/java
-========================================================================================================== eclipse控制台中的中文输出乱码问题
-1、首先在Run-Run Configration-Tomcat-Arguments,在VM arguments中添加-Dfile.encoding=UTF-8
-2、Common tab页，在Console encoding中选择UTF-8
-==========================================================================================================eclipse的tomcat部署目录
-workspace\.metadata\.plugins\org.eclipse.wst.server.core
 ========================================================================================================== ${}标签不起作用
 <%@ page contentType="text/html; charset=gb2312" language="java" isELIgnored="false" %>
 <%@ page isELIgnored＝"true|false"%>如果设定为真，那么JSP中的表达式被当成字符串处理。　
@@ -31,14 +10,17 @@ workspace\.metadata\.plugins\org.eclipse.wst.server.core
 Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile
 首先检查父项目,子项目的jdk版本是否一致,编码格式是否一致
 把java Build Path里面的Libraries中的JRE System Libraries(JRE7)改为jdk7, maven编译需要jdk, 而不是jre
-==========================================================================================================eclipse的xml进行拼写检查
-在eclipse下的Window--Preference输入spell，然后把第一个复选框“Enable spell checking“给去掉就可以了
-==========================================================================================================eclipse设置不格式化注释
-Windows -> Preferces -> Java -> Code Style -> Formatter -> Edit -> Comments
-取消勾选“Enable Javadoc comment formatting”.
+==========================================================================================================maven Java 1.6 or newer
+Dynamic Web Module 3.0 requires Java 1.6 or newer.
+在项目的pom.xml的<build></build>标签中加入： 
+<plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>  
+<version>2.3.2</version><configuration><source>1.6</source> <target>1.6</target></configuration></plugin></plugins>
+保存，项目构建完成后在项目文件夹上点右键，选择Maven->Update Project 
 ==========================================================================================================
-
-
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
 
 
 

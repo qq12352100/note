@@ -59,7 +59,6 @@ windows > preference > Team > SVN #SVN Interface
     WIN7  C:\Users\[YourUserName]\AppData\Roaming\Subversion\
 3. 如果你用的SVNKit, 找到以下目录并删除.keyring文件.
 	[eclipse]\configuration\org.eclipse.core.runtime
-
 ---------------------------------------------------------------------------------------------------------------设置注释格式
 选择Window/Preferences/Java/Code Style/Code Templates/Comments/Types（Methods） 默认是当前系统的用户名
 /**
@@ -69,11 +68,50 @@ windows > preference > Team > SVN #SVN Interface
 ---------------------------------------------------------------------------------------------------------------比较文件
 右键菜单上就有compare with-->each other,比较两个文件之间的不同。
 右键菜单上就有compare with-->local history,可以比较任意两次保存之后，文件有什么不同。
+---------------------------------------------------------------------------------------------------------------xml进行拼写检查
+在eclipse下的Window--Preference输入spell，然后把第一个复选框“Enable spell checking“给去掉就可以了
+---------------------------------------------------------------------------------------------------------------设置不格式化注释
+Windows -> Preferces -> Java -> Code Style -> Formatter -> Edit -> Comments
+取消勾选“Enable Javadoc comment formatting”.
+---------------------------------------------------------------------------------------------------------------jdk版本问题
+eclipse默认用自带的JDK，最高版本是1.6，如果想用自己安装的JDK1.7，设置方法：
+菜单window--->Preferences--->Java--->Installed JREs，把默认JDK1.6的改为自己新安装的JDK1.7。
+这时在java project中会警告：
+Description Resource Path Location Type Build path specifies execution environment JavaSE-1.6. 
+There are no JREs installed in the workspace that are strictly compatible with this environment.
+communication  Build  path JRE System Library Problem
+去除警告方法：工程名称上右键菜单：Properties--->Java Build Path--->Libraries，
+选中"JRE System Library[JavaSE-1.6]"，
+选择右侧按钮“Edit"，打开新界面中选择"Workspace default JRR (JDK1.7......)"即可。
+---------------------------------------------------------------------------------------------------------------新建maven webapp后无法添加src/main/java和src/main/test
+1.eclipse->window>preferences->java->compiler->选择本地要用的Java版本
+2.eclipse->window>preferences->java->installJars->修改为本地jdk
+3.项目右键->buildPath configure Build Path->点击选项卡Libraries->选中JRE System Library->
+点击edit->选中Alternate JRE->选择jdk
+4.点击finish，点击ok，自动出现src/main/java和src/test/java
+---------------------------------------------------------------------------------------------------------------控制台中的中文输出乱码问题
+1、首先在Run-Run Configration-Tomcat-Arguments,在VM arguments中添加-Dfile.encoding=UTF-8
+2、Common tab页，在Console encoding中选择UTF-8
+---------------------------------------------------------------------------------------------------------------tomcat部署目录
+workspace\.metadata\.plugins\org.eclipse.wst.server.core
+---------------------------------------------------------------------------------------------------------------git问题
+--使用Ecplise git commit时出现"There are no stages files"
+进入Window——Preferences——Team——Git——Committing，
+取消 [] use staging view to commit instead of commit dialog
+--push
+点team---remote--push或者team--push to upstream
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 ===============================================================================================================Properties Editor插件
 Help-->Install New software-->add
 Name: Properties Editor
 Location: http://propedit.sourceforge.jp/eclipse/updates/
+安装最后一个
 Editors-->File Association		*.properties
+
+
+
 ===============================================================================================================
 notepad快捷键
 
