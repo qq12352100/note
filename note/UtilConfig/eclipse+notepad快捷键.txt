@@ -110,8 +110,13 @@ Location: http://propedit.sourceforge.jp/eclipse/updates/
 安装最后一个
 Editors-->File Association		*.properties
 
-
-
+===============================================================================================================反编译插件
+打开eclispe，在eclipse的菜单栏上选择Help->Install New Software 
+在对话框中点击add按钮
+Name：jd-eclipse_update_site
+Location：http://jd.benow.ca/jd-eclipse/update
+重启之后，在窗口菜单栏点击Widow->Preference->General->Editors->File Associations,
+将FileType里的*.class和*.class without source的Associated editors下面的Class File Editor设置成default即可
 ===============================================================================================================
 notepad快捷键
 
