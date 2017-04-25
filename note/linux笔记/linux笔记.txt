@@ -11,10 +11,15 @@ cat error.log | grep -B 5 'nick' 【显示foo及前5行】
 cat error.log | grep -A 5 'nick' 【显示foo及后5行】
 ps -ef|grep java				【查看运行中的java程序】
 netstat -tunpl | grep 端口      【查看端口占用】netstat -apn
-uname -a						【查看32位64位】
-more /proc/cpuinfo				【查看cpu是多少位的】
 find / -name 'key' -type d		【查找目录】
 find / -name key -print			【查找文件】
+
+===========================================================================================【系统属性】
+uname -a						【查看32位64位】
+more /proc/cpuinfo				【查看cpu是多少位的】
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l	【查看物理CPU个数(插槽)】
+cat /proc/cpuinfo| grep "processor"| wc -l					【查看逻辑CPU个数(虚拟)】
+cat /proc/cpuinfo| grep "cpu cores"| uniq					【查看每个物理CPU中core的个数(即核数)】
 ===========================================================================================【关闭防火墙】
 查看状态： service iptables status 
 1) 重启后生效 
