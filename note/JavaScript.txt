@@ -3,6 +3,7 @@ http://cdn.code.baidu.com/  百度静态资源库
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
 window.location.href
+上右下左
 ==========================================================================================================json处理
 -----------------------------------------------------表单序列化
 $("#Form").serialize()
@@ -142,6 +143,7 @@ jQuery.nextAll() 		//返回所有之后的兄弟节点
 jQuery.siblings() 		//返回兄弟姐妹节点，不分前后
 ---------------------------------------------------------------------------------
 $("#searchArea").is(':checked')		//判断有没有被选中
+this.parentNode						//传父节点
 ========================================================================================================== URL取参数
 http://localhost:8086/topic/index?topicId=361
 window.location
