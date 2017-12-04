@@ -79,6 +79,8 @@ $(window).scroll(function(){
 		alert(0);
    } 
 });
+----滑到顶部
+$('html,body').animate({scrollTop:0},'slow');
 ==========================================================================================================循环
 if(obj.a3.length>0){ 
 	var temp = obj.a3.split(',');
