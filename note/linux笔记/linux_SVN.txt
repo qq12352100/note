@@ -79,3 +79,45 @@ svnserve -d -r /opt/svn/ --listen-port 3399
 
 svn://115.28.41.25:3399
 
+
+------------------------------------------------------------------本文介绍利用svnsync来同步版本库，达到备份版本库的目的----------------------------------------------------------------------------------------------
+要用到两个命令
+1、svnsync init
+初始化，建立目标库和源库之间的同步关系
+命令格式 svnsync init 目标库URL 源库URL
+2、svnsync sync
+真正的同步
+命令格式 svnsync sync 目标库URL
+目标
+本次实现的是版本库的远程自动备份，将版本库备份到另一台机器上
+假设我们要同步的源版本库为 http://192.168.0.1/svn/proj1　位于机器A，具体路径我们不必理会，因为我们使用http协议
+目标库在机器B，file:///svn/proj1，这个为了简单和安全，我们使用file://协议，proj1是我们用svnadmin create命令创建的一个空库
+过程
+1、在机器B上，创建目标库
+mkdir /svn
+svnadmin create /svn/proj1
+2、在机器B上，修改目标库的脚本pre-revprop-change
+进入/svn/proj1/hooks/
+cd /svn/proj1/hooks/
+cp pre-revprop-change.tmpl pre-revprop-change
+chmod +x pre-revprop-change
+vi pre-revprop-change
+REPOS=”$1″
+REV=”$2″
+USER=”$3″
+PROPNAME=”$4″
+ACTION=”$5″
+if [ "$ACTION" = "M" -a "$PROPNAME" = "svn:log" ]; then exit 0; fi
+echo “Changing revision properties other than svn:log is prohibited” >&2
+exit 1
+原脚本的意思是如果修改的是svn:log属性，将允许修改，返回0；否则，不允许，返回1
+我们要将它改为允许修改所有的属性，在脚本中直接返回0，新的脚本如下：
+exit 0;
+3、初始化
+在机器B上
+svnsync init file:///svn/proj1 http://192.168.0.1/svn/proj1 会提示输入用户名和密码，这里提供的用户名和密码是可以完全读取http://192.168.0.1/svn/proj1的用户名和密码
+4、同步
+在机器B上
+svnsync sync file:///svn/proj1
+依然会提示输入用户名和密码，不过，你可以在这个命令之后加上 username 、password参数，
+例如svnsync sync file:///svn/proj1 –username username –password password
