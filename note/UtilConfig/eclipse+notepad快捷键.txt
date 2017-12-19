@@ -45,9 +45,9 @@ window > preference > Content type > Text > Html  > Add  搜索Content
 在输入框中输入 *.vm  点击OK ，选中新加入得*.vm   
 在下面的 Defualt encoding 中输入 "utf-8“ 单击 update
 ---------------------------------------------------------------------------------------------------------------设置一行的代码长度
-java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索formatter
-XML：XML->XML Files->Editor-> line width 修改成140		搜索xml
-html：Web->HTML Files->Editor-> line width 修改成140	搜索html
+java：java->code style->formatter->edit->line wrapping->maximum line width 修改140  搜索 formatter
+XML：XML->XML Files->Editor-> line width 修改成140		搜索 xml
+html：Web->HTML Files->Editor-> line width 修改成140	搜索 html
 ---------------------------------------------------------------------------------------------------------------为SVN设置快捷键
 1、Window-->Preferences-->General-->Keys
 2、搜索SVN。
