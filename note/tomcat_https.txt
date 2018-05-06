@@ -5,7 +5,7 @@ l  执行命令
 keytool -genkey -alias tomcat -keyalg RSA -keystore D:\tomcat.keystore -validity 36500
 参数简要说明：“F:\tomcat.keystore”含义是将证书文件保存在F盘，证书文件名称是tomcat.keystore ；“-validity 36500”含义是证书有效期，36500表示100年，默认值是90天
 l  在命令行填写必要的参数：
-A、输入keystore密码：此处需要输入大于6个字符的字符串
+A、输入keystore密码：此处需要输入大于6个字符的字符串123456
 B、“您的名字与姓氏是什么？”这是必填项，并且必须是TOMCAT部署主机的域名或者IP[如：gbcom.com 或者 10.1.25.251]，就是你将来要在浏览器中输入的访问地址
 C、 “你的组织单位名称是什么？”、“您的组织名称是什么？”、“您所在城市或区域名称是什么？”、“您所在的州或者省份名称是什么？”、“该单位的两字母国 家代码是什么？”可以按照需要填写也可以不填写直接回车，在系统询问“正确吗？”时，对照输入信息，如果符合要求则使用键盘输入字母“y”，否则输入“n”重新填写上面的信息
 D、输入<tomcat>的主密码，这项较为重要，会在tomcat配置文件中使用，建议输入与keystore的密码一致，设置其它密码也可以
@@ -17,7 +17,7 @@ l  完成上述输入后，直接回车则在你在第二步中定义的位置找到生成的文件
 去掉注释且修改参数=>
 <Connector port="443" protocol="HTTP/1.1" SSLEnabled="true"
                maxThreads="150" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS" keystoreFile="c:/users/admin/tomcat.keystore" keystorePass="www.gbcom.com.cn"/>
+               clientAuth="false" sslProtocol="TLS" keystoreFile="c:/users/admin/.keystore" keystorePass="123456"/>
 			   
 在tomcat\conf\web.xml中的</welcome-file-list>后面加上这样一段：
 <login-config>

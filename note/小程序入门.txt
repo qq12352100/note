@@ -1,0 +1,117 @@
+index目录下有index.js、index.json、index.wxml、index.wxss四个文件，
+其中js是处理页面逻辑的，相当于web的javascript页；
+json是一个数据文件，是对于index页面才有效的数据；
+wxml是界面布局文件，相当于web的html文件，但又和html有所不同，因为wxml中是纯粹的界面布局，不可参入js；
+wxss是样式文件，相当于web的css，其语法与css的相容，又有些差异
+
+
+bindtap="tap"  绑定js中事件
+
+循环
+<view class="group">
+  <block wx:for="{{iconType}}">
+    <icon type="{{item}}" size="40"/>
+  </block>
+</view>
+
+请求后端
+wx.request({
+   url: 'https://localhost:8443/test-json/comfirorder', //仅为示例，并非真实的接口地址
+   data: {
+     x: '',
+     y: ''
+   },
+   method: 'get',
+   header: {
+     'content-type': 'application/json'
+   },
+   success: function (res) {
+     that.setData({
+       shopList: res.data
+     });
+     console.log(res.data)
+   }
+}
+          wx.request({
+            url: 'https://localhost:8443/test-json/comfirorder', //仅为示例，并非真实的接口地址
+            data: {
+              arriveTime: date, phone: phone, people: people, remark: remark,shopId:shopId
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+            success: function (res) {
+              if(res.data)
+              wx.hideLoading()
+            }
+          })
+
+  <navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">跳转到新页面</navigator>
+  <navigator url="../../redirect/redirect/redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">在当前页打开</navigator>
+  <navigator url="/page/index/index" open-type="switchTab" hover-class="other-navigator-hover">切换 Tab</navigator>
+
+打电话
+wx.makePhoneCall({
+  phoneNumber: '0755-1234567' 
+})
+获取当前位置
+wx.getLocation({
+  type: 'gcj02', //返回可以用于wx.openLocation的经纬度  
+  success: function (res) {
+	var latitude = res.latitude
+	var longitude = res.longitude
+  }
+})  
+打开地图去哪
+wx.openLocation({
+  latitude: 37.376086, 
+  longitude: 118.020314,
+  name: "花园桥肯德基",
+  scale: 28	//层级
+})
+
+
+onShareAppMessage: function( options ){
+　　var that = this;
+　　// 设置菜单中的转发按钮触发转发事件时的转发内容
+　　var shareObj = {
+　　　　title: "转发的标题",        // 默认是小程序的名称(可以写slogan等)
+　　　　path: '/pages/share/share',        // 默认是当前页面，必须是以‘/’开头的完整路径
+　　　　imgUrl: '',     //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+　　　　success: function(res){
+　　　　　　// 转发成功之后的回调
+　　　　　　if(res.errMsg == 'shareAppMessage:ok'){
+　　　　　　}
+　　　　},
+　　　　fail: function(){
+　　　　　　// 转发失败之后的回调
+　　　　　　if(res.errMsg == 'shareAppMessage:fail cancel'){
+　　　　　　　　// 用户取消转发
+　　　　　　}else if(res.errMsg == 'shareAppMessage:fail'){
+　　　　　　　　// 转发失败，其中 detail message 为详细失败信息
+　　　　　　}
+　　　　},
+　　　　complete: fucntion(){
+　　　　　　// 转发结束之后的回调（转发成不成功都会执行）
+　　　　}
+　　};
+　　// 来自页面内的按钮的转发
+　　if( options.from == 'button' ){
+　　　　var eData = options.target.dataset;
+　　　　console.log( eData.name );     // shareBtn
+　　　　// 此处可以修改 shareObj 中的内容
+　　　　shareObj.path = '/pages/btnname/btnname?btn_name='+eData.name;
+　　}
+　　// 返回shareObj
+　　return shareObj;
+}
+
+
+
+
+
+
+
+
+
