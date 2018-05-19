@@ -36,7 +36,14 @@ Dynamic Web Module 3.0 requires Java 1.6 or newer.
 <plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>  
 <version>2.3.2</version><configuration><source>1.6</source> <target>1.6</target></configuration></plugin></plugins>
 保存，项目构建完成后在项目文件夹上点右键，选择Maven->Update Project 
-==========================================================================================================
+==========================================================================================================Tomcat启动时Creation of SecureRandom instance for session ID很慢
+find / -name java.security
+vi /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.181-2.6.14.5.el7.x86_64/jre/lib/security/java.security
+/securerandom 回车 按n找下一个 shift+n上一个
+ securerandom.source=file:/dev/urandom
+替换成    
+securerandom.source=file:/dev/./urandom
+重启tomcat
 ==========================================================================================================
 ==========================================================================================================
 ==========================================================================================================
