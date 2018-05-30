@@ -1,5 +1,36 @@
 cat test.log | grep outage
 
+jsonContent = new JSONObject();
+jsonContent.put("touser", u.getOpenid());
+jsonContent.put("msgtype", "text");
+
+JSON.parseObject()
+
+//模版引入
+<import src="../../template/component.wxml"/>
+
+//定义模版
+<template name="swiper">
+</template>
+
+//模版使用
+<template is="msgItem" data="{{...item}}"/>
+
+//事件传参
+<view data-alpha-beta="1" data-alphaBeta="2" bindtap="bindViewTap"> DataSet Test </view>
+bindViewTap:function(event){
+	event.currentTarget.dataset.alphaBeta === 1 // - 会转为驼峰写法
+	event.currentTarget.dataset.alphabeta === 2 // 大写会转为小写
+}
+
+//手机号正则
+var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+if (!myreg.test(str)) {  
+  return false;  
+} else {  
+  return true;  
+}  
+
 bindtap="tap"  绑定js中事件
 
 循环
