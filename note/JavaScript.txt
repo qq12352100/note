@@ -231,6 +231,8 @@ border:1px solid #000000;		//一个像素的实线边框
 	1px dashed #000000			//一个像素的虚线边框
 	
 	cursor:pointer;				//鼠标样式
+	
+	text-transform: uppercase; //input值转大写
 
 
 
