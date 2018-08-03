@@ -1,0 +1,35 @@
+oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
+
+============================================================================================================建库流程
+-- 注意：请用SYSTEM用户登录，再运行此脚本
+-- 数据库名：HCBMP
+-- 用户名：HCBMP
+-- 密码：HCBMP
+CREATE TABLESPACE HCBMP DATAFILE   'HCBMP.dbf'   SIZE  128M   REUSE
+AUTOEXTEND  ON   NEXT   1280K
+MINIMUM   EXTENT   128K
+DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
+
+--创建用户
+CREATE USER HCBMP IDENTIFIED BY "HCBMP" DEFAULT TABLESPACE HCBMP;
+--赋权限
+GRANT UNLIMITED TABLESPACE TO HCBMP;
+GRANT connect, resource, dba To HCBMP;
+============================================================================================================
+--备份
+exp HCBMP/HCBMP@ORCL full=y inctype=complete file=2.dmp
+--恢复
+imp HCBMP/HCBMP@BKK file=f:/2.dmp full=y ignore=y;
+============================================================================================================修改SYS密码
+在cmd窗口中敲入下列命令:
+sqlplus /nolog
+connect  /  as  sysdba
+alter user sys identified by root; 
+alter user system identified by root;
+============================================================================================================手动刷新视图
+BEGIN
+DBMS_MVIEW.REFRESH (
+list => 'MV_MCINFOBOUND',
+Method =>'C',
+refresh_after_errors => True);
+END;

@@ -1,3 +1,9 @@
+su - oracle 
+export DIDPLAY=10.61.228.74:0.0
+cd $ORACLE_HOME
+cd bin
+./dbca
+
 1. find   /  -name test  | xargs rm -rf      (这个命令可以查找test文件或者目录，并删除！)
 2. 用下面的命令可以查找 /home下最近两天修改过的文件：find /home -type f -mtime -2
 如果要把这些文件也删掉，那么可以：find /home -type f -mtime -2 -exec rm {} \;
