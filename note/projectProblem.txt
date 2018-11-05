@@ -51,7 +51,11 @@ securerandom.source=file:/dev/./urandom
     enableLookups="false"
                connectionTimeout="20000"
                redirectPort="8443" maxHttpHeaderSize="8192"/>
-==========================================================================================================
+==========================================================================================================Tomcat在Windows中输出日志到catalina.out
+1、打开bin下面的startup.bat文件，把call "%EXECUTABLE%" start %CMD_LINE_ARGS%
+     改为call "%EXECUTABLE%" run %CMD_LINE_ARGS% 。
+2、打开bin下面的catalina.bat文件，会发现共有4处 %ACTION% ，在后面分别加上
+     >> %CATALINA_HOME%\logs\catalina.out
 ==========================================================================================================
 ==========================================================================================================
 

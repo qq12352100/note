@@ -6,6 +6,7 @@ jsonContent.put("msgtype", "text");
 
 JSON.parseObject()
 
+
 //Ä£°æÒıÈë
 <import src="../../template/component.wxml"/>
 
