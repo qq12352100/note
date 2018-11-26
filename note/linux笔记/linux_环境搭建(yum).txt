@@ -32,6 +32,7 @@ chkconfig mysqld on
 
 第3步、启动MySql服务
 service mysqld start
+如果出现Note: Forwarding request to 'systemctl enable mysqld.service'.调用systemctl enable mysqld.service
 
 第4步、设置MySQL的root用户设置密码
 mysql -u root
