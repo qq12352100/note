@@ -15,8 +15,17 @@ yum clean all			清除缓存目录下的软件包及旧的headers
 yum list java*  
 yum install java-1.7.0-openjdk* -y  (自动选择yes)
 =================================================================================================================【安装mysql】
+
 第1步、yum安装mysql
 yum -y install mysql-server
+【找不到mysql-server的话】
+1、下载mysql的repo源
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+2、安装mysql-community-release-el7-5.noarch.rpm包
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+安装这个包后，会获得两个mysql的yum repo源： 
+/etc/yum.repos.d/mysql-community.repo和 
+/etc/yum.repos.d/mysql-community-source.repo。
 
 第2步、设置开机启动
 chkconfig mysqld on
