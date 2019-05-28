@@ -26,36 +26,6 @@ df.format(allNum * 0.1 / allNumLast * 1000);
 而isELIgnored＝"false"时输出为100。Web容器默认isELIgnored＝"false"。
 ==========================================================================================================jdk编码默认GBK，javac报错
 在系统环境变量中增加一个变量，变量名为: JAVA_TOOL_OPTIONS， 变量值为：-Dfile.encoding=UTF-8，保存
-==========================================================================================================maven install时报错
-Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile
-首先检查父项目,子项目的jdk版本是否一致,编码格式是否一致
-把java Build Path里面的Libraries中的JRE System Libraries(JRE7)改为jdk7, maven编译需要jdk, 而不是jre
-==========================================================================================================maven Java 1.6 or newer
-Dynamic Web Module 3.0 requires Java 1.6 or newer.
-在项目的pom.xml的<build></build>标签中加入： 
-<plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>  
-<version>2.3.2</version><configuration><source>1.6</source> <target>1.6</target></configuration></plugin></plugins>
-保存，项目构建完成后在项目文件夹上点右键，选择Maven->Update Project 
-==========================================================================================================Tomcat启动时Creation of SecureRandom instance for session ID很慢
-find / -name java.security
-vi /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.181-2.6.14.5.el7.x86_64/jre/lib/security/java.security
-/securerandom 回车 按n找下一个 shift+n上一个
- securerandom.source=file:/dev/urandom
-替换成    
-securerandom.source=file:/dev/./urandom
-重启tomcat
-==========================================================================================================Invalid character found in method name. HTTP method names must be tokens
-只需要在server.xml中增加maxHttpHeaderSize字段即可:
-<Connector URIEncoding="UTF-8" port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol"
-    useBodyEncodingForURI="false"
-    enableLookups="false"
-               connectionTimeout="20000"
-               redirectPort="8443" maxHttpHeaderSize="8192"/>
-==========================================================================================================Tomcat在Windows中输出日志到catalina.out
-1、打开bin下面的startup.bat文件，把call "%EXECUTABLE%" start %CMD_LINE_ARGS%
-     改为call "%EXECUTABLE%" run %CMD_LINE_ARGS% 。
-2、打开bin下面的catalina.bat文件，会发现共有4处 %ACTION% ，在后面分别加上
-     >> %CATALINA_HOME%\logs\catalina.out
 ==========================================================================================================
 ==========================================================================================================
 

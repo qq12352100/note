@@ -20,15 +20,22 @@ yum install java-1.7.0-openjdk* -y  (自动选择yes)
 yum -y install mysql-server
 【找不到mysql-server的话】
 1、下载mysql的repo源
-wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+#wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+#wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+
 2、安装mysql-community-release-el7-5.noarch.rpm包
-sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+#sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+【报错mysql-community-release conflicts with mysql57-community-release-el7-8.noarch】
+解决#rpm -e mysql57-community-release-el7-8.noarch --nodeps
+可以修改#vim /etc/yum.repos.d/mysql-community.repo源，改变默认安装的mysql版本。
+比如要安装5.6版本，将5.7源的enabled=1改成enabled=0。然后再将5.6源的enabled=0改成enabled=1即可。
 安装这个包后，会获得两个mysql的yum repo源： 
 /etc/yum.repos.d/mysql-community.repo和 
 /etc/yum.repos.d/mysql-community-source.repo。
 
 第2步、设置开机启动
 chkconfig mysqld on
+systemctl enable mysqld.service
 
 第3步、启动MySql服务
 service mysqld start

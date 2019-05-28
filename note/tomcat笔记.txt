@@ -1,3 +1,26 @@
+==========================================================================================================Tomcat启动时Creation of SecureRandom instance for session ID很慢
+find / -name java.security
+vi /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.181-2.6.14.5.el7.x86_64/jre/lib/security/java.security
+/securerandom 回车 按n找下一个 shift+n上一个
+ securerandom.source=file:/dev/urandom
+替换成    
+securerandom.source=file:/dev/./urandom
+重启tomcat
+==========================================================================================================Invalid character found in method name. HTTP method names must be tokens
+只需要在server.xml中增加maxHttpHeaderSize字段即可:
+<Connector URIEncoding="UTF-8" port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol"
+    useBodyEncodingForURI="false"
+    enableLookups="false"
+               connectionTimeout="20000"
+               redirectPort="8443" maxHttpHeaderSize="8192"/>
+==========================================================================================================Tomcat在Windows中输出日志到catalina.out
+1、打开bin下面的startup.bat文件，把call "%EXECUTABLE%" start %CMD_LINE_ARGS%
+     改为call "%EXECUTABLE%" run %CMD_LINE_ARGS% 。
+2、打开bin下面的catalina.bat文件，会发现共有4处 %ACTION% ，在后面分别加上
+     >> %CATALINA_HOME%\logs\catalina.out
+	 
+如果不能输出，配置环境变量CATALINA_HOME
+==================================================================================.keystore证书
 已经安装JDK
 步骤：
 l  进入%JAVA_HOME%/bin目录
@@ -35,3 +58,11 @@ l  完成上述输入后，直接回车则在你在第二步中定义的位置找到生成的文件
 <transport-guarantee>CONFIDENTIAL</transport-guarantee>
 </user-data-constraint>
 </security-constraint>
+==================================================================================.jks证书
+<Connector port="443"   protocol="org.apache.coyote.http11.Http11NioProtocol" maxThreads="150" SSLEnabled="true">
+	<SSLHostConfig>
+		<Certificate certificateKeystoreFile="conf/example.com.jks" certificateKeyAlias="example.com"
+			certificateKeystorePassword="password"
+					 type="RSA" />
+	</SSLHostConfig>
+</Connector>

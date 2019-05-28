@@ -72,7 +72,7 @@ masterauth test123					#验证
 set name bkk@163.com
 get name
 setnx name bkk@163.com  		//返回0（存在）， 1（不存在）成功插入
-setex haircolor 10 red  		//设置10秒有效期，10秒之后返回nil（空）
+setex haircolor 10 red  		//设置10秒有效期，10秒之后返回nil（空）(set name miaoerduo ex 10)//设置name的过期时间为10秒
 setrange name 2 @126			//从下标为2开始替换，返回替换后字符长度。返回结果bk@1263.com
 mset key1 bkk1 key2 bkk2		//设置多个键值对
 msetnx key3 bkk3 key2 bkk2 		//有一个不成功都不成功
@@ -85,7 +85,8 @@ decr key						//自减
 decrby key 5					//以5自减（-5自增）
 append name sss					//为name追加sss
 strlen name						//返回值的长度
-
+		
+set name miaoerduo nx			//NX：（if Not eXist）只有键key不存在的时候才会设置key的值--XX：只有键key存在的时候才会设置key的值
 ---------------------------------------hashes----------------------------------------适合存对象，占内存少
 hset user:001 name bkk
 hget user:001 name 
@@ -139,7 +140,7 @@ scard myset1					//返回集合元素个数
 sismember myset one				//判断one是不是在myset中，1是0不是
 srandmember myset 				//随机返回一个元素，不删除
 
---------------------------------sorted sets(zset)--------------------------------------------
+--------------------------------sorted sets(zset)--------------------------------------------(值相同，保存最后一个序列号)
 zadd myzset 1 one 
 zrange myzset 0 -1 withscores	//输出全部（带序号）
 zrem myzset one					//删除one元素
@@ -154,7 +155,7 @@ zremrangebyscore myzset 1 2 	//删除序号区间元素
 =============键值命令===============================================================================
 keys *							//返回所有键
 exists 	name					//判断key是否存在（1存在0不存在）
-del name						//删除key（1成功0不成功）
+del name						//删除key（1成功0不成功）redis-cli -a password keys "*" | xargs redis-cli -a password del （liunx下删除多个key）
 expire name 10					//设置过期时间（10秒）（1成功0失败）
 ttl name						//获取有效时长（-1过期）
 select 0						//选择第0个数据库（0-15共16个数据库）(默认进入0数据库)
