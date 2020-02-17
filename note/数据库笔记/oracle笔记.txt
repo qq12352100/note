@@ -1,8 +1,17 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
+============================================================================================================基础
+select count(*) from v＄session;
+show parameter processes;
+show parameter sessions;
+
+
 ============================================================================================================常用sql
+============================================================================================================常用sql
+show parameter instance;
+
 select * from dba_users; 查看数据库里面所有用户，前提是你是有dba权限的帐号，如sys,system
-select * from all_users;  查看你能管理的所有用户！
+select username from all_users;  查看你能管理的所有用户！
 select * from user_users; 查看当前用户信息 ！
 
 @ d:\wonders\1_create_table.sql  --运行sql脚本
@@ -13,7 +22,7 @@ select * from user_triggers;
 select * from user_sequences;
 
 在insert语句中,直接使用sequence.nextval引用；
-insert?into?goods(goods_id,goods_name,store_date,goods_num)?values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500);?
+insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500); 
 ============================================================================================================锁表解决
 --所有session中的所有被锁定的对象信息。
 select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t2.PROGRAM, t2.LOGON_TIME, t2.COMMAND, t2.LOCKWAIT, t2.SADDR, t2.PADDR, t2.TADDR, t2.SQL_ADDRESS, t1.LOCKED_MODE
@@ -35,7 +44,7 @@ MINIMUM   EXTENT   128K
 DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
 
 --创建用户
-CREATE USER HCBMP IDENTIFIED BY "HCBMP" DEFAULT TABLESPACE HCBMP;
+CREATE USER HCBMP IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE HCBMP;
 --赋权限
 GRANT UNLIMITED TABLESPACE TO HCBMP;
 GRANT connect, resource, dba To HCBMP;
@@ -57,3 +66,33 @@ list => 'MV_MCINFOBOUND',
 Method =>'C',
 refresh_after_errors => True);
 END;
+============================================================================================================【数据库问题】
+SQL> select file#，status，bytes/1024/1024 mb，name from v$datafile where file#=4;
+ORA-01122: database file 2 failed verification check
+ORA-01110: data file 2: '/oradata/oracle/oradata/oradb/sysaux01.dbf'
+ORA-01200: actual file size of 62720 is smaller than correct size of 66560 blocks
+报错提示数据库记录/oradata/oracle/oradata/oradb/sysaux01.dbf的大小是66560而实际大小是62720，此种报错有个简单的解决方法，就是通过dd修改报错相关的数据文件，改成数据库期望的大小，瞒过oracle：
+SQL> select 66560 - 62720 from dual;
+3840
+SQL> !dd if=/dev/zero of=/oradata/oracle/oradata/oradb/sysaux01.dbf bs=8192 count=3840 seek=62721 --bs是数据库块大小，count是差值，seek是从哪开始填充0
+3840+0 records in
+3840+0 records out
+31457280 bytes (31 MB) copied, 0.02607 seconds, 1.2 GB/s
+SQL> alter database open;
+Database altered.
+SQL> shutdown immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> startup;
+ORACLE instance started.
+Total System Global Area  839282688 bytes
+Fixed Size	   2257880 bytes
+Variable Size	 545262632 bytes
+Database Buffers	 289406976 bytes
+Redo Buffers	   2355200 bytes
+Database mounted.
+Database opened.
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
