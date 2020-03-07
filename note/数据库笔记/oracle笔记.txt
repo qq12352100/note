@@ -1,14 +1,44 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
 ============================================================================================================基础
-select count(*) from v＄session;
+select count(*) from v$session;
 show parameter processes;
 show parameter sessions;
-
-
-============================================================================================================常用sql
-============================================================================================================常用sql
 show parameter instance;
+
+lsnrctl status					#查看监听服务状态
+============================================================================================================重启oracle
+1.执行 sqlplus /nolog；
+2.conn sys / as sysdba ;（口令是你登录数据库时输入的密码）
+3.shutdown immediate ;
+4.startup;
+----------------------------------------------------------------------------------------------------------监听问题
+两个文件中要一致LISTENER_ORCL
+\app\Administrator\admin\orcl\pfile
+local_listener=LISTENER_ORCL
+
+\app\Administrator\product\11.2.0\dbhome_1\network\admin\tnsnames.ora
+LISTENER_ORCL =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = server35)(PORT = 1521))  #HOST 为127.0.0.1和localhost是本机可连接，为主机名或实际IP则远程可以连
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = orcl)
+    )
+  )
+============================================================================================================常用sql
+grant CREATE PUBLIC DATABASE LINK,DROP PUBLIC DATABASE LINK to username; #赋值创建删除dblink
+ select owner,object_name from dba_objects where object_type='DATABASE LINK';
+ drop  public database link LINK31;
+ drop database link link31;
+create database link link31 connect to CEN_BZGL identified by "CEN_BZGL"using '10.61.234.31:1521/orcl';
+
+
+SELECT * FROM t_test@link31;
+drop  database link LINK31;
+select owner,object_name from dba_objects where object_type='DATABASE LINK';
+ select * from user_sys_privs where privilege like upper('%DATABASE LINK%'); 
 
 select * from dba_users; 查看数据库里面所有用户，前提是你是有dba权限的帐号，如sys,system
 select username from all_users;  查看你能管理的所有用户！

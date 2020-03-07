@@ -9,6 +9,8 @@
 	CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 	PATH=$JAVA_HOME/bin:$PATH
 	export JAVA_HOME CLASSPATH PATH
+	
+3、运行命令让配置生效		$ source /etc/profile	
 
 ------------------------------------------------------taomcat安装------------------------------------------------------------------------
 TOMCAT_HOME=/usr/local/apache-tomcat-7.0.65
