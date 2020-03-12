@@ -28,28 +28,33 @@ LISTENER_ORCL =
     )
   )
 ============================================================================================================常用sql
-grant CREATE PUBLIC DATABASE LINK,DROP PUBLIC DATABASE LINK to username; #赋值创建删除dblink
- select owner,object_name from dba_objects where object_type='DATABASE LINK';
- drop  public database link LINK31;
- drop database link link31;
-create database link link31 connect to CEN_BZGL identified by "CEN_BZGL"using '10.61.234.31:1521/orcl';
+DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--删除命名空间
+drop user user_name cascade;													--删除用户
 
+select 'alter table '||table_name||' enable constraint '||constraint_name||';' from user_constraints where constraint_type='R';		--启动外键
+select 'alter table '||table_name||' disable constraint '||constraint_name||';' from user_constraints where constraint_type='R';	--关闭外键
 
-SELECT * FROM t_test@link31;
-drop  database link LINK31;
 select owner,object_name from dba_objects where object_type='DATABASE LINK';
- select * from user_sys_privs where privilege like upper('%DATABASE LINK%'); 
+select * from user_sys_privs where privilege like upper('%DATABASE LINK%'); 	--查看用户有没有创建dblin的权限
+grant CREATE PUBLIC DATABASE LINK,DROP PUBLIC DATABASE LINK to username; 		--赋值创建删除dblink
+create database link link31 connect to CEN_BZGL identified by "CEN_BZGL" using '10.61.234.31:1521/orcl'; --创建dblink
+SELECT * FROM t_test@link31;		--测试dblink
+drop public database link LINK31;	--删除dblink
+drop database link link31;
 
-select * from dba_users; 查看数据库里面所有用户，前提是你是有dba权限的帐号，如sys,system
-select username from all_users;  查看你能管理的所有用户！
-select * from user_users; 查看当前用户信息 ！
+create public synonym table_name for user.table_name;	--创建同义词
+drop public synonym table_name;							--删除同义词
 
-@ d:\wonders\1_create_table.sql  --运行sql脚本
+select * from user_jobs;			--查看调度任务
+select * from dba_jobs_running;		--查看正在执行的调度任务
+select * from dba_jobs;				--查看执行完的调度任务
 
---查看建立的触发器
-select * from user_triggers;
---查看建立的序列
-select * from user_sequences;
+select * from dba_users; 			--查看数据库里面所有用户，前提是你是有dba权限的帐号，如sys,system
+select username from all_users;  	--查看你能管理的所有用户！
+select * from user_users; 			--查看当前用户信息 ！
+@ d:\wonders\1_create_table.sql  	--运行sql脚本
+select * from user_triggers;		--查看建立的触发器
+select * from user_sequences;		--查看建立的序列
 
 在insert语句中,直接使用sequence.nextval引用；
 insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500); 
@@ -78,6 +83,7 @@ CREATE USER HCBMP IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE HCBMP;
 --赋权限
 GRANT UNLIMITED TABLESPACE TO HCBMP;
 GRANT connect, resource, dba To HCBMP;
+REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
 ============================================================================================================
 --备份
 exp HCBMP/HCBMP@ORCL full=y inctype=complete file=2.dmp
