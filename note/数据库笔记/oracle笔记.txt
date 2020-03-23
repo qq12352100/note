@@ -28,6 +28,8 @@ LISTENER_ORCL =
     )
   )
 ============================================================================================================常用sql
+select * from 表名 where length(nvl(字段,''))=1;								--查询非空字段的长度
+
 DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--删除命名空间
 drop user user_name cascade;													--删除用户
 
@@ -41,6 +43,9 @@ create database link link31 connect to CEN_BZGL identified by "CEN_BZGL" using '
 SELECT * FROM t_test@link31;		--测试dblink
 drop public database link LINK31;	--删除dblink
 drop database link link31;
+
+grant resource to GW_CEN_SYS;							--为用户授予resource权限，则不对用户的表空间进行限制
+grant unlimited tablespace to GW_CEN_SYS;				--授予用户表空间不受限制的权限
 
 create public synonym table_name for user.table_name;	--创建同义词
 drop public synonym table_name;							--删除同义词
@@ -58,6 +63,19 @@ select * from user_sequences;		--查看建立的序列
 
 在insert语句中,直接使用sequence.nextval引用；
 insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500); 
+==============================================================================================================================================================查看使用情况表空间
+--查看使用情况
+select a.tablespace_name, a.bytes / 1024 / 1024 "sum MB", (a.bytes - b.bytes) / 1024 / 1024 "used MB",  b.bytes / 1024 / 1024 "free MB",
+round(((a.bytes - b.bytes) / a.bytes) * 100, 2) "used%"
+from (select tablespace_name, sum(bytes) bytes from dba_data_files group by tablespace_name) a,
+(select tablespace_name, sum(bytes) bytes, max(bytes) largest from dba_free_space group by tablespace_name) b
+where a.tablespace_name = b.tablespace_name order by ((a.bytes - b.bytes) / a.bytes) desc;
+
+--找位置
+select tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space from sys.dba_data_files order by tablespace_name;
+
+--表空间扩展到4G
+alter database datafile 'D:\APP\ADMINISTRATOR\ORADATA\XYSHARE\SGSHARE.DBF' resize 4096m;
 ============================================================================================================锁表解决
 --所有session中的所有被锁定的对象信息。
 select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t2.PROGRAM, t2.LOGON_TIME, t2.COMMAND, t2.LOCKWAIT, t2.SADDR, t2.PADDR, t2.TADDR, t2.SQL_ADDRESS, t1.LOCKED_MODE
