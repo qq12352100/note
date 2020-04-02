@@ -61,6 +61,14 @@ select * from user_users; 			--查看当前用户信息 ！
 select * from user_triggers;		--查看建立的触发器
 select * from user_sequences;		--查看建立的序列
 
+
+CREATE  SEQUENCE dic_seq
+INCREMENT  BY   1  --  每次加的个数据 
+START  WITH   1 --  从1开始计数 
+NOMAXVALUE  --  不设置最大值 
+NOCYCLE --  CYCLE | NOCYCLE 是否循环，建议不使用
+NOCACHE;  --CACHE n | NOCACHE 是否启用缓存
+DROP  SEQUENCE dic_seq; --删除序列
 在insert语句中,直接使用sequence.nextval引用；
 insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500); 
 ==============================================================================================================================================================查看使用情况表空间
@@ -147,6 +155,18 @@ Database Buffers	 289406976 bytes
 Redo Buffers	   2355200 bytes
 Database mounted.
 Database opened.
-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------存储过程
+set serveroutput on;--打开输出
+EXEC raisesalary(1);--执行存储过程
+--创建
+create or replace procedure raisesalary(eno in number)
+as
+ --变量
+ psal h_p_dic_mapping.h_category_name%type;
+begin
+ select h_category_name into psal from h_p_dic_mapping where pkid=eno;
+ update h_p_dic_mapping set h_category_name=h_category_name||'333' where pkid=eno;
+ dbms_output.put_line('涨前：涨后：'||psal);
+end;
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
