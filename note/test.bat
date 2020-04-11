@@ -8,7 +8,12 @@
 
 ::start http://www.baidu.com  	rem 默认浏览器打开网页
 
-cd /d %~dp0 					rem 打开当前路径
+::cd /d %~dp0 					rem 打开当前路径
+@echo %AllUsersProfile%			rem	C:\ProgramData
+@echo %tmp%						rem	C:\Users\admin\AppData\Local\Temp
+@echo %AppData%					rem	C:\Users\admin\AppData\Roaming
+@echo %CommonProgramFiles%		rem	C:\Program Files\Common Files
+@echo %UserProfile%				rem	C:\Users\admin
 @echo %CD%						rem 代表当前目录的字符串
 @echo %DATE%					rem 当前日期
 @echo %TIME%					rem 当前时间
