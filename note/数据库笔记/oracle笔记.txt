@@ -5,6 +5,7 @@ select count(*) from v$session;
 show parameter processes;
 show parameter sessions;
 show parameter instance;
+SELECT * FROM all_tables;			--查看能看的所有表  赋予了select any table权限后
 
 lsnrctl status					#查看监听服务状态
 ============================================================================================================重启oracle
