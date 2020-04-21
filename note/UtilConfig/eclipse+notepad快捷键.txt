@@ -113,6 +113,7 @@ Location: http://propedit.sourceforge.jp/eclipse/updates/
 Editors-->File Association		*.properties
 
 ===============================================================================================================反编译插件
+官网地址 http://java-decompiler.github.io/
 打开eclispe，在eclipse的菜单栏上选择Help->Install New Software 
 在对话框中点击add按钮
 Name：jd-eclipse_update_site
