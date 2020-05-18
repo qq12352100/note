@@ -1,5 +1,6 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
+Insert into Table2(a, c, d) select a,c,5 from Table1
 ============================================================================================================基础
 select count(*) from v$session;
 show parameter processes;
@@ -157,6 +158,7 @@ Redo Buffers	   2355200 bytes
 Database mounted.
 Database opened.
 ------------------------------------------------------------------------------------------------------------存储过程
+--在创建视图（VIEW）时，只能使用AS。在声明游标（CURSOR）时，只能使用IS。
 set serveroutput on;--打开输出
 EXEC raisesalary(1);--执行存储过程
 --创建
@@ -169,5 +171,40 @@ begin
  update h_p_dic_mapping set h_category_name=h_category_name||'333' where pkid=eno;
  dbms_output.put_line('涨前：涨后：'||psal);
 end;
-------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------
+create or replace procedure calc_Money is 
+str_begin varchar2(20);
+str_end varchar2(20);
+begin
+str_begin := to_char(sysdate-1,'yyyy-mm-dd');  
+str_end :=to_char(sysdate,'yyyy-mm-dd');
+Insert into A_MONEY
+select to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'),z.akb021,v.* from (select '退款：'||sum(t.aae019),t.akb020 from YY_ZF10 t where t.zke599='2' and t.zkf018='1' 
+and t.aae036 >to_date(str_begin,'yyyy/mm/dd hh24:mi:ss') 
+and t.aae036 <to_date(str_end,'yyyy/mm/dd hh24:mi:ss')
+group by t.akb020)v  left join yy_zk49 z on v.akb020=z.akb020);
+commit;
+end;
+------------------------------------------------------------------------------------------------------------定时任务
+declare
+job_number number;
+cursor job_cursor is select * from user_jobs;
+begin
+-- Call the procedure
+sys.dbms_job.submit(job => job_number,   --out参数，job编号
+what => 'calc;', --注意有分号
+next_date => sysdate + 5/(24*60), --下一个 5分钟执行
+interval => 'TRUNC(sysdate+1)' --每天凌晨0点执行
+);
+commit;
+end;
+------------------删除
+begin
+sys.dbms_job.remove(job => 28);
+end;
+------------------修改执行时间
+begin
+sys.dbms_job.interval(job => 29,
+interval => 'TRUNC(sysdate+1)');
+end;
 ------------------------------------------------------------------------------------------------------------
