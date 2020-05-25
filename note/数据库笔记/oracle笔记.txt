@@ -112,9 +112,9 @@ CREATE USER HCBMP IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE HCBMP;
 GRANT UNLIMITED TABLESPACE TO HCBMP;
 GRANT connect, resource, dba To HCBMP;
 REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
-============================================================================================================
+============================================================================================================备份
 --备份
-exp HCBMP/HCBMP@ORCL full=y inctype=complete file=2.dmp
+exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20190929.dmp
 --恢复
 imp HCBMP/HCBMP@BKK file=f:/2.dmp full=y ignore=y;
 ============================================================================================================修改SYS密码
@@ -158,6 +158,9 @@ Redo Buffers	   2355200 bytes
 Database mounted.
 Database opened.
 ------------------------------------------------------------------------------------------------------------存储过程
+删除存储过程 DROP PROCEDURE 存储过程名字
+删除函数 DROP FUNCTION 函数名字
+删除触发器 DROP TRIGGER 触发器名字
 --在创建视图（VIEW）时，只能使用AS。在声明游标（CURSOR）时，只能使用IS。
 set serveroutput on;--打开输出
 EXEC raisesalary(1);--执行存储过程
@@ -171,7 +174,7 @@ begin
  update h_p_dic_mapping set h_category_name=h_category_name||'333' where pkid=eno;
  dbms_output.put_line('涨前：涨后：'||psal);
 end;
----------------------------------------------------------
+-----------------------------------------------------系统时间
 create or replace procedure calc_Money is 
 str_begin varchar2(20);
 str_end varchar2(20);
@@ -185,6 +188,18 @@ and t.aae036 <to_date(str_end,'yyyy/mm/dd hh24:mi:ss')
 group by t.akb020)v  left join yy_zk49 z on v.akb020=z.akb020);
 commit;
 end;
+-------------------------------------------------------循环
+create or replace procedure test_job(i in number) as
+v_num number ;
+begin
+v_num:=0;
+delete from A_test;
+while v_num < i LOOP
+  Insert into A_test(ID,name) values (to_char(sysdate,'yyyy-mm-dd'),'ss'||v_num);
+  commit;
+  v_num:= v_num + 1;
+end LOOP;
+end;
 ------------------------------------------------------------------------------------------------------------定时任务
 declare
 job_number number;
@@ -193,7 +208,9 @@ begin
 -- Call the procedure
 sys.dbms_job.submit(job => job_number,   --out参数，job编号
 what => 'calc;', --注意有分号
-next_date => sysdate + 5/(24*60), --下一个 5分钟执行
+next_date => sysdate + 5/(24*60), --下一个 5分钟执行  
+--ADD_MONTHS(trunc(sysdate,'yyyy'),6)+1/24  --每年7月1日和1月1日凌晨1点 
+--TRUNC(next_day(sysdate,'星期一'))+1/24	--每周一凌晨1点执行 
 interval => 'TRUNC(sysdate+1)' --每天凌晨0点执行
 );
 commit;
