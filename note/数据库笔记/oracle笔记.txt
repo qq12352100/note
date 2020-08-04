@@ -2,6 +2,7 @@ oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
 Insert into Table2(a, c, d) select a,c,5 from Table1
 ============================================================================================================基础
+./sqlplus bztyzfgzh/tyzfgzh2018@172.20.123.248:1521/zfpt
 select count(*) from v$session;
 show parameter processes;
 show parameter sessions;
@@ -10,6 +11,7 @@ SELECT * FROM all_tables;			--查看能看的所有表  赋予了select any table权限后
 
 lsnrctl status					#查看监听服务状态
 ============================================================================================================重启oracle
+
 1.执行 sqlplus /nolog；
 2.conn sys / as sysdba ;（口令是你登录数据库时输入的密码）
 3.shutdown immediate ;
@@ -30,6 +32,7 @@ LISTENER_ORCL =
     )
   )
 ============================================================================================================常用sql
+
 select * from 表名 where length(nvl(字段,''))=1;								--查询非空字段的长度
 
 DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--删除命名空间
@@ -86,6 +89,15 @@ select tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) tota
 
 --表空间扩展到4G
 alter database datafile 'D:\APP\ADMINISTRATOR\ORADATA\XYSHARE\SGSHARE.DBF' resize 4096m;
+扩展表空间，为其增加更多存储空间，有四种方法：
+第一种：增加数据文件
+alter tablespace data01 add datafile 'd:\java\test\data02.dbf’size 2m
+第二种：手动改变已存在数据文件大小
+alter database datafile 'd:\java\test\data01.dbf’resize 4m;
+第三种：允许已存在的数据文件自动增长
+alter database datafile ‘d:\java\test\data01.dbf’ autoextend on next 10m maxsize 500m;
+第四种方法：新增数据文件，并且允许数据文件自动增长
+alter tablespace data01 add datafile 'd:\java\test\data03.dbf’size 2m autoextend on next 10m maxsize 500m;
 ============================================================================================================锁表解决
 --所有session中的所有被锁定的对象信息。
 select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t2.PROGRAM, t2.LOGON_TIME, t2.COMMAND, t2.LOCKWAIT, t2.SADDR, t2.PADDR, t2.TADDR, t2.SQL_ADDRESS, t1.LOCKED_MODE
@@ -114,7 +126,7 @@ GRANT connect, resource, dba To HCBMP;
 REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
 ============================================================================================================备份
 --备份
-exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20190929.dmp
+exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20200518_ecard.dmp log=oracleBak_ecard.log
 --恢复
 imp HCBMP/HCBMP@BKK file=f:/2.dmp full=y ignore=y;
 ============================================================================================================修改SYS密码
