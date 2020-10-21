@@ -1,0 +1,2 @@
+=VLOOKUP(E32,Sheet2!$B1:$C6,1,FALSE)
+E32 in Sheet2!$B1:$C6 取$B1:$C6的第一列值 FASLE=精确匹配
