@@ -2,6 +2,7 @@ http://cdn.code.baidu.com/  百度静态资源库
 
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
+// @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
 window.location.href
 上右下左
 ==========================================================================================================json处理
@@ -137,6 +138,11 @@ var test1=function(){
 var test2=function(){
 	alert(1);
 }
+-------------------------------------------循环调用函数
+function time(){ 
+alert("我3秒出来一次.");
+}
+setInterval("time()",3000);
 ==========================================================================================================选择器（多个ID只取第一个）
 $("#a").next()		当前元素的下一个
 

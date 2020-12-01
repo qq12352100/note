@@ -176,8 +176,8 @@ Database opened.
 --在创建视图（VIEW）时，只能使用AS。在声明游标（CURSOR）时，只能使用IS。
 set serveroutput on;--打开输出
 EXEC raisesalary(1);--执行存储过程
---创建
-create or replace procedure raisesalary(eno in number)
+--创建 无参无括号
+create or replace procedure raisesalary(eno in number) 
 as
  --变量
  psal h_p_dic_mapping.h_category_name%type;
