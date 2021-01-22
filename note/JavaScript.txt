@@ -270,13 +270,16 @@ $( 'body' ).simulateKeyPress('x');
 ==========================================================================================================HTML
 <table id="" style="border-collapse: collapse;" >	//td加边框不起作用
 input[disabled]{outline: none;border:none;background:none;}		//input去掉边框
-
 border:1px solid #000000;		//一个像素的实线边框
-	1px dashed #000000			//一个像素的虚线边框
-	
-	cursor:pointer;				//鼠标样式
-	
-	text-transform: uppercase; //input值转大写
+1px dashed #000000			//一个像素的虚线边框
+cursor:pointer;				//鼠标样式
+text-transform: uppercase; //input值转大写
+==========================================================================================================油候
+// @match        http://ydwyweb.cc:7070/tyzf-web/pages/login.jsp
+document.getElementById('loginname').value='admin';
+document.getElementById('password').value='admin';
+document.getElementById('btnlogin').click();
+------------------------------------------------------------------
 
 
 

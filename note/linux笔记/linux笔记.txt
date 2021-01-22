@@ -37,6 +37,14 @@ cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l	【查看物理CPU个数(插槽)
 cat /proc/cpuinfo| grep "processor"| wc -l					【查看逻辑CPU个数(虚拟)】
 cat /proc/cpuinfo| grep "cpu cores"| uniq					【查看每个物理CPU中core的个数(即核数)】
 ===========================================================================================【关闭防火墙】
+Redirecting to /bin/systemctl status  iptables.service
+Unit iptables.service could not be found.
+1、 使用systemctl
+#systemctl [start|stop|restart|save|status] iptables.service
+2. 安装iptables-services
+yum install iptables-services
+systemctl enable iptables.service //设置开机启动
+-----------------------------------------------------------------
 查看状态： service iptables status 
 1) 重启后生效 
 开启： chkconfig iptables on 
@@ -62,7 +70,20 @@ iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 ===========================================================================================【linux之间互传文件】
 文件；#scp root@192.168.1.50:/usr/local/soft/apache-tomcat-7.0.72.tar.gz /usr
 文件夹：#scp -r root@192.168.1.50:/test  /test
-===========================================================================================
+===========================================================================================【Xshell安装rz/sz命令】
+sz：将选定的文件发送（send）到本地机器
+rz：运行该命令会弹出一个文件选择窗口，从本地选择文件上传到Linux服务器
+安装命令：
+yum install lrzsz
+
+从服务端发送文件到客户端：
+sz filename
+从客户端上传文件到服务端：
+rz
+在弹出的框中选择文件，上传文件的用户和组是当前登录的用户
+
+Xshell设置默认路径：
+右键会话 -> 属性 -> ZMODEM -> 接收文件夹
 ===========================================================================================
 -------------------------------------------------------
 -------------------------常用命令----------------------

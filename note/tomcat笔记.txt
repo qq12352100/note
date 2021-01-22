@@ -4,6 +4,9 @@
 2、最头上添加两行代码，jdk和jre的根目录，相当于直接给出JAVA_HOME和JRE_HOME路径
 set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_101
 set JRE_HOME=C:\Program Files\Java\jdk1.8.0_101\jre
+-----当前路径下
+set JAVA_HOME=%~dp0\jdk
+set JRE_HOME=%~dp0\jdk\jre
 ==========================================================================================================配置JVM内存参数
 创建环境变量文件在%TOMCAT_HOME%\bin\目录下创建文件setenv.bat
 SET JAVA_OPTS=-server -Xms4g -Xmx4g

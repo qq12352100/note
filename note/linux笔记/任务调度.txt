@@ -14,6 +14,10 @@ crontab -r 终止所有任务
 00 11 *  4 1-3 /bin/sh /home/omc/h.sh
 每天3-5,17-20每隔30分钟执行一次脚本
 */30 [3-5],[17-20] * * *
+每一小时重启smb 
+* */1 * * * /etc/init.d/smb restart
+每天凌晨3点执行
+00 3 * * * /etc/init.d/smb restart
 
 【shell编程】
 写个文件mytask.sh
