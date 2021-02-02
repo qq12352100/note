@@ -1,3 +1,6 @@
+:set ff  显示ff=fileformat不能执行
+:set ff=unix
+----------------------------------------------------------------------
 echo $# 【输出参数个数】
 ./restart.sh sss2 sss  sss
 3
@@ -34,6 +37,27 @@ echo ${string:1:4} #输出liba
 #查找子字符串
 string="alibaba is a great company"
 echo `expr index "$string" is`
+----------------------------------------------------------------------------
+【日期】'+%Y/%m/%d %H:%M:%S'
+date -d next-day +%Y%m%d	#明天日期
+date -d tomorrow +%Y%m%d	#明天日期
+date -d last-day +%Y%m%d	#昨天日期
+date -d yesterday +%Y%m%d	#昨天日期
+date -d last-month +%Y%m	#上个月日期
+date -d next-month +%Y%m	#下个月日期
+date -d next-year +%Y		#明年日期
+#使用 next/last指令，您可以得到以后的星期几是哪一天：
+date -d 'next monday' (下周一的日期)
+date -d next-day +%Y%m%d（明天的日期）或者：date -d tomorrow +%Y%m%d
+date -d last-day +%Y%m%d (昨天的日期) 或者：date -d yesterday +%Y%m%d
+date -d last-month +%Y%m(上个月是几月)
+date -d next-month +%Y%m(下个月是几月)
+#使用 ago 指令，您可以得到过去的日期：
+date -d ’30 days ago’ （30天前的日期）
+#可以使用负数以得到相反的日期：
+date -d ’dec 14 -2 weeks’ （相对:dec 14这个日期的两周前的日期）
+date -d ’-100 days’ (100天以前的日期)
+date -d ’50 days’(50天后的日期)
 ----------------------------------------------------------------------------
 【数组】
 array_name=(value0 value1 value2 value3)
