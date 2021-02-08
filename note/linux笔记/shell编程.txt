@@ -22,7 +22,7 @@ ps axu  | grep "httpd" | grep -v "grep" | wc -l
 currDate="`date +%Y%m%d%H%M%S`"
 cp /etc/vsftpd/vuser /etc/vsftpd/"$currDate"vuser
 #############################################################################
-【字符串】
+【字符串】=左右不能加空格
 name=xxx;取变量值的时候$name
 #获取输入并赋值给 NAME 变量，最后在 stdout 上输出
 echo "What is your name?"

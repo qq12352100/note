@@ -1,3 +1,35 @@
+1、删除现有Python
+[root@test ~]# rpm -qa|grep python|xargs rpm -ev --allmatches --nodeps ##强制删除已安装程序及其关联
+[root@test ~]# whereis python |xargs rm -frv ##删除所有残余文件 ##xargs，允许你对输出执行其他某些命令
+[root@test ~]# whereis python ##验证删除，返回无结果
+2、删除现有的yum
+[root@test ~]# rpm -qa|grep yum|xargs rpm -ev --allmatches --nodeps
+[root@test ~]# whereis yum |xargs rm -frv
+=================================================================================================================【更换yum源】
+1、备份你的原镜像文件，以免出错后可以恢复 (文件位置/etc/yum.repos.d)
+#mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+2、下载新的CentOS-Base.repo 到/etc/yum.repos.d/
+163源	#wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+aliyun	#wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+3、修改文件中的baseurl地址,把每个baseurl后边的$releasever替换成7，把$basearch替换成x86_64
+#vi CentOS-Base.repo
+4、清除原有yum缓存
+#yum clean all
+#yum makecache
+--------------【本地yum源】
+1、添加一个新的yum源配置文件dvd.repo（文件名字自定义）
+cd /etc/yum.repos.d
+vi dvd.repo
+2、添加新的内容
+name=rhel_dvd	#name相当于是注释信息，随便写
+baseurl=file://'/run/media/root/RHEL-7.3 Server.x86_64'		#此为本地光盘的路径，即yum源的地址,根据实际地址填写
+enabled=1		#是否启用 默认为启动也可不写，0则表示为禁用
+gpgcheck=0		#是否检查源的合法性，此处为0表示不检查，为1时要写下一行，后面是地址
+文件配置完成之后可以查看一下添加的内容：cat dvd.repo
+3、清除原有yum缓存
+#yum clean all
+#yum makecache
+=================================================================================================================【基本命令】
 yum的命令形式一般是如下：yum [options] [command] [package ...]
 其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为"yes"），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package ...]是操作的对象。
 
@@ -11,6 +43,14 @@ yum clean all			清除缓存目录下的软件包及旧的headers
 查询yum install安装软件的路径:
 一般是/usr/local一般一个软件是要复制多个文件到不同的地方，包括可执行文件，文档，配置文件。
 通过yum安装的软件包，可以通过rpm -ql软件包名来查询这个软件包具体都复制到了哪些文件到哪些地方。
+=================================================================================================================【安装python，pip】  
+yum list python*  
+yum install java-1.7.0-openjdk* -y  (自动选择yes)
+------------------------
+curl https://bootstrap.pypa.io/2.6/get-pip.py -o get-pip.py
+python get-pip.py
+------------------------
+wget https://www.python.org/ftp/python/3.7.0/
 =================================================================================================================【安装JDK】  
 yum list java*  
 yum install java-1.7.0-openjdk* -y  (自动选择yes)

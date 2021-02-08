@@ -71,8 +71,11 @@ iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 文件；#scp root@192.168.1.50:/usr/local/soft/apache-tomcat-7.0.72.tar.gz /usr
 文件夹：#scp -r root@192.168.1.50:/test  /test
 ===========================================================================================【Xshell安装rz/sz命令】
-sz：将选定的文件发送（send）到本地机器
-rz：运行该命令会弹出一个文件选择窗口，从本地选择文件上传到Linux服务器
+sz：下载
+rz：上传 
+-y #覆盖 
+-a #如果是Dos格式的文件，会转换为unix格式
+
 安装命令：
 yum install lrzsz
 
@@ -165,10 +168,9 @@ swp 交换分区 一般是你的物理内存的两倍 不要大于256
 vi /etc/sysconfig/network-scripts/ifcfg-eth0	
 BOOTPROTO="static"
 ONBOOT="yes"
-DNS1="192.168.1.1"
-IPADDR="192.168.1.50"
+IPADDR="192.168.0.119"
 NETMASK="255.255.255.0"
-GATEWAY="192.168.1.1"
+GATEWAY="192.168.0.1"
 /etc/rc.d/init.d/network restart				【重启网络配置】service network restart
 
 ---修改ip地址---
