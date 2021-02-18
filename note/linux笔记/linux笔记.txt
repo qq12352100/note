@@ -14,28 +14,29 @@ cd bin
 -exec rm {} \;   将找到的文件 （假定找到文件的名字为 a.txt)， 执行 rm a.txt 命令
 find有很多参数，有很强大的搜索功能，具体可以 man find 查看。
 ===========================================================================================
-/etc/init.d/sshd start			【启动22端口ssh服务】service sshd start
-passwd root						【修改root密码】
-alias cls='clear'				【别名来使用清屏命令】
-/xxxx							【vi模式下查找关键字xxxx,按n查找下一个】
+/etc/init.d/sshd start           【启动22端口ssh服务】service sshd start
+passwd root                      【修改root密码】
+alias cls='clear'                【别名来使用清屏命令】
+/xxxx                            【vi模式下查找关键字xxxx,按n查找下一个】
 ===========================================================================================
 cat log.txt|grep -A10 -B10 name  【查看log.txt中name前后10行】
 cat error.log | grep -C 5 'nick' 【显示file文件里匹配foo字串那行以及上下5行】
 cat error.log | grep -B 5 'nick' 【显示foo及前5行】
 cat error.log | grep -A 5 'nick' 【显示foo及后5行】
-ps -ef|grep java				【查看运行中的java程序】
-netstat -tunpl | grep 端口      【查看端口占用】netstat -apn
-find / -name 'key' -type d		【查找目录】
-find / -name key -print			【查找文件】
+ps -ef|grep java                 【查看运行中的java程序】
+netstat -tunpl | grep 端口       【查看端口占用】netstat -apn
+find / -name 'key' -type d       【查找目录】
+find / -name key -print          【查找文件】
 
-find /dbdata/apon2/ -name *.properties | xargs grep "jdbc:oracle"	【查找/dbdata/apon2/目录下所有properties文件，查找内容为jdbc:oracle并输出】
+find /dbdata/apon2/ -name *.properties | xargs grep "jdbc:oracle"    【查找/dbdata/apon2/目录下所有properties文件，查找内容为jdbc:oracle并输出】
 
 ===========================================================================================【系统属性】
-uname -a						【查看32位64位】
-more /proc/cpuinfo				【查看cpu是多少位的】
-cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l	【查看物理CPU个数(插槽)】
-cat /proc/cpuinfo| grep "processor"| wc -l					【查看逻辑CPU个数(虚拟)】
-cat /proc/cpuinfo| grep "cpu cores"| uniq					【查看每个物理CPU中core的个数(即核数)】
+ntpdate -u ntp.api.bz             【同步时间】
+uname -a                          【查看32位64位】
+more /proc/cpuinfo                【查看cpu是多少位的】
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l      【查看物理CPU个数(插槽)】
+cat /proc/cpuinfo| grep "processor"| wc -l                    【查看逻辑CPU个数(虚拟)】
+cat /proc/cpuinfo| grep "cpu cores"| uniq                     【查看每个物理CPU中core的个数(即核数)】
 ===========================================================================================【关闭防火墙】
 Redirecting to /bin/systemctl status  iptables.service
 Unit iptables.service could not be found.
@@ -71,57 +72,50 @@ iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 文件；#scp root@192.168.1.50:/usr/local/soft/apache-tomcat-7.0.72.tar.gz /usr
 文件夹：#scp -r root@192.168.1.50:/test  /test
 ===========================================================================================【Xshell安装rz/sz命令】
-sz：下载
-rz：上传 
+sz filename：下载
+rz ：上传 
 -y #覆盖 
 -a #如果是Dos格式的文件，会转换为unix格式
 
 安装命令：
 yum install lrzsz
 
-从服务端发送文件到客户端：
-sz filename
-从客户端上传文件到服务端：
-rz
-在弹出的框中选择文件，上传文件的用户和组是当前登录的用户
-
-Xshell设置默认路径：
-右键会话 -> 属性 -> ZMODEM -> 接收文件夹
+Xshell设置默认路径：右键会话 -> 属性 -> ZMODEM -> 接收文件夹
 ===========================================================================================
 -------------------------------------------------------
 -------------------------常用命令----------------------
 -------------------------------------------------------
-ls -l > a.txt									【列表内容输出到a.txt中|覆盖|>>|追加】
-rm -f /var/log/httpd/access.log					【将会强制删除/var/log/httpd/access.log这个文件】
-rm -rf /var/log/httpd/access					【将会删除/var/log/httpd/access目录以及其下所有文件、文件夹】
+ls -l > a.txt                                    【列表内容输出到a.txt中|覆盖|>>|追加】
+rm -f /var/log/httpd/access.log                    【将会强制删除/var/log/httpd/access.log这个文件】
+rm -rf /var/log/httpd/access                    【将会删除/var/log/httpd/access目录以及其下所有文件、文件夹】
 
-shutdown now 	【关机】init 0
-reboot       	【重启】
-env          	【查看环境变量】
-history      	【查看历史命令记录】
-ps -aux|more 	【查看进程-->top动态查看】
-kill -9 1777 	【强制杀死1777号进程】
+shutdown now     【关机】init 0
+reboot           【重启】
+env              【查看环境变量】
+history          【查看历史命令记录】
+ps -aux|more     【查看进程-->top动态查看】
+kill -9 1777     【强制杀死1777号进程】
 
 mount -参数 设备名称 挂载点  【挂载命令】挂载光驱直接mount /mnt/cdrom
 umount 设备名称              【卸载命令】
-		
-df 目录全路径		【查看某个目录是在哪个分区】
-df -l        		【查看磁盘使用情况】
-fdisk -l     		【查看系统分区的具体情况】
+        
+df 目录全路径        【查看某个目录是在哪个分区】
+df -l                【查看磁盘使用情况】
+fdisk -l             【查看系统分区的具体情况】
 
-ls      			【列出文件和目录】
-ls -a   			【显示隐藏文件】
-ls -l   			【显示长列表格式】
-ls -ahl 			【查看文件的所有组】
-mv f1 f2			【修改文件名（移动文件）】
+ls                  【列出文件和目录】
+ls -a               【显示隐藏文件】
+ls -l               【显示长列表格式】
+ls -ahl             【查看文件的所有组】
+mv f1 f2            【修改文件名（移动文件）】
 find / -name a.txt  【查找根目录下的a.txt文件】 
 chown 用户名 文件名 【修改文件所有者】
 chgrp 组名 文件名   【修改文件所在组】
 
-pwd   【显示当前工作目录】
-cd    【改变目录】
-mkdir 【建立目录】
-vi a.txt 	【建立文件】
+pwd           【显示当前工作目录】
+cd            【改变目录】
+mkdir         【建立目录】
+vi a.txt      【建立文件】
 touch a.txt
 rmdir 【删除空目录】
 more  【显示文件内容，带分页，空格下一页，】
@@ -133,6 +127,12 @@ man 【help】
 -------------------------------------------------------
 -----------------------用户管理------------------------
 -------------------------------------------------------
+/etc/shadow #bin:*:17107:0:99999:7:::
+bin:*:17107:0【用户名】【用户密码:密码最近一次修改时间】【最少多少天后才能改密码的天数（默认为0，表示可以在任何时间修改）】
+99999:7【最多多少天数系统会强制用户修改密码（默认为99999，改为1 也能让密码改不了）】【过期前多少天时间会被警告（改为-1 则永远不会提示）】
+:::【过期后多少天内账号变为inactive状态，可登陆，但不能操作】【多少天后账号会过期，无法登陆】【保留参数】
+date -d "1970-01-01 15776 days" +%Y/%m/%d 【算天数】
+
 useradd xiaoming   【添加用户xiaoming】
 passwd xiaoming    【修改xiaoming的密码】
 userdel xiaoming   【删除用户xiaoming】
@@ -146,8 +146,8 @@ groupadd 组名        【添加组】
 [cat|vi] /ect/group  【查看所有组】
 [cat|vi] /ect/passwd 【查看所有的用户信息】
 
-cut -d : -f 1 /etc/passwd									#查看系统中有哪些用户：
-cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1		#查看可以登录系统的用户：
+cut -d : -f 1 /etc/passwd                                    #查看系统中有哪些用户：
+cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1        #查看可以登录系统的用户：
 
 监视特定用户==》top回车u回车然后输出用户名即可
 终止特定进程==》top回车k回车然后输入要杀死的ID
@@ -165,17 +165,17 @@ swp 交换分区 一般是你的物理内存的两倍 不要大于256
 选中第二行，输入e
 输入 空格 1 【单用户级别】
 ===========================================================================================【设置IP】
-vi /etc/sysconfig/network-scripts/ifcfg-eth0	
+vi /etc/sysconfig/network-scripts/ifcfg-eth0    
 BOOTPROTO="static"
 ONBOOT="yes"
 IPADDR="192.168.0.119"
 NETMASK="255.255.255.0"
 GATEWAY="192.168.0.1"
-/etc/rc.d/init.d/network restart				【重启网络配置】service network restart
+/etc/rc.d/init.d/network restart                【重启网络配置】service network restart
 
 ---修改ip地址---
 即时生效:
-# ifconfig eth0 192.168.1.155 netmask 255.255.255.0	
+# ifconfig eth0 192.168.1.155 netmask 255.255.255.0    
 重启生效:
 修改/etc/sysconfig/network-scripts/ifcfg-eth0
 ---修改default gateway---
@@ -192,18 +192,19 @@ GATEWAY="192.168.0.1"
 重启生效:
 修改/etc/sysconfig/network
 ===========================================================================================【无法修改resolv.conf的问题DNS】
-/etc/init.d/NetworkManager stop 	#关闭NetworkManager服务
-vim /etc/resolv.conf				#修改或新增dns地址
-/etc/init.d/network restart			#重启网卡
-chkconfig NetworkManager off 		#避免重启服务器后配置被清空
+/etc/init.d/NetworkManager stop     #关闭NetworkManager服务
+vim /etc/resolv.conf                #修改或新增dns地址
+/etc/init.d/network restart            #重启网卡
+chkconfig NetworkManager off         #避免重启服务器后配置被清空
 ===========================================================================================【桌面配置】
-startx					#从命令行直接启动图形桌面环境
-echo $LANG 				#查看当前使用的系统语言
-locale					#查看安装的语言包
-locale -a 				#查看支持的字符集:
-LANG="zh_CN.utf8"		#切换为中文
-vi /etc/sysconfig/i18n  			#设置系统默认的语言配置
-yum groupinstall chinese-support 	#安装中文语言包
+startx                    #从命令行直接启动图形桌面环境
+echo $LANG                 #查看当前使用的系统语言
+locale                    #查看安装的语言包
+locale -a                 #查看支持的字符集:
+LANG="zh_CN.utf8"        #切换为中文
+vi /etc/sysconfig/i18n              #设置系统默认的语言配置
+yum groupinstall chinese-support     #安装中文语言包
+===========================================================================================
 ===========================================================================================【解压命令】
 .tar 
 解包：tar xvf FileName.tar
