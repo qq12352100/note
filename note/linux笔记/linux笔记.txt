@@ -1,3 +1,7 @@
+
+>表示覆盖原文件内容
+>>表示追加内容（会另起一行）
+
 su - oracle 
 export DIDPLAY=10.61.228.74:0.0
 cd $ORACLE_HOME
