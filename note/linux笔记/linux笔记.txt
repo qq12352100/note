@@ -27,6 +27,7 @@ wget http://songjian:songjian@119.3.235.61:7005/bkk/tongji.sh
 -P 将下载的所有内容存放到指定目录
 ===========================================================================================
 /etc/init.d/sshd start           【启动22端口ssh服务】service sshd start
+ssh 10.10.10.10 -p 22 -l root
 passwd root                      【修改root密码】
 alias cls='clear'                【别名来使用清屏命令】
 /xxxx                            【vi模式下查找关键字xxxx,按n查找下一个】
@@ -136,6 +137,10 @@ grep  【在文本中查询内容】
 
 man 【help】
 |   【管道命令】
+umask 0022  【创建文件默认权限】
+setfacl /m u:boss:rwx -R /caiwubu   【设置特殊权限】drwxr-xr-x+ getfacl
+chattr +i /zhangben     【隐藏权限不能删不能改】 +a 只能追加不能删  lsattr 
+ln -s /etc/passwd ./passwd1     【软连接】硬链接不加-s 时刻与源文件同步 权限后面数据变2
 -------------------------------------------------------
 -----------------------用户管理------------------------
 -------------------------------------------------------
