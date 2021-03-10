@@ -21,6 +21,7 @@ aliyun	#wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo
 cd /etc/yum.repos.d
 vi dvd.repo
 2、添加新的内容
+[loca]          #仓库名字
 name=rhel_dvd	#name相当于是注释信息，随便写
 baseurl=file://'/run/media/root/RHEL-7.3 Server.x86_64'		#此为本地光盘的路径，即yum源的地址,根据实际地址填写
 enabled=1		#是否启用 默认为启动也可不写，0则表示为禁用
