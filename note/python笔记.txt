@@ -2,6 +2,14 @@ whl包：已经编译的包，类似于exe文件。
 tar包：源文件，只是打包在一起，还没有编译。
 tar.gz包：源文件，压缩并打包在一起，还没有编译。
 ===================================================================【离线安装】
+网址https://pypi.org/project/
+Windows环境：（命令窗口cd到指定目录，打开文件夹选中路径cmd回车）
+安装whl包： pip install  **.whl（前提是要安装好pip和wheel）
+安装tar.gz包：cd到解压后路径,python setup.py install（安装pip和wheel都可以参照这种方法）
+Linux环境：
+　　安装whl同上
+　　安装tar.gz:cd到解压后路径,./configure  -> make  -> make install
+-------------------------------------------------------------------------
 #正常环境会把所有安装的包都写入文档
 pip freeze > requirements.txt
 #下载python项目需要的所有的依赖包

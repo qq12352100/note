@@ -1,6 +1,22 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
 Insert into Table2(a, c, d) select a,c,5 from Table1
+============================================================================================================建库流程
+-- 注意：请用SYSTEM用户登录，再运行此脚本
+-- 数据库名：HCBMP
+-- 用户名：HCBMP
+-- 密码：HCBMP
+CREATE TABLESPACE BKK DATAFILE   'D:/oracledate/BKK.dbf'   SIZE  128M   REUSE
+AUTOEXTEND  ON   NEXT   1280K
+MINIMUM   EXTENT   128K
+DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
+
+--创建用户
+CREATE USER BKK IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE BKK;
+--赋权限
+GRANT UNLIMITED TABLESPACE TO BKK;
+GRANT connect, resource, dba To BKK;
+REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
 ============================================================================================================基础
 ./sqlplus bztyzfgzh/tyzfgzh2018@172.20.123.248:1521/zfpt
 select count(*) from v$session;
@@ -112,22 +128,6 @@ select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t
 --解锁
  alter system kill session 'sid,seial#';
  alter system kill session '10,15';
-============================================================================================================建库流程
--- 注意：请用SYSTEM用户登录，再运行此脚本
--- 数据库名：HCBMP
--- 用户名：HCBMP
--- 密码：HCBMP
-CREATE TABLESPACE HCBMP DATAFILE   'HCBMP.dbf'   SIZE  128M   REUSE
-AUTOEXTEND  ON   NEXT   1280K
-MINIMUM   EXTENT   128K
-DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
-
---创建用户
-CREATE USER HCBMP IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE HCBMP;
---赋权限
-GRANT UNLIMITED TABLESPACE TO HCBMP;
-GRANT connect, resource, dba To HCBMP;
-REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
 ============================================================================================================备份
 --备份
 exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20200518_ecard.dmp log=oracleBak_ecard.log
