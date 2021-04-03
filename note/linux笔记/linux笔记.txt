@@ -46,6 +46,8 @@ cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l      【查看物理CPU个数(
 cat /proc/cpuinfo| grep "processor"| wc -l                    【查看逻辑CPU个数(虚拟)】
 cat /proc/cpuinfo| grep "cpu cores"| uniq                     【查看每个物理CPU中core的个数(即核数)】
 ===========================================================================================【关闭防火墙】
+vim /etc/sysconfig/iptables
+--------------------------------
 Redirecting to /bin/systemctl status  iptables.service
 Unit iptables.service could not be found.
 1、 使用systemctl
@@ -53,7 +55,7 @@ Unit iptables.service could not be found.
 2. 安装iptables-services
 yum install iptables-services
 systemctl enable iptables.service //设置开机启动
------------------------------------------------------------------
+-----------------------------------------------------------------systemctl status firewalld #3内核以上
 查看状态： service iptables status 
 1) 重启后生效 
 开启： chkconfig iptables on 
