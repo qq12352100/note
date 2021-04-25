@@ -7,23 +7,18 @@ character-set-server=utf8
 ---------------------------------------------------------------------------------------
 数据库备份
 mysqldump -u root -p bkk>bak.sql
-
+mysqldump -u root -p --databases hlwsjtb > hlwsjtb.sql
+创建数据库
+create database `hlwsjtb`;
 清空数据表
-truncate user_a;		#ID从0开始
-delete user_a;			#ID从上次的开始
-
+truncate user_a;    #ID从0开始
+delete user_a;      #ID从上次的开始
 删除
 DELETE FROM _user WHERE username IS NULL AND city <> 'NULL';
-
 插入
 INSERT INTO _user(username) VALUES (RAND()*10);
-
 更新
 UPDATE _user SET int_=5 WHERE int_ IS NULL ;
-
-清空
-TRUNCATE TABLE _user;
-
 --------------------------------------------------------------------------------------------------------【授权】 
 #grant all privileges on *.* to 'root'@'%' identified by 'yangxin123456' with grant option;
 all privileges：表示将所有权限授予给用户。也可指定具体的权限，如：SELECT、CREATE、DROP等。
@@ -36,7 +31,7 @@ with grant option：表示该用户可以将自己拥有的权限授权给别人
 回收权限
 #revoke create on *.* from 'yangxin@localhost';
 删除用户
-#select host,user from user;
+#select host,user,Password,password_expired from user;
 #drop user 'yangxin'@'localhost';
 修改密码use mysql;
 mysql5.7之前#update user set password=password('123456') where user='root';

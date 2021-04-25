@@ -46,6 +46,13 @@ cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l      【查看物理CPU个数(
 cat /proc/cpuinfo| grep "processor"| wc -l                    【查看逻辑CPU个数(虚拟)】
 cat /proc/cpuinfo| grep "cpu cores"| uniq                     【查看每个物理CPU中core的个数(即核数)】
 ===========================================================================================【关闭防火墙】
+1、查看
+iptables -nvL --line-number
+-L 查看当前表的所有规则，默认查看的是filter表，如果要查看NAT表，可以加上-t NAT参数
+-n 不对ip地址进行反查，加上这个参数显示速度会快很多
+-v 输出详细信息，包含通过该规则的数据包数量，总字节数及相应的网络接口
+–-line-number 显示规则的序列号，这个参数在删除或修改规则时会用到
+-------------------------------------------------------------------------------------
 vim /etc/sysconfig/iptables
 --------------------------------
 Redirecting to /bin/systemctl status  iptables.service
@@ -232,7 +239,7 @@ GATEWAY="192.168.0.1"
 
 ---修改ip地址---
 即时生效:
-# ifconfig eth0 192.168.1.155 netmask 255.255.255.0    
+# ifconfig eth0 10.188.217.84 netmask 255.255.255.0    
 重启生效:
 修改/etc/sysconfig/network-scripts/ifcfg-eth0
 ---修改default gateway---
