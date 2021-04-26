@@ -4,7 +4,7 @@ Consumer£ºÏû·ÑÕß£¬»ñÈ¡Êı¾İ£¬¿ÉÏû·ÑÖ¸¶¨µÄTopic£»
 Group£ºÏû·ÑÕß×é£¬Í¬Ò»¸ögroup¿ÉÒÔÓĞ¶à¸öÏû·ÑÕß£¬Ò»ÌõÏûÏ¢ÔÚÒ»¸ögroupÖĞ£¬Ö»»á±»Ò»¸öÏû·ÑÕß»ñÈ¡£»
 Partition£º·ÖÇø£¬ÎªÁË±£Ö¤kafkaµÄÍÌÍÂÁ¿£¬Ò»¸öTopic¿ÉÒÔÉèÖÃ¶à¸ö·ÖÇø¡£Í¬Ò»·ÖÇøÖ»ÄÜ±»Ò»¸öÏû·ÑÕß¶©ÔÄ¡£
 
-
+=============================================================================================================¡¾Windows¡¿
 1¡¢jdkÑ¡Ôñ1.8µÄ°æ±¾,È»ºó»·¾³±äÁ¿JAVA_HOME¡£
 2¡¢zookeeper
     ÏÂÔØ°²×°°ü£ºhttp://zookeeper.apache.org/releases.html#download
@@ -40,7 +40,40 @@ Partition£º·ÖÇø£¬ÎªÁË±£Ö¤kafkaµÄÍÌÍÂÁ¿£¬Ò»¸öTopic¿ÉÒÔÉèÖÃ¶à¸ö·ÖÇø¡£Í¬Ò»·ÖÇøÖ»ÄÜ±
 4¡¢´´½¨Ïû·ÑÕß
     ĞÂ½¨cmd´°¿Ú: cd D:\Tool\kafka_2.11-2.1.1\bin\windows
     kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic haha --from-beginning
-    
+===============================================================================================================¡¾linux¡¿
+1¡¢ÏÂÔØ
+#wget https://mirrors.bfsu.edu.cn/apache/kafka/2.8.0/kafka_2.12-2.8.0.tgz
+#wget https://mirrors.bfsu.edu.cn/apache/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz
+
+2¡¢½âÑ¹
+#tar -xzvf kafka_2.12-2.8.0.tgz
+#tar -xzvf apache-zookeeper-3.7.0-bin.tar.gz
+
+3¡¢ÅäÖÃ
+#vim kafka_2.12-2.8.0/config/server.properties
+listeners=PLAINTEXT://localhost:9092
+advertised.listeners=PLAINTEXT://localhost:9092
+
+#vim apache-zookeeper-3.7.0-bin/conf/zoo_sample.cfg
+#cp apache-zookeeper-3.7.0-bin/conf/zoo_sample.cfg apache-zookeeper-3.7.0-bin/conf/zoo.cfg
+
+4¡¢Æô¶¯zookeeper
+Æô¶¯#sh zkServer.sh start
+×´Ì¬#sh zkServer.sh status
+
+5¡¢Æô¶¯kafka
+Æô¶¯#sh kafka_2.12-2.8.0/bin/kafka-server-start.sh kafka_2.12-2.8.0/config/server.properties
+Í£Ö¹#sh kafka-server-stop.sh
+
+6¡¢´´½¨topic
+#sh kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+7¡¢´´½¨Éú²úÕß
+#sh kafka-console-producer.sh --broker-list localhost:9092 --topic test
+8¡¢´´½¨Ïû·ÑÕß
+#sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+
+sh kafka-topics.sh --list --zookeeper localhost:2181        #²é¿´topic
+===============================================================================================================
 ÎÊÌâ£º
 1¡¢java.nio.file.InvalidPathException: Illegal char <      > at index 18: D:kafka_2.12-2.7.0       mp\meta.properties.tmp
 WindowsÏÂserver.propertiesÖĞµÄLog BasicsÏÂµÄlog.dirsÂ·¾¶ÎÊÌâ¸ÄÎªlog.dirs=D:\\kafka_2.12-2.7.0\\tmp
@@ -51,4 +84,7 @@ WindowsÏÂserver.propertiesÖĞµÄLog BasicsÏÂµÄlog.dirsÂ·¾¶ÎÊÌâ¸ÄÎªlog.dirs=D:\\kaf
 3¡¢´´½¨topic±¨´í Replication factor: 1 larger than available brokers: 0.
 ÒâË¼ÊÇ¿ÉÓÃbrokersÎª0£¬ËµÃ÷ÔÚÆô¶¯brokerÊ±ÓĞÎÊÌâ£¬²é¿´Ò»ÏÂÆô¶¯Ê±ÓĞÃ»ÓĞ±¨´í
 
-
+4¡¢java.net.ConnectException: Connection refused: no further informationÔ¶³Ì·ÃÎÊ±¨´í
+listeners=PLAINTEXT://localhost:9092
+advertised.listeners=PLAINTEXT://localhost:9092
+ĞŞ¸ÄlocalhostÎª¾ßÌåµÄIPµØÖ·
