@@ -168,9 +168,12 @@ yy #复制整行
 :set nu     #显示行号
 :set nonu   #取消行号
 
+:set ff     #显示ff=fileformat不能执行
+:set ff=unix
+
 ctrl+z挂起fg再回车就可以将后台挂起程序切换的前台来。
 
-
+telnet---->>ctrl+],然后再按q就可以退出了。
 
 
 
