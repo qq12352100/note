@@ -9,8 +9,8 @@
 1、备份你的原镜像文件，以免出错后可以恢复 (文件位置/etc/yum.repos.d)
 #mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 2、下载新的CentOS-Base.repo 到/etc/yum.repos.d/
-163源	#wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
-aliyun	#wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+163源    #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+aliyun  #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 3、修改文件中的baseurl地址,把每个baseurl后边的$releasever替换成7，把$basearch替换成x86_64
 #vi CentOS-Base.repo
 4、清除原有yum缓存
@@ -22,10 +22,10 @@ cd /etc/yum.repos.d
 vi dvd.repo
 2、添加新的内容
 [loca]          #仓库名字
-name=rhel_dvd	#name相当于是注释信息，随便写
-baseurl=file://'/run/media/root/RHEL-7.3 Server.x86_64'		#此为本地光盘的路径，即yum源的地址,根据实际地址填写
-enabled=1		#是否启用 默认为启动也可不写，0则表示为禁用
-gpgcheck=0		#是否检查源的合法性，此处为0表示不检查，为1时要写下一行，后面是地址
+name=rhel_dvd   #name相当于是注释信息，随便写
+baseurl=file://'/run/media/root/RHEL-7.3 Server.x86_64'     #此为本地光盘的路径，即yum源的地址,根据实际地址填写
+enabled=1       #是否启用 默认为启动也可不写，0则表示为禁用
+gpgcheck=0      #是否检查源的合法性，此处为0表示不检查，为1时要写下一行，后面是地址
 文件配置完成之后可以查看一下添加的内容：cat dvd.repo
 3、清除原有yum缓存
 #yum clean all
@@ -34,12 +34,12 @@ gpgcheck=0		#是否检查源的合法性，此处为0表示不检查，为1时�
 yum的命令形式一般是如下：yum [options] [command] [package ...]
 其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为"yes"），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package ...]是操作的对象。
 
-yum install package1 	安装指定的安装包package1
-yum check-update		列出所有可更新的软件清单
-yum update 				全部更新
-yum list 				显示所有已经安装和可以安装的程序包
-yum remove package1 	删除程序包package1
-yum clean all			清除缓存目录下的软件包及旧的headers
+yum install package1    安装指定的安装包package1
+yum check-update        列出所有可更新的软件清单
+yum update              全部更新
+yum list                显示所有已经安装和可以安装的程序包
+yum remove package1     删除程序包package1
+yum clean all           清除缓存目录下的软件包及旧的headers
 -----------------------------------------------------------------------------------------------------------------
 查询yum install安装软件的路径:
 一般是/usr/local一般一个软件是要复制多个文件到不同的地方，包括可执行文件，文档，配置文件。
@@ -86,7 +86,7 @@ service mysqld start
 mysql -u root
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 ...... 省略了一些行
-mysql> select user,host,password from mysql.user;		//查询用户的密码，都为空，用下面的命令设置root的密码为root
+mysql> select user,host,password from mysql.user;       //查询用户的密码，都为空，用下面的命令设置root的密码为root
 mysql> set password for root@localhost=password('root');
 mysql> exit
 

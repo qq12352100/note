@@ -7,24 +7,24 @@ jsonContent.put("msgtype", "text");
 JSON.parseObject()
 
 
-//Ä£°æÒıÈë
+//æ¨¡ç‰ˆå¼•å…¥
 <import src="../../template/component.wxml"/>
 
-//¶¨ÒåÄ£°æ
+//å®šä¹‰æ¨¡ç‰ˆ
 <template name="swiper">
 </template>
 
-//Ä£°æÊ¹ÓÃ
+//æ¨¡ç‰ˆä½¿ç”¨
 <template is="msgItem" data="{{...item}}"/>
 
-//ÊÂ¼ş´«²Î
+//äº‹ä»¶ä¼ å‚
 <view data-alpha-beta="1" data-alphaBeta="2" bindtap="bindViewTap"> DataSet Test </view>
 bindViewTap:function(event){
-	event.currentTarget.dataset.alphaBeta === 1 // - »á×ªÎªÍÕ·åĞ´·¨
-	event.currentTarget.dataset.alphabeta === 2 // ´óĞ´»á×ªÎªĞ¡Ğ´
+    event.currentTarget.dataset.alphaBeta === 1 // - ä¼šè½¬ä¸ºé©¼å³°å†™æ³•
+    event.currentTarget.dataset.alphabeta === 2 // å¤§å†™ä¼šè½¬ä¸ºå°å†™
 }
 
-//ÊÖ»úºÅÕıÔò
+//æ‰‹æœºå·æ­£åˆ™
 var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
 if (!myreg.test(str)) {  
   return false;  
@@ -32,18 +32,18 @@ if (!myreg.test(str)) {
   return true;  
 }  
 
-bindtap="tap"  °ó¶¨jsÖĞÊÂ¼ş
+bindtap="tap"  ç»‘å®šjsä¸­äº‹ä»¶
 
-Ñ­»·
+å¾ªç¯
 <view class="group">
   <block wx:for="{{iconType}}">
     <icon type="{{item}}" size="40"/>
   </block>
 </view>
 
-ÇëÇóºó¶Ë
+è¯·æ±‚åç«¯
 wx.request({
-   url: 'https://localhost:8443/test-json/comfirorder', //½öÎªÊ¾Àı£¬²¢·ÇÕæÊµµÄ½Ó¿ÚµØÖ·
+   url: 'https://localhost:8443/test-json/comfirorder', //ä»…ä¸ºç¤ºä¾‹ï¼Œå¹¶éçœŸå®çš„æ¥å£åœ°å€
    data: {
      x: '',
      y: ''
@@ -60,7 +60,7 @@ wx.request({
    }
 }
           wx.request({
-            url: 'https://localhost:8443/test-json/comfirorder', //½öÎªÊ¾Àı£¬²¢·ÇÕæÊµµÄ½Ó¿ÚµØÖ·
+            url: 'https://localhost:8443/test-json/comfirorder', //ä»…ä¸ºç¤ºä¾‹ï¼Œå¹¶éçœŸå®çš„æ¥å£åœ°å€
             data: {
               arriveTime: date, phone: phone, people: people, remark: remark,shopId:shopId
             },
@@ -74,33 +74,33 @@ wx.request({
             }
           })
 
-  <navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">Ìø×ªµ½ĞÂÒ³Ãæ</navigator>
-  <navigator url="../../redirect/redirect/redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">ÔÚµ±Ç°Ò³´ò¿ª</navigator>
-  <navigator url="/page/index/index" open-type="switchTab" hover-class="other-navigator-hover">ÇĞ»» Tab</navigator>
+  <navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">è·³è½¬åˆ°æ–°é¡µé¢</navigator>
+  <navigator url="../../redirect/redirect/redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">åœ¨å½“å‰é¡µæ‰“å¼€</navigator>
+  <navigator url="/page/index/index" open-type="switchTab" hover-class="other-navigator-hover">åˆ‡æ¢ Tab</navigator>
 
-´òµç»°
+æ‰“ç”µè¯
 wx.makePhoneCall({
   phoneNumber: '0755-1234567' 
 })
-»ñÈ¡µ±Ç°Î»ÖÃ
+è·å–å½“å‰ä½ç½®
 wx.getLocation({
-  type: 'gcj02', //·µ»Ø¿ÉÒÔÓÃÓÚwx.openLocationµÄ¾­Î³¶È  
+  type: 'gcj02', //è¿”å›å¯ä»¥ç”¨äºwx.openLocationçš„ç»çº¬åº¦  
   success: function (res) {
-	var latitude = res.latitude
-	var longitude = res.longitude
+    var latitude = res.latitude
+    var longitude = res.longitude
   }
 })  
-´ò¿ªµØÍ¼È¥ÄÄ
+æ‰“å¼€åœ°å›¾å»å“ª
 wx.openLocation({
   latitude: 37.376086, 
   longitude: 118.020314,
-  name: "»¨Ô°ÇÅ¿ÏµÂ»ù",
-  scale: 28	//²ã¼¶
+  name: "èŠ±å›­æ¡¥è‚¯å¾·åŸº",
+  scale: 28 //å±‚çº§
 })
-´ò¿ª¿Í·ş
+æ‰“å¼€å®¢æœ
 <button open-type="contact" />
 
-Ö§¸¶
+æ”¯ä»˜
 wx.request({
 url: 'https://www.see-source.com/weixinpay/xiadan', 
 method: 'POST',
@@ -111,72 +111,72 @@ header: {
 data: {'openid':openId},
 success: function(res) {
 var prepay_id = res.data.prepay_id;
-console.log("Í³Ò»ÏÂµ¥·µ»Ø prepay_id:"+prepay_id);
+console.log("ç»Ÿä¸€ä¸‹å•è¿”å› prepay_id:"+prepay_id);
 that.sign(prepay_id);
 }
 
 onShareAppMessage: function( options ){
-¡¡¡¡var that = this;
-¡¡¡¡// ÉèÖÃ²Ëµ¥ÖĞµÄ×ª·¢°´Å¥´¥·¢×ª·¢ÊÂ¼şÊ±µÄ×ª·¢ÄÚÈİ
-¡¡¡¡var shareObj = {
-¡¡¡¡¡¡¡¡title: "×ª·¢µÄ±êÌâ",        // Ä¬ÈÏÊÇĞ¡³ÌĞòµÄÃû³Æ(¿ÉÒÔĞ´sloganµÈ)
-¡¡¡¡¡¡¡¡path: '/pages/share/share',        // Ä¬ÈÏÊÇµ±Ç°Ò³Ãæ£¬±ØĞëÊÇÒÔ¡®/¡¯¿ªÍ·µÄÍêÕûÂ·¾¶
-¡¡¡¡¡¡¡¡imgUrl: '',     //×Ô¶¨ÒåÍ¼Æ¬Â·¾¶£¬¿ÉÒÔÊÇ±¾µØÎÄ¼şÂ·¾¶¡¢´úÂë°üÎÄ¼şÂ·¾¶»òÕßÍøÂçÍ¼Æ¬Â·¾¶£¬Ö§³ÖPNG¼°JPG£¬²»´«Èë imageUrl ÔòÊ¹ÓÃÄ¬ÈÏ½ØÍ¼¡£ÏÔÊ¾Í¼Æ¬³¤¿í±ÈÊÇ 5:4
-¡¡¡¡¡¡¡¡success: function(res){
-¡¡¡¡¡¡¡¡¡¡¡¡// ×ª·¢³É¹¦Ö®ºóµÄ»Øµ÷
-¡¡¡¡¡¡¡¡¡¡¡¡if(res.errMsg == 'shareAppMessage:ok'){
-¡¡¡¡¡¡¡¡¡¡¡¡}
-¡¡¡¡¡¡¡¡},
-¡¡¡¡¡¡¡¡fail: function(){
-¡¡¡¡¡¡¡¡¡¡¡¡// ×ª·¢Ê§°ÜÖ®ºóµÄ»Øµ÷
-¡¡¡¡¡¡¡¡¡¡¡¡if(res.errMsg == 'shareAppMessage:fail cancel'){
-¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡// ÓÃ»§È¡Ïû×ª·¢
-¡¡¡¡¡¡¡¡¡¡¡¡}else if(res.errMsg == 'shareAppMessage:fail'){
-¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡// ×ª·¢Ê§°Ü£¬ÆäÖĞ detail message ÎªÏêÏ¸Ê§°ÜĞÅÏ¢
-¡¡¡¡¡¡¡¡¡¡¡¡}
-¡¡¡¡¡¡¡¡},
-¡¡¡¡¡¡¡¡complete: fucntion(){
-¡¡¡¡¡¡¡¡¡¡¡¡// ×ª·¢½áÊøÖ®ºóµÄ»Øµ÷£¨×ª·¢³É²»³É¹¦¶¼»áÖ´ĞĞ£©
-¡¡¡¡¡¡¡¡}
-¡¡¡¡};
-¡¡¡¡// À´×ÔÒ³ÃæÄÚµÄ°´Å¥µÄ×ª·¢
-¡¡¡¡if( options.from == 'button' ){
-¡¡¡¡¡¡¡¡var eData = options.target.dataset;
-¡¡¡¡¡¡¡¡console.log( eData.name );     // shareBtn
-¡¡¡¡¡¡¡¡// ´Ë´¦¿ÉÒÔĞŞ¸Ä shareObj ÖĞµÄÄÚÈİ
-¡¡¡¡¡¡¡¡shareObj.path = '/pages/btnname/btnname?btn_name='+eData.name;
-¡¡¡¡}
-¡¡¡¡// ·µ»ØshareObj
-¡¡¡¡return shareObj;
+ã€€ã€€var that = this;
+ã€€ã€€// è®¾ç½®èœå•ä¸­çš„è½¬å‘æŒ‰é’®è§¦å‘è½¬å‘äº‹ä»¶æ—¶çš„è½¬å‘å†…å®¹
+ã€€ã€€var shareObj = {
+ã€€ã€€ã€€ã€€title: "è½¬å‘çš„æ ‡é¢˜",        // é»˜è®¤æ˜¯å°ç¨‹åºçš„åç§°(å¯ä»¥å†™sloganç­‰)
+ã€€ã€€ã€€ã€€path: '/pages/share/share',        // é»˜è®¤æ˜¯å½“å‰é¡µé¢ï¼Œå¿…é¡»æ˜¯ä»¥â€˜/â€™å¼€å¤´çš„å®Œæ•´è·¯å¾„
+ã€€ã€€ã€€ã€€imgUrl: '',     //è‡ªå®šä¹‰å›¾ç‰‡è·¯å¾„ï¼Œå¯ä»¥æ˜¯æœ¬åœ°æ–‡ä»¶è·¯å¾„ã€ä»£ç åŒ…æ–‡ä»¶è·¯å¾„æˆ–è€…ç½‘ç»œå›¾ç‰‡è·¯å¾„ï¼Œæ”¯æŒPNGåŠJPGï¼Œä¸ä¼ å…¥ imageUrl åˆ™ä½¿ç”¨é»˜è®¤æˆªå›¾ã€‚æ˜¾ç¤ºå›¾ç‰‡é•¿å®½æ¯”æ˜¯ 5:4
+ã€€ã€€ã€€ã€€success: function(res){
+ã€€ã€€ã€€ã€€ã€€ã€€// è½¬å‘æˆåŠŸä¹‹åçš„å›è°ƒ
+ã€€ã€€ã€€ã€€ã€€ã€€if(res.errMsg == 'shareAppMessage:ok'){
+ã€€ã€€ã€€ã€€ã€€ã€€}
+ã€€ã€€ã€€ã€€},
+ã€€ã€€ã€€ã€€fail: function(){
+ã€€ã€€ã€€ã€€ã€€ã€€// è½¬å‘å¤±è´¥ä¹‹åçš„å›è°ƒ
+ã€€ã€€ã€€ã€€ã€€ã€€if(res.errMsg == 'shareAppMessage:fail cancel'){
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€// ç”¨æˆ·å–æ¶ˆè½¬å‘
+ã€€ã€€ã€€ã€€ã€€ã€€}else if(res.errMsg == 'shareAppMessage:fail'){
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€// è½¬å‘å¤±è´¥ï¼Œå…¶ä¸­ detail message ä¸ºè¯¦ç»†å¤±è´¥ä¿¡æ¯
+ã€€ã€€ã€€ã€€ã€€ã€€}
+ã€€ã€€ã€€ã€€},
+ã€€ã€€ã€€ã€€complete: fucntion(){
+ã€€ã€€ã€€ã€€ã€€ã€€// è½¬å‘ç»“æŸä¹‹åçš„å›è°ƒï¼ˆè½¬å‘æˆä¸æˆåŠŸéƒ½ä¼šæ‰§è¡Œï¼‰
+ã€€ã€€ã€€ã€€}
+ã€€ã€€};
+ã€€ã€€// æ¥è‡ªé¡µé¢å†…çš„æŒ‰é’®çš„è½¬å‘
+ã€€ã€€if( options.from == 'button' ){
+ã€€ã€€ã€€ã€€var eData = options.target.dataset;
+ã€€ã€€ã€€ã€€console.log( eData.name );     // shareBtn
+ã€€ã€€ã€€ã€€// æ­¤å¤„å¯ä»¥ä¿®æ”¹ shareObj ä¸­çš„å†…å®¹
+ã€€ã€€ã€€ã€€shareObj.path = '/pages/btnname/btnname?btn_name='+eData.name;
+ã€€ã€€}
+ã€€ã€€// è¿”å›shareObj
+ã€€ã€€return shareObj;
 }
-µÇÂ½
+ç™»é™†
 wx.request({
-  //ºóÌ¨½Ó¿ÚµØÖ·
+  //åå°æ¥å£åœ°å€
   url: 'https://api.weixin.qq.com/sns/jscode2session',
   data: { 
-	appid:'wx7255a01c5dfe1f7c',
-	secret:'e035d9830443adaa943e7f6415b20c21',
-	grant_type: 'authorization_code',
-	js_code:  res.code,
+    appid:'wx7255a01c5dfe1f7c',
+    secret:'e035d9830443adaa943e7f6415b20c21',
+    grant_type: 'authorization_code',
+    js_code:  res.code,
   },
   method: 'GET',
   header: {'content-type': 'application/json'},
   success: function (res) {
-	console.log(res.data)
-	wx.setStorageSync('openId', res.data.openid);
+    console.log(res.data)
+    wx.setStorageSync('openId', res.data.openid);
   }
 })
-·¢Ä£°æÏûÏ¢
+å‘æ¨¡ç‰ˆæ¶ˆæ¯
   sendMsg:function(e){
     var opid = wx.getStorageSync('openid');
     var fId = e.detail.formId;  
     var l = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=9_faXetBSTEykPl9DeKWM08yEO5--zo5rjoNAp5LuJEJwIeAHqxaP51PrvNoF3yoh1Q2Q_g-Q8pC_lzqyiF6Y5Z5WiiASERSgrO64WCm9D7brpai1vrKXlTDian90ijWs1kMD4K3wNrj37zzBYAQRhAGAFVW';  
     var d = {
       touser: opid,
-      template_id: 'F--MGLm3i0isE4bOHfB-4UjxechDGMQDWYxU2CDW_F8',//Õâ¸öÊÇ1¡¢ÉêÇëµÄÄ£°åÏûÏ¢id£¬  
+      template_id: 'F--MGLm3i0isE4bOHfB-4UjxechDGMQDWYxU2CDW_F8',//è¿™ä¸ªæ˜¯1ã€ç”³è¯·çš„æ¨¡æ¿æ¶ˆæ¯idï¼Œ  
       page: '/pages/index/index',
       form_id: fId,
-      value: {//²âÊÔÍê·¢ÏÖ¾¹È»value»òÕßdata¶¼ÄÜ³É¹¦ÊÕµ½Ä£°åÏûÏ¢·¢ËÍ³É¹¦Í¨Öª£¬ÊÇbug»¹ÊÇ¹ÊÒâ£¿£¿¡¾±ÉÊÓ¡¢±ÉÊÓ¡¢±ÉÊÓ...¡¿ ÏÂÃæµÄkeyword*ÊÇÄã1¡¢ÉèÖÃµÄÄ£°åÏûÏ¢µÄ¹Ø¼ü´Ê±äÁ¿  
+      value: {//æµ‹è¯•å®Œå‘ç°ç«Ÿç„¶valueæˆ–è€…dataéƒ½èƒ½æˆåŠŸæ”¶åˆ°æ¨¡æ¿æ¶ˆæ¯å‘é€æˆåŠŸé€šçŸ¥ï¼Œæ˜¯bugè¿˜æ˜¯æ•…æ„ï¼Ÿï¼Ÿã€é„™è§†ã€é„™è§†ã€é„™è§†...ã€‘ ä¸‹é¢çš„keyword*æ˜¯ä½ 1ã€è®¾ç½®çš„æ¨¡æ¿æ¶ˆæ¯çš„å…³é”®è¯å˜é‡  
 
         "keyword1": {
           "value": "ss",
@@ -214,34 +214,34 @@ wx.request({
       }
     });  
   },
-¹«ÕËºÅÍøÒ³ÉÏ´«Í¼Æ¬
+å…¬è´¦å·ç½‘é¡µä¸Šä¼ å›¾ç‰‡
 wx.chooseImage({
-				count: 1, // Ä¬ÈÏ9
-				sizeType: ['original', 'compressed'], // ¿ÉÒÔÖ¸¶¨ÊÇÔ­Í¼»¹ÊÇÑ¹ËõÍ¼£¬Ä¬ÈÏ¶şÕß¶¼ÓĞ
-				sourceType: ['album', 'camera'], // ¿ÉÒÔÖ¸¶¨À´Ô´ÊÇÏà²á»¹ÊÇÏà»ú£¬Ä¬ÈÏ¶şÕß¶¼ÓĞ
-				success: function (res) {
-					var localIds = res.localIds; // ·µ»ØÑ¡¶¨ÕÕÆ¬µÄ±¾µØIDÁĞ±í£¬localId¿ÉÒÔ×÷Îªimg±êÇ©µÄsrcÊôĞÔÏÔÊ¾Í¼Æ¬
-					console.log("localIds="+localIds)
-					wx.uploadImage({
-						localId: localIds[0], // ĞèÒªÉÏ´«µÄÍ¼Æ¬µÄ±¾µØID£¬ÓÉchooseImage½Ó¿Ú»ñµÃ
-						isShowProgressTips: 1, // Ä¬ÈÏÎª1£¬ÏÔÊ¾½ø¶ÈÌáÊ¾
-						success: function (res) {
-							var serverId = res.serverId; // ·µ»ØÍ¼Æ¬µÄ·şÎñÆ÷¶ËID
-							console.log("serverId="+serverId)
-							pushServer(serverId);
-							wx.downloadImage({
-								serverId: serverId, // ĞèÒªÏÂÔØµÄÍ¼Æ¬µÄ·şÎñÆ÷¶ËID£¬ÓÉuploadImage½Ó¿Ú»ñµÃ
-								isShowProgressTips: 1, // Ä¬ÈÏÎª1£¬ÏÔÊ¾½ø¶ÈÌáÊ¾
-								success: function (res) {
-									var localId = res.localId; // ·µ»ØÍ¼Æ¬ÏÂÔØºóµÄ±¾µØID
-									console.log("localId="+localId)
-									$("#image").attr('src',localId);  
-								}
-							});
-						}
-					});
-				}
-			});
+                count: 1, // é»˜è®¤9
+                sizeType: ['original', 'compressed'], // å¯ä»¥æŒ‡å®šæ˜¯åŸå›¾è¿˜æ˜¯å‹ç¼©å›¾ï¼Œé»˜è®¤äºŒè€…éƒ½æœ‰
+                sourceType: ['album', 'camera'], // å¯ä»¥æŒ‡å®šæ¥æºæ˜¯ç›¸å†Œè¿˜æ˜¯ç›¸æœºï¼Œé»˜è®¤äºŒè€…éƒ½æœ‰
+                success: function (res) {
+                    var localIds = res.localIds; // è¿”å›é€‰å®šç…§ç‰‡çš„æœ¬åœ°IDåˆ—è¡¨ï¼ŒlocalIdå¯ä»¥ä½œä¸ºimgæ ‡ç­¾çš„srcå±æ€§æ˜¾ç¤ºå›¾ç‰‡
+                    console.log("localIds="+localIds)
+                    wx.uploadImage({
+                        localId: localIds[0], // éœ€è¦ä¸Šä¼ çš„å›¾ç‰‡çš„æœ¬åœ°IDï¼Œç”±chooseImageæ¥å£è·å¾—
+                        isShowProgressTips: 1, // é»˜è®¤ä¸º1ï¼Œæ˜¾ç¤ºè¿›åº¦æç¤º
+                        success: function (res) {
+                            var serverId = res.serverId; // è¿”å›å›¾ç‰‡çš„æœåŠ¡å™¨ç«¯ID
+                            console.log("serverId="+serverId)
+                            pushServer(serverId);
+                            wx.downloadImage({
+                                serverId: serverId, // éœ€è¦ä¸‹è½½çš„å›¾ç‰‡çš„æœåŠ¡å™¨ç«¯IDï¼Œç”±uploadImageæ¥å£è·å¾—
+                                isShowProgressTips: 1, // é»˜è®¤ä¸º1ï¼Œæ˜¾ç¤ºè¿›åº¦æç¤º
+                                success: function (res) {
+                                    var localId = res.localId; // è¿”å›å›¾ç‰‡ä¸‹è½½åçš„æœ¬åœ°ID
+                                    console.log("localId="+localId)
+                                    $("#image").attr('src',localId);  
+                                }
+                            });
+                        }
+                    });
+                }
+            });
 
 
 

@@ -1,35 +1,35 @@
--------¡¾ĞéÄâÄ¿Â¼ÉèÖÃ¡¿------
-1¡¢´ò¿ªapacheµÄconfÄ¿Â¼ÏÂhttpd.conf
-2¡¢×¢ÊÍ#DocumentRoot "D:/apache2.2/htdocs"
-3¡¢ÔÚ<IfModule dir_module>ºóÌí¼Ó´úÂë
+-------ã€è™šæ‹Ÿç›®å½•è®¾ç½®ã€‘------
+1ã€æ‰“å¼€apacheçš„confç›®å½•ä¸‹httpd.conf
+2ã€æ³¨é‡Š#DocumentRoot "D:/apache2.2/htdocs"
+3ã€åœ¨<IfModule dir_module>åæ·»åŠ ä»£ç 
 <IfModule dir_module>
-	#»¶Ó­Ò³Ãæ
-	DirectoryIndex index.html index.htm index.php
-	#Õ¾µãµÄ±ğÃû
-	Alias /myblog "D:/myblog"
-	<Directory d:/myblog>
-	#·ÃÎÊÈ¨ÏŞ
-	Order allow,deny
-	Allow from all
-	</Directory>
+    #æ¬¢è¿é¡µé¢
+    DirectoryIndex index.html index.htm index.php
+    #ç«™ç‚¹çš„åˆ«å
+    Alias /myblog "D:/myblog"
+    <Directory d:/myblog>
+    #è®¿é—®æƒé™
+    Order allow,deny
+    Allow from all
+    </Directory>
 </IfModule>
-4¡¢·ÃÎÊhttp://localhost:80/myblog
------------¡¾ĞéÄâÖ÷»úÉèÖÃ¡¿---------
-1¡¢Æô¶¯ httpd-vhosts.conf
-ÔÚ httpd-conf ÎÄ¼şÖĞ´ò¿ª
+4ã€è®¿é—®http://localhost:80/myblog
+-----------ã€è™šæ‹Ÿä¸»æœºè®¾ç½®ã€‘---------
+1ã€å¯åŠ¨ httpd-vhosts.conf
+åœ¨ httpd-conf æ–‡ä»¶ä¸­æ‰“å¼€
 # Virtual hosts
 Include conf/extra/httpd-vhosts.conf
-2¡¢ÔÚhttpd-vhosts.confÎÄ¼şÖĞ×öÅäÖÃ
+2ã€åœ¨httpd-vhosts.confæ–‡ä»¶ä¸­åšé…ç½®
 <VirualHost 127.0.0.1:80>
-	DocumentRoot "d:/myblog"
-	DirectoryIndex index.html index.htm index.php
-	<Directory d:/myblog>
-	Options FollowSymLinks
-	AllowOverride None
-	Order allow,deny
-	Allow from all
-	</Directory>
+    DocumentRoot "d:/myblog"
+    DirectoryIndex index.html index.htm index.php
+    <Directory d:/myblog>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    </Directory>
 </VirtualHost>
-3¡¢ĞŞ¸ÄhostsÎÄ¼ş C:\WINDOWS\system32\drivers\etc\hosts
+3ã€ä¿®æ”¹hostsæ–‡ä»¶ C:\WINDOWS\system32\drivers\etc\hosts
 127.0.0.1  www.bkk.com
-4¡¢·ÃÎÊwww.bkk.com
+4ã€è®¿é—®www.bkk.com

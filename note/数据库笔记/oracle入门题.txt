@@ -1,32 +1,32 @@
---Çó²¿ÃÅÖĞÄÄĞ©ÈËµÄĞ½Ë®×î¸ß
+--æ±‚éƒ¨é—¨ä¸­å“ªäº›äººçš„è–ªæ°´æœ€é«˜
 
 select ename, sal from emp 
 join (select max(sal) max_sal, deptno from emp group by deptno) t
 on (emp.sal = t.max_sal and emp.deptno = t.deptno)
 
---Çó²¿ÃÅÆ½¾ùĞ½Ë®µÄµÈ¼¶
+--æ±‚éƒ¨é—¨å¹³å‡è–ªæ°´çš„ç­‰çº§
 
 select deptno, avg_sal, grade from
 (select deptno ,avg(sal) avg_sal from emp group by deptno) t
 join salgrade s on (t.avg_sal between s.losal and s.hisal)
 
---Çó²¿ÃÅÆ½¾ùµÄĞ½Ë®µÈ¼¶
+--æ±‚éƒ¨é—¨å¹³å‡çš„è–ªæ°´ç­‰çº§
 
 select avg(grade), deptno from
    (select deptno, ename, grade from emp join salgrade s 
       on( emp.sal between s.losal and s.hisal)) t
 group by deptno
 
---¹ÍÔ±ÖĞÄÄĞ©ÈËÊÇ¾­ÀíÈË
+--é›‡å‘˜ä¸­å“ªäº›äººæ˜¯ç»ç†äºº
 
 select ename from emp where empno in (select distinct mgr from emp)
 
---²»×¼ÓÃ×éº¯Êı£¬ÇóĞ½Ë®µÄ×î¸ßÖµ£¨ÃæÊÔÌâ£©
+--ä¸å‡†ç”¨ç»„å‡½æ•°ï¼Œæ±‚è–ªæ°´çš„æœ€é«˜å€¼ï¼ˆé¢è¯•é¢˜ï¼‰
 
 select sal from emp where sal not in
    (select distinct e1.sal from emp e1 join emp e2 on(e1.sal < e2.sal))
 
---ÇóÆ½¾ùĞ½Ë®×î¸ßµÄ²¿ÃÅ±àºÅ
+--æ±‚å¹³å‡è–ªæ°´æœ€é«˜çš„éƒ¨é—¨ç¼–å·
 
 select deptno, avg_sal from
    (select avg(sal) avg_sal , deptno from emp group by deptno)
@@ -38,9 +38,9 @@ where avg_sal =
 select deptno, avg_sal from
    (select avg(sal) avg_sal , deptno from emp group by deptno)
 where avg_sal = 
-   (select max(avg(sal))from emp group by deptno)--×Óº¯ÊıÇ¶Ì×£¨×î¶àÁ½²ã£©
+   (select max(avg(sal))from emp group by deptno)--å­å‡½æ•°åµŒå¥—ï¼ˆæœ€å¤šä¸¤å±‚ï¼‰
 
---ÇóÆ½¾ùĞ½Ë®×î¸ßµÄ²¿ÃÅÃû³Æ
+--æ±‚å¹³å‡è–ªæ°´æœ€é«˜çš„éƒ¨é—¨åç§°
 
 select dname from dept where deptno = 
 (select deptno from
@@ -50,7 +50,7 @@ where avg_sal =
       select max(avg_sal)from (select avg(sal) avg_sal from emp group by deptno))
    )
 
---ÇóÆ½¾ùĞ½Ë®µÄµÈ¼¶×îµÍµÄ²¿ÃÅµÄ²¿ÃÅÃû³Æ
+--æ±‚å¹³å‡è–ªæ°´çš„ç­‰çº§æœ€ä½çš„éƒ¨é—¨çš„éƒ¨é—¨åç§°
 
 select dname, t1.deptno, grade, avg_sal from 
   (
@@ -88,22 +88,22 @@ join dept on (t1.deptno = dept.deptno)
    ( select min(grade) from v$_dept_avg_sal_info )
 
 
---Çó²¿ÃÅ¾­ÀíÈËÖĞÆ½¾ùĞ½Ë®×îµÍµÄ²¿ÃÅÃû³Æ(Ë¼¿¼Ìâ)
+--æ±‚éƒ¨é—¨ç»ç†äººä¸­å¹³å‡è–ªæ°´æœ€ä½çš„éƒ¨é—¨åç§°(æ€è€ƒé¢˜)
 
 select dname from dept where deptno =
  (
   select deptno from 
         (select deptno, avg(sal) avg_sal from emp 
-	  where empno in (select mgr from emp) group by deptno) 
+      where empno in (select mgr from emp) group by deptno) 
   where avg_sal =(
       select min(avg_sal) from (
               select deptno, avg(sal) avg_sal from emp 
-		where empno in (select mgr from emp) group by deptno
-		) 
-	)
+        where empno in (select mgr from emp) group by deptno
+        ) 
+    )
  )
 
---Çó±ÈÆÕÍ¨Ô±¹¤µÄ×î¸ßĞ½Ë®»¹Òª¸ßµÄ¾­ÀíÈËÃû³Æ
+--æ±‚æ¯”æ™®é€šå‘˜å·¥çš„æœ€é«˜è–ªæ°´è¿˜è¦é«˜çš„ç»ç†äººåç§°
 
 select ename from emp 
   where empno in (select distinct mgr from emp where mgr is not null)
@@ -114,13 +114,13 @@ and
       (select distinct mgr from emp where mgr is not null)
     )
 
---ÇóĞ½Ë®×î¸ßµÄÇ°5Ãû¹ÍÔ±
+--æ±‚è–ªæ°´æœ€é«˜çš„å‰5åé›‡å‘˜
 
 select ename, sal, rownum r from 
    (select ename, sal from emp order by sal desc)
 where rownum <=5
 
---ÇóĞ½Ë®×î¸ßµÄµÚ6µ½µÚ10Ãû¹ÍÔ±
+--æ±‚è–ªæ°´æœ€é«˜çš„ç¬¬6åˆ°ç¬¬10åé›‡å‘˜
 
 select ename, sal, rownum from
  (select ename,sal,rownum r from

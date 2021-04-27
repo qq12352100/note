@@ -1,192 +1,192 @@
-//hibernate.cfg.xmlÖĞµÄÅäÖÃ
-<mapping class="com.bkk.domian.User" />  			//»ùÓÚ×¢½âannotation£¬Ö±½Ó×¢ÊÍÔÚÀàÃûÉÏÃæ
-<mapping resource="com/bkk/domain/User.hbm.xml" /> 	//»ùÓÚÅäÖÃÎÄ¼ş£¬¼ÓÔØÅäÖÃÎÄ¼ş¡£
-<property name="hbm2ddl.autp">true</property>		//ÅÅ°æSQLÓï¾ä
+//hibernate.cfg.xmlä¸­çš„é…ç½®
+<mapping class="com.bkk.domian.User" />             //åŸºäºæ³¨è§£annotationï¼Œç›´æ¥æ³¨é‡Šåœ¨ç±»åä¸Šé¢
+<mapping resource="com/bkk/domain/User.hbm.xml" />  //åŸºäºé…ç½®æ–‡ä»¶ï¼ŒåŠ è½½é…ç½®æ–‡ä»¶ã€‚
+<property name="hbm2ddl.autp">true</property>       //æ’ç‰ˆSQLè¯­å¥
 
-»ùÓÚannotationÒª´´½¨Sessionfactory sf = new AnnotationConfiguration().configure().buildSessionfactory();
-ÀàÃûÉÏ¼Ó@Entity
-@Table(name="_User")	//±íÃûÓëÀàÃû²»Ò»ÖÂ
-@Column(name="_name")	//ÁĞÃûÓëÊôĞÔÃû²»Ò»ÖÂ
-@Id 					//Ö÷¼ü£¬¼ÓÔÚget·½·¨ÉÏ
+åŸºäºannotationè¦åˆ›å»ºSessionfactory sf = new AnnotationConfiguration().configure().buildSessionfactory();
+ç±»åä¸ŠåŠ @Entity
+@Table(name="_User")    //è¡¨åä¸ç±»åä¸ä¸€è‡´
+@Column(name="_name")   //åˆ—åä¸å±æ€§åä¸ä¸€è‡´
+@Id                     //ä¸»é”®ï¼ŒåŠ åœ¨getæ–¹æ³•ä¸Š
 
-//È¡mapÖĞµÄkeyºÍvalue
+//å–mapä¸­çš„keyå’Œvalue
 <s:iterator value="#{1:'a', 2:'b', 3:'c'}" >
-	<s:property value="key"/> | <s:property value="value"/> <br />
+    <s:property value="key"/> | <s:property value="value"/> <br />
 </s:iterator>
 <s:iterator value="#{1:'a', 2:'b', 3:'c'}" var="x">
-	<s:property value="#x.key"/> | <s:property value="#x.value"/> <br />
+    <s:property value="#x.key"/> | <s:property value="#x.value"/> <br />
 </s:iterator>
 
-Ê¹ÓÃstatus:
+ä½¿ç”¨status:
 <s:iterator value="{'aaa', 'bbb', 'ccc'}" status="status">
-	<s:property/> | 
-	±éÀú¹ıµÄÔªËØ×ÜÊı£º<s:property value="#status.count"/> |
-	±éÀú¹ıµÄÔªËØË÷Òı£º<s:property value="#status.index"/> |
-	µ±Ç°ÊÇÅ¼Êı£¿£º<s:property value="#status.even"/> |
-	µ±Ç°ÊÇÆæÊı£¿£º<s:property value="#status.odd"/> |
-	ÊÇµÚÒ»¸öÔªËØÂğ£¿£º<s:property value="#status.first"/> |
-	ÊÇ×îºóÒ»¸öÔªËØÂğ£¿£º<s:property value="#status.last"/>
-	<br />
+    <s:property/> | 
+    éå†è¿‡çš„å…ƒç´ æ€»æ•°ï¼š<s:property value="#status.count"/> |
+    éå†è¿‡çš„å…ƒç´ ç´¢å¼•ï¼š<s:property value="#status.index"/> |
+    å½“å‰æ˜¯å¶æ•°ï¼Ÿï¼š<s:property value="#status.even"/> |
+    å½“å‰æ˜¯å¥‡æ•°ï¼Ÿï¼š<s:property value="#status.odd"/> |
+    æ˜¯ç¬¬ä¸€ä¸ªå…ƒç´ å—ï¼Ÿï¼š<s:property value="#status.first"/> |
+    æ˜¯æœ€åä¸€ä¸ªå…ƒç´ å—ï¼Ÿï¼š<s:property value="#status.last"/>
+    <br />
 </s:iterator>
 
 
-//°Ñ±äÁ¿·ÅÈëactionContextÖĞ
+//æŠŠå˜é‡æ”¾å…¥actionContextä¸­
 <s:set var="age"  value="#parameters.age[0]"/>
 <s:if test="#age < 0">wrong age!</s:if>
 <s:elseif test="#parameters.age[0] < 20">too young!</s:elseif>
 <s:else>yeah!</s:else>
 
 
-//struts2±êÇ©ÖĞ¿ÉÒÔÊ¹ÓÃ¾²Ì¬·½·¨
+//struts2æ ‡ç­¾ä¸­å¯ä»¥ä½¿ç”¨é™æ€æ–¹æ³•
 <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
 
-//ÉùÃ÷Ê½Òì³£´¦Àí 
-<!-- ÅäÖÃÈ«¾ÖµÄException -->
+//å£°æ˜å¼å¼‚å¸¸å¤„ç† 
+<!-- é…ç½®å…¨å±€çš„Exception -->
 <global-exception-mappings>
-	<exception-mapping exception="java.lang.Exception" result="error_userState" />
+    <exception-mapping exception="java.lang.Exception" result="error_userState" />
 </global-exception-mappings>
 
-//Ê±¼äÀàĞÍ¸ñÊ½
+//æ—¶é—´ç±»å‹æ ¼å¼
 <s:date name="%{postTime}" format="yyyy-MM-dd HH:mm:ss"/>
 
-//Set¼¯ºÏ×ª»»ÎªLong[]Êı×é
+//Seté›†åˆè½¬æ¢ä¸ºLong[]æ•°ç»„
 Long[] privilege = new Long[role.getPrivilege.size()];
 int indx = 0;
 for(Privilege privilege : role.getPrivilege()) {
-	privilegeIds[index++] = privilege.getById();
+    privilegeIds[index++] = privilege.getById();
 }
-//jqueryÈ«Ñ¡
+//jqueryå…¨é€‰
 <input type="checkbox" onclick="$('[name=privilege]').attr('checked',this.checked)" id="cbAll">
-<label for="cbAll">È«Ñ¡<label>
-//µ¥Ñ¡checkbox»ØÏÔ
+<label for="cbAll">å…¨é€‰<label>
+//å•é€‰checkboxå›æ˜¾
 <input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"
-	<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
+    <s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
 <label for="cd_${id}">${name}</label>
 
-${pageContext.request.contextPath}  //jspÒ³ÃæÖĞÄÃµ½Web-RootÂ·¾¶
+${pageContext.request.contextPath}  //jspé¡µé¢ä¸­æ‹¿åˆ°Web-Rootè·¯å¾„
 
 String z = new String(zone.getBytes("ISO-8859-1"), "UTF-8");
-String fileName = URLEncoder.encode(applicationTemplate.getName(), "utf-8"); // ·½·¨Ò»
-String fileName = new String(applicationTemplate.getName().getBytes("gbk"), "iso8859-1"); // ·½·¨¶ş
+String fileName = URLEncoder.encode(applicationTemplate.getName(), "utf-8"); // æ–¹æ³•ä¸€
+String fileName = new String(applicationTemplate.getName().getBytes("gbk"), "iso8859-1"); // æ–¹æ³•äºŒ
 
-onclick="return window.confirm('ÄúÈ·¶¨Òª³õÊ¼»¯ÃÜÂëÎª1234Âğ£¿')"
+onclick="return window.confirm('æ‚¨ç¡®å®šè¦åˆå§‹åŒ–å¯†ç ä¸º1234å—ï¼Ÿ')"
 
-userAdd.jspÖĞ---------
-¸ÚÎ»add
-<s:select name="roleIds" multiple="true" size="10" list="#roleList" listKey="id" listValue="name"></s:select> °´×¡Ctrl¼ü¿ÉÒÔ¶àÑ¡»òÈ¡ÏûÑ¡Ôñ
+userAdd.jspä¸­---------
+å²—ä½add
+<s:select name="roleIds" multiple="true" size="10" list="#roleList" listKey="id" listValue="name"></s:select> æŒ‰ä½Ctrlé”®å¯ä»¥å¤šé€‰æˆ–å–æ¶ˆé€‰æ‹©
 
-²¿ÃÅadd
-<s:select name="departmentId" list="#departmentList" listKey="id" listValue="name" headerKey="" headerValue="ÇëÑ¡Ôñ²¿ÃÅ"></s:select>
+éƒ¨é—¨add
+<s:select name="departmentId" list="#departmentList" listKey="id" listValue="name" headerKey="" headerValue="è¯·é€‰æ‹©éƒ¨é—¨"></s:select>
 
-userActionÖĞ---------
-¸ÚÎ»add
-private Long[] roleIds;  //Éú³Éget¡¢set·½·¨£¬½ÓÊÜÇ°Ì¨´«À´µÄÊı¾İ
+userActionä¸­---------
+å²—ä½add
+private Long[] roleIds;  //ç”Ÿæˆgetã€setæ–¹æ³•ï¼Œæ¥å—å‰å°ä¼ æ¥çš„æ•°æ®
 List<Role> roleList = roleService.getByIds(roleIds);
 model.setRoles(new HashSet<Role>(roleList));
 userService.save(model);
 
-²¿ÃÅadd
-private Long departmentId;  //Éú³Éget¡¢set·½·¨£¬½ÓÊÜÇ°Ì¨´«À´µÄÊı¾İ
+éƒ¨é—¨add
+private Long departmentId;  //ç”Ÿæˆgetã€setæ–¹æ³•ï¼Œæ¥å—å‰å°ä¼ æ¥çš„æ•°æ®
 Department department = departmentService.getById(departmentId);
 model.setDepartment(department);
 userService.save(model);
 
-ĞŞ¸ÄºÍÌí¼ÓÒ³Ãæsave.jsp---------
+ä¿®æ”¹å’Œæ·»åŠ é¡µé¢save.jsp---------
 <s:form action="userAction_%{id == null ? 'add' : 'edit'}">
-	<s:hidden name="id"></s:hidden>
+    <s:hidden name="id"></s:hidden>
 
-<s:radio name="gender" list="%{{'ÄĞ', 'Å®'}}"></s:radio>
+<s:radio name="gender" list="%{{'ç”·', 'å¥³'}}"></s:radio>
 
-IFÅĞ¶Ï------------
+IFåˆ¤æ–­------------
 <s:if test="#parent != null">
-	<s:a action="departmentAction_list?parentId=%{#parent.parent.id}">·µ»ØÉÏÒ»¼¶</s:a>
+    <s:a action="departmentAction_list?parentId=%{#parent.parent.id}">è¿”å›ä¸Šä¸€çº§</s:a>
 </s:if>
 ------------------------------------------------------------------------
-ActionContext.getContext().put("key",value);			//·Åµ½ÖµÕ»mapÖĞ
-ActionContext.getContext().getValueStack().push(role);  // ·Åµ½Õ»¶¥£¬ÏÈÕÒÕ»ÔÙÕÒmap
+ActionContext.getContext().put("key",value);            //æ”¾åˆ°å€¼æ ˆmapä¸­
+ActionContext.getContext().getValueStack().push(role);  // æ”¾åˆ°æ ˆé¡¶ï¼Œå…ˆæ‰¾æ ˆå†æ‰¾map
 -------------------------------------------------------------------------
-Ä£°å£º
-	¶à¶ÔÒ»£º
-		<many-to-one name="" class="" column=""></many-to-one>
-	Ò»¶Ô¶à£º
-		<set name="">
-			<key column=""></key>
-			<one-to-many class=""/>
-		</set>
-	¶à¶Ô¶à£º
-		<set name="" table="">
-			<key column=""></key>
-			<many-to-many class="" column=""></many-to-many>
-		</set>
-----------------------------------------------------------------------------		
-		ÇëÇóÊı	µØÖ·À¸
-×ª·¢	  1		²»±ä
-ÖØ¶¨Ïò	  2		±ä
+æ¨¡æ¿ï¼š
+    å¤šå¯¹ä¸€ï¼š
+        <many-to-one name="" class="" column=""></many-to-one>
+    ä¸€å¯¹å¤šï¼š
+        <set name="">
+            <key column=""></key>
+            <one-to-many class=""/>
+        </set>
+    å¤šå¯¹å¤šï¼š
+        <set name="" table="">
+            <key column=""></key>
+            <many-to-many class="" column=""></many-to-many>
+        </set>
+----------------------------------------------------------------------------        
+        è¯·æ±‚æ•° åœ°å€æ 
+è½¬å‘    1     ä¸å˜
+é‡å®šå‘   2     å˜
 ----------------------------------------------------------------------------
-  ×÷ÓÃ		·½·¨Ãû		·µ»ØÖµ		Ò³Ãæ
+  ä½œç”¨        æ–¹æ³•å     è¿”å›å€¼     é¡µé¢
 
-ÁĞ±í		list()		list		list.jsp
-É¾³ı		delete()	toList
-Ìí¼ÓÒ³Ãæ	addUI()		addUI		addUI.jsp
-Ìí¼Ó		add()		toList
-ĞŞ¸ÄÒ³Ãæ	editUI()	editUI		editUI.jsp
-ĞŞ¸Ä		edit()		toList
+åˆ—è¡¨      list()      list        list.jsp
+åˆ é™¤      delete()    toList
+æ·»åŠ é¡µé¢    addUI()     addUI       addUI.jsp
+æ·»åŠ       add()       toList
+ä¿®æ”¹é¡µé¢    editUI()    editUI      editUI.jsp
+ä¿®æ”¹      edit()      toList
 
-toListµÄ½á¹ûÅäÖÃ£º
+toListçš„ç»“æœé…ç½®ï¼š
 <result name="toList" type="redirectAction">roleAction_list</result>
 ------------------------------------------------------------------------------
-¸ñÊ½£º
-EL±í´ïÊ½:		JSPÖĞ
-	${±í´ïÊ½}
-OGNL±í´ïÊ½:		Strtus2ÖĞ£¨Struts2µÄ×Ô¶¨Òå±êÇ©ÖĞ¡¢struts.xml...£©
-	Struts2µÄ×Ô¶¨Òå±êÇ©µÄÊôĞÔÖµÖĞ	%{±í´ïÊ½}
-	struts.xmlÖĞ					${±í´ïÊ½}
-	Óï·¨£º
-		%{name}È¡ÖµÕ»ÖĞµÄÖµ
- ¡¡		%{#name}È¡ÖµÕ»ÖĞMapÖĞµÄÖµ
- ¡¡¡¡	%{#user.name}È¡ÖµÕ»ÖĞMapÖĞµÄÖµ
- ¡¡¡¡	#{'k':'v', 'k2':'v2'}¶¨ÒåÒ»¸öMap
- ¡¡¡¡	{'e1', 'e2'}¶¨ÒåÒ»¸öList
+æ ¼å¼ï¼š
+ELè¡¨è¾¾å¼:      JSPä¸­
+    ${è¡¨è¾¾å¼}
+OGNLè¡¨è¾¾å¼:        Strtus2ä¸­ï¼ˆStruts2çš„è‡ªå®šä¹‰æ ‡ç­¾ä¸­ã€struts.xml...ï¼‰
+    Struts2çš„è‡ªå®šä¹‰æ ‡ç­¾çš„å±æ€§å€¼ä¸­  %{è¡¨è¾¾å¼}
+    struts.xmlä¸­                 ${è¡¨è¾¾å¼}
+    è¯­æ³•ï¼š
+        %{name}å–å€¼æ ˆä¸­çš„å€¼
+ ã€€      %{#name}å–å€¼æ ˆä¸­Mapä¸­çš„å€¼
+ ã€€ã€€ %{#user.name}å–å€¼æ ˆä¸­Mapä¸­çš„å€¼
+ ã€€ã€€ #{'k':'v', 'k2':'v2'}å®šä¹‰ä¸€ä¸ªMap
+ ã€€ã€€ {'e1', 'e2'}å®šä¹‰ä¸€ä¸ªList
  
-  ¡¡¡¡	%{ #{'k':'v', 'k2':'v2'} }Struts2µÄ×Ô¶¨Òå±êÇ©µÄÊôĞÔÖµÖĞ ¶¨ÒåÒ»¸öMap
+  ã€€ã€€    %{ #{'k':'v', 'k2':'v2'} }Struts2çš„è‡ªå®šä¹‰æ ‡ç­¾çš„å±æ€§å€¼ä¸­ å®šä¹‰ä¸€ä¸ªMap
 ---------------------------------------------------------------------------------
-Óï·¨ËµÃ÷£º
-	·½Ê½Ò»£º
-		CASE value WHEN [compare_value] THEN result [WHEN [compare_value] THEN result ...] [ELSE result] END 
-	·½Ê½¶ş£º
-		CASE WHEN [condition] THEN result [WHEN [condition] THEN result ...] [ELSE result] END 
+è¯­æ³•è¯´æ˜ï¼š
+    æ–¹å¼ä¸€ï¼š
+        CASE value WHEN [compare_value] THEN result [WHEN [compare_value] THEN result ...] [ELSE result] END 
+    æ–¹å¼äºŒï¼š
+        CASE WHEN [condition] THEN result [WHEN [condition] THEN result ...] [ELSE result] END 
 
 
 
-Ê¹ÓÃÊ¾Àı£º
+ä½¿ç”¨ç¤ºä¾‹ï¼š
 
-mysql> select id,name, (gender) as 'ĞÔ±ğ' from itcast_user;
+mysql> select id,name, (gender) as 'æ€§åˆ«' from itcast_user;
 +----+------------+------+
-| id | name       | ĞÔ±ğ |
+| id | name       | æ€§åˆ« |
 +----+------------+------+
-| 19 | ÕÅÈı       | 1    |
-| 20 | Ğ¡ºì       | 2    |
-| 21 | ³¬¼¶¹ÜÀíÔ± |      |
+| 19 | å¼ ä¸‰       | 1    |
+| 20 | å°çº¢       | 2    |
+| 21 | è¶…çº§ç®¡ç†å‘˜ |      |
 +----+------------+------+
 3 rows in set (0.00 sec)
 
-mysql> select id,name, (CASE gender WHEN 1 THEN 'ÄĞ' WHEN 2 THEN 'Å®' ELSE 'ÆäËû' END) as 'ĞÔ±ğ' from itcast_user;
+mysql> select id,name, (CASE gender WHEN 1 THEN 'ç”·' WHEN 2 THEN 'å¥³' ELSE 'å…¶ä»–' END) as 'æ€§åˆ«' from itcast_user;
 +----+------------+------+
-| id | name       | ĞÔ±ğ |
+| id | name       | æ€§åˆ« |
 +----+------------+------+
-| 19 | ÕÅÈı       | ÄĞ   |
-| 20 | Ğ¡ºì       | Å®   |
-| 21 | ³¬¼¶¹ÜÀíÔ± | ÆäËû |
+| 19 | å¼ ä¸‰       | ç”·   |
+| 20 | å°çº¢       | å¥³   |
+| 21 | è¶…çº§ç®¡ç†å‘˜ | å…¶ä»– |
 +----+------------+------+
 3 rows in set (0.00 sec)
 
-mysql> select id,name, (CASE WHEN gender=1 THEN 'ÄĞ' WHEN gender=2 THEN 'Å®' ELSE 'ÆäËû' END) as 'ĞÔ±ğ' from itcast_user;
+mysql> select id,name, (CASE WHEN gender=1 THEN 'ç”·' WHEN gender=2 THEN 'å¥³' ELSE 'å…¶ä»–' END) as 'æ€§åˆ«' from itcast_user;
 +----+------------+------+
-| id | name       | ĞÔ±ğ |
+| id | name       | æ€§åˆ« |
 +----+------------+------+
-| 19 | ÕÅÈı       | ÄĞ   |
-| 20 | Ğ¡ºì       | Å®   |
-| 21 | ³¬¼¶¹ÜÀíÔ± | ÆäËû |
+| 19 | å¼ ä¸‰       | ç”·   |
+| 20 | å°çº¢       | å¥³   |
+| 21 | è¶…çº§ç®¡ç†å‘˜ | å…¶ä»– |
 +----+------------+------+
 3 rows in set (0.00 sec)
 ====================================================================================================

@@ -1,28 +1,28 @@
-½â¾ö·½°¸Ò»£ºÍ¨¹ı¶Ë¿ÚÀ´Çø·Ö£¬È±µã£º²»ÊÇ80¶Ë¿ÚÓòÃûºóÒª¼Ó¶Ë¿Úwww.zhandian2.com:81
-½â¾ö·½°¸¶ş£ºÍ¨¹ıServerNameÀ´Çø·Ö
+è§£å†³æ–¹æ¡ˆä¸€ï¼šé€šè¿‡ç«¯å£æ¥åŒºåˆ†ï¼Œç¼ºç‚¹ï¼šä¸æ˜¯80ç«¯å£åŸŸååè¦åŠ ç«¯å£www.zhandian2.com:81
+è§£å†³æ–¹æ¡ˆäºŒï¼šé€šè¿‡ServerNameæ¥åŒºåˆ†
 <virtualHost *:80>
-	DocumentRoot "d:/myblog"
-	#ÅäÖÃµÚÒ»¸öÕ¾µã
-	ServerName www.bkk1.com
-	DirectoryIndex news.html index.html
-	<Directory />
-	Options FollowSymLinks
-	AllowOverride None
-	Order allow,deny
-	Allow from all
-	</Directory>
+    DocumentRoot "d:/myblog"
+    #é…ç½®ç¬¬ä¸€ä¸ªç«™ç‚¹
+    ServerName www.bkk1.com
+    DirectoryIndex news.html index.html
+    <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    </Directory>
 </VirtualHost>
 <virtualHost *:80>
-	DocumentRoot "d:/myblog2"
-	#ÅäÖÃµÚ¶ş¸öÕ¾µã
-	ServerName www.bkk2.com
-	DirectoryIndex news.html index.html
-	<Directory />
-	Options FollowSymLinks
-	AllowOverride None
-	Order allow,deny
-	Allow from all
-	</Directory>
+    DocumentRoot "d:/myblog2"
+    #é…ç½®ç¬¬äºŒä¸ªç«™ç‚¹
+    ServerName www.bkk2.com
+    DirectoryIndex news.html index.html
+    <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    </Directory>
 </VirtualHost>
 
 

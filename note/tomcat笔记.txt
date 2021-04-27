@@ -1,70 +1,70 @@
 
-==========================================================================================================¸øtomcatÖ¸¶¨jdkÓëjre
-1¡¢ÓÃ¼ÇÊÂ±¾´ò¿ªtomcat/bin/setclasspath.bat
-2¡¢×îÍ·ÉÏÌí¼ÓÁ½ÐÐ´úÂë£¬jdkºÍjreµÄ¸ùÄ¿Â¼£¬Ïàµ±ÓÚÖ±½Ó¸ø³öJAVA_HOMEºÍJRE_HOMEÂ·¾¶
+==========================================================================================================ç»™tomcatæŒ‡å®šjdkä¸Žjre
+1ã€ç”¨è®°äº‹æœ¬æ‰“å¼€tomcat/bin/setclasspath.bat
+2ã€æœ€å¤´ä¸Šæ·»åŠ ä¸¤è¡Œä»£ç ï¼Œjdkå’Œjreçš„æ ¹ç›®å½•ï¼Œç›¸å½“äºŽç›´æŽ¥ç»™å‡ºJAVA_HOMEå’ŒJRE_HOMEè·¯å¾„
 set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_101
 set JRE_HOME=C:\Program Files\Java\jdk1.8.0_101\jre
------µ±Ç°Â·¾¶ÏÂ
+-----å½“å‰è·¯å¾„ä¸‹
 set JAVA_HOME=%~dp0\jdk
 set JRE_HOME=%~dp0\jdk\jre
-==========================================================================================================ÅäÖÃJVMÄÚ´æ²ÎÊý
-´´½¨»·¾³±äÁ¿ÎÄ¼þÔÚ%TOMCAT_HOME%\bin\Ä¿Â¼ÏÂ´´½¨ÎÄ¼þsetenv.bat
+==========================================================================================================é…ç½®JVMå†…å­˜å‚æ•°
+åˆ›å»ºçŽ¯å¢ƒå˜é‡æ–‡ä»¶åœ¨%TOMCAT_HOME%\bin\ç›®å½•ä¸‹åˆ›å»ºæ–‡ä»¶setenv.bat
 SET JAVA_OPTS=-server -Xms4g -Xmx4g
-²âÊÔ #catalina.bat configtest
+æµ‹è¯• #catalina.bat configtest
 ----------------------------------------------------------------------------------------
-ÔÚbinÏÂµÄcatalina.batÎÄ¼þÖÐecho Using CATALINA_BASE: "%CATALINA_BASE%"µÄÇ°Ò»ÐÐ¼ÓÈëÈçÏÂ´úÂë¡£
+åœ¨binä¸‹çš„catalina.batæ–‡ä»¶ä¸­echo Using CATALINA_BASE: "%CATALINA_BASE%"çš„å‰ä¸€è¡ŒåŠ å…¥å¦‚ä¸‹ä»£ç ã€‚
 set JAVA_OPTS=%JAVA_OPTS% -server -Xms8192m -Xmx8192m -Xmn1890m
--server£ºÒ»¶¨Òª×÷ÎªµÚÒ»¸ö²ÎÊý£¬ÔÚ¶à¸öCPUÊ±ÐÔÄÜ¼Ñ
--Xms£ºjava Heap³õÊ¼´óÐ¡¡£ Ä¬ÈÏÊÇÎïÀíÄÚ´æµÄ1/64¡£
--Xmx£ºjava heap×î´óÖµ¡£½¨Òé¾ùÉèÎªÎïÀíÄÚ´æµÄÒ»°ë¡£²»¿É³¬¹ýÎïÀíÄÚ´æ¡£
--XX:PermSize£ºÉè¶¨ÄÚ´æµÄÓÀ¾Ã±£´æÇø³õÊ¼´óÐ¡¡£È±Ê¡ÖµÎª64M¡£
--XX:MaxPermSize£ºÉè¶¨ÄÚ´æµÄÓÀ¾Ã±£´æÇø×î´ó ´óÐ¡¡£È±Ê¡ÖµÎª64M¡£
--Xmn£ºyoung generation(ÄêÇá´ú)µÄheap´óÐ¡¡£Ò»°ãÉèÖÃÎªXmxµÄ3¡¢4·ÖÖ®Ò»
-==========================================================================================================TomcatÆô¶¯Ê±Creation of SecureRandom instance for session IDºÜÂý
+-serverï¼šä¸€å®šè¦ä½œä¸ºç¬¬ä¸€ä¸ªå‚æ•°ï¼Œåœ¨å¤šä¸ªCPUæ—¶æ€§èƒ½ä½³
+-Xmsï¼šjava Heapåˆå§‹å¤§å°ã€‚ é»˜è®¤æ˜¯ç‰©ç†å†…å­˜çš„1/64ã€‚
+-Xmxï¼šjava heapæœ€å¤§å€¼ã€‚å»ºè®®å‡è®¾ä¸ºç‰©ç†å†…å­˜çš„ä¸€åŠã€‚ä¸å¯è¶…è¿‡ç‰©ç†å†…å­˜ã€‚
+-XX:PermSizeï¼šè®¾å®šå†…å­˜çš„æ°¸ä¹…ä¿å­˜åŒºåˆå§‹å¤§å°ã€‚ç¼ºçœå€¼ä¸º64Mã€‚
+-XX:MaxPermSizeï¼šè®¾å®šå†…å­˜çš„æ°¸ä¹…ä¿å­˜åŒºæœ€å¤§ å¤§å°ã€‚ç¼ºçœå€¼ä¸º64Mã€‚
+-Xmnï¼šyoung generation(å¹´è½»ä»£)çš„heapå¤§å°ã€‚ä¸€èˆ¬è®¾ç½®ä¸ºXmxçš„3ã€4åˆ†ä¹‹ä¸€
+==========================================================================================================Tomcatå¯åŠ¨æ—¶Creation of SecureRandom instance for session IDå¾ˆæ…¢
 find / -name java.security
 vi /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.181-2.6.14.5.el7.x86_64/jre/lib/security/java.security
-/securerandom »Ø³µ °´nÕÒÏÂÒ»¸ö shift+nÉÏÒ»¸ö
+/securerandom å›žè½¦ æŒ‰næ‰¾ä¸‹ä¸€ä¸ª shift+nä¸Šä¸€ä¸ª
  securerandom.source=file:/dev/urandom
-Ìæ»»³É    
+æ›¿æ¢æˆ    
 securerandom.source=file:/dev/./urandom
-ÖØÆôtomcat
+é‡å¯tomcat
 ==========================================================================================================Invalid character found in method name. HTTP method names must be tokens
-Ö»ÐèÒªÔÚserver.xmlÖÐÔö¼ÓmaxHttpHeaderSize×Ö¶Î¼´¿É:
+åªéœ€è¦åœ¨server.xmlä¸­å¢žåŠ maxHttpHeaderSizeå­—æ®µå³å¯:
 <Connector URIEncoding="UTF-8" port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol"
     useBodyEncodingForURI="false"
     enableLookups="false"
                connectionTimeout="20000"
                redirectPort="8443" maxHttpHeaderSize="8192"/>
-==========================================================================================================TomcatÔÚWindowsÖÐÊä³öÈÕÖ¾µ½catalina.out
-1¡¢´ò¿ªbinÏÂÃæµÄstartup.batÎÄ¼þ£¬°Ñcall "%EXECUTABLE%" start %CMD_LINE_ARGS%
-     ¸ÄÎªcall "%EXECUTABLE%" run %CMD_LINE_ARGS% ¡£
-2¡¢´ò¿ªbinÏÂÃæµÄcatalina.batÎÄ¼þ£¬»á·¢ÏÖ¹²ÓÐ4´¦ %ACTION% £¬ÔÚºóÃæ·Ö±ð¼ÓÉÏ
+==========================================================================================================Tomcatåœ¨Windowsä¸­è¾“å‡ºæ—¥å¿—åˆ°catalina.out
+1ã€æ‰“å¼€binä¸‹é¢çš„startup.batæ–‡ä»¶ï¼ŒæŠŠcall "%EXECUTABLE%" start %CMD_LINE_ARGS%
+     æ”¹ä¸ºcall "%EXECUTABLE%" run %CMD_LINE_ARGS% ã€‚
+2ã€æ‰“å¼€binä¸‹é¢çš„catalina.batæ–‡ä»¶ï¼Œä¼šå‘çŽ°å…±æœ‰4å¤„ %ACTION% ï¼Œåœ¨åŽé¢åˆ†åˆ«åŠ ä¸Š
      >> %CATALINA_HOME%\logs\catalina.out
-	 
-Èç¹û²»ÄÜÊä³ö£¬ÅäÖÃ»·¾³±äÁ¿CATALINA_HOME
-==================================================================================.keystoreÖ¤Êé
-ÒÑ¾­°²×°JDK
-²½Öè£º
-l  ½øÈë%JAVA_HOME%/binÄ¿Â¼
-l  Ö´ÐÐÃüÁî
+     
+å¦‚æžœä¸èƒ½è¾“å‡ºï¼Œé…ç½®çŽ¯å¢ƒå˜é‡CATALINA_HOME
+==================================================================================.keystoreè¯ä¹¦
+å·²ç»å®‰è£…JDK
+æ­¥éª¤ï¼š
+l  è¿›å…¥%JAVA_HOME%/binç›®å½•
+l  æ‰§è¡Œå‘½ä»¤
 keytool -genkey -alias tomcat -keyalg RSA -keystore D:\tomcat.keystore -validity 36500
-²ÎÊý¼òÒªËµÃ÷£º¡°F:\tomcat.keystore¡±º¬ÒåÊÇ½«Ö¤ÊéÎÄ¼þ±£´æÔÚFÅÌ£¬Ö¤ÊéÎÄ¼þÃû³ÆÊÇtomcat.keystore £»¡°-validity 36500¡±º¬ÒåÊÇÖ¤ÊéÓÐÐ§ÆÚ£¬36500±íÊ¾100Äê£¬Ä¬ÈÏÖµÊÇ90Ìì
-l  ÔÚÃüÁîÐÐÌîÐ´±ØÒªµÄ²ÎÊý£º
-A¡¢ÊäÈëkeystoreÃÜÂë£º´Ë´¦ÐèÒªÊäÈë´óÓÚ6¸ö×Ö·ûµÄ×Ö·û´®123456
-B¡¢¡°ÄúµÄÃû×ÖÓëÐÕÊÏÊÇÊ²Ã´£¿¡±ÕâÊÇ±ØÌîÏî£¬²¢ÇÒ±ØÐëÊÇTOMCAT²¿ÊðÖ÷»úµÄÓòÃû»òÕßIP[Èç£ºgbcom.com »òÕß 10.1.25.251]£¬¾ÍÊÇÄã½«À´ÒªÔÚä¯ÀÀÆ÷ÖÐÊäÈëµÄ·ÃÎÊµØÖ·
-C¡¢ ¡°ÄãµÄ×éÖ¯µ¥Î»Ãû³ÆÊÇÊ²Ã´£¿¡±¡¢¡°ÄúµÄ×éÖ¯Ãû³ÆÊÇÊ²Ã´£¿¡±¡¢¡°ÄúËùÔÚ³ÇÊÐ»òÇøÓòÃû³ÆÊÇÊ²Ã´£¿¡±¡¢¡°ÄúËùÔÚµÄÖÝ»òÕßÊ¡·ÝÃû³ÆÊÇÊ²Ã´£¿¡±¡¢¡°¸Ãµ¥Î»µÄÁ½×ÖÄ¸¹ú ¼Ò´úÂëÊÇÊ²Ã´£¿¡±¿ÉÒÔ°´ÕÕÐèÒªÌîÐ´Ò²¿ÉÒÔ²»ÌîÐ´Ö±½Ó»Ø³µ£¬ÔÚÏµÍ³Ñ¯ÎÊ¡°ÕýÈ·Âð£¿¡±Ê±£¬¶ÔÕÕÊäÈëÐÅÏ¢£¬Èç¹û·ûºÏÒªÇóÔòÊ¹ÓÃ¼üÅÌÊäÈë×ÖÄ¸¡°y¡±£¬·ñÔòÊäÈë¡°n¡±ÖØÐÂÌîÐ´ÉÏÃæµÄÐÅÏ¢
-D¡¢ÊäÈë<tomcat>µÄÖ÷ÃÜÂë£¬ÕâÏî½ÏÎªÖØÒª£¬»áÔÚtomcatÅäÖÃÎÄ¼þÖÐÊ¹ÓÃ£¬½¨ÒéÊäÈëÓëkeystoreµÄÃÜÂëÒ»ÖÂ£¬ÉèÖÃÆäËüÃÜÂëÒ²¿ÉÒÔ
-l  Íê³ÉÉÏÊöÊäÈëºó£¬Ö±½Ó»Ø³µÔòÔÚÄãÔÚµÚ¶þ²½ÖÐ¶¨ÒåµÄÎ»ÖÃÕÒµ½Éú³ÉµÄÎÄ¼þ
+å‚æ•°ç®€è¦è¯´æ˜Žï¼šâ€œF:\tomcat.keystoreâ€å«ä¹‰æ˜¯å°†è¯ä¹¦æ–‡ä»¶ä¿å­˜åœ¨Fç›˜ï¼Œè¯ä¹¦æ–‡ä»¶åç§°æ˜¯tomcat.keystore ï¼›â€œ-validity 36500â€å«ä¹‰æ˜¯è¯ä¹¦æœ‰æ•ˆæœŸï¼Œ36500è¡¨ç¤º100å¹´ï¼Œé»˜è®¤å€¼æ˜¯90å¤©
+l  åœ¨å‘½ä»¤è¡Œå¡«å†™å¿…è¦çš„å‚æ•°ï¼š
+Aã€è¾“å…¥keystoreå¯†ç ï¼šæ­¤å¤„éœ€è¦è¾“å…¥å¤§äºŽ6ä¸ªå­—ç¬¦çš„å­—ç¬¦ä¸²123456
+Bã€â€œæ‚¨çš„åå­—ä¸Žå§“æ°æ˜¯ä»€ä¹ˆï¼Ÿâ€è¿™æ˜¯å¿…å¡«é¡¹ï¼Œå¹¶ä¸”å¿…é¡»æ˜¯TOMCATéƒ¨ç½²ä¸»æœºçš„åŸŸåæˆ–è€…IP[å¦‚ï¼šgbcom.com æˆ–è€… 10.1.25.251]ï¼Œå°±æ˜¯ä½ å°†æ¥è¦åœ¨æµè§ˆå™¨ä¸­è¾“å…¥çš„è®¿é—®åœ°å€
+Cã€ â€œä½ çš„ç»„ç»‡å•ä½åç§°æ˜¯ä»€ä¹ˆï¼Ÿâ€ã€â€œæ‚¨çš„ç»„ç»‡åç§°æ˜¯ä»€ä¹ˆï¼Ÿâ€ã€â€œæ‚¨æ‰€åœ¨åŸŽå¸‚æˆ–åŒºåŸŸåç§°æ˜¯ä»€ä¹ˆï¼Ÿâ€ã€â€œæ‚¨æ‰€åœ¨çš„å·žæˆ–è€…çœä»½åç§°æ˜¯ä»€ä¹ˆï¼Ÿâ€ã€â€œè¯¥å•ä½çš„ä¸¤å­—æ¯å›½ å®¶ä»£ç æ˜¯ä»€ä¹ˆï¼Ÿâ€å¯ä»¥æŒ‰ç…§éœ€è¦å¡«å†™ä¹Ÿå¯ä»¥ä¸å¡«å†™ç›´æŽ¥å›žè½¦ï¼Œåœ¨ç³»ç»Ÿè¯¢é—®â€œæ­£ç¡®å—ï¼Ÿâ€æ—¶ï¼Œå¯¹ç…§è¾“å…¥ä¿¡æ¯ï¼Œå¦‚æžœç¬¦åˆè¦æ±‚åˆ™ä½¿ç”¨é”®ç›˜è¾“å…¥å­—æ¯â€œyâ€ï¼Œå¦åˆ™è¾“å…¥â€œnâ€é‡æ–°å¡«å†™ä¸Šé¢çš„ä¿¡æ¯
+Dã€è¾“å…¥<tomcat>çš„ä¸»å¯†ç ï¼Œè¿™é¡¹è¾ƒä¸ºé‡è¦ï¼Œä¼šåœ¨tomcaté…ç½®æ–‡ä»¶ä¸­ä½¿ç”¨ï¼Œå»ºè®®è¾“å…¥ä¸Žkeystoreçš„å¯†ç ä¸€è‡´ï¼Œè®¾ç½®å…¶å®ƒå¯†ç ä¹Ÿå¯ä»¥
+l  å®Œæˆä¸Šè¿°è¾“å…¥åŽï¼Œç›´æŽ¥å›žè½¦åˆ™åœ¨ä½ åœ¨ç¬¬äºŒæ­¥ä¸­å®šä¹‰çš„ä½ç½®æ‰¾åˆ°ç”Ÿæˆçš„æ–‡ä»¶
 
-ÅäÖÃTOMCAT·þÎñÆ÷
-ÔòÐèÒª½«Éú³ÉµÄÖ¤Êétomcat.keystore¿½±´µ½Tomcat½«ÒªÒýÓÃµÄÎ»ÖÃc:/users/admin
+é…ç½®TOMCATæœåŠ¡å™¨
+åˆ™éœ€è¦å°†ç”Ÿæˆçš„è¯ä¹¦tomcat.keystoreæ‹·è´åˆ°Tomcatå°†è¦å¼•ç”¨çš„ä½ç½®c:/users/admin
 
-È¥µô×¢ÊÍÇÒÐÞ¸Ä²ÎÊý=>
+åŽ»æŽ‰æ³¨é‡Šä¸”ä¿®æ”¹å‚æ•°=>
 <Connector port="443" protocol="HTTP/1.1" SSLEnabled="true"
                maxThreads="150" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS" keystoreFile="c:/users/admin/.keystore" keystorePass="123456"/>
-			   
-ÔÚtomcat\conf\web.xmlÖÐµÄ</welcome-file-list>ºóÃæ¼ÓÉÏÕâÑùÒ»¶Î£º
+               
+åœ¨tomcat\conf\web.xmlä¸­çš„</welcome-file-list>åŽé¢åŠ ä¸Šè¿™æ ·ä¸€æ®µï¼š
 <login-config>
 <!-- Authorization setting for SSL -->
 <auth-method>CLIENT-CERT</auth-method>
@@ -80,11 +80,11 @@ l  Íê³ÉÉÏÊöÊäÈëºó£¬Ö±½Ó»Ø³µÔòÔÚÄãÔÚµÚ¶þ²½ÖÐ¶¨ÒåµÄÎ»ÖÃÕÒµ½Éú³ÉµÄÎÄ¼þ
 <transport-guarantee>CONFIDENTIAL</transport-guarantee>
 </user-data-constraint>
 </security-constraint>
-==================================================================================.jksÖ¤Êé
+==================================================================================.jksè¯ä¹¦
 <Connector port="443"   protocol="org.apache.coyote.http11.Http11NioProtocol" maxThreads="150" SSLEnabled="true">
-	<SSLHostConfig>
-		<Certificate certificateKeystoreFile="conf/example.com.jks" certificateKeyAlias="example.com"
-			certificateKeystorePassword="password"
-					 type="RSA" />
-	</SSLHostConfig>
+    <SSLHostConfig>
+        <Certificate certificateKeystoreFile="conf/example.com.jks" certificateKeyAlias="example.com"
+            certificateKeystorePassword="password"
+                     type="RSA" />
+    </SSLHostConfig>
 </Connector>

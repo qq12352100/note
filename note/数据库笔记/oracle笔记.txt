@@ -1,39 +1,39 @@
-oracle ´´½¨ÊµÀýbkk(ÓëorclÍ¬¼¶Í¬¸ÅÄî£© ´´½¨ÓÃ»§¸³È¨ÏÞ
+oracle åˆ›å»ºå®žä¾‹bkk(ä¸ŽorclåŒçº§åŒæ¦‚å¿µï¼‰ åˆ›å»ºç”¨æˆ·èµ‹æƒé™
 
 Insert into Table2(a, c, d) select a,c,5 from Table1
-============================================================================================================½¨¿âÁ÷³Ì
--- ×¢Òâ£ºÇëÓÃSYSTEMÓÃ»§µÇÂ¼£¬ÔÙÔËÐÐ´Ë½Å±¾
--- Êý¾Ý¿âÃû£ºHCBMP
--- ÓÃ»§Ãû£ºHCBMP
--- ÃÜÂë£ºHCBMP
+============================================================================================================å»ºåº“æµç¨‹
+-- æ³¨æ„ï¼šè¯·ç”¨SYSTEMç”¨æˆ·ç™»å½•ï¼Œå†è¿è¡Œæ­¤è„šæœ¬
+-- æ•°æ®åº“åï¼šHCBMP
+-- ç”¨æˆ·åï¼šHCBMP
+-- å¯†ç ï¼šHCBMP
 CREATE TABLESPACE BKK DATAFILE   'D:/oracledate/BKK.dbf'   SIZE  128M   REUSE
 AUTOEXTEND  ON   NEXT   1280K
 MINIMUM   EXTENT   128K
 DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
 
---´´½¨ÓÃ»§
+--åˆ›å»ºç”¨æˆ·
 CREATE USER BKK IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE BKK;
---¸³È¨ÏÞ
+--èµ‹æƒé™
 GRANT UNLIMITED TABLESPACE TO BKK;
 GRANT connect, resource, dba To BKK;
-REVOKE CONNECT,RESOURCE FROM chenmh;--ÊÕ»ØÈ¨ÏÞ
-============================================================================================================»ù´¡
+REVOKE CONNECT,RESOURCE FROM chenmh;--æ”¶å›žæƒé™
+============================================================================================================åŸºç¡€
 ./sqlplus bztyzfgzh/tyzfgzh2018@172.20.123.248:1521/zfpt
 select count(*) from v$session;
 show parameter processes;
 show parameter sessions;
 show parameter instance;
-SELECT * FROM all_tables;			--²é¿´ÄÜ¿´µÄËùÓÐ±í  ¸³ÓèÁËselect any tableÈ¨ÏÞºó
+SELECT * FROM all_tables;           --æŸ¥çœ‹èƒ½çœ‹çš„æ‰€æœ‰è¡¨  èµ‹äºˆäº†select any tableæƒé™åŽ
 
-lsnrctl status					#²é¿´¼àÌý·þÎñ×´Ì¬
-============================================================================================================ÖØÆôoracle
+lsnrctl status                  #æŸ¥çœ‹ç›‘å¬æœåŠ¡çŠ¶æ€
+============================================================================================================é‡å¯oracle
 
-1.Ö´ÐÐ sqlplus /nolog£»
-2.conn sys / as sysdba ;£¨¿ÚÁîÊÇÄãµÇÂ¼Êý¾Ý¿âÊ±ÊäÈëµÄÃÜÂë£©
+1.æ‰§è¡Œ sqlplus /nologï¼›
+2.conn sys / as sysdba ;ï¼ˆå£ä»¤æ˜¯ä½ ç™»å½•æ•°æ®åº“æ—¶è¾“å…¥çš„å¯†ç ï¼‰
 3.shutdown immediate ;
 4.startup;
-----------------------------------------------------------------------------------------------------------¼àÌýÎÊÌâ
-Á½¸öÎÄ¼þÖÐÒªÒ»ÖÂLISTENER_ORCL
+----------------------------------------------------------------------------------------------------------ç›‘å¬é—®é¢˜
+ä¸¤ä¸ªæ–‡ä»¶ä¸­è¦ä¸€è‡´LISTENER_ORCL
 \app\Administrator\admin\orcl\pfile
 local_listener=LISTENER_ORCL
 
@@ -41,120 +41,120 @@ local_listener=LISTENER_ORCL
 LISTENER_ORCL =
   (DESCRIPTION =
     (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = server35)(PORT = 1521))  #HOST Îª127.0.0.1ºÍlocalhostÊÇ±¾»ú¿ÉÁ¬½Ó£¬ÎªÖ÷»úÃû»òÊµ¼ÊIPÔòÔ¶³Ì¿ÉÒÔÁ¬
+      (ADDRESS = (PROTOCOL = TCP)(HOST = server35)(PORT = 1521))  #HOST ä¸º127.0.0.1å’Œlocalhostæ˜¯æœ¬æœºå¯è¿žæŽ¥ï¼Œä¸ºä¸»æœºåæˆ–å®žé™…IPåˆ™è¿œç¨‹å¯ä»¥è¿ž
     )
     (CONNECT_DATA =
       (SERVICE_NAME = orcl)
     )
   )
-============================================================================================================³£ÓÃsql
+============================================================================================================å¸¸ç”¨sql
 
-select * from ±íÃû where length(nvl(×Ö¶Î,''))=1;								--²éÑ¯·Ç¿Õ×Ö¶ÎµÄ³¤¶È
+select * from è¡¨å where length(nvl(å­—æ®µ,''))=1;                                --æŸ¥è¯¢éžç©ºå­—æ®µçš„é•¿åº¦
 
-DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--É¾³ýÃüÃû¿Õ¼ä
-drop user user_name cascade;													--É¾³ýÓÃ»§
+DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--åˆ é™¤å‘½åç©ºé—´
+drop user user_name cascade;                                                    --åˆ é™¤ç”¨æˆ·
 
-select 'alter table '||table_name||' enable constraint '||constraint_name||';' from user_constraints where constraint_type='R';		--Æô¶¯Íâ¼ü
-select 'alter table '||table_name||' disable constraint '||constraint_name||';' from user_constraints where constraint_type='R';	--¹Ø±ÕÍâ¼ü
+select 'alter table '||table_name||' enable constraint '||constraint_name||';' from user_constraints where constraint_type='R';     --å¯åŠ¨å¤–é”®
+select 'alter table '||table_name||' disable constraint '||constraint_name||';' from user_constraints where constraint_type='R';    --å…³é—­å¤–é”®
 
 select owner,object_name from dba_objects where object_type='DATABASE LINK';
-select * from user_sys_privs where privilege like upper('%DATABASE LINK%'); 	--²é¿´ÓÃ»§ÓÐÃ»ÓÐ´´½¨dblinµÄÈ¨ÏÞ
-grant CREATE PUBLIC DATABASE LINK,DROP PUBLIC DATABASE LINK to username; 		--¸³Öµ´´½¨É¾³ýdblink
-create database link link31 connect to CEN_BZGL identified by "CEN_BZGL" using '10.61.234.31:1521/orcl'; --´´½¨dblink
-SELECT * FROM t_test@link31;		--²âÊÔdblink
-drop public database link LINK31;	--É¾³ýdblink
+select * from user_sys_privs where privilege like upper('%DATABASE LINK%');     --æŸ¥çœ‹ç”¨æˆ·æœ‰æ²¡æœ‰åˆ›å»ºdblinçš„æƒé™
+grant CREATE PUBLIC DATABASE LINK,DROP PUBLIC DATABASE LINK to username;        --èµ‹å€¼åˆ›å»ºåˆ é™¤dblink
+create database link link31 connect to CEN_BZGL identified by "CEN_BZGL" using '10.61.234.31:1521/orcl'; --åˆ›å»ºdblink
+SELECT * FROM t_test@link31;        --æµ‹è¯•dblink
+drop public database link LINK31;   --åˆ é™¤dblink
 drop database link link31;
 
-grant resource to GW_CEN_SYS;							--ÎªÓÃ»§ÊÚÓèresourceÈ¨ÏÞ£¬Ôò²»¶ÔÓÃ»§µÄ±í¿Õ¼ä½øÐÐÏÞÖÆ
-grant unlimited tablespace to GW_CEN_SYS;				--ÊÚÓèÓÃ»§±í¿Õ¼ä²»ÊÜÏÞÖÆµÄÈ¨ÏÞ
+grant resource to GW_CEN_SYS;                           --ä¸ºç”¨æˆ·æŽˆäºˆresourceæƒé™ï¼Œåˆ™ä¸å¯¹ç”¨æˆ·çš„è¡¨ç©ºé—´è¿›è¡Œé™åˆ¶
+grant unlimited tablespace to GW_CEN_SYS;               --æŽˆäºˆç”¨æˆ·è¡¨ç©ºé—´ä¸å—é™åˆ¶çš„æƒé™
 
-create public synonym table_name for user.table_name;	--´´½¨Í¬Òå´Ê
-drop public synonym table_name;							--É¾³ýÍ¬Òå´Ê
+create public synonym table_name for user.table_name;   --åˆ›å»ºåŒä¹‰è¯
+drop public synonym table_name;                         --åˆ é™¤åŒä¹‰è¯
 
-select * from user_jobs;			--²é¿´µ÷¶ÈÈÎÎñ
-select * from dba_jobs_running;		--²é¿´ÕýÔÚÖ´ÐÐµÄµ÷¶ÈÈÎÎñ
-select * from dba_jobs;				--²é¿´Ö´ÐÐÍêµÄµ÷¶ÈÈÎÎñ
+select * from user_jobs;            --æŸ¥çœ‹è°ƒåº¦ä»»åŠ¡
+select * from dba_jobs_running;     --æŸ¥çœ‹æ­£åœ¨æ‰§è¡Œçš„è°ƒåº¦ä»»åŠ¡
+select * from dba_jobs;             --æŸ¥çœ‹æ‰§è¡Œå®Œçš„è°ƒåº¦ä»»åŠ¡
 
-select * from dba_users; 			--²é¿´Êý¾Ý¿âÀïÃæËùÓÐÓÃ»§£¬Ç°ÌáÊÇÄãÊÇÓÐdbaÈ¨ÏÞµÄÕÊºÅ£¬Èçsys,system
-select username from all_users;  	--²é¿´ÄãÄÜ¹ÜÀíµÄËùÓÐÓÃ»§£¡
-select * from user_users; 			--²é¿´µ±Ç°ÓÃ»§ÐÅÏ¢ £¡
-@ d:\wonders\1_create_table.sql  	--ÔËÐÐsql½Å±¾
-select * from user_triggers;		--²é¿´½¨Á¢µÄ´¥·¢Æ÷
-select * from user_sequences;		--²é¿´½¨Á¢µÄÐòÁÐ
+select * from dba_users;            --æŸ¥çœ‹æ•°æ®åº“é‡Œé¢æ‰€æœ‰ç”¨æˆ·ï¼Œå‰ææ˜¯ä½ æ˜¯æœ‰dbaæƒé™çš„å¸å·ï¼Œå¦‚sys,system
+select username from all_users;     --æŸ¥çœ‹ä½ èƒ½ç®¡ç†çš„æ‰€æœ‰ç”¨æˆ·ï¼
+select * from user_users;           --æŸ¥çœ‹å½“å‰ç”¨æˆ·ä¿¡æ¯ ï¼
+@ d:\wonders\1_create_table.sql     --è¿è¡Œsqlè„šæœ¬
+select * from user_triggers;        --æŸ¥çœ‹å»ºç«‹çš„è§¦å‘å™¨
+select * from user_sequences;       --æŸ¥çœ‹å»ºç«‹çš„åºåˆ—
 
 
 CREATE  SEQUENCE dic_seq
-INCREMENT  BY   1  --  Ã¿´Î¼ÓµÄ¸öÊý¾Ý 
-START  WITH   1 --  ´Ó1¿ªÊ¼¼ÆÊý 
-NOMAXVALUE  --  ²»ÉèÖÃ×î´óÖµ 
-NOCYCLE --  CYCLE | NOCYCLE ÊÇ·ñÑ­»·£¬½¨Òé²»Ê¹ÓÃ
-NOCACHE;  --CACHE n | NOCACHE ÊÇ·ñÆôÓÃ»º´æ
-DROP  SEQUENCE dic_seq; --É¾³ýÐòÁÐ
-ÔÚinsertÓï¾äÖÐ,Ö±½ÓÊ¹ÓÃsequence.nextvalÒýÓÃ£»
-insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'Ê¥Ë¬¿óÈªË®',to_date('2011-01-01','yyyy-mm-dd'),500); 
-==============================================================================================================================================================²é¿´Ê¹ÓÃÇé¿ö±í¿Õ¼ä
---²é¿´Ê¹ÓÃÇé¿ö
+INCREMENT  BY   1  --  æ¯æ¬¡åŠ çš„ä¸ªæ•°æ® 
+START  WITH   1 --  ä»Ž1å¼€å§‹è®¡æ•° 
+NOMAXVALUE  --  ä¸è®¾ç½®æœ€å¤§å€¼ 
+NOCYCLE --  CYCLE | NOCYCLE æ˜¯å¦å¾ªçŽ¯ï¼Œå»ºè®®ä¸ä½¿ç”¨
+NOCACHE;  --CACHE n | NOCACHE æ˜¯å¦å¯ç”¨ç¼“å­˜
+DROP  SEQUENCE dic_seq; --åˆ é™¤åºåˆ—
+åœ¨insertè¯­å¥ä¸­,ç›´æŽ¥ä½¿ç”¨sequence.nextvalå¼•ç”¨ï¼›
+insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'åœ£çˆ½çŸ¿æ³‰æ°´',to_date('2011-01-01','yyyy-mm-dd'),500); 
+==============================================================================================================================================================æŸ¥çœ‹ä½¿ç”¨æƒ…å†µè¡¨ç©ºé—´
+--æŸ¥çœ‹ä½¿ç”¨æƒ…å†µ
 select a.tablespace_name, a.bytes / 1024 / 1024 "sum MB", (a.bytes - b.bytes) / 1024 / 1024 "used MB",  b.bytes / 1024 / 1024 "free MB",
 round(((a.bytes - b.bytes) / a.bytes) * 100, 2) "used%"
 from (select tablespace_name, sum(bytes) bytes from dba_data_files group by tablespace_name) a,
 (select tablespace_name, sum(bytes) bytes, max(bytes) largest from dba_free_space group by tablespace_name) b
 where a.tablespace_name = b.tablespace_name order by ((a.bytes - b.bytes) / a.bytes) desc;
---²é¿´Ä³Ò»¸ö±í¿Õ¼äÕ¼ÓÃ
-SELECT	table_name,	nvl ( bytes / 1024 / 1024, 0 ) MB FROM	dba_tables	LEFT JOIN dba_segments ON table_name = segment_name 
+--æŸ¥çœ‹æŸä¸€ä¸ªè¡¨ç©ºé—´å ç”¨
+SELECT  table_name, nvl ( bytes / 1024 / 1024, 0 ) MB FROM  dba_tables  LEFT JOIN dba_segments ON table_name = segment_name 
 --where table_name like '%SIPI_MSG%'
-ORDER BY	nvl ( bytes, 0 ) DESC;
+ORDER BY    nvl ( bytes, 0 ) DESC;
 
---ÕÒÎ»ÖÃ
+--æ‰¾ä½ç½®
 select tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space from sys.dba_data_files order by tablespace_name;
 
---±í¿Õ¼äÀ©Õ¹µ½4G
+--è¡¨ç©ºé—´æ‰©å±•åˆ°4G
 alter database datafile 'D:\APP\ADMINISTRATOR\ORADATA\XYSHARE\SGSHARE.DBF' resize 4096m;
-À©Õ¹±í¿Õ¼ä£¬ÎªÆäÔö¼Ó¸ü¶à´æ´¢¿Õ¼ä£¬ÓÐËÄÖÖ·½·¨£º
-µÚÒ»ÖÖ£ºÔö¼ÓÊý¾ÝÎÄ¼þ
-alter tablespace data01 add datafile 'd:\java\test\data02.dbf¡¯size 2m
-µÚ¶þÖÖ£ºÊÖ¶¯¸Ä±äÒÑ´æÔÚÊý¾ÝÎÄ¼þ´óÐ¡
-alter database datafile 'd:\java\test\data01.dbf¡¯resize 4m;
-µÚÈýÖÖ£ºÔÊÐíÒÑ´æÔÚµÄÊý¾ÝÎÄ¼þ×Ô¶¯Ôö³¤
-alter database datafile ¡®d:\java\test\data01.dbf¡¯ autoextend on next 10m maxsize 500m;
-µÚËÄÖÖ·½·¨£ºÐÂÔöÊý¾ÝÎÄ¼þ£¬²¢ÇÒÔÊÐíÊý¾ÝÎÄ¼þ×Ô¶¯Ôö³¤
-alter tablespace data01 add datafile 'd:\java\test\data03.dbf¡¯size 2m autoextend on next 10m maxsize 500m;
-============================================================================================================Ëø±í½â¾ö
---ËùÓÐsessionÖÐµÄËùÓÐ±»Ëø¶¨µÄ¶ÔÏóÐÅÏ¢¡£
+æ‰©å±•è¡¨ç©ºé—´ï¼Œä¸ºå…¶å¢žåŠ æ›´å¤šå­˜å‚¨ç©ºé—´ï¼Œæœ‰å››ç§æ–¹æ³•ï¼š
+ç¬¬ä¸€ç§ï¼šå¢žåŠ æ•°æ®æ–‡ä»¶
+alter tablespace data01 add datafile 'd:\java\test\data02.dbfâ€™size 2m
+ç¬¬äºŒç§ï¼šæ‰‹åŠ¨æ”¹å˜å·²å­˜åœ¨æ•°æ®æ–‡ä»¶å¤§å°
+alter database datafile 'd:\java\test\data01.dbfâ€™resize 4m;
+ç¬¬ä¸‰ç§ï¼šå…è®¸å·²å­˜åœ¨çš„æ•°æ®æ–‡ä»¶è‡ªåŠ¨å¢žé•¿
+alter database datafile â€˜d:\java\test\data01.dbfâ€™ autoextend on next 10m maxsize 500m;
+ç¬¬å››ç§æ–¹æ³•ï¼šæ–°å¢žæ•°æ®æ–‡ä»¶ï¼Œå¹¶ä¸”å…è®¸æ•°æ®æ–‡ä»¶è‡ªåŠ¨å¢žé•¿
+alter tablespace data01 add datafile 'd:\java\test\data03.dbfâ€™size 2m autoextend on next 10m maxsize 500m;
+============================================================================================================é”è¡¨è§£å†³
+--æ‰€æœ‰sessionä¸­çš„æ‰€æœ‰è¢«é”å®šçš„å¯¹è±¡ä¿¡æ¯ã€‚
 select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t2.PROGRAM, t2.LOGON_TIME, t2.COMMAND, t2.LOCKWAIT, t2.SADDR, t2.PADDR, t2.TADDR, t2.SQL_ADDRESS, t1.LOCKED_MODE
   from v$locked_object t1, v$session t2, dba_objects t3
  where t1.session_id = t2.sid
    and t1.object_id = t3.object_id
  order by t2.logon_time;
---½âËø
+--è§£é”
  alter system kill session 'sid,seial#';
  alter system kill session '10,15';
-============================================================================================================±¸·Ý
---±¸·Ý
+============================================================================================================å¤‡ä»½
+--å¤‡ä»½
 exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20200518_ecard.dmp log=oracleBak_ecard.log
---»Ö¸´
+--æ¢å¤
 imp HCBMP/HCBMP@BKK file=f:/2.dmp full=y ignore=y;
-============================================================================================================ÐÞ¸ÄSYSÃÜÂë
-ÔÚcmd´°¿ÚÖÐÇÃÈëÏÂÁÐÃüÁî:
+============================================================================================================ä¿®æ”¹SYSå¯†ç 
+åœ¨cmdçª—å£ä¸­æ•²å…¥ä¸‹åˆ—å‘½ä»¤:
 sqlplus /nolog
 connect  /  as  sysdba
 alter user sys identified by root; 
 alter user system identified by root;
-============================================================================================================ÊÖ¶¯Ë¢ÐÂÊÓÍ¼
+============================================================================================================æ‰‹åŠ¨åˆ·æ–°è§†å›¾
 BEGIN
 DBMS_MVIEW.REFRESH (
 list => 'MV_MCINFOBOUND',
 Method =>'C',
 refresh_after_errors => True);
 END;
-============================================================================================================¡¾Êý¾Ý¿âÎÊÌâ¡¿
-SQL> select file#£¬status£¬bytes/1024/1024 mb£¬name from v$datafile where file#=4;
+============================================================================================================ã€æ•°æ®åº“é—®é¢˜ã€‘
+SQL> select file#ï¼Œstatusï¼Œbytes/1024/1024 mbï¼Œname from v$datafile where file#=4;
 ORA-01122: database file 2 failed verification check
 ORA-01110: data file 2: '/oradata/oracle/oradata/oradb/sysaux01.dbf'
 ORA-01200: actual file size of 62720 is smaller than correct size of 66560 blocks
-±¨´íÌáÊ¾Êý¾Ý¿â¼ÇÂ¼/oradata/oracle/oradata/oradb/sysaux01.dbfµÄ´óÐ¡ÊÇ66560¶øÊµ¼Ê´óÐ¡ÊÇ62720£¬´ËÖÖ±¨´íÓÐ¸ö¼òµ¥µÄ½â¾ö·½·¨£¬¾ÍÊÇÍ¨¹ýddÐÞ¸Ä±¨´íÏà¹ØµÄÊý¾ÝÎÄ¼þ£¬¸Ä³ÉÊý¾Ý¿âÆÚÍûµÄ´óÐ¡£¬Â÷¹ýoracle£º
+æŠ¥é”™æç¤ºæ•°æ®åº“è®°å½•/oradata/oracle/oradata/oradb/sysaux01.dbfçš„å¤§å°æ˜¯66560è€Œå®žé™…å¤§å°æ˜¯62720ï¼Œæ­¤ç§æŠ¥é”™æœ‰ä¸ªç®€å•çš„è§£å†³æ–¹æ³•ï¼Œå°±æ˜¯é€šè¿‡ddä¿®æ”¹æŠ¥é”™ç›¸å…³çš„æ•°æ®æ–‡ä»¶ï¼Œæ”¹æˆæ•°æ®åº“æœŸæœ›çš„å¤§å°ï¼Œçž’è¿‡oracleï¼š
 SQL> select 66560 - 62720 from dual;
 3840
-SQL> !dd if=/dev/zero of=/oradata/oracle/oradata/oradb/sysaux01.dbf bs=8192 count=3840 seek=62721 --bsÊÇÊý¾Ý¿â¿é´óÐ¡£¬countÊÇ²îÖµ£¬seekÊÇ´ÓÄÄ¿ªÊ¼Ìî³ä0
+SQL> !dd if=/dev/zero of=/oradata/oracle/oradata/oradb/sysaux01.dbf bs=8192 count=3840 seek=62721 --bsæ˜¯æ•°æ®åº“å—å¤§å°ï¼Œcountæ˜¯å·®å€¼ï¼Œseekæ˜¯ä»Žå“ªå¼€å§‹å¡«å……0
 3840+0 records in
 3840+0 records out
 31457280 bytes (31 MB) copied, 0.02607 seconds, 1.2 GB/s
@@ -167,30 +167,30 @@ ORACLE instance shut down.
 SQL> startup;
 ORACLE instance started.
 Total System Global Area  839282688 bytes
-Fixed Size	   2257880 bytes
-Variable Size	 545262632 bytes
-Database Buffers	 289406976 bytes
-Redo Buffers	   2355200 bytes
+Fixed Size     2257880 bytes
+Variable Size    545262632 bytes
+Database Buffers     289406976 bytes
+Redo Buffers       2355200 bytes
 Database mounted.
 Database opened.
-------------------------------------------------------------------------------------------------------------´æ´¢¹ý³Ì
-É¾³ý´æ´¢¹ý³Ì DROP PROCEDURE ´æ´¢¹ý³ÌÃû×Ö
-É¾³ýº¯Êý DROP FUNCTION º¯ÊýÃû×Ö
-É¾³ý´¥·¢Æ÷ DROP TRIGGER ´¥·¢Æ÷Ãû×Ö
---ÔÚ´´½¨ÊÓÍ¼£¨VIEW£©Ê±£¬Ö»ÄÜÊ¹ÓÃAS¡£ÔÚÉùÃ÷ÓÎ±ê£¨CURSOR£©Ê±£¬Ö»ÄÜÊ¹ÓÃIS¡£
-set serveroutput on;--´ò¿ªÊä³ö
-EXEC raisesalary(1);--Ö´ÐÐ´æ´¢¹ý³Ì
---´´½¨ ÎÞ²ÎÎÞÀ¨ºÅ
+------------------------------------------------------------------------------------------------------------å­˜å‚¨è¿‡ç¨‹
+åˆ é™¤å­˜å‚¨è¿‡ç¨‹ DROP PROCEDURE å­˜å‚¨è¿‡ç¨‹åå­—
+åˆ é™¤å‡½æ•° DROP FUNCTION å‡½æ•°åå­—
+åˆ é™¤è§¦å‘å™¨ DROP TRIGGER è§¦å‘å™¨åå­—
+--åœ¨åˆ›å»ºè§†å›¾ï¼ˆVIEWï¼‰æ—¶ï¼Œåªèƒ½ä½¿ç”¨ASã€‚åœ¨å£°æ˜Žæ¸¸æ ‡ï¼ˆCURSORï¼‰æ—¶ï¼Œåªèƒ½ä½¿ç”¨ISã€‚
+set serveroutput on;--æ‰“å¼€è¾“å‡º
+EXEC raisesalary(1);--æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+--åˆ›å»º æ— å‚æ— æ‹¬å·
 create or replace procedure raisesalary(eno in number) 
 as
- --±äÁ¿
+ --å˜é‡
  psal h_p_dic_mapping.h_category_name%type;
 begin
  select h_category_name into psal from h_p_dic_mapping where pkid=eno;
  update h_p_dic_mapping set h_category_name=h_category_name||'333' where pkid=eno;
- dbms_output.put_line('ÕÇÇ°£ºÕÇºó£º'||psal);
+ dbms_output.put_line('æ¶¨å‰ï¼šæ¶¨åŽï¼š'||psal);
 end;
------------------------------------------------------ÏµÍ³Ê±¼ä
+-----------------------------------------------------ç³»ç»Ÿæ—¶é—´
 create or replace procedure calc_Money is 
 str_begin varchar2(20);
 str_end varchar2(20);
@@ -198,13 +198,13 @@ begin
 str_begin := to_char(sysdate-1,'yyyy-mm-dd');  
 str_end :=to_char(sysdate,'yyyy-mm-dd');
 Insert into A_MONEY
-select to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'),z.akb021,v.* from (select 'ÍË¿î£º'||sum(t.aae019),t.akb020 from YY_ZF10 t where t.zke599='2' and t.zkf018='1' 
+select to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'),z.akb021,v.* from (select 'é€€æ¬¾ï¼š'||sum(t.aae019),t.akb020 from YY_ZF10 t where t.zke599='2' and t.zkf018='1' 
 and t.aae036 >to_date(str_begin,'yyyy/mm/dd hh24:mi:ss') 
 and t.aae036 <to_date(str_end,'yyyy/mm/dd hh24:mi:ss')
 group by t.akb020)v  left join yy_zk49 z on v.akb020=z.akb020);
 commit;
 end;
--------------------------------------------------------Ñ­»·
+-------------------------------------------------------å¾ªçŽ¯
 create or replace procedure test_job(i in number) as
 v_num number ;
 begin
@@ -216,26 +216,26 @@ while v_num < i LOOP
   v_num:= v_num + 1;
 end LOOP;
 end;
-------------------------------------------------------------------------------------------------------------¶¨Ê±ÈÎÎñ
+------------------------------------------------------------------------------------------------------------å®šæ—¶ä»»åŠ¡
 declare
 job_number number;
 cursor job_cursor is select * from user_jobs;
 begin
 -- Call the procedure
-sys.dbms_job.submit(job => job_number,   --out²ÎÊý£¬job±àºÅ
-what => 'calc;', --×¢ÒâÓÐ·ÖºÅ
-next_date => sysdate + 5/(24*60), --ÏÂÒ»¸ö 5·ÖÖÓÖ´ÐÐ  
---ADD_MONTHS(trunc(sysdate,'yyyy'),6)+1/24  --Ã¿Äê7ÔÂ1ÈÕºÍ1ÔÂ1ÈÕÁè³¿1µã 
---TRUNC(next_day(sysdate,'ÐÇÆÚÒ»'))+1/24	--Ã¿ÖÜÒ»Áè³¿1µãÖ´ÐÐ 
-interval => 'TRUNC(sysdate+1)' --Ã¿ÌìÁè³¿0µãÖ´ÐÐ
+sys.dbms_job.submit(job => job_number,   --outå‚æ•°ï¼Œjobç¼–å·
+what => 'calc;', --æ³¨æ„æœ‰åˆ†å·
+next_date => sysdate + 5/(24*60), --ä¸‹ä¸€ä¸ª 5åˆ†é’Ÿæ‰§è¡Œ  
+--ADD_MONTHS(trunc(sysdate,'yyyy'),6)+1/24  --æ¯å¹´7æœˆ1æ—¥å’Œ1æœˆ1æ—¥å‡Œæ™¨1ç‚¹ 
+--TRUNC(next_day(sysdate,'æ˜ŸæœŸä¸€'))+1/24   --æ¯å‘¨ä¸€å‡Œæ™¨1ç‚¹æ‰§è¡Œ 
+interval => 'TRUNC(sysdate+1)' --æ¯å¤©å‡Œæ™¨0ç‚¹æ‰§è¡Œ
 );
 commit;
 end;
-------------------É¾³ý
+------------------åˆ é™¤
 begin
 sys.dbms_job.remove(job => 28);
 end;
-------------------ÐÞ¸ÄÖ´ÐÐÊ±¼ä
+------------------ä¿®æ”¹æ‰§è¡Œæ—¶é—´
 begin
 sys.dbms_job.interval(job => 29,
 interval => 'TRUNC(sysdate+1)');

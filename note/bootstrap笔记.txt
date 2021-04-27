@@ -1,32 +1,32 @@
 ------------------------------------------------------------------------------------------------
-±í¸ñ¶¨Òå
+è¡¨æ ¼å®šä¹‰
 https://blog.csdn.net/qq_38836082/article/details/81450164
 
 $('#tb_SaleOrder').bootstrapTable({
-	url: '<%=common_basePath %>/subject/list',
-	method: 'get',
-	sidePagination: "true",
-	toolbar: '#toolbar',              //¹¤¾ß°´Å¥ÓÃÄÄ¸öÈİÆ÷
-	sortOrder:'desc',
-	striped: true, // ÊÇ·ñÏÔÊ¾ĞĞ¼ä¸ôÉ«
-	uniqueId: "ID",
-	pageSize: "10",
-	pagination: true, // ÊÇ·ñ·ÖÒ³
-	sortable: true, // ÊÇ·ñÆôÓÃÅÅĞò
-	columns: [{
-		 checkbox: true
-	 },{
-		 field: 'id',
-		 visible: false,
-	 },{
-		 field: 'name',
-		 title: 'ÏîÄ¿Ãû³Æ',
-		 
-	 },{
-		 field: 'money',
-		 title: 'ÏîÄ¿½ğ¶î',
-	 }]
-	 
+    url: '<%=common_basePath %>/subject/list',
+    method: 'get',
+    sidePagination: "true",
+    toolbar: '#toolbar',              //å·¥å…·æŒ‰é’®ç”¨å“ªä¸ªå®¹å™¨
+    sortOrder:'desc',
+    striped: true, // æ˜¯å¦æ˜¾ç¤ºè¡Œé—´éš”è‰²
+    uniqueId: "ID",
+    pageSize: "10",
+    pagination: true, // æ˜¯å¦åˆ†é¡µ
+    sortable: true, // æ˜¯å¦å¯ç”¨æ’åº
+    columns: [{
+         checkbox: true
+     },{
+         field: 'id',
+         visible: false,
+     },{
+         field: 'name',
+         title: 'é¡¹ç›®åç§°',
+         
+     },{
+         field: 'money',
+         title: 'é¡¹ç›®é‡‘é¢',
+     }]
+     
 });
 
 ------------------------------------------------------------------------------------------------

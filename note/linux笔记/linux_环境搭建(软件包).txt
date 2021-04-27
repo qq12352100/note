@@ -1,16 +1,16 @@
-﻿linux 环境搭建：CentOS 6.5 64位
+linux 环境搭建：CentOS 6.5 64位
 -----------------------------------------------------------JDK安装：-------------------------------------------------------------------------
-1、解压：	$ tar -zxvf jdk.tar.gz
+1、解压：   $ tar -zxvf jdk.tar.gz
 2、配置环境变量：
-	vim /etc/profile
-	
-	在末尾行添加
-	JAVA_HOME=/usr/local/jdk1.7.0_80
-	CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-	PATH=$JAVA_HOME/bin:$PATH
-	export JAVA_HOME CLASSPATH PATH
-	
-3、运行命令让配置生效		$ source /etc/profile	
+    vim /etc/profile
+    
+    在末尾行添加
+    JAVA_HOME=/usr/local/jdk1.7.0_80
+    CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+    PATH=$JAVA_HOME/bin:$PATH
+    export JAVA_HOME CLASSPATH PATH
+    
+3、运行命令让配置生效     $ source /etc/profile   
 
 ------------------------------------------------------taomcat安装------------------------------------------------------------------------
 TOMCAT_HOME=/usr/local/apache-tomcat-7.0.65
@@ -26,37 +26,37 @@ source /etc/profile
 -----------------------------------------------------------------mysql安装----------------------------------------------------------------------
 1、下载MySQL-5.6.16-1.el6.x86_64.rpm-bundle.tar
 2、解压 tar -xvf MySQL-5.6.15-1.el6.i686.rpm-bundle.tar
-MySQL-shared-compat-5.6.15-1.el6.i686.rpm		 # RHEL兼容包
-MySQL-server-5.6.15-1.el6.i686.rpm				 # MySQL服务端程序
-MySQL-client-5.6.15-1.el6.i686.rpm				 # MySQL客户端程序
-MySQL-devel-5.6.15-1.el6.i686.rpm				 # MySQL的库和头文件
-MySQL-shared-5.6.15-1.el6.i686.rpm				 # MySQL的共享库
+MySQL-shared-compat-5.6.15-1.el6.i686.rpm        # RHEL兼容包
+MySQL-server-5.6.15-1.el6.i686.rpm               # MySQL服务端程序
+MySQL-client-5.6.15-1.el6.i686.rpm               # MySQL客户端程序
+MySQL-devel-5.6.15-1.el6.i686.rpm                # MySQL的库和头文件
+MySQL-shared-5.6.15-1.el6.i686.rpm               # MySQL的共享库
 在RHEL系统中，必须先安装“MySQL-shared-compat-5.6.15-1.el6.i686.rpm”这个兼容包，然后才能安装server和client，否则安装时会出错。
 3、安装
-rpm -qa | grep mysql							--查看系统之前是否已安装MySQL
-rpm -e --nodeps mysql-libs-5.1.47-4.el6.i686	--移除mysql
-find / -name mysql*								--查找残留文件
-rm -rf /var/lib/mysql*							--移除残留文件
+rpm -qa | grep mysql                            --查看系统之前是否已安装MySQL
+rpm -e --nodeps mysql-libs-5.1.47-4.el6.i686    --移除mysql
+find / -name mysql*                             --查找残留文件
+rm -rf /var/lib/mysql*                          --移除残留文件
 卸载后 /var/lib/mysql 中的  /etc/my.cnf 会重命名为 my.cnf.rpmsave，/var/log/mysqld.log 会重命名为 /var/log/mysqld.log.rpmsave，如果确定没用后就手工删除。
 安装开始：
 rpm -ivh MySQL-shared-compat-5.6.15-1.el6.i686.rpm
 rpm -ivh MySQL-server-5.6.15-1.el6.i686.rpm
 rpm -ivh MySQL-client-5.6.15-1.el6.i686.rpm
-rpm -q MySQL-server					--安装完成，查看有没有安装成功
-netstat -nat						--检测 MySQL 3306 端口是否安打开
-service mysql start/stop			--启动/关闭MySql 服务
+rpm -q MySQL-server                 --安装完成，查看有没有安装成功
+netstat -nat                        --检测 MySQL 3306 端口是否安打开
+service mysql start/stop            --启动/关闭MySql 服务
 
 a、数据库目录    /var/lib/mysql/ 
-b、配置文件	 /usr/share/mysql（mysql.server命令及配置文件） 
-c、相关命令	 /usr/bin(mysqladmin mysqldump等命令) 
-d、启动脚本	 /etc/rc.d/init.d/（启动脚本文件mysql的目录）
+b、配置文件   /usr/share/mysql（mysql.server命令及配置文件） 
+c、相关命令   /usr/bin(mysqladmin mysqldump等命令) 
+d、启动脚本   /etc/rc.d/init.d/（启动脚本文件mysql的目录）
 
 在这个版本的安装过程中会在 /root/.mysql_secret 生成随机密码，首次登陆、找到随机密码，用此密码来登录
 
-set password=password('123456');														--设置新密码
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION；	--赋予任何主机上以root身份访问数据的权限(有密码)
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION；							--赋予任何主机上以root身份访问数据的权限(没密码)
-flush privileges;																		--刷新系统权限,重启服务也可以
+set password=password('123456');                                                        --设置新密码
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION； --赋予任何主机上以root身份访问数据的权限(有密码)
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION；                            --赋予任何主机上以root身份访问数据的权限(没密码)
+flush privileges;                                                                       --刷新系统权限,重启服务也可以
 
 --查看连接权限
 use mysql;
@@ -68,7 +68,7 @@ select user,host from user;  --注:host为%，说明可以任意主机连接
 lower_case_table_names=1
 
 --修改字符集的问题
-show variables like 'character%';	--查看字符集
+show variables like 'character%';   --查看字符集
 vim /usr/my.cnf
 加文件中加入：
 [client]
@@ -116,22 +116,22 @@ ab -c 10 -n 100 http://blog.csdn.net/
 现公司服务器内存一般都可以加到最大2G ，所以可以采取以下配置：
 JAVA_OPTS='-Xms1024m -Xmx2048m -XX:PermSize=256M -XX:MaxNewSize=256m -XX:MaxPermSize=256m'
 
--server		 启用jdk 的 server 版；  
--Xms		 java虚拟机初始化时的最小内存；  
--Xmx		 java虚拟机可使用的最大内存；  
--XX:PermSize	  内存永久保留区域  
+-server      启用jdk 的 server 版；  
+-Xms         java虚拟机初始化时的最小内存；  
+-Xmx         java虚拟机可使用的最大内存；  
+-XX:PermSize      内存永久保留区域  
 -XX:MaxPermSize   内存最大永久保留区域  
 
 ------------------------------------------------------解压命令------------------------------------------------------------------------
- *.tar			用 tar –xvf 
- *.gz			用 gzip -d或者 gunzip 
- *.tar.gz和*.tgz	用 tar –xzf 
- *.bz2			用 bzip2 -d或者	bunzip2 
- *.tar.bz2		用 tar –xjf  
- *.Z			用 uncompress 
- *.tar.Z		用 tar –xZf 
- *.rar			用 unrar 
- *.zip			用 unzip 
+ *.tar          用 tar –xvf 
+ *.gz           用 gzip -d或者 gunzip 
+ *.tar.gz和*.tgz 用 tar –xzf 
+ *.bz2          用 bzip2 -d或者    bunzip2 
+ *.tar.bz2      用 tar –xjf  
+ *.Z            用 uncompress 
+ *.tar.Z        用 tar –xZf 
+ *.rar          用 unrar 
+ *.zip          用 unzip 
 
 -------------------------------------------rpm包安装过程中依赖问题“libc.so.6 is needed by XXX”解决方法-----------------------------------------
 解决方法都是安装缺少的依赖库即可。但是搜索后发现，本机上有些库已经安装了。
@@ -144,8 +144,8 @@ yum list libstdc++*
 yum install libstdc++.i686
 -----------------------------------------------------------------------------------------------------------------------------------------------
 chown -R root:root /var/lib/mysql
-rpm -qa|grep -i mysql		--查找以前是否装有mysql
-rpm -e --nodeps mysql		--删除包
+rpm -qa|grep -i mysql       --查找以前是否装有mysql
+rpm -e --nodeps mysql       --删除包
 
 mysql
 localhost密码root

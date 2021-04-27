@@ -1,37 +1,37 @@
------------¡¾ÕûºÏphp¡¿-------------
-1¡¢ÔÚapacheµÄconfÄ¿Â¼ÏÂµÄhttp.confÄ£¿é¹ÜÀíÏÂ¼ÓÏÂÃæ´úÂë
-	#apache¼ÓÔØphp´¦ÀíÄ£¿é
-	LoadModule php5_module ~php°²×°Â·¾¶/php5apache2_2.dll
-	#phpinidir Õâ¸öÓÃÓÚÖ¸¶¨php·ÅiniÎÄ¼ş£¬¸ÃÎÄ¼ş¼ÓÔØÊ±´¦ÀíphpµÄÒ»Ğ©ÅäÖÃ
-	PHPIniDir "~phpÄ£¿é°²×°Â·¾¶"
-	#µ±ÓĞÒ»¸ö×ÊÔ´ÊÇ*.phpµÄÊ±ºò¾ÍÓÉphpÀ´´¦Àí
-	AddType application/x-httpd-php .php .phtml
-2¡¢°Ñphp.ini-development¸Ä³Éphp.ini
-3¡¢ÔÚphp.iniÖĞÖ¸¶¨¶ÔÓ¦¹¦ÄÜÄ£¿é
-	£»ÕâÊÇÖ¸¶¨phpµÄÀ©Õ¹Â·¾¶
-	extension_dir = "~php°²×°Â·¾¶/ext"
-4¡¢²âÊÔtest.php
-	<?php
-	  phpinfo();
-	?>
-ÖØÆôapache·ÃÎÊhttp://localhost/test.php
--------------¡¾ÕûºÏmysql¡¿----------------
-1¡¢php.iniÖĞ´ò¿ª
-	extension=php_mysql.dll
-	extension=php_mysqli.dll
-2¡¢²âÊÔ
+-----------ã€æ•´åˆphpã€‘-------------
+1ã€åœ¨apacheçš„confç›®å½•ä¸‹çš„http.confæ¨¡å—ç®¡ç†ä¸‹åŠ ä¸‹é¢ä»£ç 
+    #apacheåŠ è½½phpå¤„ç†æ¨¡å—
+    LoadModule php5_module ~phpå®‰è£…è·¯å¾„/php5apache2_2.dll
+    #phpinidir è¿™ä¸ªç”¨äºæŒ‡å®šphpæ”¾iniæ–‡ä»¶ï¼Œè¯¥æ–‡ä»¶åŠ è½½æ—¶å¤„ç†phpçš„ä¸€äº›é…ç½®
+    PHPIniDir "~phpæ¨¡å—å®‰è£…è·¯å¾„"
+    #å½“æœ‰ä¸€ä¸ªèµ„æºæ˜¯*.phpçš„æ—¶å€™å°±ç”±phpæ¥å¤„ç†
+    AddType application/x-httpd-php .php .phtml
+2ã€æŠŠphp.ini-developmentæ”¹æˆphp.ini
+3ã€åœ¨php.iniä¸­æŒ‡å®šå¯¹åº”åŠŸèƒ½æ¨¡å—
+    ï¼›è¿™æ˜¯æŒ‡å®šphpçš„æ‰©å±•è·¯å¾„
+    extension_dir = "~phpå®‰è£…è·¯å¾„/ext"
+4ã€æµ‹è¯•test.php
+    <?php
+      phpinfo();
+    ?>
+é‡å¯apacheè®¿é—®http://localhost/test.php
+-------------ã€æ•´åˆmysqlã€‘----------------
+1ã€php.iniä¸­æ‰“å¼€
+    extension=php_mysql.dll
+    extension=php_mysqli.dll
+2ã€æµ‹è¯•
 test.php
 <?php
-	$conn=mysql_connect("localhost","root","root");
-	if($conn){
-	 echo "Á¬½Ómysql³É¹¦£¡";
-	}else{
-	 echo "Á¬½ÓmysqlÊ§°Ü£¡";
-	}
+    $conn=mysql_connect("localhost","root","root");
+    if($conn){
+     echo "è¿æ¥mysqlæˆåŠŸï¼";
+    }else{
+     echo "è¿æ¥mysqlå¤±è´¥ï¼";
+    }
 ?>
-ÖØÆôapache·ÃÎÊhttp://localhost/test.php
------------¡¾ÕûºÏphpmyadmin¡¿-------------
-1¡¢php.iniÖĞ´ò¿ª
-	extension=php_mbstring.dll
-Ö±½Ó½âÑ¹µ½htdocsÄ¿Â¼ÏÂÃæ
-·ÃÎÊhttp://localhost/Ä¿Â¼Ãû/index.php
+é‡å¯apacheè®¿é—®http://localhost/test.php
+-----------ã€æ•´åˆphpmyadminã€‘-------------
+1ã€php.iniä¸­æ‰“å¼€
+    extension=php_mbstring.dll
+ç›´æ¥è§£å‹åˆ°htdocsç›®å½•ä¸‹é¢
+è®¿é—®http://localhost/ç›®å½•å/index.php

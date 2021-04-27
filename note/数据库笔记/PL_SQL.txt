@@ -8,7 +8,7 @@ begin
  dbms_output.put_line(v_empno(1));
 end;
 
-------select Óï¾ä ºÍ intoÒ»ÆğÓÃ²¢ÇÒÓĞÇÒÖ»ÓĞÒ»Ìõ¼ÇÂ¼·µ»Ø
+------select è¯­å¥ å’Œ intoä¸€èµ·ç”¨å¹¶ä¸”æœ‰ä¸”åªæœ‰ä¸€æ¡è®°å½•è¿”å›
 declare
  v_ename emp.ename%type;
  v_sal emp.sal%type;
@@ -17,7 +17,7 @@ begin
  dbms_output.put_line(v_ename || ' ' || v_sal);
 end;
 
---------insert Óï¾ä
+--------insert è¯­å¥
 declare
  v_deptno dept.deptno%type := 50;
  v_dname dept.dname%type := 'aaa';
@@ -27,7 +27,7 @@ begin
  commit;
 end;
 
------------·µ»ØÖµÎÊÌâ select ·µ»ØÒ»¸öÖµ
+-----------è¿”å›å€¼é—®é¢˜ select è¿”å›ä¸€ä¸ªå€¼
 declare
  v_deptno emp2.deptno%type := 50;
  v_count number;
@@ -35,38 +35,38 @@ begin
    --update emp2 set sal = sal/2 where deptno = v_deptno;
    --select deptno into v_deptno from emp2 where empno = 7369;
      select count(*) into v_count from emp2;
-    dbms_output.put_line(sql%rowcount || 'Ìõ¼ÇÂ¼±»Ó°Ïì');-- sql ÊÇÖ¸¸Õ¸ÕÖ´ÍêµÄsqlÓï¾ä
+    dbms_output.put_line(sql%rowcount || 'æ¡è®°å½•è¢«å½±å“');-- sql æ˜¯æŒ‡åˆšåˆšæ‰§å®Œçš„sqlè¯­å¥
   commit;
 end;
 
------------ÔÚpl/sqlÖĞÖ´ĞĞDDLÓï¾ä
+-----------åœ¨pl/sqlä¸­æ‰§è¡ŒDDLè¯­å¥
 begin
   execute immediate 'create table T (nnn varchar2(20) default ''aaa'')';
 end;
 
------------ifÓï¾ä
+-----------ifè¯­å¥
 declare
  v_sal emp.sal%type;
 begin
  select sal into v_sal from emp
          where empno = 7369;
  if (v_sal < 1200) then
-	      dbms_output.put_line('low');
+          dbms_output.put_line('low');
  elsif (v_sal <2000) then
-		dbms_output.put_line('middle');
+        dbms_output.put_line('middle');
  else
-		dbms_output.put_line('high');
+        dbms_output.put_line('high');
 end if;
 end;
 
-----------------Ñ­»·loop¿ªÍ·£¬end loop½áÎ²¡£
+----------------å¾ªç¯loopå¼€å¤´ï¼Œend loopç»“å°¾ã€‚
 declare---do while
   i binary_integer := 1;
 begin
   loop
-	dbms_output.put_line(i);
-	i := i+1;
-	exit when (i >= 11);
+    dbms_output.put_line(i);
+    i := i+1;
+    exit when (i >= 11);
   end loop;
 end;
 
@@ -74,8 +74,8 @@ declare---while do
   j binary_integer := 1;
 begin
   while j < 11 loop
-	  dbms_output.put_line(j);
-	  j := j + 1;
+      dbms_output.put_line(j);
+      j := j + 1;
  end loop;
 end;
 
@@ -88,8 +88,8 @@ begin---for
  end loop;
 end;
 
--------------------´íÎó´¦Àí
-create table errorlog------½¨Á¢ÈÕÖ¾
+-------------------é”™è¯¯å¤„ç†
+create table errorlog------å»ºç«‹æ—¥å¿—
 (
 id number primary key,
 errcode number,

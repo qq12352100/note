@@ -74,10 +74,10 @@ SELECT a.a1 "活跃人数" , b.b1 "男性活跃" ,c.c1 "女性活跃" FROM (
 我们不能给同一张表的同一个事件安排两个触发器 
 语法：
 create trigger trigger_name 
-	before | after
-	insert | update | delete
-	on table_name
-	for each row
+    before | after
+    insert | update | delete
+    on table_name
+    for each row
 begin
    sql
 end
@@ -102,13 +102,13 @@ drop triggers trigger_name ;
 ------------------------------------------------------事务管理------------------------------------------------------
 为保证数据库内容的一致，就要将数据库的一组操作作为一个整体来进行，要么全部成功完成，要么全部失败退出。
 开启事务处理的方式：
-标准事务：start transaction		#遇到commit或rollback语句，则认为是事务终止，后面的语句会立即写入到文件
-非标准：set autocommit=0		#即使遇到commit或rollback语句，后面语句仍然处于事务之中，说明不会写入到文件
-set autocommit=0：		表示关闭自动提交模式
-set autocommit=1：		表示开启自动提交模式
-start transaction：		开启标准事务
-commit：				提交事务
-rollback：				回滚事务
+标准事务：start transaction      #遇到commit或rollback语句，则认为是事务终止，后面的语句会立即写入到文件
+非标准：set autocommit=0        #即使遇到commit或rollback语句，后面语句仍然处于事务之中，说明不会写入到文件
+set autocommit=0：       表示关闭自动提交模式
+set autocommit=1：       表示开启自动提交模式
+start transaction：      开启标准事务
+commit：             提交事务
+rollback：               回滚事务
 
 -------------------------------------------------------存储过程-----------------------------------------------------
 大型数据库系统中，一组为了完成特定功能的SQL
