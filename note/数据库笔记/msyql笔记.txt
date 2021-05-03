@@ -7,7 +7,18 @@ character-set-server=utf8
 ---------------------------------------------------------------------------------------
 数据库备份
 mysqldump -u root -p bkk>bak.sql
-mysqldump -u root -p --databases hlwsjtb > hlwsjtb.sql
+mysqldump -u root -proot --databases hlwsjtb > hlwsjtb.db
+mysqldump -u root -proot --databases hlwsjtb > `date +%Y-%m-%d`_hlwsjtb.db
+mysqldump -u root -proot hlwsjtb t_yisa_door_device > t_yisa_door_device.sql
+
+还原数据库备份
+方式一：命令行
+mysql -uroot -p  db_name < /backup/mysqldump/db_name.db
+方式二：进mysql
+mysql > use db_name
+mysql > source /backup/mysqldump/db_name.db
+注：在导入备份数据库前，db_name如果没有，是需要创建的； 而且与db_name.db中数据库名是一样的才可以导入。
+
 创建数据库
 create database `hlwsjtb`;
 清空数据表
