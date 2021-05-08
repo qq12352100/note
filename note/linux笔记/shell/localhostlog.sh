@@ -37,7 +37,7 @@ df -h | grep '^/dev/' >> $fname
 #free
 free -g | sed -n '2p' | awk -v a='G' '{print "内存总共：",$2a,"使用：",$3a,"剩余：",$4a}' >> $fname
 echo '-----------------------------------------------------------------------------------------------------' >> $fname
-ps -ef | grep 'python' | grep 'start$' | awk '{print $8,$9,$10}'| sort -k 2 | uniq | wc -l |awk '{print "正在运行的python脚本:",$1-1}' >> $fname
+ps -ef | grep 'python' | grep 'start$' | uniq | wc -l |awk '{print "正在运行的python脚本:",$1-1}' >> $fname
 ps -ef | grep 'python' | grep 'start$' | awk '{print $8,$9,$10}'| sort -k 2 | uniq >> $fname
 ps -ef | grep 'python' | grep ':app$' | awk '{print $13,$NF}' | uniq >> $fname
 screen -ls >> $fname

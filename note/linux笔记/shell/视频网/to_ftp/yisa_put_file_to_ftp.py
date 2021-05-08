@@ -31,7 +31,7 @@ import re
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-filterIP= ''
+filterIP= {'ip'}
 def redis_connect(redis_config):
     if 'database' not in redis_config:
         redis_config['database'] = 0
@@ -229,7 +229,7 @@ class Dispatcher(multiprocessing.Process):
                         if try_times < self.try_times:
                             self.message_queen.put({'message':message,'try_times':try_times})#将消息退回队列
                             continue
-                        filterIP += str(re.findall(r"(?:[0-9]{1,3}\.){3}[0-9]{1,3}\:[0-9]{1,5}", image_url))
+                        filterIP.add(str(re.findall(r"(?:[0-9]{1,3}\.){3}[0-9]{1,3}\:[0-9]{1,5}", image_url)))
                         logging.warning(filterIP)
                         logging.warning('下载图片时错误: [%s] %s', image_url,str(e))
                         pipe.incr(time.strftime('%Y%m%d',time.localtime(time.time()))+":downpic_error")
