@@ -26,6 +26,15 @@ curl -F file=@20210115.txt http://songjian:songjian@10.52.223.3:36998/bkk/carFac
 /etc/init.d/sshd start           【启动22端口ssh服务】service sshd start
 ssh 10.10.10.10 -p 22 -l root    【远程登录】
 passwd root                      【修改root密码】
+chapasswd [选项]　　批量更新密码。注意：命令内没有用户名和密码，回车后以"用户名:密码"的格式输入（密码一般为明文），chpasswd根据选项加密
+1)常用选项
+-c,--crypt-method METHOD 使用指定的方法加密。加密方法有DES，MD5，NONE，SHA256，SHA512
+-e,--encrypted 提供的密码已经加密
+-h,--help 帮助
+-m.--md5
+非交互式修改密码
+echo 123456 | passwd --stdin user002
+echo "user003:123456" | chpasswd
 alias cls='clear'                【别名来使用清屏命令】
 ===========================================================================================
 cat log.txt|grep -A10 -B10 name  【查看log.txt中name前后10行】
