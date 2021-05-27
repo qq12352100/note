@@ -9,6 +9,7 @@ cd $ORACLE_HOME
 cd bin
 ./dbca
 
+===========================================================================================【find命令】
 1. find   /  -name test  | xargs rm -rf      (这个命令可以查找test文件或者目录，并删除！)
 2. 用下面的命令可以查找 /home下最近两天修改过的文件：find /home -type f -mtime -2
 如果要把这些文件也删掉，那么可以：find /home -type f -mtime -2 -exec rm {} \;
@@ -18,6 +19,21 @@ cd bin
 -mtime +3 修改时间在3天前
 -exec rm {} \;   将找到的文件 （假定找到文件的名字为 a.txt)， 执行 rm a.txt 命令
 find有很多参数，有很强大的搜索功能，具体可以 man find 查看。
+
+find ./-type f -name consumer.xml -exec sed -i"s/aaaaaa/bbbbbb/g"{}\;
+-name参数指定查找的文件名
+-exec参数将查找到的内容传递给下一一个命令去继续执行相关逻辑
+sed命令主要对文件内容进行替换，这里会将consumer文件中的aaaaa替换成bbbbbb
+
+===========================================================================================【抓包】
+tcpdump tcp -ieth0 -t -S 0 -C 100 dst port 6060 and src net 192.168.1.0/24 -W test cap
+-i      #表示监听抓服务器上哪个网卡
+-t      #表示不显示时间戳
+-S      #可以抓到完整的数据包
+-C      #表示一共抓取多少次数据包
+dst port          #6060表示抓取目标端口是6060的数据包
+src net +网段     #表示数据包的来源网络地址为192.168.1.104
+
 ===========================================================================================【wget下载】
 wget http://songjian:songjian@119.3.235.61:7005/bkk/tongji.sh
 ===========================================================================================【curl上传】
@@ -83,6 +99,23 @@ systemctl enable iptables.service //设置开机启动
 3）修改/etc/sysconfig/iptables 文件，添加以下内容： 
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+---------------------------------------------------------------------------------
+开启端口
+# firewall-cmd --zone=public --add-port=80/tcp --permanent
+# firewall-cmd --zone=public --add-port=8080-8081/tcp
+查询端口号80 是否开启：
+# firewall-cmd --query-port=80/tcp
+重启防火墙：
+# firewall-cmd --reload
+查询有哪些端口是开启的:
+# firewall-cmd --list-port
+命令含义：
+--zone #作用域
+--add-port=80/tcp #添加端口，格式为：端口/通讯协议
+--permanent #永久生效，没有此参数重启后失效
+关闭firewall：
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
 ===========================================================================================【使用iptables限制ping命令】
 iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 解除设置方法（即删除本规则）:
@@ -96,8 +129,8 @@ iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 通过Iptables端口实现80到8080的转发
 #iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 
 ===========================================================================================【linux之间互传文件】
-文件；#scp root@192.168.1.50:/usr/local/soft/apache-tomcat-7.0.72.tar.gz /usr
-文件夹：#scp -r root@192.168.1.50:/test  /test
+文件；#scp /home/space/music/1.mp3 root@192.168.1.50:/home/root/others/music       #scp file_source file_target 
+文件夹：#scp -r /test root@192.168.1.50:/test 
 ===========================================================================================【Xshell安装rz/sz命令】
 sz filename：下载
 rz ：上传 

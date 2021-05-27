@@ -38,7 +38,9 @@ pause
 
 netsh -c interface ip dump
 netsh interface ip show config
-netsh interface ip set address "本地连接" static 37.136.6.210 255.255.255.0 37.136.6.254 1
+netsh interface ip set address "本地连接" static 37.136.6.210 255.255.255.0 37.136.6.254 1  rem 设置网卡IP 掩码 网关
+netsh interface set interface "本地连接" disabled rem 禁用网卡
+netsh interface set interface "本地连接" enabled  rem 启用网卡
 ncpa.cpl
 ::Usage：第一条命令 | 第二条命令 [| 第三条命令...]将第一条命令的结果作为第二条命令的参数来使用，记得在unix中这种方式很常见。
 ::Usage：第一条命令 || 第二条命令 [|| 第三条命令...]用这种方法可以同时执行多条命令，当碰到执行正确的命令后将不执行后面的命令，如果没有出现正确的命令则一直执行完所有命令；
