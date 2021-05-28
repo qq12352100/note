@@ -101,8 +101,10 @@ systemctl enable iptables.service //设置开机启动
 -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 ---------------------------------------------------------------------------------
 开启端口
-# firewall-cmd --zone=public --add-port=80/tcp --permanent
-# firewall-cmd --zone=public --add-port=8080-8081/tcp
+#firewall-cmd --zone=public --add-port=80/tcp --permanent
+#firewall-cmd --zone=public --add-port=8080-8081/tcp
+#firewall-cmd --zone=public --add-service=ftp --permanent
+#firewall-cmd --zone=public --add-source=56.200.18.1/24 --permanent
 查询端口号80 是否开启：
 # firewall-cmd --query-port=80/tcp
 重启防火墙：
