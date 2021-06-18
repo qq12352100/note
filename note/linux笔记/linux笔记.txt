@@ -110,6 +110,7 @@ systemctl enable iptables.service //设置开机启动
 #firewall-cmd --zone=public --add-port=8080-8081/tcp
 #firewall-cmd --zone=public --add-service=ftp --permanent
 #firewall-cmd --zone=public --add-source=56.200.18.1/24 --permanent
+#firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.0.200" port protocol="tcp" port="80" reject"
 查询端口号80 是否开启：
 # firewall-cmd --query-port=80/tcp
 重启防火墙：
