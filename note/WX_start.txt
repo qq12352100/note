@@ -6,7 +6,7 @@ jsonContent.put("msgtype", "text");
 
 JSON.parseObject()
 
-
+1
 //模版引入
 <import src="../../template/component.wxml"/>
 
