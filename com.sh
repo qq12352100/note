@@ -4,5 +4,5 @@ if [ $# -gt 0 ]; then
     git pull
     git add .
     git commit -am $1
-    git pm
+    git git push origin master
 fi
