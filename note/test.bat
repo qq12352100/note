@@ -1,6 +1,7 @@
 ::不加@时，在运行时，会在窗口显示出这条命令,而加了@, 只会显示出 echo后面你要显示出的东西
 mode con cols=80 lines=20&color 0c  rem  cols宽 lines高  cmd里面键入:help color 查查看
 TITLE Tomcat                        rem  设置窗口标题
+cmdow @ /top /mov 500 500           rem  移动窗口到某个位置 详见cmdow下载
 @echo off 
 @echo --  输出文字       --         rem 跟在输出后面会输出
 ::dir c:\*.* >a.txt                 rem 将c盘下所有文件名输出到a.txt中，如果没有a文件，则在bat同一目录下创建一个
