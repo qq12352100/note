@@ -100,33 +100,30 @@ Next i
 ============================================For Each…Next语句     跳出循环    Exit For
 Dim sht As Worksheet, c As Range, i As Integer:i = 1
 For Each sht In Worksheets
-    Cells(i, "A") = sht.Name
-    i = i + 1
-Next sht
+    Debug.Print sht.Name
+i = i + 1:Next sht
 i = 1
 For Each c In Range("A1:A10")
     c.Value = i
-    i = i + 1
-Next c
+i = i + 1:Next c
 ============================================Do While语句      跳出循环    Exit Do
 Dim i As Integer:i = 1
 Do While Cells(i, "A") <> ""
     Debug.Print i
-    i = i + 1
-Loop
+i = i + 1:Loop
 ============================================Do Until语句      跳出循环    Exit Do
 Dim i As Integer:i = 1
 Do Until Cells(i, "A") = ""
     Debug.Print i
-i = i + 1
-Loop
+i = i + 1:Loop
 =====================跳出循环 可简写 If i = 3 Then Exit Do
 If i = 3 Then
     Debug.Print "跳出循环"
     Exit Do
 End If
 ----------------------------------------------------------------------------------------------【函数声明及调用】
-Sub SayHello()      '声明无参函数
+=============================='无参函数
+Sub SayHello()      
     MsgBox "好!"
 End Sub
 ------------------------
@@ -135,8 +132,8 @@ Sub RunSub()        '调用
     Call SayHello               'Call 过程名[(参数1,参数2…)]
     Application.Run "SayHello"  '利用Application对象的Run方法，Application.Run 表示过程名的字符串(或字符串变量)[,参数1,参数2…]
 End Sub
-=============================
-Sub PrintInfo(info)  '声明带参函数
+=============================='带参函数
+Sub PrintInfo(info)  
     MsgBox info
 End Sub
 ------------------------
@@ -144,6 +141,16 @@ Sub RunPara()       '调用
     PrintInfo ("Hello World")
     Call PrintInfo ("Hello World")
     Application.Run "PrintInfo", "Hello World"
+End Sub
+=============================='带参带返回值函数
+Function getResult(ByVal x As Byte, ByVal y As Byte) As Byte 
+getResult = x + y
+End Function
+------------------------
+Sub Test()          '调用
+    Dim res As Byte
+    res = getResult(5,10)
+    MsgBox (res)
 End Sub
 ----------------------------------------------------------------------------------------------【时间处理】
 m       2           月份（数字不带零)
@@ -203,6 +210,11 @@ For i = 0 To dict.Count - 1
     Value = v(i)
     MsgBox key & Value
 Next
+----------------------------------------------------------------------------------------------【颜色设置】Interior.ColorIndex 无色0黑色1白色2红色3绿色4
+Cells(1, 1).Font.ColorIndex = 3 '字的颜色号为3 红色
+Cells(1, 1).Interior.ColorIndex = 3 ' 背景的颜色为3 红色
+Cells(2, 1).Font.Color = RGB(0, 255, 0) '字的颜色绿色
+Cells(2, 1).Interior.Color = RGB(0, 0, 255) '背景的颜色蓝色
 ----------------------------------------------------------------------------------------------
 常用对象
 Application  代表整个Excel应用程序  
