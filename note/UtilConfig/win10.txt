@@ -1,0 +1,25 @@
+【激活win10】
+右键开始菜单--Windows PowerShell--依次执行
+slmgr.vbs -skms zh.us.to
+slmgr -ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
+slmgr -skms kms.03k.org
+slmgr -ato
+
+【删除桌面IE图标】
+cmd--gpedit.msc--用户配置--管理桌面--桌面--隐藏桌面上的 Internet Explorer 图标
+
+【删除我的电脑右边文件夹】
+cmd--regedit--计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\DelegateFolders
+{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}--对应的是“视频”文件夹；
+{d3162b92-9365-467a-956b-92703aca08af}--对应的是“文档”文件夹；
+{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}--对应的是“桌面”文件夹；
+{24ad3ad4-a569-4530-98e1-ab02f9417aa8}--对应的是“图片”文件夹；
+{088e3905-0323-4b02-9826-5d99428e115f}--对应的是“下载”文件夹；
+{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}--对应的是“音乐”文件夹；
+{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}--对应的是“3D对象”文件夹；
+
+【关闭防火墙】
+win+e --点击地址栏向下箭头--进入控制面板--关闭防火墙
+
+【截图工具】
+开始--附件--右键点击“截图工具”快捷方式图标，选择“属性”，在弹出的窗口中“快捷方式”栏目下有“快捷键”一项，直接按键盘上的字母键，即可形成快捷键
