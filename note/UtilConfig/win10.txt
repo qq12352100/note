@@ -5,8 +5,18 @@ slmgr -ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
 slmgr -skms kms.03k.org
 slmgr -ato
 
+优化：
+1、右键开始-计算机管理-服务-关闭Windows Update + Windows Search
+2、右键电脑属性-系统保护-禁用-删除所有还原点
+3、右键C盘属性-工具-碎片整理优化-计划关闭
+
+【Security Center服务无法禁用】
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc
+在右侧把 start由4（禁用）改为2（自动）
+
 【删除桌面IE图标】
 cmd--gpedit.msc--用户配置--管理桌面--桌面--隐藏桌面上的 Internet Explorer 图标
+右键个性化-主题-右边左面图标设置
 
 【删除我的电脑右边文件夹】
 cmd--regedit--计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\DelegateFolders
