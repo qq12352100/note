@@ -1,0 +1,14 @@
+nodejs就是运行在服务器端的js
+
+
+npm install -g nrm      #下载nrm
+nrm ls                  #查看可切换的镜像源
+nrm use taobao          #切换淘宝镜像源
+npm get registry        #查看镜像源使用状态
+
+#下载包npm命令，查看版本
+npm -v
+npm install npm -g      #升级
+npm install express     #安装express  卸载：npm uninstall express 更新：npm update express 搜索：npm search express
+var express = require('express');   #代码引入
+
