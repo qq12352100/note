@@ -9,6 +9,7 @@ slmgr -ato
 1、右键开始-计算机管理-服务-关闭Windows Update + Windows Search
 2、右键电脑属性-系统保护-禁用-删除所有还原点
 3、右键C盘属性-工具-碎片整理优化-计划关闭
+4、文件夹选项-取消勾选“在快速访问中显示最近使用的文件”、“在快速访问中显示常用文件夹”
 
 【Security Center服务无法禁用】
 计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc
