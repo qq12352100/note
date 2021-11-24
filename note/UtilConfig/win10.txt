@@ -1,3 +1,11 @@
+==装机
+1、火绒安装C，向日葵安装C，安装QQ拼音C（皮肤，桌面助手）
+2、chrom浏览器安装C，挂VNP登录同步油猴
+3、Everything,Ditto设置开机启动
+
+
+
+=================================================================
 【激活win10】
 右键开始菜单--Windows PowerShell--依次执行
 slmgr.vbs -skms zh.us.to
@@ -6,11 +14,15 @@ slmgr -skms kms.03k.org
 slmgr -ato
 
 优化：
-1、右键开始-计算机管理-服务-关闭Windows Update + Windows Search
+1、右键开始-计算机管理-服务-关闭Windows Update + Windows Search + windows update medic service
 2、右键电脑属性-系统保护-禁用-删除所有还原点
 3、右键C盘属性-工具-碎片整理优化-计划关闭
 4、文件夹选项-取消勾选“在快速访问中显示最近使用的文件”、“在快速访问中显示常用文件夹”
+5、关闭睡眠hiberfil.sys删除，Windows PowerShell（管理员）执行 powercfg -h off
 
+【windows update medic service服务无法禁用】
+计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc
+在右侧把 start由4（禁用）改为2（自动）
 【Security Center服务无法禁用】
 计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc
 在右侧把 start由4（禁用）改为2（自动）
