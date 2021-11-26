@@ -26,12 +26,12 @@ slmgr -ato
 4、文件夹选项-取消勾选“在快速访问中显示最近使用的文件”、“在快速访问中显示常用文件夹”
 5、关闭睡眠hiberfil.sys删除，Windows PowerShell（管理员）执行 powercfg -h off
 
-【windows update medic service服务无法禁用】
-计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc
+【windows update medic service服务无法禁用】计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc
 在右侧把 start由4（禁用）改为2（自动）
-【Security Center服务无法禁用】
-计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc
+【Security Center服务无法禁用】计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc
 在右侧把 start由4（禁用）改为2（自动）
+【右键新建里面的值】计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew
+修改Classes值与顺序
 
 【删除桌面IE图标】
 cmd--gpedit.msc--用户配置--管理桌面--桌面--隐藏桌面上的 Internet Explorer 图标
