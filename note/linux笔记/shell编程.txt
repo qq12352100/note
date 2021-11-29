@@ -1,7 +1,7 @@
 :set ff  显示ff=fileformat不能执行
 :set ff=unix
 
-nohup java -jar master_base-0.0.1_BASE.jar > log.file 2>&1 | tail -300f log.file
+nohup java -jar master_base-0.0.1_BASE.jar > log.file 2>&1
 ps -ef|grep java|grep -v color|awk '{print $2}' | xargs kill -9
 ----------------------------------------------------------------------
 echo $# 【输出参数个数】
