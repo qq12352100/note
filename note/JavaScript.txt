@@ -9,8 +9,12 @@ window.location.href
 -----------------------------------------------------表单序列化
 $("#Form").serialize()
 --mgrade=aa1&mclass=aa2
+var stringObj= "{" +jsonstr.replace(/&/g,"\",").replace(/=/g,":\"") + "\"}"; --转json字符串
+
 $("#Form").serializeObject()
 --{"mgrade":"aa1","mclass":"aa2"}
+$("#Form").serializeArray()
+--[{"name":"bkk"},{"name2":"bkk2"}]
 -----------------------------------------------------jquery转json字符串转换json对象
 JSON.parse(jsonstr);        //转为json对象 
 eval('(' + jsonstr + ')');  //转为json对象
