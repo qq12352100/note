@@ -38,6 +38,11 @@ set /a c=39/10
 @echo %c%
 
 for  %%I in (A,B,C) do echo %%I     rem 循环
+for /f "skip=1 tokens=9 delims= " %a in ('ping 172.20.123.231') do @echo %a
+skip=1 #忽略第一行，默认显示所有行
+tokens=9 #显示第9列 类似于awk的 参数$9
+delims= #分隔符 本次分隔符为一个空格
+ping 172.20.123.231 #循环该命令所有行
 pause
 
 netsh -c interface ip dump
@@ -50,3 +55,15 @@ ncpa.cpl
 ::Usage：第一条命令 || 第二条命令 [|| 第三条命令...]用这种方法可以同时执行多条命令，当碰到执行正确的命令后将不执行后面的命令，如果没有出现正确的命令则一直执行完所有命令；
 ::Usage：第一条命令 & 第二条命令 [& 第三条命令...]用这种方法可以同时执行多条命令，而不管命令是否执行成功
 ::Usage：第一条命令 && 第二条命令 [&& 第三条命令...]用这种方法可以同时执行多条命令，当碰到执行出错的命令后将不执行后面的命令，如果一直没有出错则一直执行完所有命令；
+--------------------------------------------------一秒一个ping输出，超时5秒输出一个“请求超时。”#两个echo一个输出屏幕一个输出到文件
+@echo off 
+set host=172.20.123.231
+set logfile=ping_%host%.log
+:loop
+for /f "tokens=* skip=2" %%A in ('ping %host% -n 1') do (
+    echo %date:~0,-3% %time:~0,-3% %%A >> %logfile%
+    echo %date:~0,-3% %time:~0,-3% %%A
+    timeout /t 1 /nobreak > nul
+    goto loop
+)
+--------------------------------------------------
