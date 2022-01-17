@@ -189,16 +189,18 @@ ls -a               【显示隐藏文件】
 ls -l               【显示长列表格式】
 ls -ahl             【查看文件的所有组】
 mv f1 f2            【修改文件名（移动文件）】
+cp f1 f2            【拷贝文件】-r 递归
+\cp f1 f2           【拷贝强制覆盖】
 find / -name a.txt  【查找根目录下的a.txt文件】 
 chown 用户名 文件名 【修改文件所有者】
 chgrp 组名 文件名   【修改文件所在组】
 
 pwd           【显示当前工作目录】
 cd            【改变目录】
-mkdir         【建立目录】
+mkdir         【建立目录】-p 多级目录
 vi a.txt      【建立文件】
 touch a.txt
-rmdir 【删除空目录】
+rmdir 【删除空目录】 rm -rf 【强制删非空目录】
 more  【显示文件内容，带分页，空格下一页，】
 less  【显示文件内容带分页】
 grep  【在文本中查询内容】
