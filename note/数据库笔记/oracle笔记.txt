@@ -3,31 +3,33 @@ oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 Insert into Table2(a, c, d) select a,c,5 from Table1
 ============================================================================================================建库流程
 -- 注意：请用SYSTEM用户登录，再运行此脚本
--- 数据库名：HCBMP
--- 用户名：HCBMP
--- 密码：HCBMP
-CREATE TABLESPACE BKK DATAFILE   'D:/oracledate/BKK.dbf'   SIZE  128M   REUSE
-AUTOEXTEND  ON   NEXT   1280K
-MINIMUM   EXTENT   128K
-DEFAULT   STORAGE   (INITIAL   128K   NEXT   128K   MINEXTENTS   1   MAXEXTENTS   4096   PCTINCREASE   0);
+-- 文档 https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_7003.htm
+--创建用户表空间
+CREATE TABLESPACE BKK DATAFILE  'D:/oracledate/BKK.dbf'  SIZE 128M REUSE
+AUTOEXTEND ON NEXT 1280K
+MAXSIZE 32767M
+MINIMUM EXTENT 128K
+DEFAULT STORAGE (INITIAL 128K NEXT 128K MINEXTENTS 1 MAXEXTENTS 4096 PCTINCREASE 0);
 
---创建用户
+--创建索引表空间
+CREATE TABLESPACE TPPAML_BSE_IDX DATAFILE  'D:/oracledate/BKK_IDX.dbf'  SIZE 100M 
+AUTOEXTEND ON NEXT 10M 
+MAXSIZE UNLIMITED;
+
+REUSE       表示文件是否被重用.   
+AUTOEXTEND  表明是否自动扩展.  
+NEXT        表示数据文件满了以后扩展的大小.
+UNLIMITED   表示无限的表空间.    
+MINIMUM EXTENT 指出在表空间中范围的最小值。这个参数可以减小空间碎片，保证在表空间的范围是这个数值的整数倍。
+
+--创建用户并指定表空间
 CREATE USER BKK IDENTIFIED BY "A!bcd_1234" DEFAULT TABLESPACE BKK;
 --赋权限
 GRANT UNLIMITED TABLESPACE TO BKK;
-GRANT connect, resource, dba To BKK;
-REVOKE CONNECT,RESOURCE FROM chenmh;--收回权限
-============================================================================================================基础
-./sqlplus bztyzfgzh/tyzfgzh2018@172.20.123.248:1521/zfpt
-select count(*) from v$session;
-show parameter processes;
-show parameter sessions;
-show parameter instance;
-SELECT * FROM all_tables;           --查看能看的所有表  赋予了select any table权限后
-
-lsnrctl status                  #查看监听服务状态
+GRANT CONNECT,RESOURCE,DBA To BKK;
+--收回权限
+REVOKE CONNECT,RESOURCE,DBA FROM BKK;
 ============================================================================================================重启oracle
-
 1.执行 sqlplus /nolog；
 2.conn sys / as sysdba ;（口令是你登录数据库时输入的密码）
 3.shutdown immediate ;
@@ -48,11 +50,24 @@ LISTENER_ORCL =
     )
   )
 ============================================================================================================常用sql
+./sqlplus bztyzfgzh/tyzfgzh2018@172.20.123.248:1521/zfpt
+select count(*) from v$session;                         --当前会话的连接数
+select count(*) from v$process;                         --当前进程的连接数
+select count(*) from v$session where status='ACTIVE';   --并发连接数
+select value from v$parameter where name = 'processes'; --查询数据库允许的最大连接数
+show parameter processes;
+show parameter sessions;
+show parameter instance;
+SELECT * FROM all_tables;           --查看能看的所有表  赋予了select any table权限后
 
-select * from 表名 where length(nvl(字段,''))=1;                                --查询非空字段的长度
+lsnrctl status                  #查看监听服务状态
 
-DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;--删除命名空间
-drop user user_name cascade;                                                    --删除用户
+select * from 表名 where length(nvl(字段,''))=1;                                            --查询非空字段的长度
+select TABLE_NAME ,NUM_ROWS,LAST_ANALYZED,user from user_tables ORDER BY TABLE_name;        --查看所有表名  where TABLESPACE_NAME is not null and  user='BKK' 
+SELECT table_name, column_name, data_type FROM all_tab_cols WHERE table_name = 'WX_TOKEN';  --查看表下所有字段名称类型
+
+DROP TABLESPACE GW_ETL_BAK INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;    --删除命名空间
+drop user user_name cascade;                                                        --删除用户
 
 select 'alter table '||table_name||' enable constraint '||constraint_name||';' from user_constraints where constraint_type='R';     --启动外键
 select 'alter table '||table_name||' disable constraint '||constraint_name||';' from user_constraints where constraint_type='R';    --关闭外键
@@ -82,16 +97,18 @@ select * from user_users;           --查看当前用户信息 ！
 select * from user_triggers;        --查看建立的触发器
 select * from user_sequences;       --查看建立的序列
 
-
+============================================================================================================序列
+--创建序列
 CREATE  SEQUENCE dic_seq
-INCREMENT  BY   1  --  每次加的个数据 
-START  WITH   1 --  从1开始计数 
-NOMAXVALUE  --  不设置最大值 
-NOCYCLE --  CYCLE | NOCYCLE 是否循环，建议不使用
-NOCACHE;  --CACHE n | NOCACHE 是否启用缓存
-DROP  SEQUENCE dic_seq; --删除序列
-在insert语句中,直接使用sequence.nextval引用；
-insert into goods(goods_id,goods_name,store_date,goods_num) values(seq_goods_id.nextval,'圣爽矿泉水',to_date('2011-01-01','yyyy-mm-dd'),500); 
+INCREMENT  BY   1       --  每次加的个数据 
+START  WITH   1         --  从1开始计数 
+NOMAXVALUE              --  不设置最大值 
+NOCYCLE                 --  CYCLE | NOCYCLE 是否循环，建议不使用
+NOCACHE;                --  CACHE | NOCACHE 是否启用缓存
+--删除序列
+DROP  SEQUENCE dic_seq; 
+--使用序列
+insert into goods(id,name,store_date) values(seq_goods_id.nextval,'矿泉水',to_date('2011-01-01','yyyy-mm-dd')); 
 ==============================================================================================================================================================查看使用情况表空间
 --查看使用情况
 select a.tablespace_name, a.bytes / 1024 / 1024 "sum MB", (a.bytes - b.bytes) / 1024 / 1024 "used MB",  b.bytes / 1024 / 1024 "free MB",
@@ -105,7 +122,7 @@ SELECT  table_name, nvl ( bytes / 1024 / 1024, 0 ) MB FROM  dba_tables  LEFT JOI
 ORDER BY    nvl ( bytes, 0 ) DESC;
 
 --找位置
-select tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space from sys.dba_data_files order by tablespace_name;
+select tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0)||'M'  total_space from sys.dba_data_files order by tablespace_name;
 
 --表空间扩展到4G
 alter database datafile 'D:\APP\ADMINISTRATOR\ORADATA\XYSHARE\SGSHARE.DBF' resize 4096m;
@@ -133,6 +150,9 @@ select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t
 exp HCBMP/'A!bcd_1234'@BKK full=y inctype=complete file=20200518_ecard.dmp log=oracleBak_ecard.log
 --恢复
 imp HCBMP/HCBMP@BKK file=f:/2.dmp full=y ignore=y;
+
+exp mines/123456@xxx.xxx.x.xxx:1521/orcl file=D:\data\mine-2019-12-17.dmp  log=D:\data\mine-2019-12-17.log
+imp mines/123456@localhost:1521/orcl full=y file=D:\data\mine-2019-12-17.dmp
 ============================================================================================================修改SYS密码
 在cmd窗口中敲入下列命令:
 sqlplus /nolog
