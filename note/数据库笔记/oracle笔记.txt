@@ -159,7 +159,19 @@ sqlplus /nolog
 connect  /  as  sysdba
 alter user sys identified by root; 
 alter user system identified by root;
-============================================================================================================手动刷新视图
+============================================================================================================视图
+--创建视图
+CREATE OR REPLACE VIEW rs_sbk_tk AS 
+select zaz006, zke196,zke185,aac003,aae019,zke599,zkf018,akb020,aae065,zke601,aae036 from yy_zf08;
+--创建用户
+CREATE USER rs_sbk IDENTIFIED BY "sX1$W76J8n^@cNh&";
+--授权connect，resource角色
+grant connect, resource to rs_sbk;
+--授权查看视图
+grant select on BZTYZF.rs_sbk_cz to rs_sbk;
+--查看
+SELECT * FROM BZTYZF.RS_SBK_CZ rsc;
+--手动刷新视图
 BEGIN
 DBMS_MVIEW.REFRESH (
 list => 'MV_MCINFOBOUND',
