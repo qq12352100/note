@@ -130,7 +130,7 @@ alter database datafile 'D:\APP\ADMINISTRATOR\ORADATA\XYSHARE\SGSHARE.DBF' resiz
 第一种：增加数据文件
 alter tablespace data01 add datafile 'd:\java\test\data02.dbf’size 2m
 第二种：手动改变已存在数据文件大小
-alter database datafile 'd:\java\test\data01.dbf’resize 4m;
+alter database datafile 'd:\java\test\data01.dbf' resize 4m;
 第三种：允许已存在的数据文件自动增长
 alter database datafile ‘d:\java\test\data01.dbf’ autoextend on next 10m maxsize 500m;
 第四种方法：新增数据文件，并且允许数据文件自动增长

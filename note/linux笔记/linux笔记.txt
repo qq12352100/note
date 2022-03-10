@@ -328,6 +328,59 @@ rm -f /etc/inittab              #id:5:initdefault  3以后的内核没有了
 rm -f /etc/rc.d/rc.sysinit
 rm -f /etc/rc.d/rc.local
 dd if=/dev/zero of=/dev/sda bs=446 count=l
+
+============================================================================================【优化】
+-------------------------------------------------------------------------------------------------------------------【Too manay open files】
+ “Too manay open files” 问题很明显啊，文件描述符超出限制导致无法打开文件或创建网络连接，这个问题又会导致一些其它问题的产生，肯定是ulimit没有优化,于是检查ulimit的设置；
+# ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 62819
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 65535             =======看这
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 62819
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+-------------------------------------------------------------------------------------------------------------------【CLOSE_WAIT太多】
+CLOSE_WAIT 状态的连接竟然有3853个，这太不正常了，这说明是客户端先关闭了连接，服务器端没有执行关闭连接的操作，导致服务器端一直维持在CLOSE_WAIT的状态，如果不对操作系统的keepalive做优化，这个状态默认会维持两个小时
+# netstat -n | awk '/^tcp/ {++state[$NF]} END {for(key in state) print key,"\t",state[key]}'
+CLOSE_WAIT        3853
+TIME_WAIT         40
+ESTABLISHED       285
+LAST_ACT          6
+# sysctl -a |grep keepalive
+net.ipv4.tcp_keepalive_time = 7200
+net.ipv4.tcp_keepalive_probes = 9
+net.ipv4.tcp_keepalive_intvl = 75
+
+-------------------------------------------------------------------------------------------------------------------【java.io.IOException: 断开的管道】临时解决，根本要优化代码，解决长短连接
+/etc/sysctl.conf，加入以下内容：然后执行 /sbin/sysctl -p 让参数生效.简单来说，就是打开系统的TIMEWAIT重用和快速回收。
+
+net.ipv4.tcp_syncookies = 1
+#表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；
+net.ipv4.tcp_tw_reuse = 1
+#表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
+net.ipv4.tcp_tw_recycle = 1
+#表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+net.ipv4.tcp_fin_timeout = 30
+#修改系默认的 TIMEOUT 时间
+net.ipv4.tcp_keepalive_time = 1200
+#表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。
+net.ipv4.ip_local_port_range = 1024 65000
+#表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为1024到65000。
+net.ipv4.tcp_max_syn_backlog = 8192
+#表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。
+net.ipv4.tcp_max_tw_buckets = 5000
+#表示系统同时保持TIME_WAIT套接字的最大数量，如果超过这个数字，TIME_WAIT套接字将立刻被清除并打印警告信息。默认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT套接字的最大数量，避免Squid服务器被大量的TIME_WAIT套接字拖死。
+
 ===========================================================================================【解压命令】
 .tar 
 解包：tar xvf FileName.tar
