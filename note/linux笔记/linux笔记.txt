@@ -146,7 +146,7 @@ rz ：上传
 -a #如果是Dos格式的文件，会转换为unix格式
 
 安装命令：
-yum install lrzsz
+yum install lrzsz -y
 
 Xshell设置默认路径：右键会话 -> 属性 -> ZMODEM -> 接收文件夹
 ===========================================================================================【免密登录到192.168.0.10】
@@ -362,7 +362,7 @@ net.ipv4.tcp_keepalive_probes = 9
 net.ipv4.tcp_keepalive_intvl = 75
 
 -------------------------------------------------------------------------------------------------------------------【java.io.IOException: 断开的管道】临时解决，根本要优化代码，解决长短连接
-/etc/sysctl.conf，加入以下内容：然后执行 /sbin/sysctl -p 让参数生效.简单来说，就是打开系统的TIMEWAIT重用和快速回收。
+vim /etc/sysctl.conf，加入以下内容：然后执行 /sbin/sysctl -p 让参数生效.简单来说，就是打开系统的TIMEWAIT重用和快速回收。
 
 net.ipv4.tcp_syncookies = 1
 #表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；

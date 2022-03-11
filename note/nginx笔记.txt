@@ -1,0 +1,5 @@
+connect() to connect() failed (13: Permission denied)
+解决如下：/usr/sbin/setsebool httpd_can_network_connect=1
+
+bind() to 0.0.0.0:5499 failed (13: Permission denied)
+解决如下：setenforce 0    （关闭selinux）
