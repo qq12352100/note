@@ -1,5 +1,23 @@
 connect() to connect() failed (13: Permission denied)
 解决如下：/usr/sbin/setsebool httpd_can_network_connect=1
-
+-------------------------------------------------------------------
 bind() to 0.0.0.0:5499 failed (13: Permission denied)
 解决如下：setenforce 0    （关闭selinux）
+-------------------------------------------------------------------
+webservice地址名没有端口号或与原地址不符合
+解决：
+upstream localhost {
+   server 172.20.123.208:7071;
+   server 172.20.123.208:7072;  #访问机率server localhost:9999 weight=5; 
+}
+server {
+    listen       5499;
+    server_name  172.20.123.231;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        proxy_set_header Host $host:$server_port;  #soad location 变为默认80端口与原地址端口不符合 172.20.123.231:5499
+        proxy_pass   http://localhost;
+    }   
+}
