@@ -56,6 +56,7 @@ $ rm id_rsa*
 
 2、生成SSH KEY
  $ ssh-keygen -t rsa -C "qq12352100@163.com"
+ $ ssh-keygen -t ed25519 -C "qq12352100@163.com"
 
 3、将Public Key 添加到GitHub
 Account-->SSH keys 里面的 Add a new key ,  将你的public key（id_rsa.pub）的内容拷贝到SSH key文本框
