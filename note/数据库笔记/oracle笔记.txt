@@ -136,6 +136,11 @@ alter database datafile ‘d:\java\test\data01.dbf’ autoextend on next 10m max
 第四种方法：新增数据文件，并且允许数据文件自动增长
 alter tablespace data01 add datafile 'd:\java\test\data03.dbf’size 2m autoextend on next 10m maxsize 500m;
 ============================================================================================================锁表解决
+SELECT sid, serial#, username, osuser FROM v$session where sid 
+in(select session_id from v$locked_object);
+--kill掉相关的会话
+ALTER SYSTEM KILL SESSION '597,1171';
+--------------------------------------------------------------------------
 --所有session中的所有被锁定的对象信息。
 select t2.username, t2.sid, t2.serial#, t3.object_name, t2.OSUSER, t2.MACHINE, t2.PROGRAM, t2.LOGON_TIME, t2.COMMAND, t2.LOCKWAIT, t2.SADDR, t2.PADDR, t2.TADDR, t2.SQL_ADDRESS, t1.LOCKED_MODE
   from v$locked_object t1, v$session t2, dba_objects t3

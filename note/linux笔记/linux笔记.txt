@@ -1,5 +1,8 @@
 cat file.txt | tr "\n" ","| sed -e 's/,$/\n/'     #行转列
 
+nohup java -jar /usr/local/share/bkk/bkk/HMKJ-0.0.1_BASE.jar >>/usr/local/share/bkk/log.file 2>&1 &
+ps -ef|grep java|grep -v color|awk '{print $2}' | xargs kill -9 & rm -f /usr/local/share/bkk/log.file
+
 >表示覆盖原文件内容
 >>表示追加内容（会另起一行）
 
@@ -43,6 +46,12 @@ src net +网段     #表示数据包的来源网络地址为192.168.1.104
 wget http://songjian:songjian@119.3.235.61:7005/bkk/tongji.sh
 ===========================================================================================【curl上传】
 curl -F file=@20210115.txt http://songjian:songjian@10.52.223.3:36998/bkk/carFaceNum
+===========================================================================================【会话】
+yum install screen -y
+screen -S name  #创建一个name的session
+screen -R name  #打开name这个session
+screen -ls      #列出所有已经存在的session
+ctrl + a d      #退出当前的session
 ===========================================================================================
 /etc/init.d/sshd start           【启动22端口ssh服务】service sshd start
 ssh 10.10.10.10 -p 22 -l root    【远程登录】

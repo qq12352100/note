@@ -5,7 +5,12 @@
 dzjkkTool.jar放在apache-maven-3.5.3\bin下然后cmd
 
 D:\apache-maven-3.5.3\bin>mvn install:install-file -Dfile=dzjkkTool.jar -DgroupId=com.bkk -DartifactId=dzjkkTool -Dversion=1.0.0 -Dpackaging=jar
-
+mvn install:install-file -Dfile=aliyun-java-sdk-core-4.4.1.jar -DgroupId=com.aliyun -DartifactId=sm-java-sdk-core -Dversion=4.4.1 -Dpackaging=jar
+<dependency>
+    <groupId>com.aliyun</groupId>
+    <artifactId>sm-java-sdk-core</artifactId>
+    <version>4.4.1</version>
+</dependency>
 <dependency>
     <groupId>com.bkk</groupId>
     <artifactId>dzjkkTool</artifactId>

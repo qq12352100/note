@@ -27,4 +27,4 @@ tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 source /etc/profile
 go version
-./gohttpserver -r ./ --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
+./gohttpserver -r /usr/local/share/bkk --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
