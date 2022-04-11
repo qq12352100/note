@@ -1,3 +1,33 @@
+下载地址：http://nginx.org/en/download.html
+
+yum -y install make zlib zlib-devel pcre pcre-devel gcc-c++ libtool  openssl openssl-devel
+mkdir /usr/local/src/
+cd /usr/local/src/
+wget http://nginx.org/download/nginx-1.21.6.tar.gz
+tar -zxvf nginx-1.21.6.tar.gz
+cd nginx-1.21.6
+./configure
+make && make install
+
+cd /lib/systemd/system/
+vim nginx.service
+
+[Unit]
+Description=nginx service
+After=network.target 
+[Service] 
+Type=forking 
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s quit
+PrivateTmp=true 
+[Install] 
+WantedBy=multi-user.target
+
+systemctl enable nginx && systemctl start nginx
+---------------------------------------------------默认配置文件/usr/local/nginx/conf
+export PATH=$PATH:/usr/local/nginx/sbin
+===========================================================
 connect() to connect() failed (13: Permission denied)
 解决如下：/usr/sbin/setsebool httpd_can_network_connect=1
 -------------------------------------------------------------------
@@ -21,3 +51,6 @@ server {
         proxy_pass   http://localhost;
     }   
 }
+
+-----------------------------------------------------------
+===========================================================
