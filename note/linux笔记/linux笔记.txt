@@ -145,9 +145,6 @@ iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 在Linux 环境下，配置tomcat使用80端口。用普通用户不能启动，提示木有权限；root用户可以正常启动。据说1024以内的端口都要root权限。
 通过Iptables端口实现80到8080的转发
 #iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 
-===========================================================================================【linux之间互传文件】
-文件；#scp /home/space/music/1.mp3 root@192.168.1.50:/home/root/others/music       #scp file_source file_target 
-文件夹：#scp -r /test root@192.168.1.50:/test 
 ===========================================================================================【Xshell安装rz/sz命令】
 sz filename：下载
 rz ：上传 
@@ -158,9 +155,25 @@ rz ：上传
 yum install lrzsz -y
 
 Xshell设置默认路径：右键会话 -> 属性 -> ZMODEM -> 接收文件夹
-===========================================================================================【免密登录到192.168.0.10】
+===========================================================================================【linux之间互传文件】
+文件；#scp /home/space/music/1.mp3 root@192.168.1.50:/home/root/others/music       #scp file_source file_target 
+文件夹：#scp -r /test root@192.168.1.50:/test 
+===========================================================================================【互信】
+主机A:
 #ssh-keygen
-#ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.0.10
+#cat id_rsa.pub >> authorized_keys
+#scp id_rsa.pub xxx.xxx.xxx.xxx:/root/.ssh
+主机B:
+#chattr -i authorized_keys  
+#rm -rf authorized_keys
+#cat id_rsa.pub >> authorized_keys
+
+#vi /etc/ssh/sshd_config
+RSAAuthentication yes
+PermitRootLogin yes
+PubkeyAuthentication yes
+#systemctl restart sshd.service
+authorized_keys的权限，它的权限严格要求是600，/home/xxx/.ssh目录的权限，它的权限须是700
 -------------------------------------------------------sshpass工具
 wget -c http://downloads.sourceforge.net/project/sshpass/sshpass/1.05/sshpass-1.05.tar.gz
 tar -xzvf sshpass-1.05.tar.gz
