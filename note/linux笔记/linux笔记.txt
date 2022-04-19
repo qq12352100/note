@@ -464,16 +464,16 @@ net.ipv4.tcp_max_tw_buckets = 5000
 ———————————————
 ===========================================================================================【监控网卡流量】
 源码包路径：
-http://www.ex-parrot.com/%7Epdw/iftop/download/iftop-0.17.tar.gz
+wget http://www.ex-parrot.com/%7Epdw/iftop/download/iftop-0.17.tar.gz
 tar zxvf iftop-0.17.tar.gz
 cd iftop-0.17
 ./configure
 make && make install
+
 configure: error: can't find pcap.h
 You're not going to get very far without libpcap.
-那你需要先安装libpcap，找到相应的rpm文件，比如：
--rw-r--r-- 1 root root  108987 Apr  3 08:21 libpcap-0.9.4-8.1.i386.rpm
--rw-r--r-- 1 root root  119062 Apr  3 08:21 libpcap-devel-0.9.4-8.1.i386.rpm
+那你需要先安装libpcap
+yum install flex byacc  libpcap ncurses ncurses-devel libpcap-devel -y
 
 1、iftop界面相关说明
 界面上面显示的是类似刻度尺的刻度范围，为显示流量图形的长条作标尺用的。

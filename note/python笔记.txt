@@ -1,7 +1,7 @@
 whl包：已经编译的包，类似于exe文件。
 tar包：源文件，只是打包在一起，还没有编译。
 tar.gz包：源文件，压缩并打包在一起，还没有编译。
-===================================================================【离线安装】
+===================================================================【离线安装库】
 网址https://pypi.org/project/
 Windows环境：（命令窗口cd到指定目录，打开文件夹选中路径cmd回车）
 安装whl包： pip install  **.whl（前提是要安装好pip和wheel）
@@ -35,4 +35,19 @@ vi ~/.pip/pip.conf
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]
 trusted-host = https://pypi.tuna.tsinghua.edu.cn  # trusted-host 此参数是为了避免麻烦，否则使用的时候可能会提示不受信任
-===================================================================
+===================================================================【安装p3.10】
+wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz
+tar -zxvf Python-3.10.4.tgz
+mkdir /usr/local/python3.7
+./configure --prefix=/usr/local/python3.7
+make && make install
+#添加环境变量
+vim /etc/profile
+/usr/local/python3.7/bin
+source /etc/profile
+#备份
+mv /usr/bin/python3 /usr/bin/python3.bak
+ln -s /usr/local/python3.7/bin/python3 /usr/bin/python3
+
+
+yum install -y gcc patch libffi-devel python-devel  zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel -y

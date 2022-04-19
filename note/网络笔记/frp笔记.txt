@@ -44,6 +44,13 @@ remote_port = 7389              #ÕâÀï¾ÍÊÇ×ª·¢³öÈ¥µÄ¶Ë¿Ú£¬Ò²¾ÍÊÇÔÚ×Ô¼ºµÄ»úÆ÷ÉÏ·ÃÎ
 frpc.exe -c frpc.ini
 ·ÃÎÊhttp://xxx.xxx.xxx.xxx:7500£¬¿´ÏÂClient CountsÊýÁ¿Îª1¾ÍÕý³£
 È»ºómstscÆô¶¯Ô¶³ÌÁ¬½Ó£ºVPSµÄIP:7389
+
+ºóÌ¨¿ª»úÆô¶¯£» win+R ËÑË÷ gpedit.msc²¢ÒÀ´Î½øÈë¼ÆËã»úÅäÖÃ ¨C Windows ÉèÖÃ ¨C ½Å±¾(Æô¶¯/¹Ø»ú) Ë«»÷ ¡°Æô¶¯¡± £¬µã»÷Ìí¼Ó£¬È»ºóä¯ÀÀÑ¡ÖÐÇ°ÃæÖÆ×÷µÄ.vbsÎÄ¼þ£¬²»ÓÃ¹Ü½Å±¾²ÎÊý¡£
+½¨Ò»¸öfrpc.vbsÎÄ¼þ
+dim objShell 
+set objShell=wscript.createObject("WScript.Shell") 
+iReturnCode=objShell.Run("D:\frp\frpc.exe -c D:\frp\frpc.ini",0,TRUE)
+
 ------------------------------------------------´úÀíweb-http
 [web]
 type = http                     #µ±´úÀí³öÀ´µÄÊÇweb·þÎñÊ±£¬ÔÚfrps.iniÖÐµÄÒ»Ïî£ºvhost_https_port = 7001£¬ÔÚÍâÍø·ÃÎÊhttp://vpsµÄIP:7001
