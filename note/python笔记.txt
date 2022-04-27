@@ -37,6 +37,7 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 trusted-host = https://pypi.tuna.tsinghua.edu.cn  # trusted-host 此参数是为了避免麻烦，否则使用的时候可能会提示不受信任
 ===================================================================【安装p3.10】
 wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz
+wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
 tar -zxvf Python-3.10.4.tgz
 mkdir /usr/local/python3.7
 ./configure --prefix=/usr/local/python3.7

@@ -44,8 +44,6 @@ server {
     listen       5499;
     server_name  172.20.123.231;
 
-    #access_log  /var/log/nginx/host.access.log  main;
-
     location / {
         proxy_set_header Host $host:$server_port;  #soad location 变为默认80端口与原地址端口不符合 172.20.123.231:5499
         proxy_pass   http://localhost;
@@ -53,4 +51,52 @@ server {
 }
 
 -----------------------------------------------------------
+nginx服务器地址及端口：127.0.0.1:80
+后端服务地址及端口：127.0.0.1:8080
+测试URL：http://127.0.0.1:80/api/upload
+location /api/ {
+    proxy_pass http://127.0.0.1:8080/;  #实际访问：http://127.0.0.1:8080/upload
+}
+location /api {
+    proxy_pass http://127.0.0.1:8080/;  #实际访问：http://127.0.0.1:8080//upload
+}
+location /api/ {
+    proxy_pass http://127.0.0.1:8080;   #实际访问：http://127.0.0.1:8080/api/upload
+}
+location /api {
+    proxy_pass http://127.0.0.1:8080;   #实际访问：http://127.0.0.1:8080/api/upload
+}
+location /api/ {
+    proxy_pass http://127.0.0.1:8080/server/;   #实际访问：http://127.0.0.1:8080/server/upload
+}
+location /api {
+    proxy_pass http://127.0.0.1:8080/server/;   #实际访问：http://127.0.0.1:8080/server//upload
+}
+location /api/ {
+    proxy_pass http://127.0.0.1:8080/server;    #实际访问：http://127.0.0.1:8080/serverupload
+}
+location /api {
+    proxy_pass http://127.0.0.1:8080/server;    #实际访问：http://127.0.0.1:8080/server/upload
+}
+--总结--proxy_pass后有目录(包括 / )，去除location匹配
 ===========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

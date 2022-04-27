@@ -350,7 +350,20 @@ rm -f /etc/inittab              #id:5:initdefault  3以后的内核没有了
 rm -f /etc/rc.d/rc.sysinit
 rm -f /etc/rc.d/rc.local
 dd if=/dev/zero of=/dev/sda bs=446 count=l
-
+===========================================================================================【openssl降级教程】
+wget http://www.openssl.org/source/openssl-1.0.2k.tar.gz
+tar -xzf openssl-1.0.2k.tar.gz
+cd openssl-1.0.2k
+./config --prefix=/usr/local/openssl
+./config -t
+make && make install
+cd /usr/local
+ldd /usr/local/openssl/bin/openssl
+which openssl
+openssl version
+-----------------------卸载
+apt-get purge openssl
+rm -rf /etc/ssl #删除配置文件 
 ============================================================================================【优化】
 -------------------------------------------------------------------------------------------------------------------【Too manay open files】
  “Too manay open files” 问题很明显啊，文件描述符超出限制导致无法打开文件或创建网络连接，这个问题又会导致一些其它问题的产生，肯定是ulimit没有优化,于是检查ulimit的设置；
