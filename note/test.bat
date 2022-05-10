@@ -45,6 +45,11 @@ delims= #分隔符 本次分隔符为一个空格
 ping 172.20.123.231 #循环该命令所有行
 pause
 
+:: 新窗口启动 /k 不关闭窗口 /c 关闭窗口
+start cmd /k "c: && cd C:\Project\test-app-1 && npm start"
+:: 新窗口延迟 5 秒启动 test-app-2, 
+start cmd /k "timeout -nobreak 5 && c: && cd C:\Project\test-app-2 && npm start"
+
 netsh -c interface ip dump
 netsh interface ip show config
 netsh interface ip set address "本地连接" static 37.136.6.210 255.255.255.0 37.136.6.254 1  rem 设置网卡IP 掩码 网关
