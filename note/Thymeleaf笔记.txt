@@ -1,4 +1,5 @@
 <span th:text="${user.name}">
+<img alt="" th:src="@{'/static/'+*{test_org_code}+'.png'}" />
 #省去前面user
 <h2 th:object="${user}">
     <p>Name: <span th:text="*{name}">Jack</span>.</p>
@@ -55,4 +56,4 @@ first/last，返回是否为第一或最后，boolean值
 
 #在script标签中通过th:inline="javascript"来声明这是要特殊处理的js脚本
 <script th:inline="javascript">
-const user = /*[[Thymeleaf表达式]]*/ "静态环境下的默认值";
+var data = [[${list}]];
