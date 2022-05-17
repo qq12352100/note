@@ -2,6 +2,7 @@ cat file.txt | tr "\n" ","| sed -e 's/,$/\n/'     #行转列
 
 nohup java -jar /usr/local/share/bkk/bkk/HMKJ-0.0.1_BASE.jar >>/usr/local/share/bkk/log.file 2>&1 &
 ps -ef|grep java|grep -v color|awk '{print $2}' | xargs kill -9 & rm -f /usr/local/share/bkk/log.file
+nohup java -jar  >>log.file 2>&1 &
 
 >表示覆盖原文件内容
 >>表示追加内容（会另起一行）
@@ -343,6 +344,12 @@ locale -a                 #查看支持的字符集:
 LANG="zh_CN.utf8"        #切换为中文
 vi /etc/sysconfig/i18n              #设置系统默认的语言配置
 yum groupinstall chinese-support     #安装中文语言包
+===========================================================================================【安装字体】
+把C:\Windows\Fonts下字体拷出来，MSYH.TTC（微软雅黑）上传到/usr/share/fonts/
+cd /usr/share/fonts/
+mkfontscale
+mkfontdir
+fc-cache
 ===========================================================================================【卸载内核】
 rm rf /boot/*                   #卸载内核 
 rm -f /etc/fstab                #设备挂载点
