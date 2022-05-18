@@ -1,4 +1,16 @@
 nodejs就是运行在服务器端的js
+下载：
+http://nodejs.cn/download/
+
+配置全局安装的模块路径和缓存路径
+在nodejs根目录,创建node_global，node_cache文件夹，然后cmd执行
+npm config set prefix "D:\A\nodejs\node_modules\node_global"
+npm config set cache "D:\A\nodejs\node_modules\node_cache"
+
+
+配置环境变量
+创建 NODE_PATH 变量 变量值为node_modules地址-->> NODE_PATH   C:\nodejs\node_modules
+path 中添加  C:\nodejs 和 C:\nodejs\node_global
 
 
 npm install -g nrm      #下载nrm
@@ -10,5 +22,8 @@ npm get registry        #查看镜像源使用状态
 npm -v
 npm install npm -g      #升级
 npm install express     #安装express  卸载：npm uninstall express 更新：npm update express 搜索：npm search express
+
 var express = require('express');   #代码引入
 
+https://www.electronjs.org/
+https://github.com/electron/electron
