@@ -1,3 +1,4 @@
 yum install lrzsz -y
+yum install -y vim
 
 nohup java -jar master_base-0.0.1_BASE.jar >>log.file 2>&1 &

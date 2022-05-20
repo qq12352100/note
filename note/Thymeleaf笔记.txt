@@ -25,6 +25,11 @@
 
 
 <div th:if="true">你填的是true</div>
+如果表达式结果为布尔值，则为 true 或 false
+如果表达式的值为 null，th:if 将判定此表达式为 false
+如果值是数字，为 0 时，判断为 false；不为零时，判定为 true
+如果值是是 String，值为 “false”、“off”、“no” 时，判定为 false，否则判断为 true，字符串为空时，也判断为 true
+如果值不是布尔值，数字，字符或字符串的其它对象，只要不为 null，则判断为 true
 <span th:text="${user.age}%2 == 0"></span>  
 gt (>), lt (<), ge (>=), le (<=), not (!). Also eq (==), neq/ne (!=).
 #三元运算
