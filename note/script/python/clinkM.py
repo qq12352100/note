@@ -13,12 +13,20 @@ from pykeyboard import PyKeyboard
 import win32api
 import win32con
 import ctypes 
-wx = int(win32api.GetSystemMetrics(win32con.SM_CXSCREEN)/4)  # »ñÈ¡ÆÁÄ»·Ö±æÂÊX
-wy = int(win32api.GetSystemMetrics(win32con.SM_CYSCREEN)/2)  # »ñÈ¡ÆÁÄ»·Ö±æÂÊY
+wx = int(win32api.GetSystemMetrics(win32con.SM_CXSCREEN)/4)  # è·å–å±å¹•åˆ†è¾¨ç‡X
+wy = int(win32api.GetSystemMetrics(win32con.SM_CYSCREEN)/2)  # è·å–å±å¹•åˆ†è¾¨ç‡Y
 print (wx,wy)
 k = PyKeyboard()
 m = PyMouse()
 import win32gui
+
+# pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# pip install Image
+# pip install pyautogui
+# pip install pymouse
+# pip install windows
+# pip install PyUserinput
+# pip install pypiwin32
 
 def get_W(wname):
     w1hd=win32gui.FindWindow(0,wname)
@@ -29,7 +37,7 @@ def get_W(wname):
 def get_location():
     while 1:
         time.sleep(3)
-        print(m.position()) # »ñÈ¡µ±Ç°×ø±êµÄÎ»ÖÃ
+        print(m.position()) # è·å–å½“å‰åæ ‡çš„ä½ç½®
         
 def paste():
     k.press_key(k.control_key)
@@ -43,12 +51,12 @@ def clink(x, y, s):
     m.click(x, y) 
     time.sleep(s)
     
-# °´¼üË¯¾õ¼¸Ãë
+# æŒ‰é”®ç¡è§‰å‡ ç§’
 def tapK(t, s):
     k.tap_key(t)
     time.sleep(s)
     
-#control+×ÖÄ¸
+#control+å­—æ¯
 def ctl(t):
     k.press_key(k.control_key)
     time.sleep(1)
@@ -57,7 +65,7 @@ def ctl(t):
     k.release_key(k.control_key)
     time.sleep(2)
     
-#alt+×ÖÄ¸
+#alt+å­—æ¯
 def altK(t):
     k.press_key(k.alt_key)
     time.sleep(1)
@@ -67,88 +75,88 @@ def altK(t):
     time.sleep(2)
         
 def rolls(t):
-    m.move(wx, wy)#ÖĞ¼ä
+    m.move(wx, wy)#ä¸­é—´
     for k in range(0, t):
         win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, -100)
         time.sleep(1)
 
-# ¸ø1·¢Î¢ĞÅÏûÏ¢
+# ç»™1å‘å¾®ä¿¡æ¶ˆæ¯
 def sendmsg():
-    # k.tap_key(k.print_screen_key)   #½ØÆÁ
-    altK('a')           #Î¢ĞÅ½ØÆÁ
-    m.click(80, wy, 1, 2) #½ØÆÁ
-    time.sleep(3)       #Ë¯Ãß3Ãë
-    altK('z')           #»½ÆğÎ¢ĞÅ
-    ctl('f')            #²éÕÒ
+    # k.tap_key(k.print_screen_key)   #æˆªå±
+    altK('a')           #å¾®ä¿¡æˆªå±
+    m.click(80, wy, 1, 2) #æˆªå±
+    time.sleep(3)       #ç¡çœ 3ç§’
+    altK('z')           #å”¤èµ·å¾®ä¿¡
+    ctl('f')            #æŸ¥æ‰¾
     tapK('1', 1)        #1
-    tapK(k.enter_key, 3)#È·ÈÏ
-    ctl('v')            #Õ³Ìù½ØÆÁ
-    tapK(k.enter_key, 3)#·¢ËÍ
-    altK('z')           #ËõĞ¡Î¢ĞÅ
-    time.sleep(10)      #Ë¯Ãß10s
+    tapK(k.enter_key, 3)#ç¡®è®¤
+    ctl('v')            #ç²˜è´´æˆªå±
+    tapK(k.enter_key, 3)#å‘é€
+    altK('z')           #ç¼©å°å¾®ä¿¡
+    time.sleep(10)      #ç¡çœ 10s
     
-# ½ØÆÁ·¢ÓÊ¼ş
+# æˆªå±å‘é‚®ä»¶
 def sendmail():
-    ctime = time.strftime("%YÄê%mÔÂ%dÈÕ  %H:%M:%S", time.localtime())
+    ctime = time.strftime("%Yå¹´%mæœˆ%dæ—¥  %H:%M:%S", time.localtime())
     cstime = int(time.time())
-    image_path = 'C://pic/' + str(cstime) + '.png'  # Í¼Æ¬Â·¾¶
+    image_path = 'C://pic/' + str(cstime) + '.png'  # å›¾ç‰‡è·¯å¾„
     path = 'C://pic'
     if not os.path.exists(path):
         os.makedirs(path) 
     screenWidth, screenHeight = pyautogui.size()
     img = pyautogui.screenshot(region=[0, 0, screenWidth, screenHeight])  # x,y,w,h
-    out = img.transpose(Image.ROTATE_90)  # Ğı×ª90¶È
+    out = img.transpose(Image.ROTATE_90)  # æ—‹è½¬90åº¦
     out.save(image_path)
-    # µÚÈı·½ SMTP ·şÎñ
-    mail_host = "smtp.qq.com"  # ÉèÖÃ·şÎñÆ÷
-    mail_user = "584066697"  # ÓÃ»§Ãû
-    mail_pass = "dqdcupiqmubnbfij"  # ¿ÚÁî 
+    # ç¬¬ä¸‰æ–¹ SMTP æœåŠ¡
+    mail_host = "smtp.qq.com"  # è®¾ç½®æœåŠ¡å™¨
+    mail_user = "584066697"  # ç”¨æˆ·å
+    mail_pass = "dqdcupiqmubnbfij"  # å£ä»¤ 
      
     sender = '584066697@qq.com'
-    receivers = ['3349868908@qq.com']  # ½ÓÊÕÓÊ¼ş£¬¿ÉÉèÖÃÎªÄãµÄQQÓÊÏä»òÕßÆäËûÓÊÏä
+    receivers = ['3349868908@qq.com']  # æ¥æ”¶é‚®ä»¶ï¼Œå¯è®¾ç½®ä¸ºä½ çš„QQé‚®ç®±æˆ–è€…å…¶ä»–é‚®ç®±
      
     message = MIMEMultipart()
-    message['From'] = Header("·¢¼şÈË", 'utf-8')
-    message['To'] = Header("ÊÕ¼şÈË", 'utf-8')
+    message['From'] = Header("å‘ä»¶äºº", 'utf-8')
+    message['To'] = Header("æ”¶ä»¶äºº", 'utf-8')
     message['Subject'] = Header(ctime + '_dingding', 'utf-8')
     
-    # Í¼Æ¬Ìí¼Óµ½ÓÊ¼şÄÚÈİÖĞ
-    content = MIMEText('<html><style></style><body><img src="cid:imageid" alt="imageid"></body></html>', 'html', 'utf-8')  # ÕıÎÄ
+    # å›¾ç‰‡æ·»åŠ åˆ°é‚®ä»¶å†…å®¹ä¸­
+    content = MIMEText('<html><style></style><body><img src="cid:imageid" alt="imageid"></body></html>', 'html', 'utf-8')  # æ­£æ–‡
     message.attach(content)
     img = MIMEImage(open(image_path, 'rb').read())
     img.add_header('Content-ID', 'imageid')
     message.attach(img)
     try:
         smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)  # 25 Îª SMTP ¶Ë¿ÚºÅ
+        smtpObj.connect(mail_host, 25)  # 25 ä¸º SMTP ç«¯å£å·
         smtpObj.login(mail_user, mail_pass)  
         smtpObj.sendmail(sender, receivers, message.as_string())
-        print (time.strftime("%YÄê%mÔÂ%dÈÕ  %H:%M:%S ĞÇÆÚ%w", time.localtime()) + "_ÓÊ¼ş·¢ËÍ³É¹¦!")
+        print (time.strftime("%Yå¹´%mæœˆ%dæ—¥  %H:%M:%S æ˜ŸæœŸ%w", time.localtime()) + "_é‚®ä»¶å‘é€æˆåŠŸ!")
     except smtplib.SMTPException:
-        print ("Error: ÎŞ·¨·¢ËÍÓÊ¼ş")
-    time.sleep(5)  # Ë¯Ãß5·ÖÖÓ
+        print ("Error: æ— æ³•å‘é€é‚®ä»¶")
+    time.sleep(5)  # ç¡çœ 5åˆ†é’Ÿ
     
-#Ñ§Ï°Ç¿¹ú
+#å­¦ä¹ å¼ºå›½
 def xuexiqiangguo():
     get_W(u"Redmi Note 5")
-    clink(wx, 700, 5) #Ö÷ÆÁ
-    clink(wx-70, 700, 5) #¶àÈÎÎñ
-    clink(wx, 620, 10) #¹Ø±Õ
-    clink(220, 80, 10) #Ñ§Ï°Ç¿¹ú+80
+    clink(wx, 700, 5) #ä¸»å±
+    clink(wx-70, 700, 5) #å¤šä»»åŠ¡
+    clink(wx, 620, 10) #å…³é—­
+    clink(220, 80, 10) #å­¦ä¹ å¼ºå›½+80
     for k in range(0, 3):
         watch(wx, 300+k*80);#1
-    clink(300, 110, 5)#ĞÂË¼Ïë
+    clink(300, 110, 5)#æ–°æ€æƒ³
     
-    clink(220, 320, 5)#Ñ§Ï°»ı·Ö
+    clink(220, 320, 5)#å­¦ä¹ ç§¯åˆ†
 
-    print(time.strftime("%YÄê%mÔÂ%dÈÕ  %H:%M:%S ĞÇÆÚ%w", time.localtime()) + "_xuexi!")
-    time.sleep(10 * 60)#Ë¯Ãß10·ÖÖÓ
+    print(time.strftime("%Yå¹´%mæœˆ%dæ—¥  %H:%M:%S æ˜ŸæœŸ%w", time.localtime()) + "_xuexi!")
+    time.sleep(10 * 60)#ç¡çœ 10åˆ†é’Ÿ
 
 def ding(ttime):
     send=1
     weekday_ = int(time.strftime("%w", time.localtime()))
     if(weekday_ == 0 or weekday_ == 6):
-        send=0 #ÖÜÄ©Ãâ´òÈÅ²»·¢ÏûÏ¢
+        send=0 #å‘¨æœ«å…æ‰“æ‰°ä¸å‘æ¶ˆæ¯
     if ttime > 705 and ttime < 720:
         taobao()
     elif ttime > 805 and ttime < 820:
@@ -163,9 +171,9 @@ def ding(ttime):
 
 # 1360 * 768
 time.sleep(5)
-print(time.strftime("%YÄê%mÔÂ%dÈÕ  %H:%M:%S ĞÇÆÚ%w", time.localtime()) + "_start!")
+print(time.strftime("%Yå¹´%mæœˆ%dæ—¥  %H:%M:%S æ˜ŸæœŸ%w", time.localtime()) + "_start!")
 # get_location()
-while 1:  # Ñ­»·Ìõ¼şÎª1±Ø¶¨³ÉÁ¢
+while 1:  # å¾ªç¯æ¡ä»¶ä¸º1å¿…å®šæˆç«‹
     time.sleep(60*10)
     ttime = int(time.strftime("%H%M", time.localtime()))
     # holiday = int(time.strftime("%m%d", time.localtime()))
