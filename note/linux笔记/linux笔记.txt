@@ -372,6 +372,32 @@ openssl version
 apt-get purge openssl
 rm -rf /etc/ssl #删除配置文件 
 ============================================================================================【优化】
+1、备份：
+cp /etc/login.defs /etc/login.defs.bak.20220526
+cp /etc/pam.d/system-auth-ac /etc/pam.d/system-auth-ac.bak.20220526
+
+2、登录密码加固：
+sed -i 's/PASS_MAX_DAYS\(.*\)99999\(.*\)/PASS_MAX_DAYS\   90/g' /etc/login.defs
+sed -i 's/PASS_MIN_DAYS\(.*\)0\(.*\)/PASS_MIN_DAYS\   0/g' /etc/login.defs
+sed -i 's/PASS_MIN_LEN\(.*\)5\(.*\)/PASS_MIN_LEN\   5/g' /etc/login.defs
+sed -i 's/PASS_WARN_AGE\(.*\)7\(.*\)/PASS_WARN_AGE\   7/g' /etc/login.defs
+
+3、登录超时限制：
+/etc/pam.d/system-auth 配置
+auth        required      pam_tally2.so deny=5 unlock_time=300 even_deny_root root_unlock_time=10 
+
+4、超时断开设置：
+echo "export TMOUT=300" >> /etc/profile
+source /etc/profile
+
+5、防火墙策略（在服务器上限制本机的22端口只向固定服务器开发访问权限）
+/etc/sysconfig/iptables 配置
+iptables -I INPUT -s 10.3.10.17 -p tcp --dport 22 -j ACCEPT
+iptables -I INPUT -s 10.5.1.159 -p tcp --dport 22 -j ACCEPT
+iptables --line -nvL INPUT
+service iptables save
+service iptables restart 
+
 -------------------------------------------------------------------------------------------------------------------【Too manay open files】
  “Too manay open files” 问题很明显啊，文件描述符超出限制导致无法打开文件或创建网络连接，这个问题又会导致一些其它问题的产生，肯定是ulimit没有优化,于是检查ulimit的设置；
 # ulimit -a
