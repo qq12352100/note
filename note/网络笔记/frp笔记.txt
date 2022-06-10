@@ -33,6 +33,7 @@ server_addr = xxx.xxx.xxx.xxx   #vps的ip
 server_port = 7000              #vps中配置服务端要一样bind_port = 7000
 authentication_method = token
 token = admin123
+tls_enable = true               #解决[service.go:97] login to server failed: EOFEOF
 
 [rdp]
 type = tcp                      #类型tcp，协议 tcp | udp | http | https | stcp | xtcp, 默认 tcp

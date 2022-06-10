@@ -19,33 +19,24 @@ pip install --no-index --find-links=d:/test/python_package -r requirements.txt
 ===================================================================
 在安装成功了pip之后，使用命令安装包的时候: pip install sklearn 报错：  no matching distribution found for sklearn。
 easy_install --upgrade pip
-===================================================================【配置国内源】
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
-阿里云：http://mirrors.aliyun.com/pypi/simple/
-豆瓣：http://pypi.douban.com/simple/
-==linux==
-mkdir ~/.pip
-cd ~/.pip
-touch pip.conf
-vi ~/.pip/pip.conf
-==Windows==
-新建 pip 配置文件夹，直接在user用户（C:\Users\XXX\pip）目录中创建一个名为 pip 的文件夹( 即%HOMEPATH%\pip)创建一个名为 pip.ini
-------------------------
-[global] 
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-[install]
-trusted-host = https://pypi.tuna.tsinghua.edu.cn  # trusted-host 此参数是为了避免麻烦，否则使用的时候可能会提示不受信任
+===================================================================【配置pip国内源】
+pip config list                                                                 #查询当前源
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple        #配置清华大学源
+python -m pip install --upgrade pip                                             #更新pip   查看当前版本：pip show pip
+pip list -o                                                                     #查询可升级包 
+pip install --upgrade paramiko                                                  #更新某个包   pip install --upgrade 包名称==版本号
 ===================================================================【安装p3.10】
+ll /usr/bin/|grep python   #查看本系统下python安装情况
 wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz
 wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
 tar -zxvf Python-3.10.4.tgz
-mkdir /usr/local/python3.7
-./configure --prefix=/usr/local/python3.7
+cd Python-3.10.4
+mkdir /usr/local/python3.10
+./configure --prefix=/usr/local/python3.10
 make && make install
 #添加环境变量
 vim /etc/profile
-/usr/local/python3.7/bin
+/usr/local/python3.10/bin
 source /etc/profile
 #备份
 mv /usr/bin/python3 /usr/bin/python3.bak

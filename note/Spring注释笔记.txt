@@ -32,6 +32,7 @@ public void  dostory(){
 ---------------------------------------------------------------------------
 @RequestMapping(value = "getPayNotify", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 @ResponseBody
+@RestController --注解，相当于@Controller+@ResponseBody两个注解的结合
 ---------------------------------------------------------------------------
 @ResponseStatus(value=HttpStatus.FORBIDDEN, reason=“出现了错误”)  
 #当某处抛出UserException时，则会把value和reason返回给前端。

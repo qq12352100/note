@@ -61,7 +61,7 @@ mysql>grant all privileges on *.* to root@'hostname' identified by 'root' with g
 mysql> use mysql;
 Database changed
 给root用户设置新密码，蓝色部分自己输入：
-mysql> update user set password=password("root") where user="root";
+mysql> update user set password=password("root#qwex") where user="root";
 Query OK, 1 rows affected (0.04 sec)Rows matched: 1 Changed: 1 Warnings: 0
 刷新数据库mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
