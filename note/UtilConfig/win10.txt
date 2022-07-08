@@ -20,6 +20,7 @@ slmgr -skms kms.03k.org
 slmgr -ato
 
 优化：
+0、右键个性化-（主题-桌面图标显示-计算机+锁屏界面+开始-显示应用列表+任务栏-通知）  ===控制面板-通知-关闭通知
 1、右键开始-计算机管理-服务-关闭Windows Update + Windows Search + windows update medic service
 2、右键电脑属性-系统保护-禁用-删除所有还原点
 3、右键C盘属性-工具-碎片整理优化-计划关闭
