@@ -10,7 +10,6 @@ gpedit.msc      #组策略
 2、chrom浏览器安装C，挂VNP登录同步油猴
 3、Everything,Ditto设置开机启动
 
-
 =================================================================
 【激活win10】
 右键开始菜单--Windows PowerShell--依次执行
@@ -26,6 +25,7 @@ slmgr -ato
 3、右键C盘属性-工具-碎片整理优化-计划关闭
 4、文件夹选项-取消勾选“在快速访问中显示最近使用的文件”、“在快速访问中显示常用文件夹”
 5、关闭睡眠hiberfil.sys删除，Windows PowerShell（管理员）执行 powercfg -h off
+6、搜索“管理应用执行别名”
 
 【windows update medic service服务无法禁用】计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc
 在右侧把 start由4（禁用）改为2（自动）
