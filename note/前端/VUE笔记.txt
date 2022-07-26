@@ -17,7 +17,7 @@ npm install cnpm -g
 # 最新稳定版
 $ cnpm install vue
 
-# 全局安装 vue-cli
+# 全局安装 vue-cli  手脚架
 $ cnpm install --global vue-cli
 # 创建一个基于 webpack 模板的新项目
 $ vue init webpack my-project
@@ -48,6 +48,8 @@ $ cnpm run dev
 
 打包 Vue 项目使用以下命令：npm run build  会在 Vue 项目下生成一个 dist 目录，一般包含 index.html 文件及 static 目录，static 目录包含了静态文件 js、css 以及图片目录 images。
 
+------------------------------------------------------------------------------------------------------
+<slot>插槽
 
 
 
