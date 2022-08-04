@@ -114,6 +114,13 @@ git branch              //查看当前分支
 git merge dev           //合并指定分支到当前分支
 git branch -d dev       //删除dev分支
 
+git branch              //列出本地已经存在的分支，并且当前分支会用*标记
+git branch -r           //查看远程版本库的分支列表
+git branch -a           //查看所有分支列表（包括本地和远程，remotes/开头的表示远程分支）
+git branch -v           //查看一个分支的最后一次提交
+git branch --merged     //查看哪些分支已经合并到当前分支
+git branch --no-merged  //查看所有未合并工作的分支
+
 git stash                   //当前工作现场“储藏”起来，等以后恢复现场后继续工作
 git stash list              //查看存储了几个工作现场
 git stash apply stash@{0}   //恢复特定的工作现场

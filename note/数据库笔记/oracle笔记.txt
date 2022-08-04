@@ -109,6 +109,14 @@ NOCACHE;                --  CACHE | NOCACHE 是否启用缓存
 DROP  SEQUENCE dic_seq; 
 --使用序列
 insert into goods(id,name,store_date) values(seq_goods_id.nextval,'矿泉水',to_date('2011-01-01','yyyy-mm-dd')); 
+--导出序列
+select  'create sequence ' ||sequence_name||   
+        ' minvalue ' ||min_value||   
+        ' maxvalue ' ||max_value||   
+        ' start with ' ||last_number||   
+        ' increment by ' ||increment_by||   
+       ( case  when cache_size= 0  then  ' nocache'   else   ' cache ' ||cache_size end) || ';'   
+from dba_sequences where sequence_owner= 'JXDB'  ;-- JXDB貌似要大写才行
 ==============================================================================================================================================================查看使用情况表空间
 --查看使用情况
 select a.tablespace_name, a.bytes / 1024 / 1024 "sum MB", (a.bytes - b.bytes) / 1024 / 1024 "used MB",  b.bytes / 1024 / 1024 "free MB",
