@@ -49,6 +49,8 @@ pause
 start cmd /k "c: && cd C:\Project\test-app-1 && npm start"
 :: 新窗口延迟 5 秒启动 test-app-2, 
 start cmd /k "timeout -nobreak 5 && c: && cd C:\Project\test-app-2 && npm start"
+:: 获取管理员权限
+runas /user:administrator cmd
 
 netsh -c interface ip dump
 netsh interface ip show config
