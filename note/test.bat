@@ -73,7 +73,7 @@ for /f "tokens=* skip=2" %%A in ('ping %host% -n 1') do (
     timeout /t 1 /nobreak > nul
     goto loop
 )
---------------------------------------------------添加服务
+--------------------------------------------------添加服务 或 NSSM安装服务 https://nssm.cc/
 sc create 服务名 binPath= "C:\win32srvDemo.exe"
 sc config 服务名 start=AUTO   rem AUTO(自动)DEMAND(手动)DISABLED(禁用)
 sc description Redis6.2.6 "This service runs the Redis server"
