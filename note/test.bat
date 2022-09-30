@@ -51,6 +51,13 @@ start cmd /k "c: && cd C:\Project\test-app-1 && npm start"
 start cmd /k "timeout -nobreak 5 && c: && cd C:\Project\test-app-2 && npm start"
 :: 获取管理员权限
 runas /user:administrator cmd
+:: 判断文件是否存在
+if exist %SourceFile% (
+    if not exist %GenFile1% (
+) else (
+    //你要做的事情
+) 
+
 
 netsh -c interface ip dump
 netsh interface ip show config
@@ -64,8 +71,12 @@ ncpa.cpl
 ::Usage：第一条命令 && 第二条命令 [&& 第三条命令...]用这种方法可以同时执行多条命令，当碰到执行出错的命令后将不执行后面的命令，如果一直没有出错则一直执行完所有命令；
 --------------------------------------------------一秒一个ping输出，超时5秒输出一个“请求超时。”#两个echo一个输出屏幕一个输出到文件
 @echo off 
+cd C:\Windows\System32
 set host=172.20.123.231
-set logfile=ping_%host%.log
+set logfile=D:\ping_%host%.log
+if exist %logfile% (
+    del %logfile%
+)
 :loop
 for /f "tokens=* skip=2" %%A in ('ping %host% -n 1') do (
     echo %date:~0,-3% %time:~0,-3% %%A >> %logfile%
