@@ -35,6 +35,10 @@ Dynamic Web Module 3.0 requires Java 1.6 or newer.
 <version>2.3.2</version><configuration><source>1.6</source> <target>1.6</target></configuration></plugin></plugins>
 保存，项目构建完成后在项目文件夹上点右键，选择Maven->Update Project 
 ============================================================================================================================
+Error while downloading 'https://maven.apache.org/xsd/maven-4.0.0.xsd' to C:\Users\Administrator\.lemminx\cache\https\maven.apache.org\xsd\maven-4.0.0.xsd.	pom.xml
+解决：close项目重新打开
+============================================================================================================================
+
 第一步：配置环境变量
      MAVEN_HOME : D:\apache-maven-3.0.2 
      MAVEN : %MAVEN_HOME%\bin 
