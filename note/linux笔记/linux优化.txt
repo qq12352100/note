@@ -1,5 +1,5 @@
 
-yum install yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb mariadb-server redis nginx -y
+yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb mariadb-server redis nginx unzip zip
 
 #------------------------------配置mariadb
 systemctl start mariadb
