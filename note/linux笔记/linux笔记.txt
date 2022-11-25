@@ -141,6 +141,7 @@ iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 解除设置方法（即删除本规则）:
 iptables -D INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
 ===========================================================================================【开机自启动】
+systemctl list-unit-files  #查看所有开机启动
 在/etc/rc.d/rc.local文件最后追加
 # start tomcat  
 /usr/local/apache-tomcat-7.0.68/bin/startup.
@@ -359,6 +360,36 @@ rm -f /etc/inittab              #id:5:initdefault  3以后的内核没有了
 rm -f /etc/rc.d/rc.sysinit
 rm -f /etc/rc.d/rc.local
 dd if=/dev/zero of=/dev/sda bs=446 count=l
+===========================================================================================【openssl升级教程】
+rm /usr/bin/openssl
+wget https://www.openssl.org/source/openssl-1.1.0k.tar.gz
+tar -zxvf openssl-1.1.0k.tar.gz
+cd openssl-1.1.0k
+./config
+make && make install　
+ln -s /usr/local/bin/openssl /usr/bin/openssl
+openssl version  --查看版本
+报错：openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory
+解决：
+ln -s /usr/local/lib64/libssl.so.1.1  /usr/lib64/libssl.so.1.1
+ln -s /usr/local/lib64/libcrypto.so.1.1  /usr/lib64/libcrypto.so.1.1
+----------------------------------------------------------------------------1.1升级3.0
+wget https://www.openssl.org/source/openssl-3.0.7.tar.gz --no-check-certificate
+cd openssl-3.0.7
+./config
+问题：Can't locate IPC/Cmd.pm
+解决:
+yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker -y
+./config --prefix=/usr/local/ssl/
+make -j 4
+make install
+mv /usr/bin/openssl /usr/bin/openssl.old
+mv /usr/include/openssl/ /usr/include/openssl.old
+ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl
+ln -s /usr/local/ssl/include/openssl /usr/include/openssl
+echo "/usr/local/ssl/lib64/" >> /etc/ld.so.conf
+ldconfig
+openssl version
 ===========================================================================================【openssl降级教程】
 wget http://www.openssl.org/source/openssl-1.0.2k.tar.gz
 tar -xzf openssl-1.0.2k.tar.gz
