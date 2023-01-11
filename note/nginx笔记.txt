@@ -25,7 +25,12 @@ PrivateTmp=true
 WantedBy=multi-user.target
 
 systemctl enable nginx && systemctl start nginx
----------------------------------------------------默认配置文件/usr/local/nginx/conf
+
+-----------------------------------------查看版本
+编译安装  --> nginx -V  
+yum源安装 --> rpm -qa | grep nginx  
+---------------------------------------------------默认配置文件/usr/local/nginx/conf  /etc/nginx/nginx.conf
+默认主页：/usr/share/doc/HTML/index.html
 export PATH=$PATH:/usr/local/nginx/sbin
 ===========================================================
 connect() to connect() failed (13: Permission denied)
