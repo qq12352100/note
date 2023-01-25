@@ -25,6 +25,11 @@ max_pool_count = 50
 启动：
 ./frps -c frps.ini
 访问http://xxx.xxx.xxx.xxx:7500，是否成功运行；
+------------------------------------------------无法访问解决：
+systemctl status firewalld
+getenforce
+lsof -i:7500
+netstat -tunlp
 
 =====>>配置被访问电脑的客户端frpc.ini文件
 -----------------------------------------------代理Windows远程桌面

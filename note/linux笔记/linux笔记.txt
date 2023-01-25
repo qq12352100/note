@@ -12,6 +12,8 @@ export DIDPLAY=10.61.228.74:0.0
 cd $ORACLE_HOME
 cd bin
 ./dbca
+
+curl -s -L https://raw.githubusercontent.com/233boy/v2ray/master/install.sh | bash
 ===========================================================================================【安装telnet】
 1、关闭防火墙；2、执行【rpm -qa |grep telnet】命令查看是否安装过相关软件包；3、执行【yum install telnet telnet-server】命令安装telnet即可。
 ===========================================================================================【进程端口】
@@ -85,9 +87,14 @@ find /dbdata/apon2/ -name *.properties | xargs grep "jdbc:oracle"    【查找/d
 ntpdate -u ntp.api.bz             【同步时间】
 uname -a                          【查看32位64位】
 more /proc/cpuinfo                【查看cpu是多少位的】
-cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l      【查看物理CPU个数(插槽)】
-cat /proc/cpuinfo| grep "processor"| wc -l                    【查看逻辑CPU个数(虚拟)】
-cat /proc/cpuinfo| grep "cpu cores"| uniq                     【查看每个物理CPU中core的个数(即核数)】
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l  【查看物理CPU个数(插槽)】
+cat /proc/cpuinfo| grep "processor"| wc -l                【查看逻辑CPU个数(虚拟)】
+cat /proc/cpuinfo| grep "cpu cores"| uniq                 【查看每个物理CPU中core的个数(即核数)】
+
+===========================================================================================【selinux】
+查看SELinux状态：cat /etc/selinux/config 或者 getenforce 来查看状态3个状态enforcing （执行中）、permissive （不执行但产生警告）、disabled（关闭）。
+临时关闭（重启机器后失效）：setenforce 0 
+永久关闭（需要重启机器）：sed -i s#SELINUX=enforcing#SELINUX=disabled# /etc/selinux/config
 ===========================================================================================【关闭防火墙】
 1、查看
 iptables -nvL --line-number
