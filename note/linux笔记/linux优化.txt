@@ -1,7 +1,19 @@
 
 yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb mariadb-server redis nginx unzip zip wget net-tools
 
-#------------------------------配置mariadb
+
+#------------------------------【配置安全】
+1、修改默认22端口
+vim /etc/ssh/sshd_config
+找到缺省注释的#Port 22端口： yy 复制整行 p 下一行粘贴
+Port 47481
+service sshd restart
+systemctl restart sshd
+
+2、多次登录失败限制ip访问ssh
+wget https://gitee.com/qq12352100/linux-shell/raw/master/safe/sesure_ssh.sh -P /opt
+
+#------------------------------【配置mariadb】
 systemctl start mariadb
 systemctl enable mariadb
 mysql_secure_installation
@@ -29,17 +41,17 @@ grant all privileges on *.* to 'root'@'%' identified by 'root@qwer' with grant o
 flush privileges;
 show variables like "%character%";show variables like "%collation%";
 
-#------------------------------配置redis
+#------------------------------【配置redis】
 vim /etc/redis.conf
 命令模式:/requirepass
 命令模式:/bind
 systemctl start redis.service
 
-#------------------------------配置nginx
+#------------------------------【配置nginx】
 vim /etc/nginx/nginx.conf
 systemctl start nginx.service
 
-#------------------------------配置gohttpserver
+#------------------------------【配置gohttpserver】
 wget -P /usr/local/src/ https://github.com/codeskyblue/gohttpserver/releases/download/1.1.0/gohttpserver_1.1.0_linux_amd64.tar.gz
 tar -C /usr/local -xzf gohttpserver_1.1.0_linux_amd64.tar.gz
 wget -P /usr/local/src/ https://studygolang.com/dl/golang/go1.16.4.linux-amd64.tar.gz
@@ -51,7 +63,7 @@ mkdir /usr/local/share/bkk/ & cd /usr/local
 screen -S svn
 ./gohttpserver -r /usr/local/share/bkk --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
 
-#------------------------------配置frp
+#------------------------------【配置frp】
 wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/frp_0.43.0_linux_amd64.tar.gz
 tar -C /usr/local -xzf frp_0.43.0_linux_amd64.tar.gz
 cd /usr/local/frp_0.43.0_linux_amd64 ; vim frps.ini
