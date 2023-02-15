@@ -91,7 +91,7 @@ cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l  【查看物理CPU个�
 cat /proc/cpuinfo| grep "processor"| wc -l                【查看逻辑CPU个数(虚拟)】
 cat /proc/cpuinfo| grep "cpu cores"| uniq                 【查看每个物理CPU中core的个数(即核数)】
 
-===========================================================================================【登录信息】
+===========================================================================================【登录日志信息】
 echo ""> /var/log/wtmp      #清除last     登录成功    此文件默认打开时乱码
 echo ""> /var/log/btmp      #清除lastb    登录失败    此文件默认打开时乱码
 history -c                  #清除历史命令

@@ -3,15 +3,19 @@ yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb ma
 
 
 #------------------------------【配置安全】
-1、修改默认22端口
+1、修改默认22端口：
 vim /etc/ssh/sshd_config
-找到缺省注释的#Port 22端口： yy 复制整行 p 下一行粘贴
+找到缺省注释的#Port 22端口： yy 复制整行 p 下一行粘贴  
+！！！先打开两个端口！！！
+Port 22
 Port 47481
+重启ssh服务：
 service sshd restart
 systemctl restart sshd
 
 2、多次登录失败限制ip访问ssh
 wget https://gitee.com/qq12352100/linux-shell/raw/master/safe/sesure_ssh.sh -P /opt
+cat /opt/sesure_ssh.sh
 
 #------------------------------【配置mariadb】
 systemctl start mariadb
