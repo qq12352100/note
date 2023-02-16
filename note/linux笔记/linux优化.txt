@@ -2,6 +2,12 @@
 yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb mariadb-server redis nginx unzip zip wget net-tools
 
 
+#------------------------------【登录日志信息】
+echo ""> /var/log/wtmp      #清除last     登录成功    此文件默认打开时乱码
+echo ""> /var/log/btmp      #清除lastb    登录失败    此文件默认打开时乱码
+history -c                  #清除历史命令
+
+tail -30f /var/log/secure   #记录安全相关的信息
 #------------------------------【配置安全】
 1、修改默认22端口：
 vim /etc/ssh/sshd_config
@@ -58,7 +64,10 @@ systemctl start nginx.service
 #------------------------------【配置gohttpserver】
 wget -P /usr/local/src/ https://github.com/codeskyblue/gohttpserver/releases/download/1.1.0/gohttpserver_1.1.0_linux_amd64.tar.gz
 tar -C /usr/local -xzf /usr/local/src/gohttpserver_1.1.0_linux_amd64.tar.gz
-----安装go  yum install golang 或 yum install go 
+---------yum安装go----------------
+curl -s https://mirror.go-repo.io/centos-unstable/go-repo-unstable.repo | tee /etc/yum.repos.d/go-repo-unstable.repo
+yum install golang -y 
+---------wget安装go---------------
 wget -P /usr/local/src/ https://studygolang.com/dl/golang/go1.16.4.linux-amd64.tar.gz
 tar -C /usr/local -xzf /usr/local/src/go1.16.4.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
@@ -72,8 +81,8 @@ mkdir /usr/local/share/bkk
 ./gohttpserver -r /usr/local/share/bkk --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
 
 #------------------------------【配置frp】
-wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/frp_0.43.0_linux_amd64.tar.gz
-tar -C /usr/local -xzf frp_0.43.0_linux_amd64.tar.gz
+wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/download/v0.47.0/frp_0.47.0_linux_amd64.tar.gz
+tar -C /usr/local -xzf /usr/local/src/frp_0.47.0_linux_amd64.tar.gz
 cd /usr/local/frp_0.43.0_linux_amd64 ; vim frps.ini
 screen -S frp
 ./frps -c frps.ini

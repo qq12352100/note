@@ -9,7 +9,7 @@
 1、备份你的原镜像文件，以免出错后可以恢复 (文件位置/etc/yum.repos.d)
 #mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 2、下载新的CentOS-Base.repo 到/etc/yum.repos.d/
-163源    #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+163源    #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo 或 curl -s http://mirrors.163.com/.help/CentOS7-Base-163.repo | tee /etc/yum.repos.d/CentOS-Base.repo
 aliyun  #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 3、修改文件中的baseurl地址,把每个baseurl后边的$releasever替换成7，把$basearch替换成x86_64
 #vi CentOS-Base.repo
