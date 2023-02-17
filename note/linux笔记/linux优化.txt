@@ -54,7 +54,9 @@ show variables like "%character%";show variables like "%collation%";
 #------------------------------【配置redis】
 vim /etc/redis.conf
 命令模式:/requirepass
-命令模式:/bind
+requirepass test@1234
+命令模式:/bind   
+bind 0.0.0.0
 systemctl start redis.service
 
 #------------------------------【配置nginx】
