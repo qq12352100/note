@@ -25,6 +25,7 @@ cat /opt/sesure_ssh.sh
 
 
 curl -s -L https://gitee.com/qq12352100/linux-shell/raw/master/optimize.sh | bash
+curl -s -L https://gitee.com/qq12352100/linux-shell/raw/master/audit.sh | bash
 #------------------------------【配置mariadb】
 systemctl start mariadb
 systemctl enable mariadb
