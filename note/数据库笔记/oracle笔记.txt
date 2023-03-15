@@ -98,6 +98,10 @@ select * from user_triggers;        --查看建立的触发器
 select * from user_sequences;       --查看建立的序列
 
 ============================================================================================================序列
+--备份序列
+SELECT 'drop SEQUENCE '||SEQUENCE_NAME|| ';CREATE SEQUENCE '||SEQUENCE_NAME|| ' INCREMENT BY '||INCREMENT_BY ||' START WITH '||LAST_NUMBER||' MAXVALUE '||MAX_VALUE ||' '||(case when CACHE_SIZE=0 then 'NOCACHE' else 'CACHE '||CACHE_SIZE end)||' ORDER NOCYCLE ;' FROM user_SEQUENCES;
+SELECT * FROM user_SEQUENCES;
+
 --创建序列
 CREATE  SEQUENCE dic_seq
 INCREMENT  BY   1       --  每次加的个数据 
