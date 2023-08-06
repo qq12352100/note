@@ -54,7 +54,12 @@ mysql -uroot -pGkFjrpWgUP
 grant all privileges on *.* to 'root'@'%' identified by 'GkFjrpWgUP' with grant option;
 flush privileges;
 show variables like "%character%";show variables like "%collation%";
-
+-----卸载
+systemctl stop mysql
+systemctl stop mariadb
+yum remove mariadb mariadb-server
+find / -name mysql* |xargs rm -rf
+lsof -i:3306
 #------------------------------【配置redis】
 vim /etc/redis.conf
 命令模式:/requirepass
@@ -92,6 +97,7 @@ screen -S frp
 ./frps -c frps.ini
 
 nohup java -jar master_base-0.0.1_BASE.jar >>log.file 2>&1 &
+nohup java -jar -Dloader.path=./lib bzwsjk-0.0.1_BASE.jar >>log.file 2>&1 &
 
 #------------------------------【linux测速】
 wget https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && chmod a+rx speedtest.py && mv speedtest.py /usr/local/bin/speedtest && chown root:root /usr/local/bin/speedtest && speedtest
