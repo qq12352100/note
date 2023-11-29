@@ -8,10 +8,10 @@ npx   npm 包执行器
 下载：
 https://nodejs.org/dist/v16.15.0/
 
-配置全局安装的模块路径和缓存路径
-在nodejs根目录,创建node_global，node_cache文件夹，然后cmd执行
+配置全局安装的模块路径和缓存路径,在nodejs根目录,创建node_global，node_cache文件夹，然后cmd执行
 npm config set prefix "D:\A\nodejs\node_modules\node_global"
 npm config set cache "D:\A\nodejs\node_modules\node_cache"
+npm config list     #查看配置
 
 配置环境变量
 创建 NODE_PATH 变量 变量值为node_modules地址-->> NODE_PATH   C:\nodejs\node_modules
