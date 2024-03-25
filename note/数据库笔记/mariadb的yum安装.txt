@@ -1,29 +1,29 @@
-1¡¢°²×°MariaDB
+1ã€å®‰è£…MariaDB
 yum -y install mariadb mariadb-server
-#°²×°Íê³ÉMariaDB£¬Ê×ÏÈÆô¶¯MariaDB
+#å®‰è£…å®ŒæˆMariaDBï¼Œé¦–å…ˆå¯åŠ¨MariaDB
 systemctl start mariadb
-#ÉèÖÃ¿ª»úÆô¶¯
+#è®¾ç½®å¼€æœºå¯åŠ¨
 systemctl enable mariadb
 
-#½ÓÏÂÀ´½øĞĞMariaDBµÄÏà¹Ø¼òµ¥ÅäÖÃ
+#æ¥ä¸‹æ¥è¿›è¡ŒMariaDBçš„ç›¸å…³ç®€å•é…ç½®
 mysql_secure_installation
 
-Ê×ÏÈÊÇÉèÖÃÃÜÂë£¬»áÌáÊ¾ÏÈÊäÈëÃÜÂë
-Enter current password for root (enter for none):<¨C³õ´ÎÔËĞĞÖ±½Ó»Ø³µ
-Set root password? [Y/n] <¨C ÊÇ·ñÉèÖÃrootÓÃ»§ÃÜÂë£¬ÊäÈëy²¢»Ø³µ»òÖ±½Ó»Ø³µ
-New password: <¨C ÉèÖÃrootÓÃ»§µÄÃÜÂë
-Re-enter new password: <¨C ÔÙÊäÈëÒ»´ÎÄãÉèÖÃµÄÃÜÂë
-Remove anonymous users? [Y/n] <¨C ÊÇ·ñÉ¾³ıÄäÃûÓÃ»§£¬»Ø³µ
-Disallow root login remotely? [Y/n] <¨CÊÇ·ñ½ûÖ¹rootÔ¶³ÌµÇÂ¼,»Ø³µ,
-Remove test database and access to it? [Y/n] <¨C ÊÇ·ñÉ¾³ıtestÊı¾İ¿â£¬»Ø³µ
-Reload privilege tables now? [Y/n] <¨C ÊÇ·ñÖØĞÂ¼ÓÔØÈ¨ÏŞ±í£¬»Ø³µ
+é¦–å…ˆæ˜¯è®¾ç½®å¯†ç ï¼Œä¼šæç¤ºå…ˆè¾“å…¥å¯†ç 
+Enter current password for root (enter for none):<â€“åˆæ¬¡è¿è¡Œç›´æ¥å›è½¦
+Set root password? [Y/n] <â€“ æ˜¯å¦è®¾ç½®rootç”¨æˆ·å¯†ç ï¼Œè¾“å…¥yå¹¶å›è½¦æˆ–ç›´æ¥å›è½¦
+New password: <â€“ è®¾ç½®rootç”¨æˆ·çš„å¯†ç 
+Re-enter new password: <â€“ å†è¾“å…¥ä¸€æ¬¡ä½ è®¾ç½®çš„å¯†ç 
+Remove anonymous users? [Y/n] <â€“ æ˜¯å¦åˆ é™¤åŒ¿åç”¨æˆ·ï¼Œå›è½¦
+Disallow root login remotely? [Y/n] <â€“æ˜¯å¦ç¦æ­¢rootè¿œç¨‹ç™»å½•,å›è½¦,
+Remove test database and access to it? [Y/n] <â€“ æ˜¯å¦åˆ é™¤testæ•°æ®åº“ï¼Œå›è½¦
+Reload privilege tables now? [Y/n] <â€“ æ˜¯å¦é‡æ–°åŠ è½½æƒé™è¡¨ï¼Œå›è½¦
 
-#³õÊ¼»¯MariaDBÍê³É£¬½ÓÏÂÀ´²âÊÔµÇÂ¼
+#åˆå§‹åŒ–MariaDBå®Œæˆï¼Œæ¥ä¸‹æ¥æµ‹è¯•ç™»å½•
 mysql -uroot -p
 
-2¡¢ÅäÖÃMariaDBµÄ×Ö·û¼¯
+2ã€é…ç½®MariaDBçš„å­—ç¬¦é›†
 vi /etc/my.cnf
-ÔÚ[mysqld]±êÇ©ÏÂÌí¼Ó
+åœ¨[mysqld]æ ‡ç­¾ä¸‹æ·»åŠ 
 init_connect='SET collation_connection = utf8_unicode_ci' 
 init_connect='SET NAMES utf8' 
 character-set-server=utf8
@@ -31,46 +31,46 @@ collation-server=utf8_unicode_ci
 skip-character-set-client-handshake
 
 vi /etc/my.cnf.d/client.cnf
-#ÔÚ[client]ÖĞÌí¼Ó
+#åœ¨[client]ä¸­æ·»åŠ 
 default-character-set=utf8
 
 vi /etc/my.cnf.d/mysql-clients.cnf
-#ÔÚ[mysql]ÖĞÌí¼Ó
+#åœ¨[mysql]ä¸­æ·»åŠ 
 default-character-set=utf8
 
-#È«²¿ÅäÖÃÍê³É£¬ÖØÆômariadb
+#å…¨éƒ¨é…ç½®å®Œæˆï¼Œé‡å¯mariadb
 systemctl restart mariadb
-Ö®ºó½øÈëMariaDB²é¿´×Ö·û¼¯
+ä¹‹åè¿›å…¥MariaDBæŸ¥çœ‹å­—ç¬¦é›†
 mysql> show variables like "%character%";show variables like "%collation%";
 
-3¡¢Ìí¼ÓÓÃ»§£¬ÉèÖÃÈ¨ÏŞ
-²é¿´ÓÃ»§
+3ã€æ·»åŠ ç”¨æˆ·ï¼Œè®¾ç½®æƒé™
+æŸ¥çœ‹ç”¨æˆ·
 select User, Host, Password from mysql.user;
-´´½¨ÓÃ»§ÃüÁî
+åˆ›å»ºç”¨æˆ·å‘½ä»¤
 mysql>create user root@localhost identified by 'root';
-Ö±½Ó´´½¨ÓÃ»§²¢ÊÚÈ¨µÄÃüÁî
+ç›´æ¥åˆ›å»ºç”¨æˆ·å¹¶æˆæƒçš„å‘½ä»¤
 mysql>grant all on *.* to root@localhost indentified by 'root';
-ÊÚÓèÍâÍøµÇÂ½È¨ÏŞ 
+æˆäºˆå¤–ç½‘ç™»é™†æƒé™ 
 mysql>grant all privileges on *.* to root@'%' identified by 'root';
-ÊÚÓèÈ¨ÏŞ²¢ÇÒ¿ÉÒÔÊÚÈ¨
+æˆäºˆæƒé™å¹¶ä¸”å¯ä»¥æˆæƒ
 mysql>grant all privileges on *.* to root@'hostname' identified by 'root' with grant option;
 
-#Ìø¹ıÊı¾İ¿âÈ¨ÏŞÑéÖ¤
-ÔÚmysqldÏÂÃæÌí¼Óskip-grant-tables£¬±£´æÍË³ö¡£
-1.½øÈëmysqlÊı¾İ¿â£º
+#è·³è¿‡æ•°æ®åº“æƒé™éªŒè¯
+åœ¨mysqldä¸‹é¢æ·»åŠ skip-grant-tablesï¼Œä¿å­˜é€€å‡ºã€‚
+1.è¿›å…¥mysqlæ•°æ®åº“ï¼š
 mysql> use mysql;
 Database changed
-¸ørootÓÃ»§ÉèÖÃĞÂÃÜÂë£¬À¶É«²¿·Ö×Ô¼ºÊäÈë£º
+ç»™rootç”¨æˆ·è®¾ç½®æ–°å¯†ç ï¼Œè“è‰²éƒ¨åˆ†è‡ªå·±è¾“å…¥ï¼š
 mysql> update user set password=password("root#qwex") where user="root";
 Query OK, 1 rows affected (0.04 sec)Rows matched: 1 Changed: 1 Warnings: 0
-Ë¢ĞÂÊı¾İ¿âmysql> flush privileges;
+åˆ·æ–°æ•°æ®åº“mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
-ÍË³ömysql£ºmysql> quit
+é€€å‡ºmysqlï¼šmysql> quit
 Bye
-PS£º123456ÎªĞÂÃÜÂë£¬ÓÃ»§¿É¸ù¾İ×Ô¼ºĞèÒªĞŞ¸Ä³É×Ô¼ºµÄÃÜÂë 
-¸ÄºÃÖ®ºó£¬ÔÙĞŞ¸ÄÒ»ÏÂmy.iniÕâ¸öÎÄ¼ş£¬°ÑÎÒÃÇ¸Õ²Å¼ÓÈëµÄ"skip-grant-tables"ÕâĞĞÉ¾³ı£¬±£´æÍË³öÔÙÖØÆômysql·şÎñ¾Í¿ÉÒÔÁË¡£
+PSï¼š123456ä¸ºæ–°å¯†ç ï¼Œç”¨æˆ·å¯æ ¹æ®è‡ªå·±éœ€è¦ä¿®æ”¹æˆè‡ªå·±çš„å¯†ç  
+æ”¹å¥½ä¹‹åï¼Œå†ä¿®æ”¹ä¸€ä¸‹my.iniè¿™ä¸ªæ–‡ä»¶ï¼ŒæŠŠæˆ‘ä»¬åˆšæ‰åŠ å…¥çš„"skip-grant-tables"è¿™è¡Œåˆ é™¤ï¼Œä¿å­˜é€€å‡ºå†é‡å¯mysqlæœåŠ¡å°±å¯ä»¥äº†ã€‚
 systemctl restart mariadb
-ÇĞ¼Ç£ºÔÚÅäÖÃÊ±ÒªÔÊĞíÔ¶³ÌµÇÂ¼£¬·ñÔòÖ»ÓĞlocalhostÄÜµÇÂ¼Êı¾İ¿â¡£
+åˆ‡è®°ï¼šåœ¨é…ç½®æ—¶è¦å…è®¸è¿œç¨‹ç™»å½•ï¼Œå¦åˆ™åªæœ‰localhostèƒ½ç™»å½•æ•°æ®åº“ã€‚
 
 
 
