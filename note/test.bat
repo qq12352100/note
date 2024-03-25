@@ -1,6 +1,5 @@
 ::默认编码格式为ANSI代表 GB2312 编码。
 ::不加@时，在运行时，会在窗口显示出这条命令,而加了@, 只会显示出 echo后面你要显示出的东西
-TIMEOUT /T 10                       rem  睡眠10s
 mode con cols=80 lines=20&color 0c  rem  cols宽 lines高  cmd里面键入:help color 查查看
 TITLE Tomcat                        rem  设置窗口标题
 cmdow @ /top /mov 500 500           rem  移动窗口到某个位置 详见cmdow下载

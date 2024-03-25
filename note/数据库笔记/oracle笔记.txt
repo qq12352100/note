@@ -1,10 +1,6 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
 Insert into Table2(a, c, d) select a,c,5 from Table1
-------------------------------【常用目录】
-/u01/app/oracle/product/11.2.0.4/dbhome_1/dbs
-/u01/app/11.2.0.4/grid/network/admin/listener.ora
-
 ============================================================================================================建库流程
 -- 注意：请用SYSTEM用户登录，再运行此脚本
 -- 文档 https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_7003.htm
@@ -35,20 +31,9 @@ GRANT CONNECT,RESOURCE,DBA To BKK;
 REVOKE CONNECT,RESOURCE,DBA FROM BKK;
 ============================================================================================================重启oracle
 1.执行 sqlplus /nolog；
-2.conn sys / as sysdba ;        ----------1、2两步等价于sqlplus sys/XMydwy18@bzjk as sysdba
-3.shutdown immediate ;          ---------卡住不动root执行ps aux |grep "LOCAL=NO" |awk '{printf "%s ", $2}' |xargs kill -9   （LOCAL=NO：非本地连接）
+2.conn sys / as sysdba ;（口令是你登录数据库时输入的密码）
+3.shutdown immediate ;
 4.startup;
----------------------------------
-lsnrctl status   --查看监听状态
-su oracle
-echo $ORACLE_SID
-echo $ORALCE_HOME
-export ORACLE_SID=bzjk
-export ORALCE_HOME=/u01/app/oracle/product/11.2.0.4/db_1
-
-sqlplus sys/XMydwy18@bzjk as sysdba
-
-
 ----------------------------------------------------------------------------------------------------------监听问题
 两个文件中要一致LISTENER_ORCL
 \app\Administrator\admin\orcl\pfile
@@ -113,10 +98,6 @@ select * from user_triggers;        --查看建立的触发器
 select * from user_sequences;       --查看建立的序列
 
 ============================================================================================================序列
---备份序列
-SELECT 'drop SEQUENCE '||SEQUENCE_NAME|| ';CREATE SEQUENCE '||SEQUENCE_NAME|| ' INCREMENT BY '||INCREMENT_BY ||' START WITH '||LAST_NUMBER||' MAXVALUE '||MAX_VALUE ||' '||(case when CACHE_SIZE=0 then 'NOCACHE' else 'CACHE '||CACHE_SIZE end)||' ORDER NOCYCLE ;' FROM user_SEQUENCES;
-SELECT * FROM user_SEQUENCES;
-
 --创建序列
 CREATE  SEQUENCE dic_seq
 INCREMENT  BY   1       --  每次加的个数据 

@@ -2,7 +2,6 @@ http://cdn.code.baidu.com/  百度静态资源库
 
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.js"></script>
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
 window.location.href
 上右下左
@@ -70,9 +69,8 @@ jQuery("input[name='a']").each(function(key,value){
 });
 checkName.join(",").substring(1);
 -------------------------------------------
-==========================================================================================================定时函数处理
-setTimeout(function(){location.reload();},3000);   --3秒之后刷新
-setInterval(function(){location.reload();},3000);  --每隔3秒刷新一次
+==========================================================================================================函数处理
+setTimeout(function(){location.reload();},3000);
 --------------------------------------------------------------------------获取被点击元素
 function yearClink(fun){
     fun.name;//获取函数名字
@@ -274,12 +272,12 @@ $('body').keypress( function(e) {
 // 模拟按键了 x  
 $( 'body' ).simulateKeyPress('x');  
 ==========================================================================================================HTML
-<table id="" style="border-collapse: collapse;" >               //td加边框不起作用
+<table id="" style="border-collapse: collapse;" >   //td加边框不起作用
 input[disabled]{outline: none;border:none;background:none;}     //input去掉边框
-border:1px solid #000000;                                       //一个像素的实线边框
-1px dashed #000000                                              //一个像素的虚线边框
-cursor:pointer;                                                 //鼠标样式
-text-transform: uppercase;                                      //input值转大写
+border:1px solid #000000;       //一个像素的实线边框
+1px dashed #000000          //一个像素的虚线边框
+cursor:pointer;             //鼠标样式
+text-transform: uppercase; //input值转大写
 ==========================================================================================================油候
 // @match        http://ydwyweb.cc:7070/tyzf-web/pages/login.jsp
 document.getElementById('loginname').value='admin';

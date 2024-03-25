@@ -1,27 +1,27 @@
-Staticfile CDN£¨¹úÄÚ£© : https://cdn.staticfile.org/vue/2.2.2/vue.min.js
-unpkg£ºhttps://unpkg.com/vue@2.6.14/dist/vue.min.js¡£
+Staticfile CDNï¼ˆå›½å†…ï¼‰ : https://cdn.staticfile.org/vue/2.2.2/vue.min.js
+unpkgï¼šhttps://unpkg.com/vue@2.6.14/dist/vue.min.jsã€‚
 cdnjs : https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js
 
-NPM ·½·¨°²×°£º
+NPM æ–¹æ³•å®‰è£…ï¼š
 npm install -g cnpm --registry=https://registry.npmmirror.com
 npm -v
-npm install npm -g      #Éı¼¶
-npm install express     #°²×°express  Ğ¶ÔØ£ºnpm uninstall express ¸üĞÂ£ºnpm update express ËÑË÷£ºnpm search express
-npm list -g             #²é¿´ËùÓĞÈ«¾Ö°²×°µÄÄ£¿é  npm ls -g
+npm install npm -g      #å‡çº§
+npm install express     #å®‰è£…express  å¸è½½ï¼šnpm uninstall express æ›´æ–°ï¼šnpm update express æœç´¢ï¼šnpm search express
+npm list -g             #æŸ¥çœ‹æ‰€æœ‰å…¨å±€å®‰è£…çš„æ¨¡å—  npm ls -g
 
-#Éı¼¶ npm
+#å‡çº§ npm
 cnpm install npm -g
-# Éı¼¶»ò°²×° cnpm
+# å‡çº§æˆ–å®‰è£… cnpm
 npm install cnpm -g
 
-# ×îĞÂÎÈ¶¨°æ
+# æœ€æ–°ç¨³å®šç‰ˆ
 $ cnpm install vue
 
-# È«¾Ö°²×° vue-cli  ÊÖ½Å¼Ü
+# å…¨å±€å®‰è£… vue-cli  æ‰‹è„šæ¶
 $ cnpm install --global vue-cli
-# ´´½¨Ò»¸ö»ùÓÚ webpack Ä£°åµÄĞÂÏîÄ¿
+# åˆ›å»ºä¸€ä¸ªåŸºäº webpack æ¨¡æ¿çš„æ–°é¡¹ç›®
 $ vue init webpack my-project
-# ÕâÀïĞèÒª½øĞĞÒ»Ğ©ÅäÖÃ£¬Ä¬ÈÏ»Ø³µ¼´¿É
+# è¿™é‡Œéœ€è¦è¿›è¡Œä¸€äº›é…ç½®ï¼Œé»˜è®¤å›è½¦å³å¯
 This will install Vue 2.x version of the template.
 For Vue 1.x use: vue init webpack#1.0 my-project
 ? Project name my-project
@@ -32,7 +32,7 @@ For Vue 1.x use: vue init webpack#1.0 my-project
 ? Pick an ESLint preset Standard
 ? Setup unit tests with Karma + Mocha? Yes
 ? Setup e2e tests with Nightwatch? Yes
-   vue-cli ¡¤ Generated "my-project".
+   vue-cli ãƒ» Generated "my-project".
    To get started:   
      cd my-project
      npm install
@@ -46,22 +46,22 @@ $ cnpm run dev
 > Listening at http://localhost:8080
 
 
-´ò°ü Vue ÏîÄ¿Ê¹ÓÃÒÔÏÂÃüÁî£ºnpm run build  »áÔÚ Vue ÏîÄ¿ÏÂÉú³ÉÒ»¸ö dist Ä¿Â¼£¬Ò»°ã°üº¬ index.html ÎÄ¼ş¼° static Ä¿Â¼£¬static Ä¿Â¼°üº¬ÁË¾²Ì¬ÎÄ¼ş js¡¢css ÒÔ¼°Í¼Æ¬Ä¿Â¼ images¡£
+æ‰“åŒ… Vue é¡¹ç›®ä½¿ç”¨ä»¥ä¸‹å‘½ä»¤ï¼šnpm run build  ä¼šåœ¨ Vue é¡¹ç›®ä¸‹ç”Ÿæˆä¸€ä¸ª dist ç›®å½•ï¼Œä¸€èˆ¬åŒ…å« index.html æ–‡ä»¶åŠ static ç›®å½•ï¼Œstatic ç›®å½•åŒ…å«äº†é™æ€æ–‡ä»¶ jsã€css ä»¥åŠå›¾ç‰‡ç›®å½• imagesã€‚
 
 ------------------------------------------------------------------------------------------------------
-<slot>²å²Û
+<slot>æ’æ§½
 
 
-------------------------------------------------------------------------------------------------------ES6Óï·¨
+------------------------------------------------------------------------------------------------------ES6è¯­æ³•
 
-// 1.1.·ÅÈëÁ½¸ö²ÎÊı
+// 1.1.æ”¾å…¥ä¸¤ä¸ªå‚æ•°
 const sum = (num1, num2) => {
 return num1 + num2
 }
-// 1.2.·ÅÈëÒ»¸ö²ÎÊı
+// 1.2.æ”¾å…¥ä¸€ä¸ªå‚æ•°
 const power = num => {
 return num * num
-£ı
+ï½
 
 
 

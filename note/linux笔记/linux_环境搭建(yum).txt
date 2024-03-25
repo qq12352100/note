@@ -9,7 +9,7 @@
 1、备份你的原镜像文件，以免出错后可以恢复 (文件位置/etc/yum.repos.d)
 #mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 2、下载新的CentOS-Base.repo 到/etc/yum.repos.d/
-163源    #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo 或 curl -s http://mirrors.163.com/.help/CentOS7-Base-163.repo | tee /etc/yum.repos.d/CentOS-Base.repo
+163源    #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
 aliyun  #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 3、修改文件中的baseurl地址,把每个baseurl后边的$releasever替换成7，把$basearch替换成x86_64
 #vi CentOS-Base.repo
@@ -30,16 +30,6 @@ gpgcheck=0      #是否检查源的合法性，此处为0表示不检查，为1�
 3、清除原有yum缓存
 #yum clean all
 #yum makecache
---------------【nginx源】
-1、创建文件。
-vim /etc/yum.repos.d/nginx.repo
-2、复制以下内容。
-[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=1
-3、验证yum list |grep nginx
 =================================================================================================================【基本命令】
 yum的命令形式一般是如下：yum [options] [command] [package ...]
 其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为"yes"），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package ...]是操作的对象。

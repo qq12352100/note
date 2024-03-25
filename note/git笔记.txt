@@ -17,8 +17,6 @@ $ git --help
 $ man git-
 比如，要学习 config 命令可以怎么用，可执行：
 $ git help config
-控制台中文乱码问题
-$ git config --global core.quotepath false
 ==========================================================================================git查看某个文件的修改历史
 一、切换到目录
 二、git log --pretty 例如：git log --pretty=oneline 文件名

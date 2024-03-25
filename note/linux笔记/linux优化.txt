@@ -1,33 +1,7 @@
 
 yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb mariadb-server redis nginx unzip zip wget net-tools
 
-
-#------------------------------【登录日志信息】
-echo ""> /var/log/wtmp      #清除last     登录成功    此文件默认打开时乱码
-echo ""> /var/log/btmp      #清除lastb    登录失败    此文件默认打开时乱码
-history -c                  #清除历史命令
-
-tail -30f /var/log/secure   #记录安全相关的信息
-#------------------------------【配置安全】
-1、修改默认22端口：
-vim /etc/ssh/sshd_config
-找到缺省注释的#Port 22端口： yy 复制整行 p 下一行粘贴  
-！！！先打开两个端口！！！
-Port 22
-Port 47481
-重启ssh服务：
-service sshd restart
-systemctl restart sshd
-
-2、多次登录失败限制ip访问ssh
-wget https://gitee.com/qq12352100/linux-shell/raw/master/safe/sesure_ssh.sh -P /opt
-cat /opt/sesure_ssh.sh
-
-
-curl -s -L https://gitee.com/qq12352100/linux-shell/raw/master/optimize.sh | bash
-curl -s -L https://gitee.com/qq12352100/linux-shell/raw/master/audit.sh | bash
-curl -s -L https://gitee.com/qq12352100/linux-shell/raw/master/install_gohttpserver.sh | bash
-#------------------------------【配置mariadb】
+#------------------------------配置mariadb
 systemctl start mariadb
 systemctl enable mariadb
 mysql_secure_installation
@@ -44,69 +18,50 @@ init_connect='SET NAMES utf8'
 character-set-server=utf8
 collation-server=utf8_unicode_ci
 skip-character-set-client-handshake
-
 vi /etc/my.cnf.d/client.cnf         #在[client]中添加   default-character-set=utf8
 vi /etc/my.cnf.d/mysql-clients.cnf  #在[mysql]中添加    default-character-set=utf8
 
 systemctl restart mariadb
 
-mysql -uroot -pGkFjrpWgUP
-grant all privileges on *.* to 'root'@'%' identified by 'GkFjrpWgUP' with grant option;
+mysql -uroot -proot@qwer
+grant all privileges on *.* to 'root'@'%' identified by 'root@qwer' with grant option;
 flush privileges;
 show variables like "%character%";show variables like "%collation%";
------卸载
-systemctl stop mysql
-systemctl stop mariadb
-yum remove mariadb mariadb-server
-find / -name mysql* |xargs rm -rf
-lsof -i:3306
-#------------------------------【配置redis】
+
+#------------------------------配置redis
 vim /etc/redis.conf
 命令模式:/requirepass
-requirepass test@1234
-命令模式:/bind   
-bind 0.0.0.0
+命令模式:/bind
 systemctl start redis.service
 
-#------------------------------【配置nginx】
+#------------------------------配置nginx
 vim /etc/nginx/nginx.conf
 systemctl start nginx.service
 
-#------------------------------【配置gohttpserver】
-wget -P /usr/local/src/ https://github.com/codeskyblue/gohttpserver/releases/download/1.1.0/gohttpserver_1.1.0_linux_amd64.tar.gz && tar -C /usr/local -xzf /usr/local/src/gohttpserver_1.1.0_linux_amd64.tar.gz
----------yum安装go----------------
-curl -s https://mirror.go-repo.io/centos-unstable/go-repo-unstable.repo | tee /etc/yum.repos.d/go-repo-unstable.repo && yum install golang -y 
----------wget安装go---------------
+#------------------------------配置gohttpserver
+wget -P /usr/local/src/ https://github.com/codeskyblue/gohttpserver/releases/download/1.1.0/gohttpserver_1.1.0_linux_amd64.tar.gz
+tar -C /usr/local -xzf gohttpserver_1.1.0_linux_amd64.tar.gz
 wget -P /usr/local/src/ https://studygolang.com/dl/golang/go1.16.4.linux-amd64.tar.gz
-tar -C /usr/local -xzf /usr/local/src/go1.16.4.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 source /etc/profile
 go version
 mkdir /usr/local/share/bkk/ & cd /usr/local
-----运行gohttpserver
-screen -S svn 
-cd /usr/local
-mkdir /usr/local/share/bkk
+screen -S svn
 ./gohttpserver -r /usr/local/share/bkk --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
 
-#------------------------------【配置frp】
-wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/download/v0.47.0/frp_0.47.0_linux_amd64.tar.gz
-tar -C /usr/local -xzf /usr/local/src/frp_0.47.0_linux_amd64.tar.gz
+#------------------------------配置frp
+wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/frp_0.43.0_linux_amd64.tar.gz
+tar -C /usr/local -xzf frp_0.43.0_linux_amd64.tar.gz
 cd /usr/local/frp_0.43.0_linux_amd64 ; vim frps.ini
 screen -S frp
 ./frps -c frps.ini
 
 nohup java -jar master_base-0.0.1_BASE.jar >>log.file 2>&1 &
-nohup java -jar -Dloader.path=./lib bzwsjk-0.0.1_BASE.jar >>log.file 2>&1 &
 
-#------------------------------【linux测速】
-wget https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && chmod a+rx speedtest.py && mv speedtest.py /usr/local/bin/speedtest && chown root:root /usr/local/bin/speedtest && speedtest
 
-#------------------------------【搭建Trojan代理】
-curl -O https://raw.githubusercontent.com/xxxbrian/trojan.sh/main/trojan.sh && chmod +x trojan.sh && ./trojan.sh
-wget --no-check-certificate https://raw.githubusercontent.com/tcp-nanqinlang/general/master/General/CentOS/bash/tcp_nanqinlang-1.3.2.sh && bash tcp_nanqinlang-1.3.2.sh
-#------------------------------【xray面板】
-bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+
+
 
 
 

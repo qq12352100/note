@@ -1,43 +1,43 @@
-nodejs¾ÍÊÇÒ»¸ö»ùÓÚ Chrome V8 ÒıÇæµÄ JavaScript ÔËĞĞÔÚ·şÎñÆ÷¶ËµÄjs
-npm   °ü¹ÜÀí¹¤¾ß£¬ĞÂ°æµÄnodejsÒÑ¾­¼¯³É
-nvm   °æ±¾¹ÜÀí¹¤¾ß
-nrm   Ô´µÄ¹ÜÀí¹¤¾ß
-yarn  ¾­¹ıÖØĞÂÉè¼ÆµÄÕ¸ĞÂµÄ npm ¿Í»§¶Ë
-npx   npm °üÖ´ĞĞÆ÷
+nodejså°±æ˜¯ä¸€ä¸ªåŸºäº Chrome V8 å¼•æ“çš„ JavaScript è¿è¡Œåœ¨æœåŠ¡å™¨ç«¯çš„js
+npm   åŒ…ç®¡ç†å·¥å…·ï¼Œæ–°ç‰ˆçš„nodejså·²ç»é›†æˆ
+nvm   ç‰ˆæœ¬ç®¡ç†å·¥å…·
+nrm   æºçš„ç®¡ç†å·¥å…·
+yarn  ç»è¿‡é‡æ–°è®¾è®¡çš„å´­æ–°çš„ npm å®¢æˆ·ç«¯
+npx   npm åŒ…æ‰§è¡Œå™¨
 
-ÏÂÔØ£º
+ä¸‹è½½ï¼š
 https://nodejs.org/dist/v16.15.0/
 
-ÅäÖÃÈ«¾Ö°²×°µÄÄ£¿éÂ·¾¶ºÍ»º´æÂ·¾¶,ÔÚnodejs¸ùÄ¿Â¼,´´½¨node_global£¬node_cacheÎÄ¼ş¼Ğ£¬È»ºócmdÖ´ĞĞ
+é…ç½®å…¨å±€å®‰è£…çš„æ¨¡å—è·¯å¾„å’Œç¼“å­˜è·¯å¾„
+åœ¨nodejsæ ¹ç›®å½•,åˆ›å»ºnode_globalï¼Œnode_cacheæ–‡ä»¶å¤¹ï¼Œç„¶åcmdæ‰§è¡Œ
 npm config set prefix "D:\A\nodejs\node_modules\node_global"
 npm config set cache "D:\A\nodejs\node_modules\node_cache"
-npm config list     #²é¿´ÅäÖÃ
 
-ÅäÖÃ»·¾³±äÁ¿
-´´½¨ NODE_PATH ±äÁ¿ ±äÁ¿ÖµÎªnode_modulesµØÖ·-->> NODE_PATH   C:\nodejs\node_modules
-path ÖĞÌí¼Ó  C:\nodejs ºÍ C:\nodejs\node_global
+é…ç½®ç¯å¢ƒå˜é‡
+åˆ›å»º NODE_PATH å˜é‡ å˜é‡å€¼ä¸ºnode_modulesåœ°å€-->> NODE_PATH   C:\nodejs\node_modules
+path ä¸­æ·»åŠ   C:\nodejs å’Œ C:\nodejs\node_global
 
-npm install -g nrm      #ÏÂÔØnrm
-nrm ls                  #²é¿´¿ÉÇĞ»»µÄ¾µÏñÔ´
-nrm use taobao          #ÇĞ»»ÌÔ±¦¾µÏñÔ´
-npm get registry        #²é¿´¾µÏñÔ´Ê¹ÓÃ×´Ì¬
+npm install -g nrm      #ä¸‹è½½nrm
+nrm ls                  #æŸ¥çœ‹å¯åˆ‡æ¢çš„é•œåƒæº
+nrm use taobao          #åˆ‡æ¢æ·˜å®é•œåƒæº
+npm get registry        #æŸ¥çœ‹é•œåƒæºä½¿ç”¨çŠ¶æ€
 
-#ÏÂÔØ°ünpmÃüÁî£¬²é¿´°æ±¾ 
+#ä¸‹è½½åŒ…npmå‘½ä»¤ï¼ŒæŸ¥çœ‹ç‰ˆæœ¬ 
 npm -v
-npm install npm -g      #Éı¼¶
-npm install express     #°²×°express  Ğ¶ÔØ£ºnpm uninstall express ¸üĞÂ£ºnpm update express ËÑË÷£ºnpm search express
-npm list -g             #²é¿´ËùÓĞÈ«¾Ö°²×°µÄÄ£¿é  npm ls -g
+npm install npm -g      #å‡çº§
+npm install express     #å®‰è£…express  å¸è½½ï¼šnpm uninstall express æ›´æ–°ï¼šnpm update express æœç´¢ï¼šnpm search express
+npm list -g             #æŸ¥çœ‹æ‰€æœ‰å…¨å±€å®‰è£…çš„æ¨¡å—  npm ls -g
 
-var express = require('express');   #´úÂëÒıÈë
+var express = require('express');   #ä»£ç å¼•å…¥
 
 https://www.electronjs.org/
 https://github.com/electron/electron
 
 
---------------------------------------------------------------------linuxÏÂ°²×°
-# wget https://nodejs.org/dist/v16.15.0/node-v16.15.0-linux-x64.tar.gz    // ÏÂÔØ
-# tar -zxvf node-v16.15.0-linux-x64.tar.gz -C /usr/local/src       // ½âÑ¹
-# cd node-v16.15.0-linux-x64/                  // ½øÈë½âÑ¹Ä¿Â¼
+--------------------------------------------------------------------linuxä¸‹å®‰è£…
+# wget https://nodejs.org/dist/v16.15.0/node-v16.15.0-linux-x64.tar.gz    // ä¸‹è½½
+# tar -zxvf node-v16.15.0-linux-x64.tar.gz -C /usr/local/src       // è§£å‹
+# cd node-v16.15.0-linux-x64/                  // è¿›å…¥è§£å‹ç›®å½•
 # ./bin/node -v    
 
 ln -s /usr/local/src/node-v16.15.0-linux-x64/bin/npm   /usr/local/bin/ 
@@ -45,7 +45,7 @@ ln -s /usr/local/src/node-v16.15.0-linux-x64/bin/node   /usr/local/bin/
 ln -s /usr/local/src/node-v16.15.0-linux-x64/bin/nrm   /usr/local/bin/
 
 
------------------------------ĞÂ½¨server.js,È»ºóÔËĞĞnode server.js £¬ÔÚä¯ÀÀÆ÷·ÃÎÊ127.0.0.1:8888
+-----------------------------æ–°å»ºserver.js,ç„¶åè¿è¡Œnode server.js ï¼Œåœ¨æµè§ˆå™¨è®¿é—®127.0.0.1:8888
 var http = require('http');
 http.createServer(function (request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain'});
@@ -55,59 +55,59 @@ console.log('Server running at http://127.0.0.1:8888/');
 
 
 
-============================================================================================Óï·¨ÊµÀı
----------------------------------------------------------------------Òì²½·½·¨
+============================================================================================è¯­æ³•å®ä¾‹
+---------------------------------------------------------------------å¼‚æ­¥æ–¹æ³•
 var fs = require("fs");
-//×èÈû´úÂë
+//é˜»å¡ä»£ç 
 var data = fs.readFileSync('input.txt');
 console.log(data.toString());
-console.log("³ÌĞòÖ´ĞĞ½áÊø!");
-//·Ç×èÈû´ú
+console.log("ç¨‹åºæ‰§è¡Œç»“æŸ!");
+//éé˜»å¡ä»£
 fs.readFile('input.txt', function (err, data) {
     if (err) return console.error(err);
     console.log(data.toString());
 });
-console.log("³ÌĞòÖ´ĞĞ½áÊø!");
----------------------------------------------------------------------ÊÂ¼ş
+console.log("ç¨‹åºæ‰§è¡Œç»“æŸ!");
+---------------------------------------------------------------------äº‹ä»¶
 var events = require('events');
-var eventEmitter = new events.EventEmitter(); //´´½¨
+var eventEmitter = new events.EventEmitter(); //åˆ›å»º
 var connectHandler = function connected() {
-   console.log('Á¬½Ó³É¹¦¡£');
-   eventEmitter.emit('data_received');//´¥·¢
+   console.log('è¿æ¥æˆåŠŸã€‚');
+   eventEmitter.emit('data_received');//è§¦å‘
 }
-eventEmitter.on('connection', connectHandler);//°ó¶¨
+eventEmitter.on('connection', connectHandler);//ç»‘å®š
 eventEmitter.on('data_received', function(){
-   console.log('Êı¾İ½ÓÊÕ³É¹¦¡£');
-});//°ó¶¨2
-eventEmitter.emit('connection');//´¥·¢
-console.log("³ÌĞòÖ´ĞĞÍê±Ï¡£");
----------------------------------------------------------------------Buffer Àà
-Buffer.alloc(size[, fill[, encoding]])           ·µ»ØÒ»¸öÖ¸¶¨´óĞ¡µÄ Buffer ÊµÀı£¬Èç¹ûÃ»ÓĞÉèÖÃ fill£¬ÔòÄ¬ÈÏÌîÂú 0
-Buffer.allocUnsafe(size)                         ·µ»ØÒ»¸öÖ¸¶¨´óĞ¡µÄ Buffer ÊµÀı£¬µ«ÊÇËü²»»á±»³õÊ¼»¯£¬ËùÒÔËü¿ÉÄÜ°üº¬Ãô¸ĞµÄÊı¾İ
-Buffer.from(array)                               ·µ»ØÒ»¸ö±» array µÄÖµ³õÊ¼»¯µÄĞÂµÄ Buffer ÊµÀı£¨´«ÈëµÄ array µÄÔªËØÖ»ÄÜÊÇÊı×Ö£¬²»È»¾Í»á×Ô¶¯±» 0 ¸²¸Ç£©
-Buffer.from(arrayBuffer[, byteOffset[, length]]) ·µ»ØÒ»¸öĞÂ½¨µÄÓë¸ø¶¨µÄ ArrayBuffer ¹²ÏíÍ¬Ò»ÄÚ´æµÄ Buffer¡£
-Buffer.from(buffer)                              ¸´ÖÆ´«ÈëµÄ Buffer ÊµÀıµÄÊı¾İ£¬²¢·µ»ØÒ»¸öĞÂµÄ Buffer ÊµÀı
-Buffer.from(string[, encoding])                  ·µ»ØÒ»¸ö±» string µÄÖµ³õÊ¼»¯µÄĞÂµÄ Buffer ÊµÀı
-// ´´½¨Ò»¸ö°üº¬ Latin-1 ×Ö½Ú [0x74, 0xe9, 0x73, 0x74] µÄ Buffer¡£
-const buf6 = Buffer.from('t¨¦st', 'latin1');
+   console.log('æ•°æ®æ¥æ”¶æˆåŠŸã€‚');
+});//ç»‘å®š2
+eventEmitter.emit('connection');//è§¦å‘
+console.log("ç¨‹åºæ‰§è¡Œå®Œæ¯•ã€‚");
+---------------------------------------------------------------------Buffer ç±»
+Buffer.alloc(size[, fill[, encoding]])           è¿”å›ä¸€ä¸ªæŒ‡å®šå¤§å°çš„ Buffer å®ä¾‹ï¼Œå¦‚æœæ²¡æœ‰è®¾ç½® fillï¼Œåˆ™é»˜è®¤å¡«æ»¡ 0
+Buffer.allocUnsafe(size)                         è¿”å›ä¸€ä¸ªæŒ‡å®šå¤§å°çš„ Buffer å®ä¾‹ï¼Œä½†æ˜¯å®ƒä¸ä¼šè¢«åˆå§‹åŒ–ï¼Œæ‰€ä»¥å®ƒå¯èƒ½åŒ…å«æ•æ„Ÿçš„æ•°æ®
+Buffer.from(array)                               è¿”å›ä¸€ä¸ªè¢« array çš„å€¼åˆå§‹åŒ–çš„æ–°çš„ Buffer å®ä¾‹ï¼ˆä¼ å…¥çš„ array çš„å…ƒç´ åªèƒ½æ˜¯æ•°å­—ï¼Œä¸ç„¶å°±ä¼šè‡ªåŠ¨è¢« 0 è¦†ç›–ï¼‰
+Buffer.from(arrayBuffer[, byteOffset[, length]]) è¿”å›ä¸€ä¸ªæ–°å»ºçš„ä¸ç»™å®šçš„ ArrayBuffer å…±äº«åŒä¸€å†…å­˜çš„ Bufferã€‚
+Buffer.from(buffer)                              å¤åˆ¶ä¼ å…¥çš„ Buffer å®ä¾‹çš„æ•°æ®ï¼Œå¹¶è¿”å›ä¸€ä¸ªæ–°çš„ Buffer å®ä¾‹
+Buffer.from(string[, encoding])                  è¿”å›ä¸€ä¸ªè¢« string çš„å€¼åˆå§‹åŒ–çš„æ–°çš„ Buffer å®ä¾‹
+// åˆ›å»ºä¸€ä¸ªåŒ…å« Latin-1 å­—èŠ‚ [0x74, 0xe9, 0x73, 0x74] çš„ Bufferã€‚
+const buf6 = Buffer.from('tÃ©st', 'latin1');
 
-buf.write(string[, offset[, length]][, encoding])   //Ğ´Èë»º³åÇø,·µ»ØÊµ¼ÊĞ´ÈëµÄ´óĞ¡
+buf.write(string[, offset[, length]][, encoding])   //å†™å…¥ç¼“å†²åŒº,è¿”å›å®é™…å†™å…¥çš„å¤§å°
 buf = Buffer.alloc(256);
 len = buf.write("www.runoob.com");
-console.log("Ğ´Èë×Ö½ÚÊı : "+  len);  //14
+console.log("å†™å…¥å­—èŠ‚æ•° : "+  len);  //14
 
-buf.toString([encoding[, start[, end]]])    //´Ó»º³åÇø¶ÁÈ¡Êı¾İ
-console.log( buf.toString('utf8',0,5));    // Ê¹ÓÃ 'utf8' ±àÂë, ²¢Êä³ö: abcde
+buf.toString([encoding[, start[, end]]])    //ä»ç¼“å†²åŒºè¯»å–æ•°æ®
+console.log( buf.toString('utf8',0,5));    // ä½¿ç”¨ 'utf8' ç¼–ç , å¹¶è¾“å‡º: abcde
 
-buf.toJSON();    //Buffer ×ª»»Îª JSON ¶ÔÏó
+buf.toJSON();    //Buffer è½¬æ¢ä¸º JSON å¯¹è±¡
 JSON.stringify(buf);
 
-var buffer1 = Buffer.from(('²ËÄñ½Ì³Ì'));    //»º³åÇøºÏ²¢
+var buffer1 = Buffer.from(('èœé¸Ÿæ•™ç¨‹'));    //ç¼“å†²åŒºåˆå¹¶
 var buffer2 = Buffer.from(('www.runoob.com'));
 var buffer3 = Buffer.concat([buffer1,buffer2]);
-console.log("buffer3 ÄÚÈİ: " + buffer3.toString());
----------------------------------------------------------------------Á÷
-//¶Á
+console.log("buffer3 å†…å®¹: " + buffer3.toString());
+---------------------------------------------------------------------æµ
+//è¯»
 var fs = require("fs");
 var data = '';
 var readerStream = fs.createReadStream('input.txt');
@@ -121,20 +121,20 @@ readerStream.on('end',function(){
 readerStream.on('error', function(err){
    console.log(err.stack);
 });
-//Ğ´
-var data = '²ËÄñ½Ì³Ì¹ÙÍøµØÖ·£ºwww.runoob.com';
+//å†™
+var data = 'èœé¸Ÿæ•™ç¨‹å®˜ç½‘åœ°å€ï¼šwww.runoob.com';
 var writerStream = fs.createWriteStream('output.txt');
 writerStream.write(data,'UTF8');
 writerStream.end();
 writerStream.on('finish', function() {
-    console.log("Ğ´ÈëÍê³É¡£");
+    console.log("å†™å…¥å®Œæˆã€‚");
 });
 writerStream.on('error', function(err){
    console.log(err.stack);
 });
-console.log("³ÌĞòÖ´ĞĞÍê±Ï");
+console.log("ç¨‹åºæ‰§è¡Œå®Œæ¯•");
 
----------------------------------------------------------------------Ä£¿é
+---------------------------------------------------------------------æ¨¡å—
 
 
 

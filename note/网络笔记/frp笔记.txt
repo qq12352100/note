@@ -1,18 +1,18 @@
-ÏÂÔØµØÖ·£ºhttps://github.com/fatedier/frp/releases
+ä¸‹è½½åœ°å€ï¼šhttps://github.com/fatedier/frp/releases
 
-¼ò½é£ºfrpÊÇÓĞÒ»¸ö¿Í»§¶Ë£¬Ò»¸ö·şÎñÆ÷¶Ë¡£Ê×ÏÈÅäÖÃ·şÎñÆ÷¶ËµÄfrpÅäÖÃ£»frpcºóÃÅ¸ú×ÅÒ»¸öc£¬´ó¼ÒÓ¦¸ÃÖªµÀÊÇclientµÄÊ××ÖÄ¸£¬frpsÒ²ÊÇÒ»Ñùserver£»
+ç®€ä»‹ï¼šfrpæ˜¯æœ‰ä¸€ä¸ªå®¢æˆ·ç«¯ï¼Œä¸€ä¸ªæœåŠ¡å™¨ç«¯ã€‚é¦–å…ˆé…ç½®æœåŠ¡å™¨ç«¯çš„frpé…ç½®ï¼›frpcåé—¨è·Ÿç€ä¸€ä¸ªcï¼Œå¤§å®¶åº”è¯¥çŸ¥é“æ˜¯clientçš„é¦–å­—æ¯ï¼Œfrpsä¹Ÿæ˜¯ä¸€æ ·serverï¼›
 
 tar -zxvf frp_0.41.0_linux_amd64.tar.gz
 
-=====>>ÅäÖÃ¹«Íø·şÎñÆ÷frps.iniÎÄ¼ş
+=====>>é…ç½®å…¬ç½‘æœåŠ¡å™¨frps.iniæ–‡ä»¶
 [common]
 bind_port = 7000
-#µ±´úÀí³öÀ´µÄÊÇweb·şÎñÊ±£¬ÔÚÍâÍø·ÃÎÊhttp://vpsµÄIP:7001
+#å½“ä»£ç†å‡ºæ¥çš„æ˜¯webæœåŠ¡æ—¶ï¼Œåœ¨å¤–ç½‘è®¿é—®http://vpsçš„IP:7001
 vhost_https_port = 7001
 authentication_method = token
 token = admin123
 
-#dashboard_port×´Ì¬ÒÔ¼°´úÀíÍ³¼ÆĞÅÏ¢Õ¹Ê¾,ÍøÖ·:7500¿É²é¿´ÏêÇé
+#dashboard_portçŠ¶æ€ä»¥åŠä»£ç†ç»Ÿè®¡ä¿¡æ¯å±•ç¤º,ç½‘å€:7500å¯æŸ¥çœ‹è¯¦æƒ…
 dashboard_port = 7500
 dashboard_user = admin
 dashboard_pwd = admin123
@@ -22,54 +22,54 @@ log_level = info
 log_max_days = 3
 max_pool_count = 50
 
-Æô¶¯£º
+å¯åŠ¨ï¼š
 ./frps -c frps.ini
-·ÃÎÊhttp://xxx.xxx.xxx.xxx:7500£¬ÊÇ·ñ³É¹¦ÔËĞĞ£»
-------------------------------------------------ÎŞ·¨·ÃÎÊ½â¾ö£º
+è®¿é—®http://xxx.xxx.xxx.xxx:7500ï¼Œæ˜¯å¦æˆåŠŸè¿è¡Œï¼›
+------------------------------------------------æ— æ³•è®¿é—®è§£å†³ï¼š
 systemctl status firewalld
 getenforce
 lsof -i:7500
 netstat -tunlp
 
-=====>>ÅäÖÃ±»·ÃÎÊµçÄÔµÄ¿Í»§¶Ëfrpc.iniÎÄ¼ş
------------------------------------------------´úÀíWindowsÔ¶³Ì×ÀÃæ
+=====>>é…ç½®è¢«è®¿é—®ç”µè„‘çš„å®¢æˆ·ç«¯frpc.iniæ–‡ä»¶
+-----------------------------------------------ä»£ç†Windowsè¿œç¨‹æ¡Œé¢
 [common]
-server_addr = xxx.xxx.xxx.xxx   #vpsµÄip
-server_port = 7000              #vpsÖĞÅäÖÃ·şÎñ¶ËÒªÒ»Ñùbind_port = 7000
+server_addr = xxx.xxx.xxx.xxx   #vpsçš„ip
+server_port = 7000              #vpsä¸­é…ç½®æœåŠ¡ç«¯è¦ä¸€æ ·bind_port = 7000
 authentication_method = token
 token = admin123
-tls_enable = true               #½â¾ö[service.go:97] login to server failed: EOFEOF
+tls_enable = true               #è§£å†³[service.go:97] login to server failed: EOFEOF
 
 [rdp]
-type = tcp                      #ÀàĞÍtcp£¬Ğ­Òé tcp | udp | http | https | stcp | xtcp, Ä¬ÈÏ tcp
-local_ip = 127.0.0.1            #ĞèÒª´úÀí³öÈ¥µÄip
-local_port = 3389               #ĞèÒª´úÀí³öÈ¥·ÃÎÊµÄ¶Ë¿ÚÎÒÕâÀïÊÇ3389
-remote_port = 7389              #ÕâÀï¾ÍÊÇ×ª·¢³öÈ¥µÄ¶Ë¿Ú£¬Ò²¾ÍÊÇÔÚ×Ô¼ºµÄ»úÆ÷ÉÏ·ÃÎÊµÄ´úÀí¶Ë¿Ú rdp:vpsµÄIP:7389
+type = tcp                      #ç±»å‹tcpï¼Œåè®® tcp | udp | http | https | stcp | xtcp, é»˜è®¤ tcp
+local_ip = 127.0.0.1            #éœ€è¦ä»£ç†å‡ºå»çš„ip
+local_port = 3389               #éœ€è¦ä»£ç†å‡ºå»è®¿é—®çš„ç«¯å£æˆ‘è¿™é‡Œæ˜¯3389
+remote_port = 7389              #è¿™é‡Œå°±æ˜¯è½¬å‘å‡ºå»çš„ç«¯å£ï¼Œä¹Ÿå°±æ˜¯åœ¨è‡ªå·±çš„æœºå™¨ä¸Šè®¿é—®çš„ä»£ç†ç«¯å£ rdp:vpsçš„IP:7389
 
-Æô¶¯£º´ò¿ªcmd´°¿ÚÖ´ĞĞ
+å¯åŠ¨ï¼šæ‰“å¼€cmdçª—å£æ‰§è¡Œ
 frpc.exe -c frpc.ini
-·ÃÎÊhttp://xxx.xxx.xxx.xxx:7500£¬¿´ÏÂClient CountsÊıÁ¿Îª1¾ÍÕı³£
-È»ºómstscÆô¶¯Ô¶³ÌÁ¬½Ó£ºVPSµÄIP:7389
+è®¿é—®http://xxx.xxx.xxx.xxx:7500ï¼Œçœ‹ä¸‹Client Countsæ•°é‡ä¸º1å°±æ­£å¸¸
+ç„¶åmstscå¯åŠ¨è¿œç¨‹è¿æ¥ï¼šVPSçš„IP:7389
 
-ºóÌ¨¿ª»úÆô¶¯£» win+R ËÑË÷ gpedit.msc²¢ÒÀ´Î½øÈë¼ÆËã»úÅäÖÃ ¨C Windows ÉèÖÃ ¨C ½Å±¾(Æô¶¯/¹Ø»ú) Ë«»÷ ¡°Æô¶¯¡± £¬µã»÷Ìí¼Ó£¬È»ºóä¯ÀÀÑ¡ÖĞÇ°ÃæÖÆ×÷µÄ.vbsÎÄ¼ş£¬²»ÓÃ¹Ü½Å±¾²ÎÊı¡£
-½¨Ò»¸öfrpc.vbsÎÄ¼ş
+åå°å¼€æœºå¯åŠ¨ï¼› win+R æœç´¢ gpedit.mscå¹¶ä¾æ¬¡è¿›å…¥è®¡ç®—æœºé…ç½® â€“ Windows è®¾ç½® â€“ è„šæœ¬(å¯åŠ¨/å…³æœº) åŒå‡» â€œå¯åŠ¨â€ ï¼Œç‚¹å‡»æ·»åŠ ï¼Œç„¶åæµè§ˆé€‰ä¸­å‰é¢åˆ¶ä½œçš„.vbsæ–‡ä»¶ï¼Œä¸ç”¨ç®¡è„šæœ¬å‚æ•°ã€‚
+å»ºä¸€ä¸ªfrpc.vbsæ–‡ä»¶
 dim objShell 
 set objShell=wscript.createObject("WScript.Shell") 
 iReturnCode=objShell.Run("D:\frp\frpc.exe -c D:\frp\frpc.ini",0,TRUE)
 
-------------------------------------------------´úÀíweb-http
+------------------------------------------------ä»£ç†web-http
 [web]
-type = http                     #µ±´úÀí³öÀ´µÄÊÇweb·şÎñÊ±£¬ÔÚfrps.iniÖĞµÄÒ»Ïî£ºvhost_https_port = 7001£¬ÔÚÍâÍø·ÃÎÊhttp://vpsµÄIP:7001
-local_ip = 192.168.1.12         #ÄÚÍøIP
-local_port = 8080               #ÄÚÍøµÄweb¶Ë¿Ú
-custom_domains = xxx.com        #ÍâÍøvpsµÄÓòÃû
-pool_count = 10                 #Á¬½Ó³Ø´óĞ¡10
-------------------------------------------------´úÀíSSH
+type = http                     #å½“ä»£ç†å‡ºæ¥çš„æ˜¯webæœåŠ¡æ—¶ï¼Œåœ¨frps.iniä¸­çš„ä¸€é¡¹ï¼švhost_https_port = 7001ï¼Œåœ¨å¤–ç½‘è®¿é—®http://vpsçš„IP:7001
+local_ip = 192.168.1.12         #å†…ç½‘IP
+local_port = 8080               #å†…ç½‘çš„webç«¯å£
+custom_domains = xxx.com        #å¤–ç½‘vpsçš„åŸŸå
+pool_count = 10                 #è¿æ¥æ± å¤§å°10
+------------------------------------------------ä»£ç†SSH
 [ssh]
 type = tcp
-remote_port = 6000       #remote_portÍâ²¿¶Ë¿Ú
-local_ip = 127.0.0.1     #local_ipÄÚÍøIP
-local_port = 22          #local_portÄÚ²¿¶Ë¿Ú
+remote_port = 6000       #remote_portå¤–éƒ¨ç«¯å£
+local_ip = 127.0.0.1     #local_ipå†…ç½‘IP
+local_port = 22          #local_portå†…éƒ¨ç«¯å£
 use_compression = true
 use_encryption = true
 pool_count = 2
