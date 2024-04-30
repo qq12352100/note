@@ -178,3 +178,14 @@ git commit -am "first file" //提交文件,相当于git add . 和 git commit -m 
     出现错误提示：Permission denied (publickey).因为新生成的key不能加入ssh就会导致连接不上github。
     解决办法如下：
     1、先输入$ ssh-agent，再输入$ ssh-add ~/.ssh/id_key，这样就可以了。
+
+控制台中文乱码
+git config --global core.quotepath false
+
+
+
+
+
+
+
+
