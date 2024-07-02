@@ -7,6 +7,7 @@ import socks
 import socket
 import re,json,sys,os
 
+#方法一
 '''通过请求主页获取第一页的视频数据   todu-下滑异步加载未实现抓取'''
 def get1():
     # 目标网页的URL
@@ -54,12 +55,13 @@ def get1():
         print(f"请求失败，状态码：{response.status_code}")
         
 
+#方法二
 '''通过打开网页加载完全部视频，通过js获取视频连接地址，然后复制为本地文件读取下载 todo-需要手动处理文件'''
 """ 1、点击播放列表。2、点击查看完整播放列表。3、下滑加载所有内容。
 var log = '';
 var links = document.querySelectorAll("a");
 links.forEach(function(link) {
-    if(link.title){
+    if(link.title&&link.href){
         log+=link.href+'=='+link.title+'\n'
     }
 });

@@ -2,6 +2,16 @@ General error: 1665 Cannot execute statement: impossible to write to binary log 
 永久生效，需要修改my.ini
 binlog_format=ROW
 
+---------------------------------------------------------------------------------------【忘记密码】
+1、sudo systemctl stop mysql  # 或者  sudo service mysql stop
+2、sudo mysqld_safe --skip-grant-tables &
+3、另开一个终端窗口，无需密码直接登录MySQL：
+mysql -u root
+USE mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';
+FLUSH PRIVILEGES;
+4、sudo systemctl start mysql  # 或者  sudo service mysql start
+---------------------------------------------------------------------------------------
 /*[mysqld]*/
 character-set-server=utf8
 ---------------------------------------------------------------------------------------
