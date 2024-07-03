@@ -7,6 +7,42 @@ import socks
 import socket
 import re,json,sys,os
 
+import mysql.connector
+from mysql.connector import Error
+
+# 打开数据库
+global connection,cursor
+def startMysql():
+    global connection
+    global cursor
+    connection = mysql.connector.connect(host='106.52.70.220', user='root', password='123456', database='bkk')
+    if connection.is_connected():
+        db_Info = connection.get_server_info()
+        print(f"Successfully connected to MySQL Server version {db_Info}")
+        cursor = connection.cursor()
+        
+# 执行SQL查询
+def getSql(hostname):
+    cursor.execute("SELECT * from youtube where hostname = '"+hostname+"'")
+    row = cursor.fetchone()  # 获取第一行
+    while row:  # 当fetchone()返回None时，表示没有更多行，循环结束
+        os.system('D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" '+row[2])
+        row = cursor.fetchone()  # 获取下一行
+    
+# 执行SQL插入
+def exeSql(hostname, videoId, title):
+    print(hostname, videoId, title)
+    query = "INSERT INTO youtube (hostname,videoId,title) VALUES (%s, %s, %s)"
+    cursor.execute(query, (hostname, videoId, title))
+
+# 关闭连接，释放资源
+def endMysql():
+    connection.commit()  # 提交，以保存更改
+    if (connection.is_connected()):
+        cursor.close()
+        connection.close()
+    print("MySQL connection is closed")
+
 #方法一
 '''通过请求主页获取第一页的视频数据   todu-下滑异步加载未实现抓取'''
 def get1():
@@ -71,16 +107,18 @@ def get2():
     with open('D://1.txt', 'r', encoding='utf-8') as f:
         for line in f:
             link = line[:line.index("==")]
-            print(link)  # trip()用于去除每行末尾的换行符
-            os.system('yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" '+link)
-
-
-
-
+            title = line[line.index("==")+2:]
+            print(link,title)  # trip()用于去除每行末尾的换行符
+            # exeSql("youdianyisi2020", link, title) # 插入数据库
+            os.system('D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" '+ link)
+            
+# startMysql()
 get2()
+# getSql('youdianyisi2020')
+# endMysql()
 
-
-
+#   yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" --embed-sub https://www.youtube.com/watch?v=C9Qie0RFSLQ -f "bv+ba" 
+#   yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "E:/test" https://www.youtube.com/playlist?list=PLlD7SeKBB31cwPtRZgsbceAJye9k8r1ZO -f "bv+ba" 
 
 
 
