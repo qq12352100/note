@@ -110,14 +110,14 @@ def get2():
             title = line[line.index("==")+2:]
             print(link,title)  # trip()用于去除每行末尾的换行符
             # exeSql("youdianyisi2020", link, title) # 插入数据库
-            os.system('D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" '+ link)
+            os.system('D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test/" '+ link)
             
 # startMysql()
 get2()
 # getSql('youdianyisi2020')
 # endMysql()
 
-#   yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" --embed-sub https://www.youtube.com/watch?v=C9Qie0RFSLQ -f "bv+ba" 
+#   D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" https://www.youtube.com/playlist?list=PLlD7SeKBB31esnMsNFdccwIao7R2q5vWY
 #   yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "E:/test" https://www.youtube.com/playlist?list=PLlD7SeKBB31cwPtRZgsbceAJye9k8r1ZO -f "bv+ba" 
 
 
