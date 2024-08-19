@@ -55,7 +55,7 @@ $ rm id_rsa*
 注：windows7在C:\Users\ZDZ\.ssh目录下可以找到了
 
 2、生成SSH KEY
- $ ssh-keygen -t rsa -C "qq12352100@163.com"
+ $ ssh-keygen -t ssh-rsa -C "qq12352100@163.com"
  $ ssh-keygen -t ed25519 -C "qq12352100@163.com"
 
 3、将Public Key 添加到GitHub

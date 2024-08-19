@@ -1,0 +1,37 @@
+#合并加密的M3U8 TS视频文件为MP4格式，-c copy参数表示复制原始的视频和音频流，不进行转码。这样可以节省时间，并保留原始视频的质量。
+ffmpeg -i index.m3u8 -c copy output.mp4
+
+#静音输出       anull 过滤器会创建一个全零的音频流，相当于完全静音.或者直接丢弃音频流：ffmpeg -i input.mp4 -c:v copy -an output.mp4
+ffmpeg -i input.mp4 -c:v copy -af anull output.mp4
+
+#加速视频       0.5*PTS 表示每个输出帧的时间戳为原时间戳的一半，因此播放速度加快一倍。
+ffmpeg -i input.mp4 -filter:v "setpts=0.5*PTS" -c:a copy output.mp4
+
+#减速视频       2.0*PTS 表示每个输出帧的时间戳为原时间戳的两倍，因此播放速度减慢一半。
+ffmpeg -i input.mp4 -filter:v "setpts=2.0*PTS" -c:a copy output.mp4
+
+#跳过初始几秒     -ss N 指定从第 N 秒开始截取视频，而 setpts=PTS-STARTPTS 会重置时间戳，使得视频从 0 秒开始播放。
+ffmpeg -i input.mp4 -filter:v "setpts=PTS-STARTPTS" -ss N -c:a copy output.mp4
+
+#保持音频同步     当使用 setpts 过滤器改变视频帧的时间戳时，通常需要确保音频同步。为此，可以同时应用 atempo 过滤器调整音频播放速度
+ffmpeg -i input.mp4 -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" output.mp4
+
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+
+思路为:分别处理好音频与视频流，再合并到一起。获取视频中音频(vn 参数为disable video)
+ffmpeg -i input.mp4 -vn-y -acodec copy output.m4a
+去掉视频音频(an 参数为disable audio)
+ffmpeg -i input.mp4 -an output.mp4
+截取视频(从0s开始，截取38s)
+ffmpeg -ss 00:00:00-t 00:00:38 -i input.mp4 -vcodec copy output.mp4
+视频加快速度
+ffmpeg -i input.mp4 -filter:v "setpts=0.5*PTS" -c:a copy output.mp4
+合并视频(注，在之前尝试过程中合并后视频无声音情况)
+ffmpeg -f concat -i .\filelist.txt -c copy output.mp4
+其中filelist.txt文件内容如下，合并顺序有关与先后顺序。
+file 'shadowo1.mp4'
+file 'shadow21.mp4'
+file 'shadow11.mp4
+添加字幕(ass字幕)
+ffmpeg -i output.mp4 -vf ass=1.ass video.mp4
