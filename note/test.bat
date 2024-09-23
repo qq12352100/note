@@ -1,3 +1,4 @@
+::大多数 Windows 外部命令（如 dir, ping, ipconfig 等）不区分大小写
 ::默认编码格式为ANSI代表 GB2312 编码。
 ::不加@时，在运行时，会在窗口显示出这条命令,而加了@, 只会显示出 echo后面你要显示出的东西
 mode con cols=80 lines=20&color 0c  rem  cols宽 lines高  cmd里面键入:help color 查查看
