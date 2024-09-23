@@ -17,6 +17,7 @@ cmdow @ /top /mov 500 500           rem  移动窗口到某个位置 详见cmdow下载
 @echo %CD%                          rem 代表当前目录的字符串
 @echo %DATE%                        rem 当前日期
 @echo %TIME%                        rem 当前时间
+timeout /t 10 /nobreak              rem 睡眠10s   /NOBREAK        忽略按键并等待指定的时间（延时期间，不允许用户按任意键终端延时）。
 
 set /p var=输入一个数:
 if %var% EQU 1 (                    rem EQU 等于 || NEQ 不等于 || LSS 小于 || LEQ 小于或等于 ||  GTR 大于 || GEQ 大于或等于

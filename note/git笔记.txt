@@ -148,6 +148,7 @@ git rm image -r                 //删除指定目录所有文件
 
 git remote add origin git@github.com:qq12352100/note.git            //关联远程仓库
 git remote -v                                                       //查看远程仓库
+git remote remove origin                                            //取消关联远程仓库
 
 git push -u origin master                                           //推送到远程库上
 
