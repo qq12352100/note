@@ -113,6 +113,7 @@ git checkout -b dev     //创建分支dev（-b参数表示创建并切换 =$ git
 git branch              //查看当前分支
 git merge dev           //合并指定分支到当前分支
 git branch -d dev       //删除dev分支
+git fetch -v            //获取远程仓库的变化信息到本地仓库
 
 git branch              //列出本地已经存在的分支，并且当前分支会用*标记
 git branch -r           //查看远程版本库的分支列表

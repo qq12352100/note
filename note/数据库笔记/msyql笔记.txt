@@ -8,7 +8,7 @@ binlog_format=ROW
 3、另开一个终端窗口，无需密码直接登录MySQL：
 mysql -u root
 USE mysql;
-ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'GkFjrpWgUP';
 FLUSH PRIVILEGES;
 4、sudo systemctl start mysql  # 或者  sudo service mysql start
 ---------------------------------------------------------------------------------------
@@ -55,8 +55,8 @@ with grant option：表示该用户可以将自己拥有的权限授权给别人
 #select host,user,Password,password_expired from user;
 #drop user 'yangxin'@'localhost';
 修改密码use mysql;
-mysql5.7之前#update user set password=password('123456') where user='root';
-mysql5.7之后#update user set authentication_string=password('123456') where user='root';
+mysql5.7之前#update user set password=password('GkFjrpWgUP') where user='root';
+mysql5.7之后#update user set authentication_string=password('GkFjrpWgUP') where user='root';
 -----------------------------------------------------------------------------------------------------------------
 在创建表时，就插入另一张表里面的某些数据
 create table user_b AS select * from user_a where id < 10;

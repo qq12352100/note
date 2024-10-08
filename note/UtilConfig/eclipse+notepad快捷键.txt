@@ -96,6 +96,12 @@ communication  Build  path JRE System Library Problem
 2、Common tab页，在Console encoding中选择UTF-8
 ---------------------------------------------------------------------------------------------------------------tomcat部署目录
 workspace\.metadata\.plugins\org.eclipse.wst.server.core
+---------------------------------------------------------------------------------------------------------------git同步ignore设置
+1、eclipse->window>preferences->Version Control(Team)->Git->Configration
+2、选择User Setting 然后 add Entry
+core.excludesfile
+D:/AAA/eclipse/Java.gitignore
+3、重启eclipse
 ---------------------------------------------------------------------------------------------------------------git问题
 --使用Ecplise git commit时出现"There are no stages files"
 进入Window——Preferences——Team——Git——Committing，
