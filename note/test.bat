@@ -87,9 +87,9 @@ for /f "tokens=* skip=2" %%A in ('ping %host% -n 1') do (
     timeout /t 1 /nobreak > nul
     goto loop
 )
---------------------------------------------------Ìí¼Ó·şÎñ »ò NSSM°²×°·şÎñ https://nssm.cc/
+-------------cmdÒªÒÔ¹ÜÀíÔ±ÔËĞĞ----------¡¾Ìí¼Ó·şÎñ »ò NSSM°²×°·şÎñ https://nssm.cc/¡¿
 sc create frp_service binPath= "D:\AAA\frp_0.57.0_windows_amd64\frpc.exe -c D:\AAA\frp_0.57.0_windows_amd64\frpc.toml"
-sc config frp_service start=AUTO   rem AUTO(×Ô¶¯)DEMAND(ÊÖ¶¯)DISABLED(½ûÓÃ)
+sc config frp_service start=AUTO    rem AUTO(×Ô¶¯)DEMAND(ÊÖ¶¯)DISABLED(½ûÓÃ)
 sc description frp_service "This service runs the frp client"
 
 net start MyFRPService      rem Æô¶¯·şÎñ
@@ -109,11 +109,33 @@ sc config MyService group= [LoadOrderGroup]                          rem ÉèÖÃ·şÎ
 sc config MyService depend= [DependentServiceNames]                  rem ÉèÖÃ·şÎñÒÀÀµµÄÆäËû·şÎñÃû³Æ¡£
 sc config MyService Type= [ownShare| share| interact| kernel| kernelDriver| fileSystemDriver] rem ownShare£º·şÎñÓµÓĞ×Ô¼ºµÄ½ø³Ì¿Õ¼ä¡£share£º·şÎñÓëÆäËû·şÎñ¹²Ïí½ø³Ì¿Õ¼ä¡£interact£º·şÎñ¿ÉÒÔÓë×ÀÃæ½»»¥¡£kernel£ºÄÚºËÇı¶¯³ÌĞò¡£kernelDriver£ºÄÚºËÇı¶¯³ÌĞò¡£fileSystemDriver£ºÎÄ¼şÏµÍ³Çı¶¯³ÌĞò¡£
 
+ÏÂÔØhttps://nssm.cc/£¬½âÑ¹Ö®ºó¹ÜÀíÔ±Éí·İÆô¶¯cmdÇĞ»»µ½½âÑ¹Ä¿Â¼
+nssm install FrpService "D:\AAA\frp_0.57.0_windows_amd64\frpc.exe" -c "D:\AAA\frp_0.57.0_windows_amd64\frpc.toml"
 
+NSSM: The non-sucking service manager
+Version 2.24 64-bit, 2014-08-31
+Usage: nssm <option> [<args> ...]
 
-
-
-
+To show service installation GUI:
+        nssm install [<servicename>]
+To install a service without confirmation:
+        nssm install <servicename> <app> [<args> ...]
+To show service editing GUI:
+        nssm edit <servicename>
+To retrieve or edit service parameters directly:
+        nssm get <servicename> <parameter> [<subparameter>]
+        nssm set <servicename> <parameter> [<subparameter>] <value>
+        nssm reset <servicename> <parameter> [<subparameter>]
+To show service removal GUI:
+        nssm remove [<servicename>]
+To remove a service without confirmation:
+        nssm remove <servicename> confirm
+To manage a service:
+        nssm start <servicename>
+        nssm stop <servicename>
+        nssm restart <servicename>
+        nssm status <servicename>
+        nssm rotate <servicename>
 
 
 
