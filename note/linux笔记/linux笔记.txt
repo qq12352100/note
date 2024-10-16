@@ -35,8 +35,10 @@ find有很多参数，有很强大的搜索功能，具体可以 man find 查看
 
 find ./-type f -name consumer.xml -exec sed -i"s/aaaaaa/bbbbbb/g"{}\;
 -name参数指定查找的文件名
--exec参数将查找到的内容传递给下一一个命令去继续执行相关逻辑
+-exec参数将查找到的内容传递给下一一个命令去继续执行相关逻辑   1、文件名中包含特殊字符或空格，使用 xargs。2、高效处理大量文件，xargs 通常比 -exec 更好。3、对于简单的操作，-exec 更直观易懂。
 sed命令主要对文件内容进行替换，这里会将consumer文件中的aaaaa替换成bbbbbb
+
+find . -name "*.tmp" -print0 | xargs -0 rm -v               #删除.tmp文件，这里的 -print0 和 -0 选项使用 NUL 字符作为分隔符，以避免文件名中包含空格或其他特殊字符的问题。
 
 ===========================================================================================【抓包】
 tcpdump tcp -ieth0 -t -S 0 -C 100 dst port 6060 and src net 192.168.1.0/24 -W test cap
@@ -198,10 +200,10 @@ sshpass -p "thepassword" ssh -p2222 man@123.123.123.123     #远程连接指定s
 sshpass -f xxx.txt  ssh root@192.168.11.11                  #从密码文件读取文件内容作为密码去远程连接主机
 sshpass -p '123456' scp root@host_ip:/home/test/t ./tmp/    #从远程主机上拉取文件到本地
 ===========================================================================================【添加一个超级管理员】
-adduser superuser
-passwd superuser            #  lL2#oOk-Ec^%+!mY
-vi /etc/passwd     #x后面的第一个数改为0
-usermod -a -G wheel superuser
+adduser superuser               # useradd -o -u 0 superuser    -u 0指定了用户的UID为0   
+passwd superuser                #  lL2#oOk-Ec^%+!mY
+vi /etc/passwd                  # x后面的第一个数改为0
+usermod -a -G wheel superuser   # 加入 wheel 组的用户可以使用 sudo 命令以超级用户权限执行命令，而不需要将这些用户设置为完整的 root 用户
 visudo
 在root    ALL=(ALL)       ALL下面增加
 superuser   ALL=(ALL)  ALL
