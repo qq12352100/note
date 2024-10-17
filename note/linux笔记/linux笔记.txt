@@ -213,6 +213,26 @@ vi  /etc/sudoers
 找到root那行添加
 superuser   ALL=(ALL)  ALL
 chmod -v u-w /etc/sudoers 
+===========================================================================================【注册为服务】
+# 使用 yum 安装 systemd（CentOS/RHEL）
+yum install systemd
+# 使用 apt 安装 systemd（Debian/Ubuntu）
+apt install systemd
+# 创建frps.service服务 创建并编辑该文件
+vim /etc/systemd/system/frps.service
+
+[Unit]
+# 服务名称，可自定义
+Description = frp server
+After = network.target syslog.target
+Wants = network.target
+[Service]
+Type = simple
+# 启动命令，改为实际存放frps的路径
+ExecStart = /path/to/frps -c /path/to/frps.toml
+[Install]
+WantedBy = multi-user.target
+
 ===========================================================================================
 -------------------------------------------------------
 -------------------------常用命令----------------------
