@@ -17,6 +17,8 @@ $ git --help
 $ man git-
 比如，要学习 config 命令可以怎么用，可执行：
 $ git help config
+git config --list --global      #查看全局配置的所有设置
+git config --list               #查看本地仓库的所有配置设置
 ==========================================================================================git查看某个文件的修改历史
 一、切换到目录
 二、git log --pretty 例如：git log --pretty=oneline 文件名
@@ -183,9 +185,12 @@ git commit -am "first file" //提交文件,相当于git add . 和 git commit -m 
     出现错误提示：Permission denied (publickey).因为新生成的key不能加入ssh就会导致连接不上github。
     解决办法如下：
     1、先输入$ ssh-agent，再输入$ ssh-add ~/.ssh/id_key，这样就可以了。
-
+=======================================================================================================================
 控制台中文乱码
 git config --global core.quotepath false
+=======================================================================================================================fatal: CRLF would be replaced by LF in
+git config --global core.autocrlf input
+git config --global core.eol lf
 
 
 

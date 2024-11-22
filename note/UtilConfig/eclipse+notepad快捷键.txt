@@ -1,3 +1,37 @@
+【idea快捷键】
+
+按两下SHIFT唤出全局搜索
+
+Ctrl + Q              查看函数文档
+Ctrl + P              查看函数入参
+Ctrl + W              选中整个单词
+Ctrl + D              复制选中行
+Ctrl + Y              删除选中行
+Ctrl + E              最近打开的文件
+Ctrl + 减号           折叠代码
+Ctrl + 等号           展开代码
+Ctrl + F12            查看类结构
+
+Alt + J       选择html中对称符号
+
+SHIFT + F6    重命名变量名
+
+CTRL + SHIFT + 空格     智能提示  Tab 替换后面的值
+CTRL + SHIFT + 回车     代码补全
+CTRL + SHIFT + 减号     折叠整个类代码
+CTRL + SHIFT + 等号     展开整个类代码
+CTRL + SHIFT + ↑        上下移动方法
+CTRL + SHIFT + DELETE   删除代码包围块
+CTRL + SHIFT + F        查找
+CTRL + SHIFT + R        替换      Alt + D 当前目录替换
+
+CTRL + Alt + SHIFT + L  格式化代码
+
+Alt + SHIFT + ↑        上下移动选中行
+
+CTRL + Alt + T         包围代码块
+
+---------------------------------------------------------------------------------------------------------------
 【eclipse快捷键】
 
 去除空行:在Find输入框中输入：^\s*\n 

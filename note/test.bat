@@ -20,6 +20,7 @@ cmdow @ /top /mov 500 500           rem  移动窗口到某个位置 详见cmdow下载
 @echo %TIME%                        rem 当前时间
 timeout /t 10 /nobreak              rem 睡眠10s   /NOBREAK        忽略按键并等待指定的时间（延时期间，不允许用户按任意键终端延时）。
 
+-------------------------------------------判断执行哪一步
 set /p var=输入一个数:
 if %var% EQU 1 (                    rem EQU 等于 || NEQ 不等于 || LSS 小于 || LEQ 小于或等于 ||  GTR 大于 || GEQ 大于或等于
     goto FIRST 
@@ -33,14 +34,17 @@ if %var% EQU 1 (                    rem EQU 等于 || NEQ 不等于 || LSS 小于 || LE
 :SECOND2
 @echo I AM SECOND2
 
+-------------------------------------------变量声明
 set a=aa1bb1aa2bb2
 @echo %a%
 set b=12
 @echo %b%
-set /a c=39/10           
+set /a c=39/10    rem 整数除法       
 @echo %c%
 
-for  %%I in (A,B,C) do echo %%I     rem 循环
+-------------------------------------------循环
+for  %%I in (A,B,C) do echo %%I     
+
 for /f "skip=1 tokens=9 delims= " %a in ('ping 172.20.123.231') do @echo %a
 skip=1 #忽略第一行，默认显示所有行
 tokens=9 #显示第9列 类似于awk的 参数$9
@@ -48,6 +52,7 @@ delims= #分隔符 本次分隔符为一个空格
 ping 172.20.123.231 #循环该命令所有行
 pause
 
+-------------------------------------------新窗口启动
 :: 新窗口启动 /k 执行完指定的命令后，不关闭命令提示符窗口。 /c 执行完指定的命令后，关闭命令提示符窗口。 /b 立即启动任务而不创建新的窗口。
 start cmd /k "c: && cd C:\Project\test-app-1 && npm start"
 :: 新窗口延迟 5 秒启动 test-app-2, 
