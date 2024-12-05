@@ -49,6 +49,18 @@ go version
 mkdir /usr/local/share/bkk/ & cd /usr/local
 screen -S svn
 ./gohttpserver -r /usr/local/share/bkk --port 8000 --auth-type http --auth-http bkk:bkk --upload --delete
+=======通过域名访问配置nginx
+./gohttpserver -r /usr/local/share/bkk --auth-type http --auth-http bkk:bkk --upload --delete --prefix /svn --addr :8000 --xheaders
+location /svn {
+    proxy_pass http://127.0.0.1:8000; # here need to change
+    proxy_redirect off;
+    proxy_set_header  Host    $host;
+    proxy_set_header  X-Real-IP $remote_addr;
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Forwarded-Proto $scheme;
+
+    client_max_body_size 0; # disable upload limit
+}
 
 #------------------------------配置frp
 wget -P /usr/local/src/ https://github.com/fatedier/frp/releases/frp_0.43.0_linux_amd64.tar.gz
