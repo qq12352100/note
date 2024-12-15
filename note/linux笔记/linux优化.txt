@@ -23,8 +23,8 @@ vi /etc/my.cnf.d/mysql-clients.cnf  #在[mysql]中添加    default-character-se
 
 systemctl restart mariadb
 
-mysql -uroot -proot@qwer
-grant all privileges on *.* to 'root'@'%' identified by 'root@qwer' with grant option;
+mysql -uroot -plL2oOkEc
+grant all privileges on *.* to 'root'@'%' identified by 'lL2oOkEc' with grant option;
 flush privileges;
 show variables like "%character%";show variables like "%collation%";
 
@@ -73,8 +73,17 @@ nohup java -jar master_base-0.0.1_BASE.jar >>log.file 2>&1 &
 
 
 
-
-
+#------------------------------Ubuntu配置postgresql  官方文档：https://www.postgresql.org/download/linux/
+1、apt install postgresql
+2、编辑主配置文件 /etc/postgresql/<version>/main/postgresql.conf 和客户端认证文件 /etc/postgresql/<version>/main/pg_hba.conf。
+修改 postgresql.conf：
+listen_addresses = '*'
+编辑 pg_hba.conf：添加一行
+host    all             all             0.0.0.0/0               md5
+3、ALTER USER postgres PASSWORD 'lL2oOkEc';
+sudo -i -u postgres
+systemctl restart postgresql
+psql -U postgres -d postgres
 
 
 
