@@ -12,6 +12,8 @@ import pyotp
 
 bljsecret = 'EVSCWRCPLAXUKZHBYRB4EAKZKSPT6OIX'  # 堡垒机
 yaxsecret = 'FNNH2PTGW7Y55VTAPI3C3HSO6R5KEZLICTI2DEYEEKXOXJ5QXRBYKCXZAKZ6VV57' # 亚马逊
+txy44secret = "6M7Z3LBYHSM527GJ" # 腾讯云4478
+txy58secret = "EIYAWTI5LBKWYX5O" # 腾讯云5840
 
 def hgetkey(s):
     totp = pyotp.TOTP(s)
@@ -30,6 +32,8 @@ def getkey():
         <body style="text-align: center;margin: 20% 5%;">
             <h1>堡垒机：'''+hgetkey(bljsecret)+'''</h1>
             <h1>亚马逊：'''+hgetkey(yaxsecret)+'''</h1>
+            <h1>4478腾讯云：'''+hgetkey(txy44secret)+'''</h1>
+            <h1>5840腾讯云：'''+hgetkey(txy58secret)+'''</h1>
         </body>
     </html>
     '''
