@@ -66,21 +66,30 @@ def note(subpath):
             <input id="path" value="{{ subpath }}" style="display:none;"></input>
             <textarea id="contentArea" placeholder="Type or paste your content here...">{{ saved_content }}</textarea>
             <script>
+                var contentAreaChange = false;
+                $('#contentArea').on('input', function() {
+                    contentAreaChange = true;
+                    $(this).css('border', '1px solid red');
+                });
                 function sendContent() {
-                    var content = $('#contentArea').val();
-                    var path = $('#path').val();
-                    $.ajax({
-                        url: '/save_content',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({ content : content , path : path}),
-                        success: function(response) {
-                            console.log('Content saved successfully');
-                        },
-                        error: function(error) {
-                            console.error('Error saving content:', error);
-                        }
-                    });
+                    if (contentAreaChange) {
+                        $('#contentArea').css('border', '1px solid #00ff00');
+                        var content = $('#contentArea').val();
+                        var path = $('#path').val();
+                        $.ajax({
+                            url: '/save_content',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({ content : content , path : path}),
+                            success: function(response) {
+                                contentAreaChange = false;
+                                console.log('Content saved successfully');
+                            },
+                            error: function(error) {
+                                console.error('Error saving content:', error);
+                            }
+                        });
+                    }
                 }
 
                 // 自动每秒发送一次内容
