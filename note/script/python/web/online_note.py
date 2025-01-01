@@ -33,6 +33,7 @@ def note(subpath):
     <html>
         <head>
             <title>在线笔记本</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <style>
             /* 重置默认样式 */
