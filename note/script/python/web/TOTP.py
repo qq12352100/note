@@ -8,6 +8,8 @@ pyotp 是一个用于实现基于时间的一次性密码（TOTP）和基于 HMA
 
 """
 import flask
+app = flask.Flask(__name__)
+
 import pyotp
 
 bljsecret = 'EVSCWRCPLAXUKZHBYRB4EAKZKSPT6OIX'  # 堡垒机
@@ -19,7 +21,6 @@ def hgetkey(s):
     totp = pyotp.TOTP(s)
     return totp.now()
 
-app = flask.Flask(__name__)
 
 #http://127.0.0.1:5000/getkey
 @app.route('/getkey', methods=['GET'])
