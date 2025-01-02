@@ -105,12 +105,7 @@ def getstock():
                             <th>名称</th>
                             <th>代码</th>
                             <th>当前价格</th>
-                            <th>涨跌额</th>
                             <th>涨跌幅</th>
-                            <th>成交量(手)</th>
-                            <th>成交金额(万元)</th>
-                            <th>总市值(亿元)</th>
-                            <th>类型</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,12 +142,7 @@ def getstock():
                                     <td>${dataList[1]}</td> <!-- 名称 -->
                                     <td>${dataList[2]}</td> <!-- 代码 -->
                                     <td>${parseFloat(dataList[3]).toFixed(2)}</td> <!-- 当前价格 -->
-                                    <td>${parseFloat(dataList[4]).toFixed(2)}</td> <!-- 涨跌额 -->
                                     <td>${parseFloat(dataList[5]).toFixed(2)}%</td> <!-- 涨跌幅 -->
-                                    <td>${parseInt(dataList[6]).toLocaleString()}</td> <!-- 成交量 (手) -->
-                                    <td>${parseFloat(dataList[7]).toFixed(2)}</td> <!-- 成交金额 (万元) -->
-                                    <td>${parseFloat(dataList[8]) ? parseFloat(dataList[8]).toFixed(2) : 'N/A'}</td> <!-- 总市值 (如果存在) -->
-                                    <td>${dataList[dataList.length - 1]}</td> <!-- 类型或其他标识 -->
                                 </tr>`;
                             $tbody.append(row);
                         }
