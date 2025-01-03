@@ -141,8 +141,8 @@ def getstock():
                             var row = `<tr class="${rowClass}">
                                     <td>${dataList[1]}</td> <!-- 名称 -->
                                     <td>${dataList[2]}</td> <!-- 代码 -->
-                                    <td>${parseFloat(dataList[3]).toFixed(2)}</td> <!-- 当前价格 -->
-                                    <td>${parseFloat(dataList[5]).toFixed(2)}%</td> <!-- 涨跌幅 -->
+                                    <td>${parseFloat(dataList[3]).toFixed(3)}</td> <!-- 当前价格 -->
+                                    <td>${parseFloat(dataList[5]).toFixed(3)}%</td> <!-- 涨跌幅 -->
                                 </tr>`;
                             $tbody.append(row);
                         }
