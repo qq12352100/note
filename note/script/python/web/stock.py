@@ -125,6 +125,9 @@ def getstock():
                 width: 100%;
                 overflow: hidden; /* 确保内容不会溢出 */
             }
+            table {
+                width: 100%;
+            }
             .positive {
                 background-color: #d4edda; /* 绿色背景 */
                 color: #155724;
