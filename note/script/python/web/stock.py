@@ -13,6 +13,13 @@ import flask
 app = flask.Flask(__name__)
 
 import requests
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+from email.utils import formataddr
+from datetime import datetime, time
+import time as t
+
 # 用户提供的成本价字典
 cost_prices = {
     '002230': (50.425, 200),  # 科大讯飞
@@ -23,55 +30,39 @@ cost_prices = {
     '601989': (4.791, 4200)    # 中国重工
 }
 
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
-
-def send_qq_email(sender, password, receivers, subject, content):
-    """
-    使用QQ邮箱发送邮件
-    
-    :param sender: 发件人邮箱地址（你的QQ邮箱）
-    :param password: QQ邮箱授权码
-    :param receivers: 收件人列表
-    :param subject: 邮件主题
-    :param content: 邮件正文内容
-    :return: 成功返回True，失败返回False
-    """
+# QQ邮箱发送邮件
+def send_qq_email(subject, content):
+    sender = '584066697@qq.com'
+    receivers = ['447841461@qq.com']
     try:
         # 创建MIMEText对象
         message = MIMEText(content, 'plain', 'utf-8')
-        message['From'] = Header("发件人姓名", 'utf-8')  # 或者直接使用sender
-        message['To'] = Header("收件人姓名", 'utf-8')   # 如果有多个收件人，可以用逗号分隔
+        # 设置邮件头信息
         message['Subject'] = Header(subject, 'utf-8')
-
+        message['From'] = formataddr((Header(sender, 'utf-8').encode(), sender))
+        message['To'] = ', '.join([formataddr((Header('447841461', 'utf-8').encode(), recv)) for recv in receivers])
         # 连接到QQ邮箱的SMTP服务器并登录
         smtp_server = "smtp.qq.com"
         server = smtplib.SMTP_SSL(smtp_server, 465)  # QQ邮箱的SMTP服务器端口是465
-        server.login(sender, password)
-
+        server.login(sender, 'xodvmwwxdpgabdac')
         # 发送邮件
         server.sendmail(sender, receivers, message.as_string())
         print("邮件发送成功")
-        return True
     except smtplib.SMTPException as e:
         print(f"Error: 无法发送邮件. {e}")
-        return False
     finally:
         server.quit()
-        
-from datetime import datetime, time
 
 # 定义股市的开盘和闭盘时间（这里以中国A股为例）
 TRADE_TIMES = [
     (time(9, 30), time(11, 30)),
     (time(13, 0), time(15, 0))
 ]
-
+# 判断股市是否开盘
 def is_market_open():
     now = datetime.now().time()
     return any(start <= now <= end for start, end in TRADE_TIMES)
-    
+
 def get_stock_info(stock_codes):
     # 判断是上交所还是深交所的代码
     def add_prefix(code):
@@ -81,27 +72,34 @@ def get_stock_info(stock_codes):
             return f"s_sz{code}"
             
     converted_codes = [add_prefix(code) for code in stock_codes.split('.')]
-    
+
     url = f"http://qt.gtimg.cn/q="+','.join(converted_codes)
-    print(url)
     response = requests.get(url)
-    
+
+    mailcontent = ''   # 邮件内容
+    totalG = 0 # 总收益
     # 解析返回的数据
     data_list = response.text.split(';')[:-1]  # 去掉最后一个元素
+    #0: 未知 1: 名字 2: 代码 3: 当前价格 4: 涨跌额 5: 涨跌幅 6: 成交量（手）7: 成交额（万）8: 总市值 9: 股票类型
+    #0: 未知 1: 名字 2: 代码 3: 当前价格 4: 昨收 5: 今开 6: 成交量（手） 7: 外盘 8: 内盘 9: 买一 10: 买一量（手） 11-18: 买二 买五 19: 卖一 20: 卖一量 21-28: 卖二 卖五 29: 最近逐笔成交 30: 时间 31: 涨跌 32: 涨跌% 33: 最高 34: 最低 35: 价格/成交量（手）/成交额 36: 成交量（手） 37: 成交额（万） 38: 换手率 39: 市盈率 40: 41: 最高 42: 最低 43: 振幅 44: 流通市值 45: 总市值 46: 市净率 47: 涨停价 48: 跌停价
     for one in data_list:
         data = one.split('~')
         cost_price = cost_prices.get(data[2], 0)[0]
         cost_num = cost_prices.get(data[2], 0)[1] 
-        totalG = round((float(data[3]) - cost_price) * cost_num, 2) # 总收益
-        
-        print(data[2],data[3],cost_price,cost_num,totalG,type(totalG),is_market_open())
-        
-    # send_qq_email(sender, password, receivers, subject, content) # 发送邮件
-        
-#0: 未知 1: 名字 2: 代码 3: 当前价格 4: 涨跌额 5: 涨跌幅 6: 成交量（手）7: 成交额（万）8: 总市值 9: 股票类型
-#0: 未知 1: 名字 2: 代码 3: 当前价格 4: 昨收 5: 今开 6: 成交量（手） 7: 外盘 8: 内盘 9: 买一 10: 买一量（手） 11-18: 买二 买五 19: 卖一 20: 卖一量 21-28: 卖二 卖五 29: 最近逐笔成交 30: 时间 31: 涨跌 32: 涨跌% 33: 最高 34: 最低 35: 价格/成交量（手）/成交额 36: 成交量（手） 37: 成交额（万） 38: 换手率 39: 市盈率 40: 41: 最高 42: 最低 43: 振幅 44: 流通市值 45: 总市值 46: 市净率 47: 涨停价 48: 跌停价
-    return 0
+        earnings = round((float(data[3]) - cost_price) * cost_num, 2) # 单只收益
+        totalG += earnings
+        # print(data[2],data[3],cost_price,cost_num,earnings,earnings>0,is_market_open())
+
+        if(earnings > 10 and data[2] != '600028'): # 超过10元就发邮件
+            mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
+    now = datetime.now()
+    print(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG}")
+
+    if len(mailcontent) > 0:
+        send_qq_email('股票回本', mailcontent) # 发送邮件
+        t.sleep(3600) # 休眠1小时
+
 #http://127.0.0.1:5000/getstock
 @app.route('/getstock', methods=['GET'])
 def getstock():
@@ -231,5 +229,11 @@ def getstock():
     return flask.render_template_string(html_content, cost_prices=cost_prices, stock_code='#'.join(cost_prices.keys()))
 
 if __name__ == "__main__":
-    # get_stock_info('.'.join(cost_prices.keys()))
-    app.run(debug=True, port=5000)
+    # send_qq_email('xinxin','content')
+    get_stock_info('.'.join(cost_prices.keys()))
+    while 1:
+        if is_market_open():
+            get_stock_info('.'.join(cost_prices.keys()))
+        t.sleep(600)  # 休眠10分钟
+
+    # app.run(debug=True, port=5000)
