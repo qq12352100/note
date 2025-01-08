@@ -19,16 +19,27 @@ from email.header import Header
 from email.utils import formataddr
 from datetime import datetime, time
 import time as t
+import redis
+import json
 
-# 用户提供的成本价字典
-cost_prices = {
-    '002230': (50.425, 200),  # 科大讯飞
-    '159998': (0.90, 33000),   # 计算机ETF
-    '512710': (0.620, 20000),   # 军工龙头ETF
-    '600028': (6.201, 3300),   # 中国石化
-    # '600547': (24.316, 300),   # 山东黄金
-    '601989': (4.791, 4200)    # 中国重工
+# 用户提供的成本价字典, '601989': [4.791, 4200, 1, '中国重工']  1 邮件通知 0 不通知
+cost_prices = json.loads('''
+{
+    "002230": [50.425, 200, 1, "科大讯飞"],
+    "159998": [0.90, 33000, 0, "计算机ETF"],
+    "512710": [0.620, 20000, 1, "军工龙头ETF"],
+    "600028": [6.201, 3300, 0, "中国石化"],
+    "601989": [4.791, 4200, 1, "中国重工"]
 }
+''')
+
+r = redis.Redis(host='8.152.208.138', password='lL2oOkEc')
+# 从redis中获取成本价
+def get_cost_redis():
+    global cost_prices, r
+    # print(r.ping())
+    r.set('cost_key', json.dumps(cost_prices))
+    cost_prices = eval(r.get('cost_key').decode('utf-8'))
 
 # QQ邮箱发送邮件
 def send_qq_email(subject, content):
@@ -53,29 +64,24 @@ def send_qq_email(subject, content):
     finally:
         server.quit()
 
-# 定义股市的开盘和闭盘时间（这里以中国A股为例）
-TRADE_TIMES = [
-    (time(9, 30), time(11, 30)),
-    (time(13, 0), time(15, 0))
-]
+
 # 判断股市是否开盘
 def is_market_open():
+    TRADE_TIMES = [(time(9, 30), time(11, 30)), (time(13, 0), time(15, 0))]
     now = datetime.now().time()
+    if time(1, 0) <= now < time(1, 15):
+        get_cost_redis()
     return any(start <= now <= end for start, end in TRADE_TIMES)
 
-def get_stock_info(stock_codes):
-    # 判断是上交所还是深交所的代码
-    def add_prefix(code):
-        if code.startswith(('5','6','9')):
-            return f"s_sh{code}"
-        else:
-            return f"s_sz{code}"
-            
-    converted_codes = [add_prefix(code) for code in stock_codes.split('.')]
+# 获取股票信息并发送邮件
+def get_stock_info():
+    global cost_prices, r
 
-    url = f"http://qt.gtimg.cn/q="+','.join(converted_codes)
+    stock_codes = '.'.join(cost_prices.keys())
+    url = f"http://qt.gtimg.cn/q=" + ','.join([f"s_sh{code}" if code.startswith(('5', '6', '9')) else f"s_sz{code}" for code in stock_codes.split('.')])
     response = requests.get(url)
 
+    mailhead = ''   # redis缓存头
     mailcontent = ''   # 邮件内容
     totalG = 0 # 总收益
     # 解析返回的数据
@@ -84,21 +90,22 @@ def get_stock_info(stock_codes):
     #0: 未知 1: 名字 2: 代码 3: 当前价格 4: 昨收 5: 今开 6: 成交量（手） 7: 外盘 8: 内盘 9: 买一 10: 买一量（手） 11-18: 买二 买五 19: 卖一 20: 卖一量 21-28: 卖二 卖五 29: 最近逐笔成交 30: 时间 31: 涨跌 32: 涨跌% 33: 最高 34: 最低 35: 价格/成交量（手）/成交额 36: 成交量（手） 37: 成交额（万） 38: 换手率 39: 市盈率 40: 41: 最高 42: 最低 43: 振幅 44: 流通市值 45: 总市值 46: 市净率 47: 涨停价 48: 跌停价
     for one in data_list:
         data = one.split('~')
-        cost_price = cost_prices.get(data[2], 0)[0]
-        cost_num = cost_prices.get(data[2], 0)[1] 
-        earnings = round((float(data[3]) - cost_price) * cost_num, 2) # 单只收益
-        totalG += earnings
-        # print(data[2],data[3],cost_price,cost_num,earnings,earnings>0,is_market_open())
-
-        if(earnings > 10 and data[2] != '600028'): # 超过10元就发邮件
+        cost_price = cost_prices.get(data[2], 0)[0] # 成本价
+        cost_num = cost_prices.get(data[2], 0)[1]   # 购买数量
+        notify_mail = cost_prices.get(data[2], 0)[2]    # 是否发送邮件
+        earnings = round((float(data[3]) - cost_price) * cost_num, 2) # 单股收益
+        totalG += earnings  # 总收益
+        if(earnings > 10 and notify_mail): # 单股收益超过10元就发邮件
+            mailhead += data[2]
             mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
     now = datetime.now()
     print(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG}")
 
-    if len(mailcontent) > 0:
-        send_qq_email('股票回本', mailcontent) # 发送邮件
-        t.sleep(3600) # 休眠1小时
+    # 发送邮件
+    if mailcontent.strip() and not r.exists(mailhead):
+        send_qq_email('股票回本', mailcontent) 
+        r.set(mailhead, mailcontent, ex=3600) # 1小时内不重复发送邮件
 
 #http://127.0.0.1:5000/getstock
 @app.route('/getstock', methods=['GET'])
@@ -145,8 +152,8 @@ def getstock():
                             <th>名称</th>
                             <th>代码</th>
                             <th>现价</th>
-                            <th>涨跌</th>
                             <th>成本价</th>
+                            <th>涨跌</th>
                             <th>收益</th>
                         </tr>
                     </thead>
@@ -181,8 +188,8 @@ def getstock():
                                     <td>${dataList[1]}</td> <!-- 名称 -->
                                     <td>${dataList[2]}</td> <!-- 代码 -->
                                     <td>${parseFloat(dataList[3]).toFixed(3)}</td> <!-- 当前价格 -->
-                                    <td>${parseFloat(dataList[5]).toFixed(2)}%</td> <!-- 涨跌幅 -->
                                     <td>${costPrice.toFixed(3)}</td> <!-- 成本价 -->
+                                    <td>${parseFloat(dataList[5]).toFixed(2)}%</td> <!-- 涨跌幅 -->
                                     <td>${profitLoss}</td> <!-- 收益/亏损 -->
                                 </tr>`;
                             $tbody.append(row);
@@ -230,10 +237,11 @@ def getstock():
 
 if __name__ == "__main__":
     # send_qq_email('xinxin','content')
-    get_stock_info('.'.join(cost_prices.keys()))
-    while 1:
-        if is_market_open():
-            get_stock_info('.'.join(cost_prices.keys()))
-        t.sleep(600)  # 休眠10分钟
+    get_cost_redis()
+    get_stock_info()
+    # while 1:
+    #     if is_market_open():
+    #         get_stock_info()
+    #     t.sleep(600)  # 休眠10分钟
 
     # app.run(debug=True, port=5000)

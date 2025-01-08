@@ -5,6 +5,8 @@ nohup python3 app.py > log.file 2>&1 &
 """
 
 from flask import Flask
+from threading import Thread
+import time as t
 import TOTP
 import online_note
 import stock
@@ -20,5 +22,14 @@ app.add_url_rule('/save_content', 'online_note.save_content', online_note.save_c
 # 股票
 app.add_url_rule('/getstock', 'stock.getstock', stock.getstock) 
 
+def run_stock_info():
+    while True:
+        if stock.is_market_open():
+            stock.get_stock_info()
+        t.sleep(600)  # 休眠10分钟
+
 if __name__ == '__main__':
-    app.run()
+    stock_info_thread = Thread(target=run_stock_info)
+    stock_info_thread.start()
+    app.run(debug=True, port=5000)
+    stock_info_thread.join()
