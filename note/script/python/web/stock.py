@@ -21,6 +21,9 @@ from datetime import datetime, time
 import time as t
 import redis
 import json
+import logging
+# 配置日志
+logging.basicConfig(level=logging.INFO, filename='log.file', format='%(asctime)s - %(levelname)s - %(filename)s %(lineno)d - %(message)s')
 
 # 用户提供的成本价字典, '601989': [4.791, 4200, 1, '中国重工']  1 邮件通知 0 不通知
 cost_prices = json.loads('''
@@ -37,7 +40,7 @@ r = redis.Redis(host='8.152.208.138', password='lL2oOkEc')
 # 从redis中获取成本价
 def get_cost_redis():
     global cost_prices, r
-    # print(r.ping())
+    print(r.ping())
     r.set('cost_key', json.dumps(cost_prices))
     cost_prices = eval(r.get('cost_key').decode('utf-8'))
 
@@ -58,9 +61,9 @@ def send_qq_email(subject, content):
         server.login(sender, 'xodvmwwxdpgabdac')
         # 发送邮件
         server.sendmail(sender, receivers, message.as_string())
-        print("邮件发送成功")
+        logging.info("邮件发送成功")
     except smtplib.SMTPException as e:
-        print(f"Error: 无法发送邮件. {e}")
+        logging.info(f"Error: 无法发送邮件. {e}")
     finally:
         server.quit()
 
@@ -100,7 +103,7 @@ def get_stock_info():
             mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
     now = datetime.now()
-    print(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG}")
+    logging.info(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG}")
 
     # 发送邮件
     if mailcontent.strip() and not r.exists(mailhead):
