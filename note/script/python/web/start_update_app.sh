@@ -6,3 +6,5 @@ sleep 1
 systemctl restart pyweb
 sleep 2
 systemctl status pyweb
+sleep 1
+tail -30f log.file
