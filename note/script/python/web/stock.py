@@ -40,7 +40,7 @@ r = redis.Redis(host='8.152.208.138', password='lL2oOkEc')
 # 从redis中获取成本价
 def get_cost_redis():
     global cost_prices, r
-    print(r.ping())
+    # print(r.ping())
     r.set('cost_key', json.dumps(cost_prices))
     cost_prices = eval(r.get('cost_key').decode('utf-8'))
 
@@ -72,14 +72,12 @@ def send_qq_email(subject, content):
 def is_market_open():
     TRADE_TIMES = [(time(9, 30), time(11, 30)), (time(13, 0), time(15, 0))]
     now = datetime.now().time()
-    if time(1, 0) <= now < time(1, 15):
-        get_cost_redis()
     return any(start <= now <= end for start, end in TRADE_TIMES)
 
 # 获取股票信息并发送邮件
 def get_stock_info():
     global cost_prices, r
-
+    get_cost_redis() # 获取redis最新股票代码
     stock_codes = '.'.join(cost_prices.keys())
     url = f"http://qt.gtimg.cn/q=" + ','.join([f"s_sh{code}" if code.startswith(('5', '6', '9')) else f"s_sz{code}" for code in stock_codes.split('.')])
     response = requests.get(url)
