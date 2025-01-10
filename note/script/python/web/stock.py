@@ -41,7 +41,7 @@ r = redis.Redis(host='8.152.208.138', password='lL2oOkEc')
 def get_cost_redis():
     global cost_prices, r
     # print(r.ping())
-    r.set('cost_key', json.dumps(cost_prices))
+    # r.set('cost_key', json.dumps(cost_prices))
     cost_prices = eval(r.get('cost_key').decode('utf-8'))
 
 # QQ邮箱发送邮件
@@ -112,7 +112,6 @@ def get_stock_info():
 @app.route('/getstock', methods=['GET'])
 def getstock():
     global cost_prices
-    logging.info(f"cost_prices: {cost_prices}")
     html_content = '''
     <!DOCTYPE html>
     <html>
