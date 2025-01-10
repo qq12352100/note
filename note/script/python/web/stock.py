@@ -112,6 +112,7 @@ def get_stock_info():
 @app.route('/getstock', methods=['GET'])
 def getstock():
     global cost_prices
+    logging.info(f"cost_prices: {cost_prices}")
     html_content = '''
     <!DOCTYPE html>
     <html>
