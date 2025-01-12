@@ -19,7 +19,9 @@ lsblk
 lsblk -f
 blkid
 
-sudo mkfs.ext4 /dev/sda1
+fdisk /dev/sdb  # 输入 d 来删除分区，输入 w 保存更改并退出
+
+sudo mkfs.ext4 /dev/sda
 mkdir /usr/disk500
 mount /dev/sdb1 /usr/disk500
 

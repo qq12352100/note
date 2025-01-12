@@ -179,8 +179,8 @@ def getstock():
                         // 确保关键字段存在且有效
                         if (dataList.length >= 9 && dataList[1] && dataList[2]) {
                             var rowClass = parseFloat(dataList[5]) < 0 ? 'negative' : 'positive'; // 根据涨跌幅设置行的颜色
-                            var costPrice = parseFloat(costPrices[dataList[2]][0]) || 0; // 获取成本价，默认为0
-                            var costNum = parseFloat(costPrices[dataList[2]][1]) || 0; // 获取购买数量，默认为0
+                            var costPrice = parseFloat(costPrices[dataList[2]]?.[0]) || 0; // 获取成本价，默认为0
+                            var costNum = parseFloat(costPrices[dataList[2]]?.[1]) || 0; // 获取购买数量，默认为0
                             var currentPrice = parseFloat(dataList[3]); // 当前价格
                             var profitLoss = costPrice !== 0 ? ((currentPrice - costPrice) * costNum).toFixed(2) : 'N/A'; // 计算收益/亏损
                             totalG += Number(profitLoss);
@@ -238,11 +238,11 @@ def getstock():
 
 if __name__ == "__main__":
     # send_qq_email('xinxin','content')
-    get_cost_redis()
-    get_stock_info()
+    # get_cost_redis()
+    # get_stock_info()
     # while 1:
     #     if is_market_open():
     #         get_stock_info()
     #     t.sleep(600)  # 休眠10分钟
 
-    # app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000)
