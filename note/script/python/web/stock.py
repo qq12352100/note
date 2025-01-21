@@ -96,7 +96,7 @@ def get_stock_info():
         notify_mail = cost_prices.get(data[2], 0)[2]    # 是否发送邮件
         earnings = round((float(data[3]) - cost_price) * cost_num, 2) # 单股收益
         totalG += earnings  # 总收益
-        if(earnings > 10 and notify_mail): # 单股收益超过10元就发邮件
+        if(earnings > 100 and notify_mail): # 单股收益超过100元就发邮件
             mailhead += data[2]
             mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
@@ -182,7 +182,7 @@ def getstock():
                             var costPrice = parseFloat(costPrices[dataList[2]]?.[0]) || 0; // 获取成本价，默认为0
                             var costNum = parseFloat(costPrices[dataList[2]]?.[1]) || 0; // 获取购买数量，默认为0
                             var currentPrice = parseFloat(dataList[3]); // 当前价格
-                            var profitLoss = costPrice !== 0 ? ((currentPrice - costPrice) * costNum).toFixed(2) : 'N/A'; // 计算收益/亏损
+                            var profitLoss = costPrice !== 0 ? ((currentPrice - costPrice) * costNum).toFixed(2) : 0; // 计算收益/亏损
                             totalG += Number(profitLoss);
                             // 直接构建并添加行到表格
                             var row = `<tr class="${rowClass}">
@@ -214,7 +214,7 @@ def getstock():
                 function getContent() {
                     var codenum = $('#codenum').val();
                     $.ajax({
-                        url: 'http://qt.gtimg.cn/q='+convertCodes(codenum.split('.')),
+                        url: 'http://qt.gtimg.cn/q=s_sh000001,'+convertCodes(codenum.split('.')),
                         type: 'GET',
                         success: function(response) {
                         var dataArray = response.split(';');
