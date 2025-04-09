@@ -196,7 +196,7 @@ def getstock():
                             $tbody.append(row);
                         }
                     });
-                    $tbody.append(`<tr><td colspan="5"></td><td style="color: #0058ff;">${totalG}</td></tr>`);
+                    $tbody.append(`<tr><td colspan="5"></td><td style="color: #0058ff;">${totalG.toFixed(2)}</td></tr>`);
                 }
 
                 // 转换函数
