@@ -101,7 +101,7 @@ def get_stock_info():
             mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
     now = datetime.now()
-    logging.info(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG}")
+    logging.info(f"当前时间：{now.strftime('%Y-%m-%d %H:%M:%S')}, 收益：{totalG:.2f}")
 
     # 发送邮件
     if mailcontent.strip() and not r.exists(mailhead):
