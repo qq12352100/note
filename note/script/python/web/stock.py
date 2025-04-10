@@ -96,7 +96,7 @@ def get_stock_info():
         notify_mail = cost_prices.get(data[2], 0)[2]    # 是否发送邮件
         earnings = round((float(data[3]) - cost_price) * cost_num, 2) # 单股收益
         totalG += earnings  # 总收益
-        if(earnings > 100 and notify_mail): # 单股收益超过100元就发邮件
+        if(earnings > 1000 and notify_mail): # 单股收益超过100元就发邮件
             mailhead += data[2]
             mailcontent += f"{data[1]}({data[2]}) 当前价格：{data[3]} 涨跌幅：{data[5]}% 成本价：{cost_price} 收益：{earnings}\n"
     
