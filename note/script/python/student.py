@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, time
 import openpyxl
-
-#判断传入时间是否在自定义时间内
-def is_time_in_range(target_time):
-    target_date = datetime(2025, 4, 10).date()
-    return time(8, 0) <= target_time.time() <= time(18, 0) # 早上8点到下午6点
+import os
 
 #读取excel表格并分析数据
 def readExcel():
@@ -18,24 +14,31 @@ def readExcel():
     s24da5 = {"韩若宣","安艺楠","史梦雪","席玉翠","秦柯林","范云飞","陈思羽","田浩然","李成林","陈令昌","宋子衡","陈娇娇","杨柯","姚子轩","董庶薪","卢炳旭","齐瑞林","张文凯","刘骐硕","赵瑞雪","王新冉","钱宇洁","苗同熙","周梦佳","侯天乐","范瑞卿","董勤勤","罗慧","张雨涵","张怡丹","齐梦","马玉涵","孟千琪","陈正","李明","黑志洋","张金春","刘焕毓","梁富智","黄复鹏","于俊含","崔宇铄"}
     s24r3 = {"张月驰","丁瑜","李天彬","王馨阳","李庆哲","张荣天","李梓冉","尹伟","昝钰恒","李佳鹏","李传聪","徐一鸣","卞子阳","陆晶晶","张少鹏","郭恒瑞","刘志豪","张槐豫","吕传志","徐子涵","贾然","刘俊杰","刘翔宇","宋辉","吕龙欣","曾凡雨","霍瑞康","王进辉","孔依然","郭庆硕","曲铭琛","段其乐","李易军","张洋","宋子琪","宋志文","王明昊","王士芬","李文朔","赵浩然","张紫涵","赵新鹏","周晓晶","黄子恒","李俊杰","刘世泽","于江鸿","徐成","杨兴森","郭炳辰","王振铎","姚文琰","宋冠颖"}
     s24r4 = {"杨法瑞","高昊睿","巩承昊","庞永琦","吕烁","公凡凡","范晓玲","刘洋","张盛山","王欣奥","朱庚浩","臧浩然","冯奥伟","陈天宇","刘佳怡","王若菲","贾厚浩","孙浩","王越","闫浩然","刘进强","李梦姣","景天旭","徐瑞晨","李彦甫","王杰","于乃朔","韩建强","别艳青","张明宇","孟宪礼","钟俊","花雨昊","吴博","韩志伟","王玉陶","曹伟伟","葛峻豪","魏超冉","孙思琦","鹿明浩","杨浩宇","岳鹏宇","贠佳贺","高申泰","阮辰淇","张传浩","张善航","陈梦宇"}
-    
-    workbook = openpyxl.load_workbook('C://Users//Administrator//Downloads//每日课堂练习（收集结果）.xlsx') # 文件路径
-    sheet = workbook[workbook.sheetnames[0]]
 
-    # 遍历工作表中的数据
-    for row in sheet.iter_rows(min_row=2, values_only=True):  # min_row=2 跳过标题行，values_only=True 返回单元格值而不是对象
-        cell_time = datetime.strptime(row[0], '%Y年%m月%d日 %H:%M')
-        if is_time_in_range(cell_time):
-            my_set.add(row[2])
-            
-    # 在名单1但不在名单2的人
-    # print(s23da5-my_set) # 23级大数据5
-    print(s23da6-my_set) # 23级大数据6
+    file_path = r'C:\Users\Administrator\Downloads\每日课堂练习（收集结果）.xlsx' # 文件路径
+    if os.path.exists(file_path):
+        workbook = openpyxl.load_workbook(file_path) 
+        sheet = workbook[workbook.sheetnames[0]]
+
+        # 遍历工作表中的数据
+        for index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2): # min_row=2 跳过标题行，values_only=True 返回单元格值而不是对象
+            cell_time = datetime.strptime(row[0], '%Y年%m月%d日 %H:%M')
+            if cell_time.date() == datetime(2025, 4, 10).date(): # 作业时间
+                my_set.add(row[2])
+        workbook.close()
+        # os.remove(file_path)
+        # print("文件已删除！")
+    else:
+        print("文件不存在...")
     
-    # print(s24da4-my_set) # 24级大数据4
-    # print(s24da5-my_set) # 24级大数据5
-    # print(s24r3-my_set) # 24级人工3
-    # print(s24r4-my_set) # 24级人工4
+    # 在名单1但不在名单2的人
+    print(f'23级大数据5-' + str(s23da5 - my_set))  # 23级大数据5
+    print(f'23级大数据6-' + str(s23da6 - my_set))  # 23级大数据6
+    
+    # print(f'24级大数据4-' + str(s24da4 - my_set))  # 24级大数据4
+    # print(f'24级大数据5-' + str(s24da5 - my_set))  # 24级大数据5
+    # print(f'24级人工3-' + str(s24r3 - my_set))    # 24级人工3
+    # print(f'24级人工4-' + str(s24r4 - my_set))    # 24级人工4
     
 if __name__ == "__main__":
     readExcel()
