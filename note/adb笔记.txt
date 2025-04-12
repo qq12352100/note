@@ -50,6 +50,8 @@ adb version #显示ADB版本信息。
 启动淘宝
 adb shell monkey -p com.taobao.taobao -c android.intent.category.LAUNCHER 1
 adb shell am start -n com.taobao.taobao/com.taobao.tao.welcome.Welcome
+启动钉钉
+adb shell monkey -p com.alibaba.android.rimet -c android.intent.category.LAUNCHER 1
 
 adb shell input keyevent KEYCODE_HOME   # 回到主屏幕
 adb shell input keyevent KEYCODE_BACK   # 返回

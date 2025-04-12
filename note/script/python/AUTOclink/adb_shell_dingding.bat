@@ -10,9 +10,12 @@ cd /A/scrcpy-win64-v3.2
 call :process_flow
 
 :: 打开钉钉：点击钉钉图标
-call :tap_screen 10 667 195
+adb shell monkey -p com.alibaba.android.rimet -c android.intent.category.LAUNCHER 1
+timeout /t 10 /nobreak
+
 :: 横标签打卡：点击横标签打卡位置
-call :tap_screen 20 752 381
+call :tap_screen 15 752 381
+
 :: 中间打卡：点击中间打卡位置（需要补充坐标）
 call :tap_screen 1 534 1297
 
@@ -32,14 +35,16 @@ exit /b
 
 :: 定义一个流程函数，封装主菜单、多任务、关闭等操作
 :process_flow
-    :: 主菜单：点击主菜单按钮
-    call :tap_screen 1 540 2100
+    :: 主菜单：点击主菜单按钮   # 回到主屏幕
+    adb shell input keyevent KEYCODE_HOME
+    timeout /t 2 /nobreak
 
-    :: 多任务：点击多任务按钮
-    call :tap_screen 1 316 2090
+    :: 多任务：点击多任务按钮   # 菜单键
+    adb shell input keyevent KEYCODE_MENU
+    timeout /t 2 /nobreak
 
     :: 关闭：关闭当前应用
-    call :tap_screen 3 542 1880
+    call :tap_screen 2 542 1880
 exit /b
 
 
