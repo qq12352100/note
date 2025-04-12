@@ -19,7 +19,8 @@ cmdow @ /top /mov 500 500           rem  移动窗口到某个位置 详见cmdow下载
 @echo %DATE%                        rem 当前日期
 @echo %TIME%                        rem 当前时间
 timeout /t 10 /nobreak              rem 睡眠10s   /NOBREAK        忽略按键并等待指定的时间（延时期间，不允许用户按任意键终端延时）。
-
+timeout /t 10 /nobreak >nul         rem 控制台不会输出倒计时
+timeout /t 10 /nobreak >nul 2>&1    rem 既不想看到正常输出也不想看到错误信息  2>&1 发生错误也不输出
 -------------------------------------------判断执行哪一步
 set /p var=输入一个数:
 if %var% EQU 1 (                    rem EQU 等于 || NEQ 不等于 || LSS 小于 || LEQ 小于或等于 ||  GTR 大于 || GEQ 大于或等于
@@ -34,6 +35,38 @@ if %var% EQU 1 (                    rem EQU 等于 || NEQ 不等于 || LSS 小于 || LE
 :SECOND2
 @echo I AM SECOND2
 
+-------------------------------------------函数运行环境设置
+:: 设置一个全局变量
+set globalVar=这是全局变量的值
+
+:: 开始局部环境
+setlocal
+:: 修改全局变量
+set globalVar=这是局部环境中的新值
+echo 在局部环境中: globalVar=%globalVar%
+
+:: 结束局部环境
+endlocal
+
+:: 检查全局变量的值是否恢复
+echo 在局部环境外: globalVar=%globalVar%
+
+:: 输出
+:: 在局部环境中: globalVar=这是局部环境中的新值
+:: 在局部环境外: globalVar=这是全局变量的值
+-------------------------------------------函数
+:: 调用函数 后面要跟exit /b，不然进入递归
+call :tap_screen 1 534 1297
+call :tap_screen 1 534 1297
+exit /b
+
+:: 声明函数
+:tap_screen
+    set delay=%1
+    set x=%2
+    set y=%3
+    echo %delay% %x% %y%
+exit /b
 -------------------------------------------变量声明
 set a=aa1bb1aa2bb2
 @echo %a%
