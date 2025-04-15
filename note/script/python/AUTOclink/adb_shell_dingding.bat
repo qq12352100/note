@@ -37,14 +37,14 @@ exit /b
 :process_flow
     :: 主菜单：点击主菜单按钮   # 回到主屏幕
     adb shell input keyevent KEYCODE_HOME
-    timeout /t 2 /nobreak
+    timeout /t 1 /nobreak
 
     :: 多任务：点击多任务按钮   # 菜单键
     adb shell input keyevent KEYCODE_MENU
-    timeout /t 2 /nobreak
+    timeout /t 1 /nobreak
 
     :: 关闭：关闭当前应用
-    call :tap_screen 2 542 1880
+    call :tap_screen 1 542 1880
 exit /b
 
 
