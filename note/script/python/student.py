@@ -28,20 +28,20 @@ def readExcel():
             if cell_time.date() == yesterday: # 作业时间
                 my_set.add(row[2])
         workbook.close()
-        os.remove(file_path)
+        # os.remove(file_path)
         print("文件已删除！")
     else:
         print("文件不存在...")
     
     weekday = datetime.now().weekday()
     # 在名单1但不在名单2的人
-    if weekday == 0 : # 周一
+    if weekday == 1 : # 周二统计周一
         print(f'23级大数据5-' + str(s23da5 - my_set))  # 23级大数据5
         print(f'23级大数据6-' + str(s23da6 - my_set))  # 23级大数据6
         print(f'24级大数据5-' + str(s24da5 - my_set))  # 24级大数据5
-    elif weekday == 1 : # 周二
+    elif weekday == 2 : # 周三统计周二
         print(f'24级大数据4-' + str(s24da4 - my_set))  # 24级大数据4
-    elif weekday == 2 : # 周三
+    elif weekday == 3 : # 周四统计周三
         print(f'24级人工3-' + str(s24r3 - my_set))    # 24级人工3
         print(f'24级人工4-' + str(s24r4 - my_set))    # 24级人工4
     

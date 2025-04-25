@@ -6,6 +6,9 @@ mode con cols=80 lines=20 & color 0c
 D:
 cd /A/scrcpy-win64-v3.2
 
+REM adb tcpip 5555
+REM adb connect 192.168.3.100:5555
+
 :: 执行流程函数-清理后台任务
 call :process_flow
 
