@@ -24,11 +24,11 @@ def readExcel():
         for index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2): # min_row=2 跳过标题行，values_only=True 返回单元格值而不是对象
             cell_time = datetime.strptime(row[0], '%Y年%m月%d日 %H:%M')
             yesterday = (datetime.now() - timedelta(days=1)).date()
-            # if cell_time.date() == datetime(2025, 4, 15).date(): # 作业时间
+            yesterday = datetime(2025, 4, 30).date()
             if cell_time.date() == yesterday: # 作业时间
                 my_set.add(row[2])
         workbook.close()
-        # os.remove(file_path)
+        os.remove(file_path)
         print("文件已删除！")
     else:
         print("文件不存在...")

@@ -1,4 +1,14 @@
 
+==========================================================================================代理
+http://用户名:密码@127.0.0.1:10809
+
+git -c http.proxy='http://127.0.0.1:10809' clone https://github.com/qq12352100/qq12352100.github.io.git    #临时代理克隆
+git -c http.proxy='http://127.0.0.1:10809' push origin master                                               #临时代理推送
+
+git config --global https.proxy 'http://127.0.0.1:10809'        #全局设置 HTTPS 代理
+git config --global --unset https.proxy                         #取消HTTPS代理
+git config --global http.proxy 'http://127.0.0.1:10809'         #全局设置 HTTPS 代理
+git config --global --unset http.proxy                          #取消HTTP代理
 ==========================================================================================下载别人代码
 git init
 git remote add origin https://github.com/codeskyblue/gohttpserver.git
