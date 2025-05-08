@@ -5,8 +5,9 @@
 http://qt.gtimg.cn/q=sh600028,sz159998
 http://qt.gtimg.cn/q=s_sh600028,s_sz159998
 
-腾讯财经提供的一个非官方支持的API，所以它的稳定性和长期可用性无法得到保证。 
-
+腾讯财经提供的一个非官方支持的API,所以它的稳定性和长期可用性无法得到保证。 
+pip install redis
+pip install flask
 
 """
 import flask
@@ -22,6 +23,7 @@ import time as t
 import redis
 import json
 import logging
+import akshare as ak
 # 配置日志
 logging.basicConfig(level=logging.INFO, filename='log.file', format='%(asctime)s - %(levelname)s - %(filename)s %(lineno)d - %(message)s')
 
@@ -108,10 +110,29 @@ def get_stock_info():
         send_qq_email('股票回本', mailcontent) 
         r.set(mailhead, mailcontent, ex=3600) # 1小时内不重复发送邮件
 
+# 获取金价
+def getgold():
+    gold_price_data = ak.futures_foreign_commodity_realtime(symbol='GC,XAU,BTC')
+    if gold_price_data is not None and not gold_price_data.empty:
+        result_list = []
+        for index, row in gold_price_data.iterrows():
+            result = {
+                "name": str(row["名称"]),
+                "USD_price": float(row["最新价"]),
+                "CNY_price": round(float(row["人民币报价"]), 2),  # 保留三位小数
+                "rise_fall": round(float(row["涨跌幅"]), 2)
+            }
+            result_list.append(result)
+        result_json = json.dumps(result_list, ensure_ascii=False, indent=4)
+        # print(result_json)
+    return result_json
+    
 #http://127.0.0.1:5000/getstock
 @app.route('/getstock', methods=['GET'])
 def getstock():
     global cost_prices
+    get_cost_redis() # 获取redis最新股票代码
+    gold_price_data = getgold() # 获取金价
     html_content = '''
     <!DOCTYPE html>
     <html>
@@ -165,6 +186,8 @@ def getstock():
             </div>
             <script>
                 var costPrices = {{ cost_prices|tojson|safe }}
+                var gold_price_data = JSON.parse({{ gold_price_data|tojson|safe }})
+                console.log(gold_price_data)
                 var keysJoinedByHash = Object.keys(costPrices).sort().join('.');
                 $('#codenum').val(keysJoinedByHash);
                 
@@ -197,6 +220,12 @@ def getstock():
                         }
                     });
                     $tbody.append(`<tr><td colspan="5"></td><td style="color: #0058ff;">${totalG.toFixed(2)}</td></tr>`);
+                    gold_price_data.forEach(function(item) {
+                        var rowClass = item.rise_fall < 0 ? 'negative' : 'positive'; // 根据涨跌幅设置行的颜色
+                        $tbody.append(`<tr  class="${rowClass}"><td >${item.name}</td><td >${item.USD_price}</td><td ></td><td >${item.CNY_price}</td><td >${item.rise_fall}%</td></tr>`);
+                        console.log(`名称: ${item.name}, 美元价格: ${item.USD_price}, 人民币价格: ${item.CNY_price}, 涨跌幅: ${item.rise_fall}`);
+                    });
+                    
                 }
 
                 // 转换函数
@@ -234,7 +263,7 @@ def getstock():
         </body>
     </html>
     '''
-    return flask.render_template_string(html_content, cost_prices=cost_prices, stock_code='#'.join(cost_prices.keys()))
+    return flask.render_template_string(html_content, cost_prices=cost_prices, gold_price_data=gold_price_data)
 
 if __name__ == "__main__":
     # send_qq_email('xinxin','content')
