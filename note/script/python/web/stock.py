@@ -69,7 +69,6 @@ def send_qq_email(subject, content):
     finally:
         server.quit()
 
-
 # 判断股市是否开盘
 def is_market_open():
     TRADE_TIMES = [(time(9, 30), time(11, 30)), (time(13, 0), time(15, 0))]
