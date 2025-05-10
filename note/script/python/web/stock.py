@@ -154,11 +154,11 @@ def getstock():
             table {
                 width: 100%;
             }
-            .positive {
+            .negative {
                 background-color: #d4edda; /* 绿色背景 */
                 color: #155724;
             }
-            .negative {
+            .positive {
                 background-color: #f8d7da; /* 红色背景 */
                 color: #721c24;
             }
