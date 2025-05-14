@@ -1,6 +1,10 @@
+'''
+pip install pyautogui pykeyboard
+
+'''
+
 import pyperclip 
 import time,sys,datetime
-from pymouse import PyMouse
 import pyautogui
 from pykeyboard import PyKeyboard
 import win32api
@@ -8,7 +12,7 @@ import win32con
 import ctypes 
 from pynput.mouse import Controller, Button
 k = PyKeyboard()
-m = PyMouse()
+m = pyautogui()
 mouse = Controller()
 # 1920 * 1080
 import win32api,win32con

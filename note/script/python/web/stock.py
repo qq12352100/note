@@ -8,6 +8,8 @@ http://qt.gtimg.cn/q=s_sh600028,s_sz159998
 腾讯财经提供的一个非官方支持的API,所以它的稳定性和长期可用性无法得到保证。 
 pip install redis
 pip install flask
+pip install akshare   #需要高版本python3.13
+
 
 """
 import flask
@@ -273,4 +275,4 @@ if __name__ == "__main__":
     #         get_stock_info()
     #     t.sleep(600)  # 休眠10分钟
 
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
