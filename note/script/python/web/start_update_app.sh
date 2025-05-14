@@ -3,7 +3,11 @@ wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python
 wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python/web/TOTP.py
 wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python/web/online_note.py
 wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python/web/stock.py
-wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python/web/start_update_app.sh
+if [ ! -f "start_update_app.sh" ]; then
+    wget https://raw.githubusercontent.com/qq12352100/note/master/note/script/python/web/start_update_app.sh
+    chmod +x start_update_app.sh
+fi
+
 sleep 3
 nohup python3 app.py > log.file 2>&1 &
 sleep 1
