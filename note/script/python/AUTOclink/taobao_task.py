@@ -28,8 +28,9 @@ def clink(x, y, s):
     time.sleep(s)
     
 #中间位置右键单击
-def click_right():
+def click_right(s):
     pyautogui.click(wx, wy, button='right')
+    time.sleep(s)
 
 #从屏幕中间向上向下滑动，负数是向上滑动
 def roll(p,s):
@@ -40,16 +41,16 @@ def roll(p,s):
 
 #金币任务
 def taobao_jinbi():
-    clink(946, 516, 30)
-    click_right()
+    clink(944, 375, 30) # 第一块
+    click_right(10)
 
 print(time.strftime("%Y年%m月%d日  %H:%M:%S 星期%w", time.localtime()) + "_start!")
 # get_location()
 
 time.sleep(5)
-for i in range(10):
+for i in range(30):
     # taobao_jinbi()
-    # roll(-300,30)
+    roll(-300,6)
     
 # while 1:  # 循环条件为1必定成立
     # time.sleep(60*10)
