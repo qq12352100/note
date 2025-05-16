@@ -3,24 +3,33 @@ from pptx.util import Pt
 from pptx.dml.color import RGBColor
 import os
 
-title = "5月第2周工作计划\n5月第3周工作计划"
-stitle = "26年4月第4周工作完成情况："
+'''
+本周工作总结
+读取1.pptx为模板，设置里面的内容
+'''
+
+yue = 5
+zhou = 3 # 当前第几周，最大5周
+file_name = f"2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
+# title = f"{yue}月第{zhou}周工作总结\n6月第1周工作计划"
+title = f"{yue}月第{zhou}周工作总结\n{yue}月第{zhou+1}周工作计划"
+stitle = f"25年{yue}月第{zhou}周工作完成情况："
 do_work = [
-"",
-"",
-"",
-"",
-"hello"]
+"讲解linux的yum与wget命令详细使用及yum源的更换，磁盘管理模块",
+"讲解大数据技术基础中的数据可视化与FineReport使用",
+"讲解人工智能导论中智能音频技术及检索",
+"批改毕业考试与补考学生的试卷",
+"参加学院召开的日常会"]
 plan_work = [
-"",
-"",
-"",
-"",
-"hello"]
+"讲解linux操作系统的内核的更换，DNS的配置，演示宝塔面板安装及基本功能，讲解大数据技术基础中的数据思维与安全",
+"讲解linux操作系统的内核的更换，DNS的配置，演示宝塔面板安装及基本功能，讲解人工智能导论中语音识别、分析与语音克隆",
+"讲解linux操作系统的内核的更换，DNS的配置，演示宝塔面板安装及基本功能",
+"讲解linux操作系统的内核的更换，DNS的配置，演示宝塔面板安装及基本功能",
+"讲解大数据技术基础中的数据思维与安全，讲解人工智能导论中语音识别、分析与语音克隆"]
 
 
-if os.path.exists('2.pptx'):
-    os.remove('2.pptx')
+if os.path.exists(file_name):
+    os.remove(file_name)
 # 读取 PPT 文件
 prs = Presentation('1.pptx')
 # prs.slides[0].shapes[0].text_frame.text="1234"
@@ -79,6 +88,7 @@ for i, value in enumerate(data_list):
         new_run.font.name = '宋体'
 
 all_shapes = prs.slides[5].shapes
+
 # 遍历所有形状并输出基本信息
 for idx, shape in enumerate(all_shapes):
     print(f"形状 {idx + 1}:")
@@ -87,4 +97,4 @@ for idx, shape in enumerate(all_shapes):
     print(f"  是否文本框: {shape.has_text_frame}")
     print("-" * 30)
 
-prs.save('2.pptx')
+prs.save(file_name)
