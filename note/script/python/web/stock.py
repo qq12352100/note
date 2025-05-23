@@ -239,7 +239,6 @@ def getstock():
                         }
                     });
                 }
-                
                 // 请求数据
                 function getContent() {
                     var codenum = $('#codenum').val();
