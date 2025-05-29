@@ -242,7 +242,7 @@ Sub MatchAndCopyValues()
     Dim nameInSheet2 As String
     Dim valueToCopy As Variant
     
-    indexGrade = 4 '成绩写入第几列
+    indexGrade = 4 '成绩写入第几列 索引1开始
     
     Set ws1 = ThisWorkbook.Sheets("Sheet1")
     Set ws2 = ThisWorkbook.Sheets("Sheet2")

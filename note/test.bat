@@ -125,6 +125,11 @@ for /f "tokens=* skip=2" %%A in ('ping %host% -n 1') do (
     timeout /t 1 /nobreak > nul
     goto loop
 )
+--------------------------------------------------【NirCmd】修改文件的创建时间与修改时间
+打开下拉到最下面下载  https://www.nirsoft.net/utils/nircmd.html  
+
+nircmd.exe setfiletime "D://1.txt" "24-06-2003 17:57:11" "22-11-2005 10:21:56"
+
 -------------cmd要以管理员运行----------【添加服务 或 NSSM安装服务 https://nssm.cc/】
 sc create frp_service binPath= "D:\AAA\frp_0.57.0_windows_amd64\frpc.exe -c D:\AAA\frp_0.57.0_windows_amd64\frpc.toml"
 sc config frp_service start=AUTO    rem AUTO(自动)DEMAND(手动)DISABLED(禁用)
