@@ -10,30 +10,40 @@ REM adb tcpip 5555
 REM adb connect 192.168.3.100:5555
 
 :: 执行流程函数-清理后台任务
-call :process_flow
+REM call :process_flow
+call :back3time
 
 :: 打开钉钉：点击钉钉图标
 adb shell monkey -p com.alibaba.android.rimet -c android.intent.category.LAUNCHER 1
-timeout /t 10 /nobreak
+timeout /t 3 /nobreak
 
 :: 横标签打卡：点击横标签打卡位置
-call :tap_screen 15 752 381
+call :clink_t_x_y 5 752 381
 
-:: 中间打卡：点击中间打卡位置（需要补充坐标）
-call :tap_screen 1 534 1297
+:: 中间打卡：点击中间打卡位置
+call :clink_t_x_y 1 534 1297
 
 :: 暂停脚本，等待用户确认
-pause
+REM pause
 
 exit /b
 
 :: 定义一个通用函数，用于模拟屏幕点击操作
-:tap_screen
+:clink_t_x_y
     set delay=%1
     set x=%2
     set y=%3
     adb shell input tap %x% %y%
     timeout /t %delay% /nobreak
+exit /b
+
+::返回三次
+:back3time
+    set count=3
+    for /L %%i in (1,1,%count%) do (
+        adb shell input keyevent KEYCODE_BACK
+        timeout /t 1 /nobreak >nul
+    )
 exit /b
 
 :: 定义一个流程函数，封装主菜单、多任务、关闭等操作
