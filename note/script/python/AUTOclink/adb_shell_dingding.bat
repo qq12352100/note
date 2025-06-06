@@ -1,32 +1,59 @@
 @echo off
 :: 设置窗口大小和颜色
-mode con cols=80 lines=20 & color 0c
-
+mode con cols=30 lines=5 & color 0c
 :: 切换到指定目录
-D:
-cd /A/scrcpy-win64-v3.2
+D: && cd /A/scrcpy-win64-v3.2
 
 REM adb tcpip 5555
 REM adb connect 192.168.3.100:5555
 
-:: 执行流程函数-清理后台任务
-REM call :process_flow
-call :back3time
+call :dingding
+:: 循环判断当前为12点、12点55、17点30打卡
+:start
+    :: 获取当前小时和分钟
+    for /f "tokens=1,2 delims=: " %%a in ('time /t') do (
+        set hour=%%a
+        set minute=%%b
+    )
+    :: 去除前导空格（有些系统格式为 " 9:45 AM"）
+    set hour=%hour: =%
+    set minute=%minute: =%
+    echo 当前时间为：%hour%:%minute%
 
-:: 打开钉钉：点击钉钉图标
-adb shell monkey -p com.alibaba.android.rimet -c android.intent.category.LAUNCHER 1
-timeout /t 3 /nobreak
+    :: 判断是否为指定时间点之一
+    set "run=no"
+    if "%hour%"=="12" if "%minute%"=="00" set run=yes
+    if "%hour%"=="12" if "%minute%"=="55" set run=yes
+    if "%hour%"=="17" if "%minute%"=="30" set run=yes
 
-:: 横标签打卡：点击横标签打卡位置
-call :clink_t_x_y 5 752 381
+    if "%run%"=="yes" (
+        echo 时间匹配！正在运行 dingding 子程序...
+        call :dingding
+    )
+    :: 如果是 17:30，额外执行休眠命令,并退出程序
+    if "%hour%"=="17" if "%minute%"=="35" (
+        powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Application]::SetSuspendState('Suspend', $false, $false)"
+        exit
+    )
+    :: 等待 50 秒后再次检查
+    timeout /t 50 /nobreak >nul
+    cls
+goto :start
 
-:: 中间打卡：点击中间打卡位置
-call :clink_t_x_y 1 534 1297
+:: 钉钉打卡
+:dingding
+    :: 执行流程函数-清理后台任务
+    REM call :clear_bak_task
+    call :back3time
 
-:: 暂停脚本，等待用户确认
-REM pause
+    adb shell monkey -p com.alibaba.android.rimet -c android.intent.category.LAUNCHER 1     rem 打开钉钉：点击钉钉图标
+    timeout /t 2 /nobreak
 
+    call :clink_t_x_y 5 752 381     rem 横标签打卡：点击横标签打卡位置
+    call :clink_t_x_y 1 534 1297    rem 中间打卡：点击中间打卡位置
 exit /b
+
+    REM pause                       rem 暂停脚本，等待用户确认
 
 :: 定义一个通用函数，用于模拟屏幕点击操作
 :clink_t_x_y
@@ -47,17 +74,14 @@ exit /b
 exit /b
 
 :: 定义一个流程函数，封装主菜单、多任务、关闭等操作
-:process_flow
-    :: 主菜单：点击主菜单按钮   # 回到主屏幕
-    adb shell input keyevent KEYCODE_HOME
+:clear_bak_task
+    adb shell input keyevent KEYCODE_HOME   rem 主菜单：点击主菜单按钮   # 回到主屏幕
     timeout /t 1 /nobreak
 
-    :: 多任务：点击多任务按钮   # 菜单键
-    adb shell input keyevent KEYCODE_MENU
+    adb shell input keyevent KEYCODE_MENU   rem 多任务：点击多任务按钮   # 菜单键
     timeout /t 1 /nobreak
 
-    :: 关闭：关闭当前应用
-    call :tap_screen 1 542 1880
+    call :tap_screen 1 542 1880             rem 关闭：关闭当前应用
 exit /b
 
 
