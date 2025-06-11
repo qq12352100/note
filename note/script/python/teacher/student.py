@@ -7,7 +7,7 @@ import os
 '''
 def readExcel():
     yesterday = (datetime.now() - timedelta(days=1)).date()
-    # yesterday = datetime(2025, 5, 20).date() #Excel表中提交作业那天
+    # yesterday = datetime(2025, 6, 10).date() #Excel表中提交作业那天
         
     weekday = yesterday.weekday()+1
     print(yesterday)
