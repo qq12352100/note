@@ -2,34 +2,38 @@ from pptx import Presentation
 from pptx.util import Pt
 from pptx.dml.color import RGBColor
 import os
+import subprocess
 
 '''
 本周工作总结
 读取1.pptx为模板，设置里面的内容
 '''
+# 周报输出文件夹
+file_path = r"D:\Program Files\PortableGit\test\tiantai\周报+绩效\周报"
+subprocess.run(["explorer", file_path], shell=True)                           # 使用 explorer 命令打开文件夹
 
 yue = 6
-zhou = 1 # 当前第几周，最大5周
-file_name = f"2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
+zhou = 3 # 当前第几周，最大5周
+file_name = f"/2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
 title = f"{yue}月第{zhou}周工作总结\n{yue}月第{zhou+1}周工作计划"
-title = f"{yue}月第{zhou}周工作总结\n6月第2周工作计划"
+# title = f"{yue}月第{zhou}周工作总结\n6月第2周工作计划"   # 跨月份
 stitle = f"25年{yue}月第{zhou}周工作完成情况："
 do_work = [
-"讲解linux操作系统中6种启动方式、安全模式修改root密码、取消开机等待",
-"讲解大数据技术基础中的城市空气质量大数据分析实战",
-"讲解人工智能导论中图片生成视频、文字生成视频",
-"检查学生笔记记录情况",
+"讲解linux操作系统中6种安装samba服务、vsftpd服务",
+"讲解大数据技术基础中的单机部署Hadoop",
+"讲解人工智能导论中音频信息识别、音频信息检索",
+"检查学生笔记记录情况，出期末考试试卷",
 "参加学院召开的日常会，备课"]
 plan_work = [
-"讲解linux操作系统的讲解linux操作系统中安装samba服务、vsftpd服务，讲解大数据技术基础中的单机部署Hadoop",
-"讲解linux操作系统的讲解linux操作系统中安装samba服务、vsftpd服务，讲解人工智能导论中音频信息识别、音频信息检索",
-"讲解linux操作系统的讲解linux操作系统中安装samba服务、vsftpd服务",
-"讲解linux操作系统的讲解linux操作系统中安装samba服务、vsftpd服务",
-"讲解大数据技术基础中单机部署Hadoop，讲解人工智能导论中音频信息识别、音频信息检索"]
+"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程，复习大数据技术基础中的数据采集及处理",
+"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程，复习人工智能导论中学习方式",
+"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程",
+"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程",
+"复习大数据技术基础中的数据采集及处理，复习人工智能导论中学习方式"]
 
 
-if os.path.exists(file_name):
-    os.remove(file_name)
+if os.path.exists(file_path + file_name):
+    os.remove(file_path + file_name)
 # 读取 PPT 文件
 prs = Presentation('1.pptx')
 # prs.slides[0].shapes[0].text_frame.text="1234"
@@ -97,4 +101,4 @@ for idx, shape in enumerate(all_shapes):
     print(f"  是否文本框: {shape.has_text_frame}")
     print("-" * 30)
 
-prs.save(file_name)
+prs.save(file_path + file_name)
