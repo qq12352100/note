@@ -7,6 +7,9 @@ D: && cd /A/scrcpy-win64-v3.2
 REM adb tcpip 5555
 REM adb connect 192.168.3.100:5555
 
+:: 初始化标志变量：是否已在周五执行过提醒
+set "friday_alert_done=no"
+
 call :dingding
 :: 循环判断当前为12点、12点55、17点30打卡
 :start
@@ -15,10 +18,13 @@ call :dingding
         set hour=%%a
         set minute=%%b
     )
+    :: 获取当前周几
+    for /f %%a in ('powershell -command "$(Get-Date).DayOfWeek"') do set "dayofweek=%%a"
+    
     :: 去除前导空格（有些系统格式为 " 9:45 AM"）
     set hour=%hour: =%
     set minute=%minute: =%
-    echo 当前时间为：%hour%:%minute%
+    echo 当前时间为：%hour%:%minute% (%dayofweek%)
 
     :: 判断是否为指定时间点之一
     set "run=no"
@@ -35,6 +41,13 @@ call :dingding
         powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Application]::SetSuspendState('Suspend', $false, $false)"
         exit
     )
+    
+    :: 判断是否是周五，是否第一次执行，是否下午5点，弹窗提醒写ppt
+    if /i "%friday_alert_done%" neq "yes" if /i "%dayofweek%"=="Friday" if "%hour%"=="17" (
+        msg * "今天是星期五！记得写ppt哦！"
+        set "friday_alert_done=yes"
+    )
+        
     :: 等待 50 秒后再次检查
     timeout /t 50 /nobreak >nul
     cls

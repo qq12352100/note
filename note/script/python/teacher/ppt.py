@@ -13,23 +13,23 @@ file_path = r"D:\Program Files\PortableGit\test\tiantai\周报+绩效\周报"
 subprocess.run(["explorer", file_path], shell=True)                           # 使用 explorer 命令打开文件夹
 
 yue = 6
-zhou = 3 # 当前第几周，最大5周
+zhou = 4 # 当前第几周，最大5周
 file_name = f"/2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
 title = f"{yue}月第{zhou}周工作总结\n{yue}月第{zhou+1}周工作计划"
-# title = f"{yue}月第{zhou}周工作总结\n6月第2周工作计划"   # 跨月份
+# title = f"{yue}月第{zhou}周工作总结\n6月第2周工作计划"          # 跨月份
 stitle = f"25年{yue}月第{zhou}周工作完成情况："
 do_work = [
-"讲解linux操作系统中6种安装samba服务、vsftpd服务",
-"讲解大数据技术基础中的单机部署Hadoop",
-"讲解人工智能导论中音频信息识别、音频信息检索",
-"检查学生笔记记录情况，出期末考试试卷",
+"复习大数据技术基础中的数据采集及处理",
+"复习人工智能导论中学习方式",
+"讲解linux操作系统中时区的更换，mariaDB安装，shell编程",
+"安排学生参加学校组织的活动，出期末考试试卷",
 "参加学院召开的日常会，备课"]
 plan_work = [
-"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程，复习大数据技术基础中的数据采集及处理",
-"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程，复习人工智能导论中学习方式",
-"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程",
-"讲解linux操作系统的讲解linux操作系统中时区的更换，mariaDB安装，shell编程",
-"复习大数据技术基础中的数据采集及处理，复习人工智能导论中学习方式"]
+"复习linux操作系统的常用目录、目录权限、虚拟机网络，复习大数据技术基础中的数据预处理部分",
+"复习linux操作系统的常用目录、目录权限、虚拟机网络，复习人工智能导论中机器学习的基本方法",
+"复习linux操作系统的常用目录、目录权限、虚拟机网络",
+"复习linux操作系统的常用目录、目录权限、虚拟机网络",
+"复习大数据技术基础中的数据预处理部分，复习人工智能导论中机器学习的基本方法"]
 
 
 if os.path.exists(file_path + file_name):
