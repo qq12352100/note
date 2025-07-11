@@ -43,14 +43,35 @@ def delete_files_with_keyword(directory, keyword="王欣欣", simulate=False):
                         print(f"❌ 删除失败: {file_path} - {e}")
     if not simulate:
         print(f"\n 已删除 {count} 个包含 '{keyword}' 的文件。")
-        
+
+# 创建文件目录
+def create_dir(directory, cdir):
+    # 遍历列表，逐个创建文件夹
+    for folder_name in cdir:
+        # 拼接完整路径
+        folder_path = os.path.join(root_path, folder_name)
+
+        # 判断文件夹是否存在
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+            print(f"已创建文件夹：{folder_path}")
+        else:
+            print(f"文件夹已存在，跳过创建：{folder_path}")
+            
+            
 if __name__ == "__main__":
 
+    root_path = r"D:\logs"
 
-    root_path = r"C:\Users\Administrator\Desktop\卜凯凯期末考试资料"
+    cdir = [
+    "2024级大数据4班/二级目录",
+    "2024级大数据5班",
+    "2024级大数据6班",
+    "2024级大数据7班"
+    ]
 
-
-    list_directory(root_path)
+    create_dir(root_path, cdir)
+    # list_directory(root_path)
     # delete_files_with_keyword(root_path)
 
 
