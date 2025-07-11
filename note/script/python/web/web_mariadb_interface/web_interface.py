@@ -4,6 +4,7 @@ import requests
 import pymysql
 import os
 from dotenv import load_dotenv  # 新增环境变量管理
+import time
 
 # 加载环境变量
 load_dotenv()
@@ -75,7 +76,7 @@ def handle_invoke():
         
         # 根据操作类型处理业务
         operation = data.get('operation')
-        if operation == 'update':
+        if operation in {'add', 'modify', 'del', 'list'}:
             return handle_db_query(data)
         else:
             # 其他操作类型处理
@@ -95,14 +96,22 @@ def handle_db_query(data):
         with conn.cursor() as cursor:
             # 参数化查询防止SQL注入
             table = data.get('table', '').strip()
+            operation = data.get('operation', '').strip()
             if not table:
                 return jsonify({"error": "Missing table parameter"}), 400
                 
-            # 示例：根据实际需求构建安全查询
-            sql = f"SELECT * FROM `{table}` LIMIT 10"  # 限制返回数量
+            sql = generate_sql(data)
+            print(f"Excel sql: {sql}")
             cursor.execute(sql)
-            results = cursor.fetchall()
-            return jsonify(results)
+            if operation == 'list':
+                results = cursor.fetchall()
+                return jsonify(results)
+            else:
+                conn.commit()
+                return jsonify({
+                "status": "success",
+                "message": "Operation processed"
+            })
             
     except pymysql.Error as e:
         app.logger.error(f"Database error: {str(e)}")
@@ -111,13 +120,56 @@ def handle_db_query(data):
         if conn:
             conn.close()
 
+# 组装sql语句
+def generate_sql(data):
+    table = data.get("table")
+    operation = data.get("operation")
+    data_fields = data.get("data", {})
+    id_value = data_fields.get("id")
+
+    if not table or not operation or not data_fields:
+        raise ValueError("缺少必要字段: table, operation, data")
+
+    if operation == "add":          # INSERT INTO user (name, age) VALUES ('123', '1234')
+        columns = ", ".join(data_fields.keys())
+        values = ", ".join(f"'{v}'" for v in data_fields.values())
+        return f"INSERT INTO {table} ({columns}) VALUES ({values});"
+
+    elif operation == "modify":     # UPDATE user SET name='123', age='1234' WHERE id='1'
+        if not id_value:
+            raise ValueError("修改操作必须包含 id")
+        set_clause = ", ".join(f"{k}='{v}'" for k, v in data_fields.items() if k != "id")
+        return f"UPDATE {table} SET {set_clause} WHERE id='{id_value}';"
+
+    elif operation == "del":        # 仅支持id删除，多个 id，如 "1,2,3"
+        if not id_value:
+            raise ValueError("删除操作必须包含 id")
+        id_list = [x.strip() for x in id_value.split(",")]
+        id_str = ", ".join(f"'{x}'" for x in id_list)
+        return f"DELETE FROM {table} WHERE id IN ({id_str});"
+
+    elif operation == "list":       # SELECT * FROM user WHERE id='1' ...
+        where_clause = " WHERE " + data_fields.get("query")
+        limit_clause = ""
+        if "pageNum" in data and "pageSize" in data:
+            page_num = int(data["pageNum"])
+            page_size = int(data["pageSize"])
+            limit_clause = f" LIMIT {page_size} OFFSET {page_num * page_size}"
+        return f"SELECT * FROM {table} {where_clause}{limit_clause};"
+
+    else:
+        raise ValueError(f"不支持的操作类型: {operation}")
+        
 # MD5签名验证
 def verify_signature(data):
     required_fields = ['time', 'table', 'operation', 'single']
     if not all(field in data for field in required_fields):
         return False
+    # if int(time.time()) - data['time'] > 60: # 与当前时间相差超过60秒验证失败
+        # return False
     message = f"{data['time']}{data['table']}{data['operation']}".encode()
     md5_str = hashlib.md5(message).hexdigest()
+    print(f"Generated MD5: {md5_str}")
     return md5_str == data['single']
 
 if __name__ == '__main__':
@@ -127,7 +179,7 @@ if __name__ == '__main__':
     
 '''
 
-# 删除
+# 删除 必须填id
 {
     "time": 123,
     "table": "user",

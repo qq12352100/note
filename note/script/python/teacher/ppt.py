@@ -12,24 +12,25 @@ import subprocess
 file_path = r"D:\Program Files\PortableGit\test\tiantai\周报+绩效\周报"
 subprocess.run(["explorer", file_path], shell=True)                           # 使用 explorer 命令打开文件夹
 
-yue = 6
-zhou = 5 # 当前第几周，最大5周
+yue = 7
+zhou = 2 # 当前第几周，最大5周
 file_name = f"/2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
 title = f"{yue}月第{zhou}周工作总结\n{yue}月第{zhou+1}周工作计划"
-title = f"{yue}月第{zhou}周工作总结\n7月第1周工作计划"          # 跨月份
+# title = f"{yue}月第{zhou}周工作总结\n7月第1周工作计划"          # 跨月份
 stitle = f"25年{yue}月第{zhou}周工作完成情况："
 do_work = [
-"复习linux操作系统的常用目录、目录权限、虚拟机网络",
-"复习大数据技术基础中的数据预处理部分",
-"复习人工智能导论中机器学习的基本方法",
-"配合学校22级毕业工作，准备考试相关事项",
-"参加学院召开的日常会，备课"]
-plan_work = [
 "继续配合学校进行22级毕业相关工作，数据统计、毕业证发放等",
-"安排24级学生关于开展暑期三下乡社会实践活动",
-"进行23级linux操作系统的考试，判卷工作",
+"安排24级学生整理宿舍，教师",
+"进行linux操作系统的考试判卷工作",
 "继续逐个跟进22级学生团关系转出情况",
-"配合王琦安排24级考试监考老师，安排考试场地"]
+"配合学校进行学生暑假前安排事项"
+]
+plan_work = [
+"整理学生档案，盖章，修改填写错误的地方",
+"参加学校关于学生档案卡的培训",
+"督促学生完成学生档案户籍地在网上确认",
+"继续发放22级学生毕业证书",
+"参加学校开的工作安排会议"]
 
 
 if os.path.exists(file_path + file_name):
