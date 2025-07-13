@@ -46,12 +46,8 @@ def delete_files_with_keyword(directory, keyword="王欣欣", simulate=False):
 
 # 创建文件目录
 def create_dir(directory, cdir):
-    # 遍历列表，逐个创建文件夹
     for folder_name in cdir:
-        # 拼接完整路径
         folder_path = os.path.join(root_path, folder_name)
-
-        # 判断文件夹是否存在
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
             print(f"已创建文件夹：{folder_path}")
