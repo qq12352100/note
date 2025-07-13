@@ -20,6 +20,7 @@ apipost            https://www.apipost.cn/
 dbeaver            https://dbeaver.io/download/
 java               https://www.oracle.com/cn/java/technologies/downloads/#jdk24-windows
 向日葵             https://sunlogin.oray.com/
+截图贴图            https://zh.snipaste.com/
 
 win + shift + s  自带截图--图片
 
