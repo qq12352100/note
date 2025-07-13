@@ -5,4 +5,4 @@ if [ $# -gt 0 ]; then
     git add .
     git commit -am $1
     git push origin master
-fi
+fi 
