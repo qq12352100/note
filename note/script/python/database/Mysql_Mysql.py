@@ -2,6 +2,7 @@ import pymysql
 import logging
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from DBUtils.PooledDB import PooledDB
 
 # 配置日志
 LOG_FILENAME = 'data_migration.log'
@@ -15,24 +16,28 @@ logging.basicConfig(
 PROGRESS_FILE = 'progress.txt'
 
 # 源数据库配置
-source_db = {
+source_db_config = {
     'host': '172.20.127.102',
     'port': 3306,
     'user': 'bzjw',
     'password': 'bzjw@bzjw',
-    'database': 'bzjw',
+    'database': 'psn_insu_d_jm',
     'charset': 'utf8mb4'
 }
 
 # 目标数据库配置
-target_db = {
+target_db_config = {
     'host': '172.20.127.102',
     'port': 3306,
     'user': 'bzjw',
     'password': 'bzjw@bzjw',
-    'database': 'bzjw_new',
+    'database': 'psn_insu_d_jm_test',
     'charset': 'utf8mb4'
 }
+
+# 创建数据库连接池
+source_pool = PooledDB(pymysql, 10, **source_db_config)
+target_pool = PooledDB(pymysql, 10, **target_db_config)
 
 # 清洗函数
 def clean_value(value):
@@ -55,11 +60,11 @@ def save_offset(offset):
 # 单个线程处理一个 offset 范围的数据
 def process_chunk(offset, batch_size, columns_info, varchar_types, insert_sql):
     try:
-        # 每个线程独立连接数据库
-        source_conn = pymysql.connect(**source_db)
+        # 从连接池获取连接
+        source_conn = source_pool.connection()
         source_cursor = source_conn.cursor()
 
-        target_conn = pymysql.connect(**target_db)
+        target_conn = target_pool.connection()
         target_cursor = target_conn.cursor()
 
         # 查询数据
@@ -101,7 +106,7 @@ def process_chunk(offset, batch_size, columns_info, varchar_types, insert_sql):
 # 主函数
 def main():
     # 连接源数据库获取字段信息
-    source_conn = pymysql.connect(**source_db)
+    source_conn = source_pool.connection()
     source_cursor = source_conn.cursor()
 
     # 获取字段信息
@@ -126,8 +131,8 @@ def main():
     varchar_types = ['char', 'varchar', 'text', 'tinytext', 'mediumtext', 'longtext']
 
     # 分页参数
-    batch_size = 10000
-    num_threads = 4  # 线程数（根据服务器性能调整）
+    batch_size = 50000  # 增大批处理大小
+    num_threads = 8  # 增加线程数
     offset = get_last_offset()
     total_processed = 0
 
