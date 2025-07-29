@@ -2,6 +2,7 @@
 git branch -a                       #所有分支
 git fetch origin                    #拉取远程分支
 git reset --hard origin/branch-name #重置到远程分支
+git push --force origin master      #强制把本地分支推送到远程
 ==========================================================================================代理
 http://用户名:密码@127.0.0.1:10809
 

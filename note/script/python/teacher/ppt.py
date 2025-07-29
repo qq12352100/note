@@ -13,24 +13,24 @@ file_path = r"D:\Program Files\PortableGit\test\tiantai\周报+绩效\周报"
 subprocess.run(["explorer", file_path], shell=True)                           # 使用 explorer 命令打开文件夹
 
 yue = 7
-zhou = 3 # 当前第几周，最大5周
+zhou = 4 # 当前第几周，最大5周
 file_name = f"/2025年{yue}月第{zhou}周工作总结卜凯凯.pptx"
 title = f"{yue}月第{zhou}周工作总结\n{yue}月第{zhou+1}周工作计划"
 # title = f"{yue}月第{zhou}周工作总结\n7月第1周工作计划"          # 跨月份
 stitle = f"25年{yue}月第{zhou}周工作完成情况："
 do_work = [
-"整理学生档案，盖章，修改填写错误的地方",
-"参加学校关于学生档案卡的培训",
-"督促学生完成学生档案户籍地在网上确认",
-"继续发放22级学生毕业证书",
-"参加学校开的工作安排会议"
+"扫描整理学生档案",
+"无",
+"无",
+"无",
+"无"
 ]
 plan_work = [
-"档案派遣，劳动合同审查工作",
-"就业方案确认，就业登记",
-"督促学生完成审核档案核对",
-"继续发放22级学生毕业证书",
-"档案邮寄地址确认包括国网和省网"]
+"无",
+"无",
+"无",
+"无",
+"无"]
 
 
 if os.path.exists(file_path + file_name):
