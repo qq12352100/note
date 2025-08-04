@@ -117,8 +117,16 @@ get2()
 # getSql('youdianyisi2020')
 # endMysql()
 
-#   D:\AAA\py\yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "D:/test" https://www.youtube.com/playlist?list=PLqid5YompiAgdz7RzDELakD24DaJV8OZO
-#   yt-dlp_x86.exe --proxy socks4://127.0.0.1:10808 -P "E:/test" https://www.youtube.com/playlist?list=PLlD7SeKBB31cwPtRZgsbceAJye9k8r1ZO -f "bv+ba" 
+'''
+E:\YouTube\yt-dlp.exe --proxy socks4://127.0.0.1:10808 -P "E:/YouTube" https://www.youtube.com/playlist?list=PLqid5YompiAgdz7RzDELakD24DaJV8OZO
+
+yt-dlp.exe --proxy socks4://127.0.0.1:10808 -P "E:/YouTube" https://www.youtube.com/playlist?list=PLlD7SeKBB31cwPtRZgsbceAJye9k8r1ZO -f "bv+ba" 
+
+
+
+
+
+'''
 
 
 
