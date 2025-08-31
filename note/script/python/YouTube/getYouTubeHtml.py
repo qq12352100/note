@@ -61,7 +61,7 @@ def get1():
 """ 1、点击播放列表。2、点击查看完整播放列表。3、下滑加载所有内容。
 
 let videoLinks = document.querySelectorAll('a#video-title-link');
-videoLinks.forEach((link, i) => console.log(i + 1, link.title,'==', link.href));
+videoLinks.forEach((link, i) => console.log(link.href, '==', link.title, i+1 ));
 
 """
 def get2():
