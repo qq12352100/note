@@ -19,6 +19,7 @@ git remote rm origin                                            #删除远程信
 git remote add origin git@gitee.com:qq12352100/note.git         #添加新的
 git push -u origin "master"                                     #提交代码
 git pull origin master --no-rebase                              #将远程变更合并到本地，保留完整历史
+git branch --set-upstream-to=origin/master master               #设置上游分支，避免下次再提示
 ==========================================================================================下载别人代码
 git init
 git remote add origin https://github.com/codeskyblue/gohttpserver.git
