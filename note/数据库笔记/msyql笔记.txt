@@ -13,8 +13,19 @@ FLUSH PRIVILEGES;
 4、sudo systemctl start mysql  # 或者  sudo service mysql start
 ---------------------------------------------------------------------------------------【8.0以后的登录认证问题】
 从 MySQL 8.0 开始，默认的身份验证插件从 mysql_native_password 改为 caching_sha2_password。
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'o6KRMJvFrHxS@';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'o6KRMJvFrHxS@';
+FLUSH PRIVILEGES;
+
+
+SELECT user, host, plugin FROM mysql.user WHERE user = 'root';  -- 查看当前有哪些 root 用户：
+
+-- 1. 创建用户 'root'@'%'（如果不存在）
+CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'o6KRMJvFrHxS@';
+-- 2. 授予所需权限（例如所有权限）
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+-- 3. 刷新权限
 FLUSH PRIVILEGES;
 ---------------------------------------------------------------------------------------
 /*[mysqld]*/
