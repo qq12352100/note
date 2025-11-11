@@ -14,6 +14,8 @@ FLUSH PRIVILEGES;
 ---------------------------------------------------------------------------------------【8.0以后的登录认证问题】
 从 MySQL 8.0 开始，默认的身份验证插件从 mysql_native_password 改为 caching_sha2_password。
 
+-- 先仅修改密码（使用默认 caching_sha2_password，MySQL 8.0 默认）
+ALTER USER 'root'@'%' IDENTIFIED BY 'o6KRMJvFrHxS@';
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'o6KRMJvFrHxS@';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'o6KRMJvFrHxS@';
 FLUSH PRIVILEGES;
