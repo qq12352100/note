@@ -1,6 +1,9 @@
 oracle 创建实例bkk(与orcl同级同概念） 创建用户赋权限
 
 Insert into Table2(a, c, d) select a,c,5 from Table1
+
+SELECT * FROM your_table WHERE ROWNUM = 1;    -- 只取一条数据
+
 ============================================================================================================连接问题
 jdbc:oracle:thin:@//localhost:1521/orcl   服务名格式
 

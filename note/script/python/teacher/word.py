@@ -1,53 +1,58 @@
 '''
 pip install python-docx
 '''
+import subprocess
 from docx import Document
 from datetime import datetime
 import os
 from docx.shared import Pt  # 用于设置字体大小
 from docx.oxml.ns import qn
+
+
 # 获取当前日期（本地时间）
 today = datetime.today()
 # 格式化为 "年-月-日" 中文格式
 formatted_date = today.strftime("%Y年%m月%d日")
 
-file_path = 'E:\A\管控项目资料\日报周报\工程日报017-'+formatted_date+'.docx'
+file_path = 'E:\A\管控项目资料\日报周报\工程日报-'+formatted_date+'.docx'
+
+subprocess.run(["explorer", "E:\A\管控项目资料\日报周报"], shell=True)                           # 使用 explorer 命令打开文件夹
 
 doc = Document('E:\A\管控项目资料\日报周报\日报.docx')
 
 # 今日日报 - 设置内容及格式
 today_content = '''
-1、完成重点管控人员、管控场所功能的前后端代码编写并打包发布至测试环境。
-2、调整并优化风险隐患处置流程的数据模型。
-3、完成演示环境系统的安装与部署工作，并进行简单测试。
-4、进行AI对话功能与大模型调用测试及适配。
-5、调整Dify风险隐患工作流，并完成其调用大模型的测试验证。
-6、根据演示环境要求，完成知识库内容的适配调整。
-7、新建数据对接库表，抽取12345数据至数据原始库，为后续AI数据分析提供测试数据。
-8、完成对大网格系统中所有数据的简单分析统计工作。
+1、完成重点人群组装文本预处理。
+2、实现12345热线与网格数据的脱敏展示功能。
+3、大数据向量模型代码适配解决，为后续“人找事”业务功能提供依据。
+4、实现12345热线数据与网格数据增量抽取。
+5、组装12345热线数据摸排文本向量，初步实现12345数据摸排。
+6、根据建设方案梳理智能转办中心、分析预警中心、指挥调度中心展示数据。
+7、继续整理并完善系统业务流程图及数据治理流程图。
+8、实现情况摸排功能代码进度90%。
+9、现项目总体进度45%。
 '''
 # 明日计划 - 设置内容及格式
 tomorrow_content = '''
-1、开展重点管控人员、管控场所功能的前后端联调与性能优化。
-2、继续推进AI对话功能引用大模型的调用测试与深度适配工作。
-3、继续接入大网格系统中用户、部门及人口等数据。
-4、推进实现情报分析摸排流转功能相关工作。
+1、继续完善数据治理功能模块中文本预处理流程。
+2、切换大数据提供的大数据的向量模型，并测试。
+3、根据重点人群匹配检索12345向量库生成风险隐患。
 '''
 
+
 # 读取所有段落
-print("=== 段落内容 ===")
-for para in doc.paragraphs:
-    print(para.text)
+# print("=== 段落内容 ===")
+# for para in doc.paragraphs:
+    # print(para.text)
 
 # 读取所有表格
-print("\n=== 表格内容 ===")
-for table in doc.tables:
-    for row in table.rows:
-        row_data = [cell.text for cell in row.cells]
-        print(row_data)
+# print("\n=== 表格内容 ===")
+# for table in doc.tables:
+    # for row in table.rows:
+        # row_data = [cell.text for cell in row.cells]
+        # print(row_data)
         
         
-print(doc.paragraphs[1].text)
 doc.paragraphs[1].text = '编制时间：'+formatted_date
 # 设置字体为宋体，大小为小四（12磅）
 for run in doc.paragraphs[1].runs:
@@ -55,9 +60,6 @@ for run in doc.paragraphs[1].runs:
     run.font.size = Pt(12)
     # 解决中文显示问题的额外设置
     run.element.rPr.rFonts.set(qn('w:eastAsia'), '宋体')
-    
-print(doc.paragraphs[1].text)
-
 
 # 设置今日日报内容
 cell_today = doc.tables[0].rows[2].cells[1]

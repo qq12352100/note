@@ -6,16 +6,13 @@ yum install -y yum-fastestmirror lrzsz vim screen java-1.8.0-openjdk* mariadb ma
 wget https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.rpm
 yum install -y amazon-corretto-17-x64-linux-jdk.rpm
 
-#------------------------------配置mysql
-
+#------------------------------配置mysql8
 wget https://dev.mysql.com/get/mysql80-community-release-el7-11.noarch.rpm
 rpm -ivh mysql80-community-release-el7-11.noarch.rpm
 
 yum install -y mysql-server --nogpgcheck
 systemctl start mysqld
 
-systemctl start mariadb
-systemctl enable mariadb
 mysql_secure_installation
 
 grep 'temporary password' /var/log/mysqld.log
